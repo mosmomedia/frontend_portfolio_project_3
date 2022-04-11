@@ -7,7 +7,7 @@ const BaseStyles = createGlobalStyle`
 }
 
 body {
-	${tw`bg-body text-main_text text-base`}
+	${tw`bg-body text-main_text text-sm md:text-base`}
 }
 
 h1{

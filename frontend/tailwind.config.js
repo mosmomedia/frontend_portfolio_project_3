@@ -8,6 +8,7 @@ module.exports = {
 				footer: '#000',
 				st_bg1: '#212121',
 				st_bg2: 'fceded7c',
+				mobile_text: '#fff',
 				main_text: '2f2f2f',
 			},
 			backgroundColor: {
