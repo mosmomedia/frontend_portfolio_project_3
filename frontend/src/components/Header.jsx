@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import tw from 'twin.macro';
 
 // hook
@@ -24,8 +24,13 @@ import {
 
 function Header() {
 	const [hamburgerOn, setHamburgerOn] = useState(false);
-	const [hoverOn, setHoverOn] = useState(true);
+	const [hoverOn, setHoverOn] = useState(false);
 	const { width } = useWindowDimensions();
+
+	const location = useLocation();
+
+	// exclude header in specific components
+	if (location.pathname === '/sign-in') return null;
 
 	return (
 		<HeaderStyles is_hover_on={hoverOn}>
