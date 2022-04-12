@@ -10,6 +10,7 @@ module.exports = {
 				st_bg2: '#fceded7c',
 				mobile_text: '#fff',
 				main_text: '#2f2f2f',
+				keyColor: '#ff5263',
 			},
 			backgroundColor: {
 				primary: '#ff5263',
