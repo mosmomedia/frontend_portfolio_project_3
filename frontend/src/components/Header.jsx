@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import tw, { styled } from 'twin.macro';
+import tw, { css, styled } from 'twin.macro';
 import Logo_black from '../assets/logos/logo.svg';
 import Logo_white from '../assets/logos/logo_on.svg';
 
@@ -9,7 +9,8 @@ import Button from './shared/Button';
 
 const HeaderStyles = styled.header`
 	${tw`fixed w-full h-[4.5rem]  bg-[#343540] text-white`}
-	${tw`lg:block lg:bg-header lg:text-main_text lg:h-[5rem] lg:pb-8 `}
+	${tw`lg:block lg:bg-header lg:text-main_text lg:h-[5rem]  `}
+	/* lg:pb-8 */
 
 	${({ is_hover_on }) =>
 		is_hover_on && tw`lg:h-[unset] lg:bg-black lg:text-white`}
@@ -18,7 +19,7 @@ const HeaderStyles = styled.header`
 const NavStyles = styled.nav`
 	${tw`flex bg-[#343540]  justify-between items-center h-full mx-auto px-6 `}
 
-	${tw`lg:container 2xl:max-w-7xl lg:items-start lg:h-[unset] lg:pl-4 lg:pr-6 lg:bg-none lg:bg-header`}
+	${tw`lg:container 2xl:max-w-7xl lg:items-start lg:h-[unset] lg:pl-2 lg:pr-3 lg:bg-none lg:bg-header`}
 
 	${({ is_hover_on }) => is_hover_on && tw`lg:bg-black`}
 `;
@@ -57,7 +58,7 @@ const ImgStyles = styled.img`
 const MenuStyles = styled.div`
 	${tw`absolute z-[-100] top-[4.5rem] py-3 left-0  w-full h-screen bg-[#343540] translate-y-[-115%]  space-y-14 tracking-widest transition-transform`}
 
-	${tw`lg:flex  lg:translate-y-0 lg:z-0  lg:space-y-0 lg:py-0 lg:h-full  lg:w-[unset] lg:static lg:transition-none lg:bg-white`} 
+	${tw`lg:flex  lg:translate-y-0 lg:z-0  lg:space-y-0 lg:py-0 lg:pb-8  lg:h-full  lg:w-[unset] lg:static lg:transition-none lg:bg-white`} 
 
 	${({ is_hover_on }) => is_hover_on && tw`lg:bg-black`}
 	${({ is_hamburger_on }) => is_hamburger_on && tw`translate-y-0`}
@@ -72,13 +73,13 @@ const TitleStyles = styled.li`
 
 const LinkGnbStyles = styled.ul`
 	${tw`flex px-6  flex-wrap `}
-	${tw`lg:px-[unset] lg:flex-nowrap lg:pl-12 lg:hidden `} 
+	${tw`lg:px-[unset] lg:flex-nowrap lg:pl-12 lg:hidden`} 
 	${({ is_hover_on }) => is_hover_on && tw`lg:block`}
 `;
 
 const ItemStyles = styled.li`
 	${tw`py-1.5 pr-10 text-[#ffe0e0e7]`}
-	${tw`lg:pr-0 lg:text-[#acacac] lg:text-[0.9375rem]`}
+	${tw`lg:pr-0 lg:text-[#acacac] lg:text-[0.9375rem] lg:hover:text-white`}
 
 	${({ variant }) => variant === 'mobile' && tw`lg:hidden`}
 	${({ variant }) => variant === 'web' && tw`hidden lg:block`}
@@ -86,7 +87,7 @@ const ItemStyles = styled.li`
 
 function Header() {
 	const [hamburgerOn, setHamburgerOn] = useState(false);
-	const [hoverOn, setHoverOn] = useState(false);
+	const [hoverOn, setHoverOn] = useState(true);
 
 	return (
 		<HeaderStyles is_hover_on={hoverOn}>
@@ -124,8 +125,8 @@ function Header() {
 				<MenuStyles
 					is_hamburger_on={hamburgerOn}
 					is_hover_on={hoverOn}
-					onMouseOver={() => setHoverOn(true)}
-					onMouseOut={() => setHoverOn(false)}
+					onMouseEnter={() => setHoverOn(true)}
+					onMouseLeave={() => setHoverOn(false)}
 				>
 					<ListGnbStyles>
 						{/* path */}
