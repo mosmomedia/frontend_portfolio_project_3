@@ -27,10 +27,10 @@ function Header() {
 	const [hoverOn, setHoverOn] = useState(false);
 	const { width } = useWindowDimensions();
 
-	const location = useLocation();
+	const { pathname } = useLocation();
 
 	// exclude header in specific components
-	if (location.pathname === '/sign-in') return null;
+	if (pathname === '/sign-in' || pathname === '/sign-up') return null;
 
 	return (
 		<HeaderStyles is_hover_on={hoverOn}>
@@ -159,7 +159,7 @@ function Header() {
 				{width >= 1024 ? (
 					<div>
 						<Button
-							add_styles={tw`lg:mt-[1.125rem] lg:text-[0.9375rem] lg:hover:text-keyColor `}
+							add_styles={tw`lg:mt-[1.125rem] lg:text-[0.9375rem] lg:hover:text-keyColor  `}
 						>
 							<Link to="/sign-in">로그인</Link>
 						</Button>
