@@ -1,5 +1,4 @@
-import useWD from '../hooks/useWindowDimensions';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import firebase from '../config/firebase';
@@ -10,63 +9,30 @@ import Button from '../components/shared/Button';
 import Logo from '../assets/logos/logo_circle.svg';
 import Img from '../assets/st_img_4.png';
 import { toast } from 'react-toastify';
+import Spinner from '../components/shared/Spinner';
 
 import 'twin.macro';
 import 'styled-components/macro';
-import tw, { styled } from 'twin.macro';
+import tw from 'twin.macro';
 
-const Wrapper = styled.div`
-	${tw`grid place-content-center bg-black text-[#7c7c7c]   tracking-wider h-screen md:text-sm xl:block`}
-`;
-
-const MainStyles = styled.div`
-	${tw`xl:flex xl:items-center `}
-`;
-
-const LeftSectionStyles = styled.div`
-	${tw`xl:w-3/5  `}
-`;
-
-const FormStyles = styled.form`
-	${tw`space-y-6 max-w-sm mx-auto`}
-
-	h2 {
-		${tw`text-center text-white mb-10`}
-	}
-`;
-
-const RightSectionStyles = styled.div`
-	${tw`hidden xl:block  xl:h-screen xl:w-2/5`}
-`;
-const ImageStyles = styled.img`
-	${tw`xl:absolute xl:bottom-0 xl:max-h-[95%]`}
-`;
-
-const InputGroupStyles = styled.div`
-	${tw`flex flex-col space-y-1.5 `}
-`;
-
-const InputStyles = styled.input`
-	${tw`text-st_bg1 py-0.5 px-1 rounded-sm text-base`}
-`;
-
-const LineStyles = styled.div`
-	${tw`relative h-0.5 bg-[rgba(75, 75, 75, 0.4)] `}
-
-	span {
-		${tw`absolute top-1/2 left-1/2 -translate-x-1/2 translate-y-[-58%] bg-black text-[#7c7c7c]`}
-	}
-`;
-
-const InfoStyles = styled.label`
-	span {
-		${tw`text-keyColor`}
-	}
-`;
+import {
+	Wrapper,
+	MainStyles,
+	LeftSectionStyles,
+	FormStyles,
+	RightSectionStyles,
+	ImageStyles,
+	InputGroupStyles,
+	InputStyles,
+	LineStyles,
+	InfoStyles,
+} from '../styles/AuthStyles';
 
 function SignUp() {
-	const { width } = useWD();
 	const [loading, setLoading] = useState(false);
+	const [isChecked, setIsChecked] = useState(false);
+	const [isDisabled, setIsDisabled] = useState(true);
+
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -80,13 +46,26 @@ function SignUp() {
 
 	const navigate = useNavigate();
 
+	const handleCheckbox = ({ target }) => {
+		setIsChecked(target.checked);
+	};
+
 	const handleChange = ({ target: { id, value } }) => {
 		setFormData({ ...formData, [id]: value });
 	};
 
+	useEffect(() => {
+		if (email && password && password2 && name && isChecked) {
+			setIsDisabled(false);
+		} else {
+			setIsDisabled(true);
+		}
+	}, [email, password, password2, name, isChecked]);
+
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		if (password === password2) {
+		setLoading(true);
+		if (isChecked && password === password2) {
 			try {
 				const userCredential = await firebase.createUserWithEmailAndPassword(
 					firebase.auth,
@@ -120,15 +99,20 @@ function SignUp() {
 				toast(`Welcome, ${name}!`);
 				navigate('/');
 			} catch (error) {
+				if (error.code === 'auth/weak-password') {
+					toast.error('Password should be at least 6 characters');
+				} else if (error.code === 'auth/email-already-in-use') {
+					toast.error('This email is already in use');
+				}
 				console.log(error);
-				toast.error(error);
+				setLoading(false);
 			}
 		} else {
 			toast.error('Please Confirm Password');
 		}
 	};
 
-	if (loading) return 'Loading...';
+	if (loading) return <Spinner />;
 
 	return (
 		<>
@@ -145,6 +129,7 @@ function SignUp() {
 									id="email"
 									value={email}
 									onChange={handleChange}
+									required
 								/>
 							</InputGroupStyles>
 
@@ -155,6 +140,7 @@ function SignUp() {
 									id="password"
 									value={password}
 									onChange={handleChange}
+									required
 								/>
 							</InputGroupStyles>
 
@@ -165,6 +151,7 @@ function SignUp() {
 									id="password2"
 									value={password2}
 									onChange={handleChange}
+									required
 								/>
 							</InputGroupStyles>
 
@@ -175,6 +162,7 @@ function SignUp() {
 									id="name"
 									value={name}
 									onChange={handleChange}
+									required
 								/>
 							</InputGroupStyles>
 
@@ -198,14 +186,15 @@ function SignUp() {
 								/>
 							</InputGroupStyles>
 
-							<div>
-								<InputStyles
+							<InfoStyles>
+								<input
 									type="checkbox"
 									id="personal_info"
-									onChange={handleChange}
+									onChange={handleCheckbox}
+									checked={isChecked}
+									required
 								/>
-								<InfoStyles htmlFor="personal_info">
-									{' '}
+								<label htmlFor="personal_info">
 									약관 동의 :{' '}
 									<span>
 										<Link to="/privary" target="_blank">
@@ -219,12 +208,12 @@ function SignUp() {
 										</Link>
 									</span>
 									에 동의합니다.
-								</InfoStyles>
-							</div>
-
+								</label>
+							</InfoStyles>
 							<Button
+								disabled={isDisabled}
 								variant="submit"
-								add_styles={tw`flex justify-between items-center w-full text-white text-base`}
+								add_styles={tw`flex justify-between items-center w-full  text-base`}
 							>
 								<span>
 									<img src={Logo} tw="w-5" alt="" />
@@ -243,7 +232,6 @@ function SignUp() {
 					</RightSectionStyles>
 				</MainStyles>
 			</Wrapper>
-			<div tw="absolute bottom-1 left-2 text-sm text-blue-200">{width}</div>
 		</>
 	);
 }
