@@ -10,6 +10,8 @@ import Logo_black from '../assets/logos/logo.svg';
 import Logo_white from '../assets/logos/logo_on.svg';
 import Button from './shared/Button';
 
+import { FaUserCircle, FaChalkboardTeacher } from 'react-icons/fa';
+
 import {
 	HeaderStyles,
 	NavStyles,
@@ -34,7 +36,8 @@ function Header() {
 	if (
 		pathname === '/sign-in' ||
 		pathname === '/sign-up' ||
-		pathname === '/forgot-password'
+		pathname === '/forgot-password' ||
+		pathname === '/dashboard'
 	)
 		return null;
 
@@ -162,7 +165,20 @@ function Header() {
 				{/* button */}
 				{/*logout  */}
 				{/* my dashboard */}
-				{userState ? null : width >= 1024 ? (
+				{userState ? (
+					width >= 1024 ? (
+						<Link to="/dashboard">
+							<Button variant="dashboard">
+								내 강의실
+								<FaChalkboardTeacher size={'1.625rem'} />
+							</Button>
+						</Link>
+					) : (
+						<Link to="/dashboard">
+							<FaUserCircle size={'1.625rem'} />
+						</Link>
+					)
+				) : width >= 1024 ? (
 					<div>
 						<Link to="/sign-in">
 							<Button

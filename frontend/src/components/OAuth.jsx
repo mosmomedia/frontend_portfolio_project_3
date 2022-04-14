@@ -39,6 +39,7 @@ function OAuth({ setLoading }) {
 					name: displayName,
 					nickname: '',
 					phone: '',
+					isAdmin: false,
 					createdAt: firebase.serverTimestamp(),
 				};
 				await firebase.setDoc(docRef, userProfile);

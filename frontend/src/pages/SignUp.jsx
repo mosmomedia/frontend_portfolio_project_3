@@ -42,9 +42,11 @@ function SignUp() {
 		name: '',
 		nickname: '',
 		phone: '',
+		isAdmin: false,
 	});
 
-	const { email, password, password2, name, nickname, phone } = formData;
+	const { email, password, password2, name, nickname, phone, isAdmin } =
+		formData;
 
 	const navigate = useNavigate();
 
@@ -88,6 +90,7 @@ function SignUp() {
 					name,
 					nickname,
 					phone,
+					isAdmin,
 					createdAt: firebase.serverTimestamp(),
 				};
 
@@ -125,7 +128,9 @@ function SignUp() {
 						<FormStyles onSubmit={handleSubmit}>
 							<h2>회원 가입</h2>
 							<InputGroupStyles>
-								<label htmlFor="email">이메일</label>
+								<label htmlFor="email">
+									<span tw="text-keyColor">*</span> 이메일
+								</label>
 								<InputStyles
 									type="email"
 									id="email"
@@ -136,7 +141,9 @@ function SignUp() {
 							</InputGroupStyles>
 
 							<InputGroupStyles>
-								<label htmlFor="password">비밀번호</label>
+								<label htmlFor="password">
+									<span tw="text-keyColor">*</span> 비밀번호
+								</label>
 								<InputStyles
 									type="password"
 									id="password"
@@ -147,7 +154,9 @@ function SignUp() {
 							</InputGroupStyles>
 
 							<InputGroupStyles>
-								<label htmlFor="password2">비밀번호 확인</label>
+								<label htmlFor="password2">
+									<span tw="text-keyColor">*</span> 비밀번호 확인
+								</label>
 								<InputStyles
 									type="password"
 									id="password2"
@@ -158,7 +167,9 @@ function SignUp() {
 							</InputGroupStyles>
 
 							<InputGroupStyles>
-								<label htmlFor="name">이름</label>
+								<label htmlFor="name">
+									<span tw="text-keyColor">*</span> 이름
+								</label>
 								<InputStyles
 									type="text"
 									id="name"
@@ -197,6 +208,7 @@ function SignUp() {
 									required
 								/>
 								<label htmlFor="personal_info">
+									<span tw="text-keyColor">*</span>
 									약관 동의 :{' '}
 									<span>
 										<Link to="/privary" target="_blank">
