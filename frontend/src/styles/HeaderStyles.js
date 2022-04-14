@@ -48,7 +48,7 @@ export const ImgStyles = styled.img`
 `;
 
 export const MenuStyles = styled.div`
-	${tw`absolute z-[-100] top-[4.5rem] py-3 left-0  w-full h-screen bg-[#343540] translate-y-[-115%]  space-y-14 transition-transform`}
+	${tw`absolute z-[-100] top-[4.5rem] py-7 left-0  w-full h-screen bg-[#343540] translate-y-[-115%]  space-y-14 transition-transform`}
 
 	${tw`lg:flex  lg:translate-y-0 lg:z-0  lg:space-y-0 lg:py-0   lg:h-full  lg:w-[unset] lg:static lg:transition-none lg:bg-white`} 
 

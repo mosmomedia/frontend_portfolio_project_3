@@ -14,6 +14,7 @@ import {
 	updateProfile,
 	signInWithPopup,
 	signInWithEmailAndPassword,
+	sendPasswordResetEmail,
 	GoogleAuthProvider,
 	createUserWithEmailAndPassword,
 } from 'firebase/auth';
@@ -49,6 +50,7 @@ const firebase = {
 	updateProfile,
 	signInWithPopup,
 	signInWithEmailAndPassword,
+	sendPasswordResetEmail,
 	GoogleAuthProvider,
 	createUserWithEmailAndPassword,
 	createMongoObjectId,

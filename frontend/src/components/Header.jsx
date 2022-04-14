@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { useAuthContext } from '../contexts/auth/AuthContext';
 import tw from 'twin.macro';
 
 // hook
@@ -26,11 +27,16 @@ function Header() {
 	const [hamburgerOn, setHamburgerOn] = useState(false);
 	const [hoverOn, setHoverOn] = useState(false);
 	const { width } = useWindowDimensions();
-
 	const { pathname } = useLocation();
+	const userState = useAuthContext();
 
 	// exclude header in specific components
-	if (pathname === '/sign-in' || pathname === '/sign-up') return null;
+	if (
+		pathname === '/sign-in' ||
+		pathname === '/sign-up' ||
+		pathname === '/forgot-password'
+	)
+		return null;
 
 	return (
 		<HeaderStyles is_hover_on={hoverOn}>
@@ -156,24 +162,30 @@ function Header() {
 				{/* button */}
 				{/*logout  */}
 				{/* my dashboard */}
-				{width >= 1024 ? (
+				{userState ? null : width >= 1024 ? (
 					<div>
-						<Button
-							add_styles={tw`lg:mt-[1.125rem] lg:text-[0.9375rem] lg:hover:text-keyColor  `}
-						>
-							<Link to="/sign-in">로그인</Link>
-						</Button>
-						<Button
-							variant="primary"
-							add_styles={tw`lg:text-[0.9375rem] lg:px-8`}
-						>
-							<Link to="/sign-up">회원가입</Link>
-						</Button>
+						<Link to="/sign-in">
+							<Button
+								add_styles={tw`lg:mt-[1.125rem] lg:text-[0.9375rem] lg:hover:text-keyColor  `}
+							>
+								로그인
+							</Button>
+						</Link>
+						<Link to="/sign-up">
+							<Button
+								variant="primary"
+								add_styles={tw`lg:text-[0.9375rem] lg:px-8`}
+							>
+								회원가입
+							</Button>
+						</Link>
 					</div>
 				) : (
-					<Button variant="primary" add_styles={tw`text-[0.9375rem]`}>
-						<Link to="/sign-in">로그인</Link>
-					</Button>
+					<Link to="/sign-in">
+						<Button variant="primary" add_styles={tw`text-[0.9375rem]`}>
+							로그인
+						</Button>
+					</Link>
 				)}
 			</NavStyles>
 		</HeaderStyles>

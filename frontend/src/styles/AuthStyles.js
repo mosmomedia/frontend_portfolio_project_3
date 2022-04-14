@@ -13,11 +13,22 @@ export const LeftSectionStyles = styled.div`
 `;
 
 export const FormStyles = styled.form`
-	${tw`space-y-6 max-w-sm mx-auto`}
+	${tw`space-y-5 max-w-sm mx-auto`}
 
 	h2 {
 		${tw`text-center text-white mb-10`}
 	}
+`;
+export const InputGroupStyles = styled.div`
+	${tw`flex flex-col space-y-1.5 `}
+`;
+
+export const InputStyles = styled.input`
+	${tw`text-st_bg1 text-base py-0.5 px-1 min-w-[360px] rounded-sm`}
+`;
+
+export const SubmitStyles = styled.div`
+	${tw`pt-5 space-y-7`}
 `;
 
 export const RightSectionStyles = styled.div`
@@ -25,14 +36,6 @@ export const RightSectionStyles = styled.div`
 `;
 export const ImageStyles = styled.img`
 	${tw`xl:absolute xl:bottom-0 xl:max-h-[95%]`}
-`;
-
-export const InputGroupStyles = styled.div`
-	${tw`flex flex-col space-y-1.5 `}
-`;
-
-export const InputStyles = styled.input`
-	${tw`text-st_bg1 text-base py-0.5 px-1 min-w-[380px] rounded-sm`}
 `;
 
 export const LineStyles = styled.div`
@@ -52,5 +55,24 @@ export const InfoStyles = styled.div`
 
 	span {
 		${tw`text-keyColor`}
+	}
+`;
+
+export const AdsInfoStyles = styled.div`
+	${tw`absolute bottom-4 right-4 text-[#9e9e9e] bg-[#111111] py-4 px-6 space-y-1.5 text-base rounded-md`}
+
+	h4 {
+		${tw`text-[#5c5c5c]`}
+	}
+`;
+
+export const LinkStyles = styled.div`
+	${tw`space-y-1`}
+	p {
+		${tw`text-sm text-white`}
+	}
+
+	span {
+		${tw`text-[#ea4b4e]`}
 	}
 `;

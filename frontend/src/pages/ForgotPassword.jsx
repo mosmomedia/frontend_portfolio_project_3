@@ -1,8 +1,7 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import firebase from '../config/firebase';
-import OAuth from '../components/OAuth';
 
 import BackToHomeBar from '../components/BackToHomeBar';
 import Button from '../components/shared/Button';
@@ -24,62 +23,45 @@ import {
 	ImageStyles,
 	InputGroupStyles,
 	InputStyles,
-	LineStyles,
 	AdsInfoStyles,
 	SubmitStyles,
-	LinkStyles,
 } from '../styles/AuthStyles';
 
-function SignIn() {
+function ForgotPassword() {
 	const [loading, setLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
 
-	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
-	});
-
-	const { email, password } = formData;
+	const [email, setEmail] = useState('');
 
 	const navigate = useNavigate();
 
-	const handleChange = ({ target: { id, value } }) => {
-		setFormData({ ...formData, [id]: value });
+	const handleChange = ({ target: { value } }) => {
+		setEmail(value);
 	};
 
 	useEffect(() => {
-		if (email && password) {
+		if (email) {
 			setIsDisabled(false);
 		} else {
 			setIsDisabled(true);
 		}
-	}, [email, password]);
+	}, [email]);
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
-		if (email && password) {
+		if (email) {
 			try {
-				const userCredential = await firebase.signInWithEmailAndPassword(
-					firebase.auth,
-					email,
-					password
-				);
-				const { displayName } = userCredential.user;
-
-				if (displayName) {
-					toast(`Welcome, ${displayName}!`);
-					navigate('/');
-				}
+				await firebase.sendPasswordResetEmail(firebase.auth, email);
+				toast(`Email was sent`);
+				navigate('/');
 			} catch (error) {
-				if (error.code === 'auth/wrong-password') {
-					toast.error('auth or wong-password');
-				}
+				toast.error('Could not send reset email');
 				console.log(error);
 				setLoading(false);
 			}
 		} else {
-			toast.error('Please fill out this form');
+			toast.error('Please type your email in this form');
 		}
 	};
 
@@ -92,24 +74,13 @@ function SignIn() {
 				<MainStyles>
 					<LeftSectionStyles>
 						<FormStyles onSubmit={handleSubmit}>
-							<h2>로그인</h2>
+							<h2>비밀번호 재설정</h2>
 							<InputGroupStyles>
 								<label htmlFor="email">이메일</label>
 								<InputStyles
 									type="email"
 									id="email"
 									value={email}
-									onChange={handleChange}
-									required
-								/>
-							</InputGroupStyles>
-
-							<InputGroupStyles>
-								<label htmlFor="password">비밀번호</label>
-								<InputStyles
-									type="password"
-									id="password"
-									value={password}
 									onChange={handleChange}
 									required
 								/>
@@ -124,25 +95,10 @@ function SignIn() {
 									<span>
 										<img src={Logo} tw="w-5" alt="" />
 									</span>
-									<span>로그인</span>
+									<span>이메일 보내기</span>
 									<span tw="w-5"></span>
 								</Button>
-								<LineStyles>
-									<span>or</span>
-								</LineStyles>
-								<OAuth setLoading={setLoading} />
 							</SubmitStyles>
-							<LinkStyles>
-								<span>
-									<Link to="/forgot-password">비밀번호를 잊으셨나요?</Link>
-								</span>
-								<p>
-									회원이 아니신가요?{' '}
-									<span>
-										<Link to="/sign-up">회원가입</Link>
-									</span>
-								</p>
-							</LinkStyles>
 						</FormStyles>
 					</LeftSectionStyles>
 					<RightSectionStyles>
@@ -158,4 +114,4 @@ function SignIn() {
 	);
 }
 
-export default SignIn;
+export default ForgotPassword;

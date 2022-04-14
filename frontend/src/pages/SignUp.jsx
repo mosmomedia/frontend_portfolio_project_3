@@ -7,7 +7,7 @@ import OAuth from '../components/OAuth';
 import BackToHomeBar from '../components/BackToHomeBar';
 import Button from '../components/shared/Button';
 import Logo from '../assets/logos/logo_circle.svg';
-import Img from '../assets/st_img_4.png';
+import Img from '../assets/st_img_sign_up.png';
 import { toast } from 'react-toastify';
 import Spinner from '../components/shared/Spinner';
 
@@ -26,6 +26,8 @@ import {
 	InputStyles,
 	LineStyles,
 	InfoStyles,
+	SubmitStyles,
+	AdsInfoStyles,
 } from '../styles/AuthStyles';
 
 function SignUp() {
@@ -210,25 +212,31 @@ function SignUp() {
 									에 동의합니다.
 								</label>
 							</InfoStyles>
-							<Button
-								disabled={isDisabled}
-								variant="submit"
-								add_styles={tw`flex justify-between items-center w-full  text-base`}
-							>
-								<span>
-									<img src={Logo} tw="w-5" alt="" />
-								</span>
-								<span>가입하기</span>
-								<span tw="w-5"></span>
-							</Button>
-							<LineStyles>
-								<span>or</span>
-							</LineStyles>
-							<OAuth setLoading={setLoading} />
+							<SubmitStyles>
+								<Button
+									disabled={isDisabled}
+									variant="submit"
+									add_styles={tw`flex justify-between items-center w-full  text-base`}
+								>
+									<span>
+										<img src={Logo} tw="w-5" alt="" />
+									</span>
+									<span>가입하기</span>
+									<span tw="w-5"></span>
+								</Button>
+								<LineStyles>
+									<span>or</span>
+								</LineStyles>
+								<OAuth setLoading={setLoading} />
+							</SubmitStyles>
 						</FormStyles>
 					</LeftSectionStyles>
 					<RightSectionStyles>
 						<ImageStyles src={Img} alt="" />
+						<AdsInfoStyles>
+							<h3>절대자도 아빠는 처음이라</h3>
+							<h4>스튠 x 제이 작가</h4>
+						</AdsInfoStyles>
 					</RightSectionStyles>
 				</MainStyles>
 			</Wrapper>

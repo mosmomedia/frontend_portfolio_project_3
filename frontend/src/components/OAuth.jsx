@@ -6,10 +6,8 @@ import tw, { styled } from 'twin.macro';
 import googleIcon from '../assets/icons/ico_link_google.png';
 
 const Wrapper = styled.div`
-	${tw`flex justify-between items-center rounded-md`}
+	${tw`flex justify-between items-center rounded-md px-2.5 py-1.5 text-[#c4c4c4]`}
 	border: 1px solid #353535;
-	border-radius: 4px;
-	padding: 6px 10px;
 `;
 
 const ImageStyle = styled.img`
