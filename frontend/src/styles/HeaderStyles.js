@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const HeaderStyles = styled.header`
-	${tw`fixed w-full h-[4.5rem]  bg-[#343540] text-white`}
+	${tw`fixed w-full h-[4.5rem]  text-white z-50`}
 	${tw`lg:block lg:bg-header lg:text-main_text lg:h-[5rem]  `}
 
 	${({ is_hover_on }) =>
@@ -9,9 +9,9 @@ export const HeaderStyles = styled.header`
 `;
 
 export const NavStyles = styled.nav`
-	${tw`flex bg-[#343540]  justify-between items-center h-full mx-auto px-6 tracking-wider `}
+	${tw`flex justify-between items-center h-full mx-auto px-6 tracking-wider bg-[#343540]`}
 
-	${tw`lg:container  lg:items-start lg:h-[unset] lg:pl-2 lg:pr-3 lg:bg-none lg:bg-header xl:max-w-7xl `}
+	${tw`lg:container  lg:items-start lg:h-[unset] lg:pl-2 lg:pr-3 lg:bg-none lg:bg-header xl:max-w-7xl`}
 
 	${({ is_hover_on }) => is_hover_on && tw`lg:bg-black`}
 `;
@@ -48,7 +48,7 @@ export const ImgStyles = styled.img`
 `;
 
 export const MenuStyles = styled.div`
-	${tw`absolute z-[-100] top-[4.5rem] py-7 left-0  w-full h-screen bg-[#343540] translate-y-[-115%]  space-y-14  ease-in duration-300`}
+	${tw`absolute z-[-1] top-[4.5rem] py-7 left-0  w-full h-screen bg-[#343540] translate-y-[-115%]  space-y-14  ease-in duration-300`}
 
 	${tw`lg:flex  lg:translate-y-0 lg:z-0  lg:space-y-0 lg:py-0   lg:h-full  lg:w-[unset] lg:static lg:transition-none lg:bg-white`} 
 

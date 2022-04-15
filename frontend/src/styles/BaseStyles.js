@@ -4,8 +4,23 @@ import noto300 from './fonts/noto-sans-kr-v26-korean-300.woff';
 import noto500 from './fonts/noto-sans-kr-v26-korean-500.woff';
 import noto700 from './fonts/noto-sans-kr-v26-korean-700.woff';
 import notoRegular from './fonts/noto-sans-kr-v26-korean-regular.woff';
+import paybooc_M from './fonts/paybooc_medium.otf';
+import paybooc_B from './fonts/paybooc_bold.otf';
 
 const BaseStyles = createGlobalStyle`
+
+/* paybook Medium */
+@font-face {
+  font-family: 'Paybooc_M';
+	src: url(${paybooc_M}) format('opentype')
+}
+
+@font-face {
+	font-family: 'Paybooc_B';
+	font-weight: bold;
+	src: url(${paybooc_B}) format('opentype');
+}
+
 /* noto-sans-kr-300 - korean */
 @font-face {
   font-family: 'Noto Sans KR';
@@ -13,7 +28,6 @@ const BaseStyles = createGlobalStyle`
   font-weight: 300;
 	src: local('Noto Sans KR'),
 	url(${noto300}) format('woff')
- 
 }
 /* noto-sans-kr-regular - korean */
 @font-face {
