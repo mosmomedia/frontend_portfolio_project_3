@@ -42,7 +42,6 @@ const BaseStyles = createGlobalStyle`
 }
 
 * {
-	${tw`box-border`}
 	font-family: 'Noto Sans KR', sans-serif;
 }
 
