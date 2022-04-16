@@ -19,46 +19,30 @@ const MainStyles = styled.main`
 `;
 
 const SectionStyles = styled.div`
-	${tw``}
+	${tw`pt-10`}
 	${({ variant }) => variant === 'hero' && tw`xl:h-screen`}
 `;
 
 const LeftItemStyles = styled.div`
-	${tw`relative h-full bg-[#ffe0e0] z-[-20]`}
-	${tw`pt-[28rem] pb-10 sm:pt-[36rem] sm:pb-16 xl:pt-0 xl:pb-0 xl:grid xl:grid-cols-1`}
-	/* ${tw`pt-[20rem] pb-10 xl:pt-0 xl:pb-0 xl:grid xl:grid-cols-1`} */
-	
-	background-image: url(${img_hero});
-	background-repeat: no-repeat;
-	background-size: 100% auto;
-	background-position: bottom -2rem center;
+	${tw`relative bg-[#ffe0e0]`}
 
-	/* @media (min-width: 640px) {
-		grid-template-rows: repeat(10, minmax(0, 1fr));
-		background-attachment: fixed;
-		background-position: bottom 0rem center;
-	} */
-
-	/* @media (min-width: 700px) and (max-width: 767px) {
-		background-position: bottom -5rem center;
-	} */
+	${tw`before:content before:absolute before:inset-0  before:w-full before:h-full  before:bg-black/[50%]`}
 `;
 
 const TextWrapper = styled.div`
-	${tw`xl:row-start-[7] z-0 space-y-10 `}
-	/* ${tw`xl:row-start-[7] z-0 space-y-10 `} */
-
-	${tw`before:content before:absolute before:inset-0  before:w-full before:h-full before:z-[-10] before:bg-black/[50%]`}
+	${tw`absolute bottom-16 space-y-10 w-full`}
 `;
 const TextStyles = styled.div`
 	${tw`text-center space-y-12 text-white tracking-wide`}
 
-	h1,h2,h4 {
+	h1,
+	h2,
+	h4 {
 		font-family: 'Paybooc_M';
 		font-weight: 600;
 	}
 	h2 {
-		${tw`text-xl sm:text-[1.75rem ] mb-1 sm:mb-2`}
+		${tw`text-xl sm:text-[1.75rem ] mb-1 sm:mb-4`}
 	}
 
 	h1 {
@@ -70,7 +54,7 @@ const TextStyles = styled.div`
 	}
 `;
 const LinkBtnStyles = styled.div`
-	${tw`w-2/3 mx-auto space-y-3 text-lg sm:text-xl`}
+	${tw`w-2/3 mx-auto space-y-3 text-base sm:text-xl`}
 `;
 
 const LinkUpperStyles = styled.div`
@@ -94,6 +78,8 @@ const LinkLowerStyles = styled.div`
 function Landing() {
 	const { width, isMobile } = useWD(768);
 
+	console.log(isMobile);
+
 	return (
 		<MainStyles>
 			<ContainerStyles>
@@ -101,6 +87,11 @@ function Landing() {
 				<SectionStyles variant="hero">
 					{/*LeftItem /  submit wrapper */}
 					<LeftItemStyles>
+						{isMobile && (
+							<div>
+								<img src={img_hero} alt="" />
+							</div>
+						)}
 						<TextWrapper>
 							{/* st_text */}
 							<TextStyles>
@@ -169,6 +160,7 @@ function Landing() {
 						</TextWrapper>
 					</LeftItemStyles>
 					{/* RightItem / img wrapper*/}
+
 					{!isMobile && (
 						<div>
 							{/* img */}

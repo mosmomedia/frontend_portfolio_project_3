@@ -48,7 +48,7 @@ export const ImgStyles = styled.img`
 `;
 
 export const MenuStyles = styled.div`
-	${tw`absolute z-[-1] top-[4.5rem] py-7 left-0  w-full h-screen bg-[#343540] translate-y-[-115%]  space-y-14  ease-in duration-300`}
+	${tw`absolute z-[-1] top-[4.5rem] py-7 left-0  w-full h-screen bg-[#343540] translate-y-[-115%]  space-y-14  ease-in-out duration-500`}
 
 	${tw`lg:flex  lg:translate-y-0 lg:z-0  lg:space-y-0 lg:py-0   lg:h-full  lg:w-[unset] lg:static lg:transition-none lg:bg-white`} 
 
@@ -77,7 +77,7 @@ export const LinkGnbStyles = styled.ul`
 `;
 
 export const ItemStyles = styled.li`
-	${tw`py-1.5 pr-10 text-[#ffe0e0e7]`}
+	${tw`py-2.5 pr-10 text-[#ffe0e0e7]`}
 	${tw`lg:py-2.5 lg:pr-0 lg:text-[#acacac] lg:text-[0.9375rem] lg:hover:text-white`}
 
 	${({ variant }) => variant === 'mobile' && tw`lg:hidden`}

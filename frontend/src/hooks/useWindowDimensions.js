@@ -18,7 +18,7 @@ function useWindowDimensions(size) {
 	};
 
 	const [dimensions, setDimensions] = useState(getWindowDimensions());
-	const [isMobile, setIsMobile] = useState(true);
+	const [isMobile, setIsMobile] = useState(window.innerWidth < size);
 	useEffect(() => {
 		function handleResize() {
 			setDimensions(getWindowDimensions());
