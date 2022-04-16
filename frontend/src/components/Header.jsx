@@ -180,28 +180,28 @@ function Header() {
 					)
 				) : width >= 1024 ? (
 					<div>
-						<Link to="/sign-in">
-							<Button
-								add_styles={tw`lg:mt-[1.125rem] lg:text-[0.9375rem] lg:hover:text-keyColor  `}
-							>
-								로그인
-							</Button>
-						</Link>
-						<Link to="/sign-up">
-							<Button
-								variant="primary"
-								add_styles={tw`lg:text-[0.9375rem] lg:px-8`}
-							>
-								회원가입
-							</Button>
-						</Link>
-					</div>
-				) : (
-					<Link to="/sign-in">
-						<Button variant="primary" add_styles={tw`text-[0.9375rem]`}>
+						<Button
+							navtigate_to="/sign-in"
+							add_styles={tw`lg:mt-[1.125rem] lg:text-[0.9375rem] lg:hover:text-keyColor  `}
+						>
 							로그인
 						</Button>
-					</Link>
+						<Button
+							navtigate_to="/sign-up"
+							variant="primary"
+							add_styles={tw`lg:text-[0.9375rem] lg:px-8`}
+						>
+							회원가입
+						</Button>
+					</div>
+				) : (
+					<Button
+						navtigate_to="/sign-in"
+						variant="primary"
+						add_styles={tw`text-[0.9375rem]`}
+					>
+						로그인
+					</Button>
 				)}
 			</NavStyles>
 		</HeaderStyles>

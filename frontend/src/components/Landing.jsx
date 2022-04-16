@@ -11,8 +11,7 @@ import Button from '../components/shared/Button';
 
 // assets (imgs)
 import logo_kkp from '../assets/logos/logo_kkp.png';
-import img_hero from '../assets/st_img_hero_1.png';
-// import img_hero from '../assets/st_img_hero.png';
+import img_hero from '../assets/st_img_hero.png';
 import img_effect from '../assets/st_img_hero_effect.png';
 
 const MainStyles = styled.main`
