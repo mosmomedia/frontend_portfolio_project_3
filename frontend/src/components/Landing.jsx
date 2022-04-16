@@ -20,31 +20,38 @@ const MainStyles = styled.main`
 
 const SectionStyles = styled.div`
 	${tw``}
-	${({ variant }) => variant === 'hero' && tw`h-screen`}
+	${({ variant }) => variant === 'hero' && tw`xl:h-screen`}
 `;
 
 const LeftItemStyles = styled.div`
-	${tw`h-full bg-[#ffe0e0] `}
-	${tw`grid grid-cols-1 grid-rows-6`}
+	${tw`relative h-full bg-[#ffe0e0] z-[-20]`}
+	${tw`pt-[28rem] pb-10 sm:pt-[36rem] sm:pb-16 xl:pt-0 xl:pb-0 xl:grid xl:grid-cols-1`}
+	/* ${tw`pt-[20rem] pb-10 xl:pt-0 xl:pb-0 xl:grid xl:grid-cols-1`} */
 	
 	background-image: url(${img_hero});
 	background-repeat: no-repeat;
-	background-attachment: fixed;
 	background-size: 100% auto;
-	background-position: bottom 0rem center;
+	background-position: bottom -2rem center;
 
-	@media (min-width: 700px) and (max-width: 767px) {
+	/* @media (min-width: 640px) {
+		grid-template-rows: repeat(10, minmax(0, 1fr));
+		background-attachment: fixed;
+		background-position: bottom 0rem center;
+	} */
+
+	/* @media (min-width: 700px) and (max-width: 767px) {
 		background-position: bottom -5rem center;
-	}
-
-	${tw`before:content before:absolute before:inset-0  before:w-full before:h-full before:bg-black/[45%] `}
+	} */
 `;
 
 const TextWrapper = styled.div`
-	${tw`row-start-4 z-0`}
+	${tw`xl:row-start-[7] z-0 space-y-10 `}
+	/* ${tw`xl:row-start-[7] z-0 space-y-10 `} */
+
+	${tw`before:content before:absolute before:inset-0  before:w-full before:h-full before:z-[-10] before:bg-black/[50%]`}
 `;
 const TextStyles = styled.div`
-	${tw`text-center space-y-10 text-white tracking-wide`}
+	${tw`text-center space-y-12 text-white tracking-wide`}
 
 	h1,h2,h4 {
 		font-family: 'Paybooc_M';
@@ -59,31 +66,28 @@ const TextStyles = styled.div`
 	}
 
 	h4 {
-		${tw`text-lg my-1`}
+		${tw`text-lg sm:text-xl my-3`}
 	}
 `;
 const LinkBtnStyles = styled.div`
-	${tw`w-1/2 mx-auto`}
+	${tw`w-2/3 mx-auto space-y-3 text-lg sm:text-xl`}
 `;
 
 const LinkUpperStyles = styled.div`
-	${tw`flex`}
+	${tw`flex justify-between`}
 
 	button {
-		${tw`w-1/2`}
+		${tw`w-[49%] py-2`}
 	}
-
-	border: 1px solid rgba(255, 0, 0, 0.4);
 `;
 
 const LinkLowerStyles = styled.div`
 	button {
-		${tw`flex w-full`}
-		border: 1px solid rgba(255, 0, 0, 0.4);
+		${tw`flex items-center justify-center w-full space-x-5 py-3 sm:tracking-widest `}
 	}
 
 	img {
-		${tw`h-3.5`}
+		${tw`h-6 sm:h-7`}
 	}
 `;
 
@@ -154,7 +158,7 @@ function Landing() {
 								</LinkUpperStyles>
 								{/* lower btn */}
 								<LinkLowerStyles>
-									<Button>
+									<Button add_styles={tw`bg-mobile_alt1 text-white`}>
 										<div>Collaboration with </div>
 										<span>
 											<img src={logo_kkp} alt="logo kakao page" />{' '}

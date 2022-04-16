@@ -9,7 +9,7 @@ export const HeaderStyles = styled.header`
 `;
 
 export const NavStyles = styled.nav`
-	${tw`flex justify-between items-center h-full mx-auto px-6 tracking-wider bg-[#343540]`}
+	${tw`flex justify-between items-center h-full mx-auto px-6 tracking-wider  bg-mobile_alt1`}
 
 	${tw`lg:container  lg:items-start lg:h-[unset] lg:pl-2 lg:pr-3 lg:bg-none lg:bg-header xl:max-w-7xl`}
 

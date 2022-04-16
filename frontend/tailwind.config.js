@@ -9,6 +9,7 @@ module.exports = {
 				st_bg1: '#212121',
 				st_bg2: '#fceded7c',
 				mobile_text: '#fff',
+				mobile_alt1: '#343540',
 				main_text: '#2f2f2f',
 				keyColor: '#ff5263',
 			},
