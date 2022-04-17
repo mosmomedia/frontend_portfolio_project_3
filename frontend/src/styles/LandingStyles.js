@@ -2,20 +2,26 @@ import tw, { styled } from 'twin.macro';
 
 export const MainStyles = styled.div`
 	${tw``}
+
+	h2,
+	p {
+		word-break: keep-all;
+	}
 `;
 export const SectionStyles = styled.div`
 	${tw``}
 	${({ variant }) =>
 		variant === 'platform' &&
 		tw`bg-[#fdfafa] border-b border-b-[#eae1f2b7] lg:border-none lg:bg-[#fceded7c]`}
+	${({ variant }) => variant === 'first_section' && tw`bg-[#fceded7c]`}
 `;
 
-//
+//@ platform
 export const PlatformStyles = styled.div`
 	${tw`flex justify-center `}
 
 	div {
-		${tw`flex-1 py-6 px-9 lg:py-8`}
+		${tw`flex-1 py-6 px-8 sm:px-12 lg:py-8`}
 
 		h4 {
 			${tw`text-[0.9375rem] font-medium mb-6 lg:mb-8`}
@@ -39,14 +45,15 @@ export const PlatformStyles = styled.div`
 	}
 
 	div:last-child ul {
-		${tw`flex flex-col lg:flex-row lg:justify-between`}
+		${tw`grid grid-cols-2 lg:grid-cols-none lg:grid-flow-col lg:justify-between`}
+
 		li {
 			${tw`pb-2 md:text-sm lg:font-medium 2xl:text-base`}
 		}
 	}
 `;
 
-//
+//@ class info
 
 export const ClassInfoStyles = styled.div`
 	${tw`py-16 px-6 sm:px-8 md:py-24`}
@@ -94,4 +101,44 @@ export const CardStyles = styled.div`
 			${tw`ml-0`}
 		}
 	}
+`;
+
+//@ content
+
+export const ContentStyles = styled.div`
+	${tw``}
+	${tw`py-16 px-10 space-y-8 sm:px-10 md:py-24`}
+	${tw`md:grid md:grid-cols-2 md:auto-cols-auto md:space-y-0 md:gap-10 lg:gap-16 xl:grid-cols-5 xl:gap-10 md:`}
+`;
+
+export const LeftItemStyles = styled.div`
+	${tw`space-y-8  lg:self-center xl:col-span-3 xl:pr-20`}
+
+	h2 {
+		${tw`font-bold xl:text-2xl`}
+		font-family: 'Paybooc_B';
+	}
+
+	p {
+		${tw`lg:pr-10`}
+		${({ variant }) => variant === 'reverse_section' && tw`2xl:pr-0`}
+	}
+
+	button {
+		${tw`pl-0 text-base text-keyColor`}
+	}
+
+	${({ variant }) =>
+		variant === 'reverse_section' &&
+		tw`xl:col-start-3 xl:col-span-3 xl:pr-0 xl:pl-36`}
+`;
+
+export const RightItemStyles = styled.div`
+	${tw`xl:col-start-4 xl:col-span-2`}
+	img {
+		${tw`rounded-2xl`}
+	}
+
+	${({ variant }) =>
+		variant === 'reverse_section' && tw`md:order-first xl:col-start-1`}
 `;

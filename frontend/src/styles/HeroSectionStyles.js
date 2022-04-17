@@ -29,6 +29,7 @@ export const HeroStyles = styled.img`
 
 export const EffectStyles = styled.img`
 	${tw`absolute inset-0 h-full w-full`}
+	${tw`md:p-5 lg:pr-1 xl:p-16 xl:pr-10 2xl:p-12 2xl:pr-0`}
 `;
 
 export const TextWrapper = styled.div`
@@ -76,6 +77,7 @@ export const TextStyles = styled.div`
 		${tw`text-base sm:text-xl my-3 md:text-sm md:font-light md:leading-6 lg:text-[0.9375rem] lg:leading-7 xl:text-base xl:leading-7`}
 	}
 `;
+
 export const LinkBtnStyles = styled.div`
 	${tw`w-2/3 mx-auto space-y-3 text-base sm:text-xl `}
 	${tw`md:text-sm md:w-4/5 md:mx-0 xl:text-base xl:w-2/3`}

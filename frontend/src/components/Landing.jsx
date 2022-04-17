@@ -19,11 +19,16 @@ import {
 	ClassInfoStyles,
 	CardListStyles,
 	CardStyles,
+	ContentStyles,
+	LeftItemStyles,
+	RightItemStyles,
 } from '../styles/LandingStyles';
 
 import ico_kko from '../assets/icons/ico_partner_kkp.png';
 import ico_naver from '../assets/icons/ico_partner_n.png';
 import ico_ridi from '../assets/icons/ico_partner_ridi.png';
+import img_about from '../assets/st_img_about.png';
+import img_tutors from '../assets/st_img_tutors.png';
 
 function Landing() {
 	const { width, isMobile } = useWD(768);
@@ -159,6 +164,71 @@ function Landing() {
 					</ClassInfoStyles>
 				</ContainerStyles>
 			</SectionStyles>
+
+			<SectionStyles variant="first_section">
+				<ContainerStyles>
+					{/* content */}
+					<ContentStyles>
+						{/* leftitem - text*/}
+						<LeftItemStyles>
+							<h2>스토리튠즈 - 웹소설 작가의 꿈이 현실이 되는 곳!</h2>
+							<p>
+								스토리튠즈 아카데미는 나만의 이야기를 상상하고 풀어내길 바라는
+								모두에게 열려 있습니다.
+							</p>
+							<p>
+								카카오페이지와 스토리튠즈가 공동으로 기획하여 데뷔까지의 모든
+								교육과정을 지원하는 카카오페이지 작가가 되기 위한 가장 빠른
+								지름길입니다.
+							</p>
+							<Button
+								navtigate_to="/"
+								add_styles={tw`flex justify-start items-center`}
+							>
+								더 알아보기
+								<BsArrowRightShort size={24} />{' '}
+							</Button>
+						</LeftItemStyles>
+						{/* right item - img */}
+						<RightItemStyles>
+							<img src={img_about} alt="" />
+						</RightItemStyles>
+					</ContentStyles>
+				</ContainerStyles>
+			</SectionStyles>
+
+			<SectionStyles>
+				<ContainerStyles>
+					{/* content */}
+					<ContentStyles>
+						{/* leftitem - text*/}
+						<LeftItemStyles variant="reverse_section">
+							<h2>스토리튠즈 - 웹소설 작가의 꿈이 현실이 되는 곳!</h2>
+							<p>
+								스토리튠즈 아카데미는 나만의 이야기를 상상하고 풀어내길 바라는
+								모두에게 열려 있습니다.
+							</p>
+							<p>
+								카카오페이지와 스토리튠즈가 공동으로 기획하여 데뷔까지의 모든
+								교육과정을 지원하는 카카오페이지 작가가 되기 위한 가장 빠른
+								지름길입니다.
+							</p>
+							<Button
+								navtigate_to="/"
+								add_styles={tw`flex justify-start items-center`}
+							>
+								더 알아보기
+								<BsArrowRightShort size={24} />{' '}
+							</Button>
+						</LeftItemStyles>
+						{/* right item - img */}
+						<RightItemStyles variant="reverse_section">
+							<img src={img_tutors} alt="" />
+						</RightItemStyles>
+					</ContentStyles>
+				</ContainerStyles>
+			</SectionStyles>
+
 			<div tw="fixed bottom-1 left-2 text-sm text-black  ">{width}</div>
 		</MainStyles>
 	);
