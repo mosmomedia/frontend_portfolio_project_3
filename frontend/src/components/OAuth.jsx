@@ -50,8 +50,8 @@ function OAuth({ setLoading }) {
 		} catch (error) {
 			console.log(error);
 			toast.error('Could not authorize with Google');
+			setLoading(false);
 		}
-		setLoading(false);
 	};
 
 	return (

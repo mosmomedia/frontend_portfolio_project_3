@@ -30,11 +30,12 @@ export const TextWrapper = styled.div`
 	${tw`md:relative md:bottom-[unset]`}
 `;
 export const TextStyles = styled.div`
-	${tw`text-center space-y-12 text-white tracking-wide`}
+	${tw`text-center space-y-12 text-white tracking-wider`}
 	${tw`md:text-st_alt1 md:text-left`}
 
 	h1,
-	h2,
+	h2 ,
+	h2 span,
 	h4,
 	h1 span {
 		font-family: 'Paybooc_M';
@@ -49,11 +50,11 @@ export const TextStyles = styled.div`
 		${tw`relative`}
 
 		&::after {
-			${tw`content absolute w-1 h-1 rounded-full bg-keyColor top-0 left-[35%] md:-top-1.5 md:left-[21%]`}
+			${tw`content absolute w-1 h-1 rounded-full bg-keyColor -top-1.5 left-[35%] sm:left-[25%]  md:-top-1.5 md:left-[21%]`}
 		}
 
 		&:nth-child(2)::after {
-			${tw`sm:left-[48%] md:left-[38%]`}
+			${tw`sm:left-[40%] md:left-[38%]`}
 		}
 	}
 
