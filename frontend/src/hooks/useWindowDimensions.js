@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 // const { width } = useWD();
 // eslint-disable-next-line
 {
-	/* <div tw="absolute bottom-1 left-2 text-sm text-blue-200">{width}</div> */
+	/* <div tw="fixed bottom-1 left-2 text-sm text-blue-200">{width}</div> */
 }
 
 function useWindowDimensions(size) {

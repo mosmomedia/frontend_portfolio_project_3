@@ -1,57 +1,20 @@
-import tw, { styled } from 'twin.macro';
-import 'twin.macro';
-import 'styled-components/macro';
-
 // hooks
 import useWD from '../hooks/useWindowDimensions';
 
 // styles
 import { ContainerStyles } from '../styles';
+import {
+	MainStyles,
+	SectionStyles,
+	PlatformStyles,
+} from '../styles/LandingStyles';
+
 import ico_kko from '../assets/icons/ico_partner_kkp.png';
 import ico_naver from '../assets/icons/ico_partner_n.png';
 import ico_ridi from '../assets/icons/ico_partner_ridi.png';
 
 // sections
 import HeroSection from './HeroSection';
-
-const MainStyles = styled.div`
-	${tw``}
-`;
-const SectionStyles = styled.div`
-	${tw``}
-`;
-
-const PlatformStyles = styled.div`
-	${tw`flex justify-center bg-[#fdfafa]`}
-
-	div {
-		${tw`flex-1 p-6`}
-
-		h4 {
-			${tw`text-[0.9375rem] font-medium mb-6`}
-		}
-	}
-
-	div:first-child ul {
-		${tw`flex`}
-
-		li {
-			${tw`pr-4`}
-		}
-
-		h5 {
-			${tw`hidden lg:block`}
-		}
-
-		img {
-			${tw`w-6`}
-		}
-	}
-
-	div:last-child ul {
-		${tw`flex flex-col`}
-	}
-`;
 
 function Landing() {
 	const { width, isMobile } = useWD(768);
@@ -61,7 +24,9 @@ function Landing() {
 			<ContainerStyles>
 				{/* hero */}
 				<HeroSection isMobile={isMobile} />
-				<SectionStyles>
+			</ContainerStyles>
+			<SectionStyles variant="platform">
+				<ContainerStyles>
 					<PlatformStyles>
 						{/* platform */}
 						<div>
@@ -93,9 +58,9 @@ function Landing() {
 							</ul>
 						</div>
 					</PlatformStyles>
-				</SectionStyles>
-				<div tw="absolute bottom-1 left-2 text-sm text-black  ">{width}</div>
-			</ContainerStyles>
+				</ContainerStyles>
+			</SectionStyles>
+			<div tw="fixed bottom-1 left-2 text-sm text-black  ">{width}</div>
 		</MainStyles>
 	);
 }
