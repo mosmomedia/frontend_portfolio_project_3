@@ -4,7 +4,7 @@ export const SectionStyles = styled.div`
 	${tw`pt-10 md:pt-0 md:flex md:items-center md:py-[10rem]  lg:h-screen `}
 	${({ variant }) => variant === 'hero' && tw`xl:h-screen`}
 
-	@media only screen and (min-height: 1200px) {
+	@media only screen and (min-height: 1200px)  and (min-width: 640px) {
 		height: unset;
 		padding: 4rem 0;
 		min-height: 80vh;

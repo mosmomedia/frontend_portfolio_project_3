@@ -1,6 +1,7 @@
 import tw from 'twin.macro';
 import { createGlobalStyle } from 'styled-components';
 import paybooc_M from './fonts/paybooc_medium.otf';
+import paybooc_B from './fonts/paybooc_bold.otf';
 
 const BaseStyles = createGlobalStyle`
 
@@ -8,6 +9,12 @@ const BaseStyles = createGlobalStyle`
 @font-face {
   font-family: 'Paybooc_M';
 	src: url(${paybooc_M}) format('opentype')
+}
+
+@font-face {
+  font-family: 'Paybooc_B';
+	font-weight: bold;
+	src: url(${paybooc_B}) format('opentype')
 }
 
 * {

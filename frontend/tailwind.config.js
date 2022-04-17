@@ -17,8 +17,9 @@ module.exports = {
 				primary: '#ff5263',
 				secondary: '#fff',
 				basic: '#ffcc00',
-				adv: '#ff6a95',
+				adv: '#4abb9b',
 				debut: '#000',
+				kkp: '#6979f8',
 			},
 			textColor: {
 				primary: '#fff',
@@ -26,6 +27,7 @@ module.exports = {
 				basic: '#141414',
 				adv: '#141414',
 				debut: '#fff',
+				kkp: '#fff',
 			},
 		},
 	},
