@@ -18,18 +18,17 @@ import {
 	LinkLowerStyles,
 	HeroStyles,
 	EffectStyles,
+	MobileImgStyles,
 } from '../styles/HeroSectionStyles';
 
-function HeroSection({ isMobile }) {
+function HeroSection() {
 	return (
 		<SectionStyles variant="hero">
 			{/*LeftItem /  submit wrapper */}
-			<LeftItemStyles is_mobile={isMobile}>
-				{isMobile && (
-					<div>
-						<img src={img_hero} alt="" />
-					</div>
-				)}
+			<LeftItemStyles>
+				<MobileImgStyles>
+					<img src={img_hero} alt="" />
+				</MobileImgStyles>
 				<TextWrapper>
 					{/* st_text */}
 					<TextStyles>
@@ -50,24 +49,16 @@ function HeroSection({ isMobile }) {
 						{/* text content */}
 						<div>
 							{/* web */}
-							{isMobile ? (
-								<>
-									<h4>스토리튠즈는 한국 최초의 웹 소설 전문 아카데미입니다.</h4>
-									<h4>현역 최상위 작가진을 실시간 강의를 통해 만나보세요.</h4>
-								</>
-							) : (
-								<>
-									<h4>
-										스토리튠즈는 한국 최초의 웹 소설 전문 아카데미입니다.{' '}
-									</h4>
-									<h4>
-										현역에서 일하는 최상위 작가진이 설립한 회사로, 어느 곳에서도
-										찾을 수 없는 많은 작가 양성 경험과 전문성을 가지고 있습니다.
-										작가를 꿈꾸시는 분, 글쓰기를 좋아하시는 분, 배워보고 싶었던
-										분 모두 환영합니다.
-									</h4>
-								</>
-							)}
+							<h4>스토리튠즈는 한국 최초의 웹 소설 전문 아카데미입니다.</h4>
+							<h4 className="mobile">
+								현역 최상위 작가진을 실시간 강의를 통해 만나보세요.
+							</h4>
+							<h4 className="web">
+								현역에서 일하는 최상위 작가진이 설립한 회사로, 어느 곳에서도
+								찾을 수 없는 많은 작가 양성 경험과 전문성을 가지고 있습니다.
+								작가를 꿈꾸시는 분, 글쓰기를 좋아하시는 분, 배워보고 싶었던 분
+								모두 환영합니다.
+							</h4>
 						</div>
 					</TextStyles>
 					{/* link_button */}
@@ -95,14 +86,12 @@ function HeroSection({ isMobile }) {
 			</LeftItemStyles>
 			{/* RightItem / img wrapper*/}
 
-			{!isMobile && (
-				<RightItemStyles>
-					{/* img */}
-					<HeroStyles src={img_hero} alt="landing hero" />
-					{/* img effect */}
-					<EffectStyles src={img_effect} alt="landing effect" />
-				</RightItemStyles>
-			)}
+			<RightItemStyles>
+				{/* img */}
+				<HeroStyles src={img_hero} alt="landing hero" />
+				{/* img effect */}
+				<EffectStyles src={img_effect} alt="landing effect" />
+			</RightItemStyles>
 		</SectionStyles>
 	);
 }

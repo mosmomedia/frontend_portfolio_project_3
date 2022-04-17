@@ -1,10 +1,5 @@
-import tw, { styled } from 'twin.macro';
-import 'twin.macro';
-import 'styled-components/macro';
+import tw from 'twin.macro';
 import { BsArrowRightShort } from 'react-icons/bs';
-
-// hooks
-import useWD from '../hooks/useWindowDimensions';
 
 // conponents
 import HeroSection from './HeroSection';
@@ -31,13 +26,11 @@ import img_about from '../assets/st_img_about.png';
 import img_tutors from '../assets/st_img_tutors.png';
 
 function Landing() {
-	const { width, isMobile } = useWD(768);
-
 	return (
 		<MainStyles>
 			<ContainerStyles>
 				{/* hero */}
-				<HeroSection isMobile={isMobile} />
+				<HeroSection />
 			</ContainerStyles>
 
 			<SectionStyles variant="platform">
@@ -228,8 +221,6 @@ function Landing() {
 					</ContentStyles>
 				</ContainerStyles>
 			</SectionStyles>
-
-			<div tw="fixed bottom-1 left-2 text-sm text-black  ">{width}</div>
 		</MainStyles>
 	);
 }

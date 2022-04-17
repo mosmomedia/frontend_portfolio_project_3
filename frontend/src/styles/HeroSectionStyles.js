@@ -14,12 +14,25 @@ export const SectionStyles = styled.div`
 export const LeftItemStyles = styled.div`
 	${tw`relative bg-[#ffe0e0] md:w-1/2 md:bg-body md:p-5 lg:pr-16  xl:pr-[8rem]`}
 
-	${({ is_mobile }) =>
-		is_mobile &&
-		tw`before:content before:absolute before:inset-0  before:w-full before:h-full  before:bg-black/[50%]`}
+	.mobile {
+		${tw`md:hidden`}
+	}
+
+	.web {
+		${tw`hidden md:block`}
+	}
+
+	@media (max-width: 767px) {
+		${tw`before:content before:absolute before:inset-0  before:w-full before:h-full  before:bg-black/[50%]`}
+	}
+`;
+
+export const MobileImgStyles = styled.div`
+	${tw`md:hidden`}
 `;
 
 export const RightItemStyles = styled.div`
+	${tw`hidden md:block`}
 	${tw`relative md:w-1/2 md:p-5 lg:pr-1 xl:p-16 xl:pr-10 2xl:p-12 2xl:pr-0`}
 `;
 
