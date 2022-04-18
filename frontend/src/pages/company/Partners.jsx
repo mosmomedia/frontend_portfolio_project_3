@@ -29,7 +29,7 @@ function Team() {
 								</h3>
 							</div>
 							<br />
-							<div class="wrapper">
+							<div className="wrapper">
 								<div>
 									<h2>Platform</h2>
 									<p>카카오페이지</p>
@@ -92,7 +92,7 @@ function Team() {
 			<SectionStyles add_styles={tw`px-6`}>
 				<ContainerStyles>
 					<PlatformStyles>
-						<h1 class="">Management</h1>
+						<h1>Management</h1>
 						<div>
 							<h2>ROK Media</h2>
 							<p>
