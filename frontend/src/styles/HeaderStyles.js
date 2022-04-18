@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const HeaderStyles = styled.header`
-	${tw`fixed w-full h-[4.5rem]  text-white z-50`}
+	${tw`fixed top-0 left-0 w-full h-[4.25rem]  text-white z-50`}
 	${tw`lg:block lg:bg-header lg:text-main_text lg:h-[5rem]  `}
 
 	${({ is_hover_on }) =>
@@ -48,7 +48,7 @@ export const ImgStyles = styled.img`
 `;
 
 export const MenuStyles = styled.div`
-	${tw`absolute z-[-1] top-[4.5rem] py-7 left-0  w-full h-screen bg-[#343540] translate-y-[-115%]  space-y-14  ease-in-out duration-500`}
+	${tw`absolute z-[-1] top-[4.25rem] py-7 left-0  w-full h-screen bg-[#343540] translate-y-[-115%]  space-y-14  ease-in-out duration-500`}
 
 	${tw`lg:flex  lg:translate-y-0 lg:z-0  lg:space-y-0 lg:py-0   lg:h-full  lg:w-[unset] lg:static lg:transition-none lg:bg-white`} 
 
