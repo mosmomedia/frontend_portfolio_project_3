@@ -103,7 +103,7 @@ export const CardStyles = styled.div`
 //@ content
 
 export const ContentStyles = styled.div`
-	${tw`py-20 px-10 space-y-8 sm:px-10 md:py-24 lg:py-32 xl:py-36 2xl:py-40`}
+	${tw`py-20 px-10 space-y-8 md:py-24 lg:py-32 xl:py-36 2xl:py-40`}
 	${tw`md:grid md:grid-cols-2 md:auto-cols-auto md:space-y-0 md:gap-10 lg:gap-16 xl:grid-cols-5 xl:gap-10 md:`}
 `;
 

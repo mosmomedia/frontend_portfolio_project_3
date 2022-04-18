@@ -14,6 +14,7 @@ import SignIn from './pages/accounts/SignIn';
 import SignUp from './pages/accounts/SignUp';
 import ForgotPassword from './pages/accounts/ForgotPassword';
 
+import About from './pages/company/About';
 import Faq from './pages/customer/Faq';
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
 					<Route path="/sign-in" element={<SignIn />} />
 					<Route path="/sign-up" element={<SignUp />} />
 					<Route path="/forgot-password" element={<ForgotPassword />} />
+					{/* company */}
+					<Route path="/about" element={<About />} />
 					{/*customer  */}
 					<Route path="/faq" element={<Faq />} />
 				</Routes>

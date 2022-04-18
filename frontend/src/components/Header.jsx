@@ -85,7 +85,9 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/">수강신청</Link>
+							<Link to="/" className="title">
+								수강신청
+							</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
@@ -106,7 +108,9 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/">데뷔 로드맵</Link>
+							<Link to="/" className="title">
+								데뷔 로드맵
+							</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
@@ -126,20 +130,30 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/">회사소개</Link>
+							<Link to="/about" className="title" onClick={handleClick}>
+								회사소개
+							</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
-								<Link to="/">본원소개</Link>
+								<Link to="/about" onClick={handleClick}>
+									본원소개
+								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/">대표 강사진</Link>
+								<Link to="/team" onClick={handleClick}>
+									대표 강사진
+								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/">제휴업체</Link>
+								<Link to="/partners" onClick={handleClick}>
+									제휴업체
+								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/">오시는 길</Link>
+								<Link to="/loaction" onClick={handleClick}>
+									오시는 길
+								</Link>
 							</ItemStyles>
 						</LinkGnbStyles>
 					</ListGnbStyles>
@@ -147,7 +161,7 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/faq" onClick={handleClick}>
+							<Link to="/faq" className="title" onClick={handleClick}>
 								고객지원
 							</Link>
 						</TitleStyles>

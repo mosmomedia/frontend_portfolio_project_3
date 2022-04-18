@@ -1,4 +1,3 @@
-import React from 'react';
 import ico_link_fb from '../../assets/icons/ico_link_fb.png';
 import ico_link_insta from '../../assets/icons/ico_link_insta.png';
 import ico_link_kakao from '../../assets/icons/ico_link_kakao.png';
