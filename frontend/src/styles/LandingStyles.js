@@ -56,7 +56,7 @@ export const PlatformStyles = styled.div`
 //@ class info
 
 export const ClassInfoStyles = styled.div`
-	${tw`py-16 px-6 sm:px-8 md:py-24`}
+	${tw`py-20 px-6 sm:px-8 md:py-32 lg:py-36 xl:py-40`}
 
 	h2 {
 		${tw`font-bold text-[1.25rem] text-center mb-14  lg:mb-24`}
@@ -106,8 +106,7 @@ export const CardStyles = styled.div`
 //@ content
 
 export const ContentStyles = styled.div`
-	${tw``}
-	${tw`py-16 px-10 space-y-8 sm:px-10 md:py-24`}
+	${tw`py-20 px-10 space-y-8 sm:px-10 md:py-24 lg:py-32 xl:py-36 2xl:py-40`}
 	${tw`md:grid md:grid-cols-2 md:auto-cols-auto md:space-y-0 md:gap-10 lg:gap-16 xl:grid-cols-5 xl:gap-10 md:`}
 `;
 
