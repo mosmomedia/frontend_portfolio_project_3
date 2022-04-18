@@ -4,7 +4,7 @@ import {
 	ContentStyles,
 	LeftItemStyles,
 	RightItemStyles,
-} from '../../styles/CompanyStyles';
+} from '../../styles/AboutStyles';
 
 import img_about from '../../assets/st_img_about.png';
 import img_tutors from '../../assets/st_img_tutors.png';

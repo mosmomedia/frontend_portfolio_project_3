@@ -15,6 +15,7 @@ import SignUp from './pages/accounts/SignUp';
 import ForgotPassword from './pages/accounts/ForgotPassword';
 
 import About from './pages/company/About';
+import Team from './pages/company/Team';
 import Faq from './pages/customer/Faq';
 
 function App() {
@@ -33,6 +34,7 @@ function App() {
 					<Route path="/forgot-password" element={<ForgotPassword />} />
 					{/* company */}
 					<Route path="/about" element={<About />} />
+					<Route path="/team" element={<Team />} />
 					{/*customer  */}
 					<Route path="/faq" element={<Faq />} />
 				</Routes>

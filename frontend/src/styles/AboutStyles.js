@@ -4,7 +4,7 @@ export const style = styled.div``;
 
 export const SectionStyles = styled.div`
 	h1 {
-		${tw`font-bold text-3xl mb-10 xl:mb-16`}
+		${tw`font-bold text-3xl mb-10 xl:mb-16 lg:text-4xl `}
 	}
 
 	${({ variant }) => variant === 'first' && tw`mt-[4.25rem]`}
@@ -15,7 +15,7 @@ export const ContentStyles = styled.div`
 	${tw`py-16 px-10 space-y-8 sm:py-20 md:px-6 md:py-24 xl:py-32  xl:pl-4 xl:pr-2 2xl:py-40`}
 
 	${tw`space-y-8`}
-	${tw`md:grid md:grid-cols-2 md:auto-cols-auto md:space-y-0 md:gap-10 lg:gap-16 xl:grid-cols-5 xl:gap-10 md:`}
+	${tw`md:grid md:grid-cols-2 md:auto-cols-auto md:space-y-0 md:gap-10 lg:gap-16 xl:grid-cols-5 xl:gap-40`}
 `;
 
 export const LeftItemStyles = styled.div`
