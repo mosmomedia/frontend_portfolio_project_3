@@ -10,9 +10,11 @@ import Header from './components/Header';
 import Landing from './components/Landing';
 import Footer from './components/Footer';
 
-import SignIn from './pages/SignIn';
-import SignUp from './pages/SignUp';
-import ForgotPassword from './pages/ForgotPassword';
+import SignIn from './pages/accounts/SignIn';
+import SignUp from './pages/accounts/SignUp';
+import ForgotPassword from './pages/accounts/ForgotPassword';
+
+import Faq from './pages/customer/Faq';
 
 function App() {
 	return (
@@ -22,10 +24,14 @@ function App() {
 			<Router>
 				<Header></Header>
 				<Routes>
+					{/* landing */}
 					<Route path="/" element={<Landing />} />
+					{/* accounts */}
 					<Route path="/sign-in" element={<SignIn />} />
 					<Route path="/sign-up" element={<SignUp />} />
 					<Route path="/forgot-password" element={<ForgotPassword />} />
+					{/*customer  */}
+					<Route path="/faq" element={<Faq />} />
 				</Routes>
 				<Footer />
 				<ToastContainer autoClose={2500} />

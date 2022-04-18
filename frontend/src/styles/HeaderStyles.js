@@ -83,3 +83,13 @@ export const ItemStyles = styled.li`
 	${({ variant }) => variant === 'mobile' && tw`lg:hidden`}
 	${({ variant }) => variant === 'web' && tw`hidden lg:block`}
 `;
+
+export const ButtonStyles = styled.div`
+	.web {
+		${tw`hidden lg:block`}
+	}
+
+	.mobile {
+		${tw`lg:hidden`}
+	}
+`;

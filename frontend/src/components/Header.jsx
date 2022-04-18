@@ -3,14 +3,11 @@ import { Link, useLocation } from 'react-router-dom';
 import { useAuthContext } from '../contexts/auth/AuthContext';
 import tw from 'twin.macro';
 
-// hook
-import useWindowDimensions from '../hooks/useWindowDimensions';
-
 import Logo_black from '../assets/logos/logo.svg';
 import Logo_white from '../assets/logos/logo_on.svg';
 import Button from './shared/Button';
 
-import { FaUserCircle, FaChalkboardTeacher } from 'react-icons/fa';
+import { FaChalkboardTeacher } from 'react-icons/fa';
 
 import {
 	HeaderStyles,
@@ -23,12 +20,12 @@ import {
 	TitleStyles,
 	LinkGnbStyles,
 	ItemStyles,
+	ButtonStyles,
 } from '../styles/HeaderStyles';
 
 function Header() {
 	const [hamburgerOn, setHamburgerOn] = useState(false);
 	const [hoverOn, setHoverOn] = useState(false);
-	const { width } = useWindowDimensions();
 	const { pathname } = useLocation();
 	const userState = useAuthContext();
 
@@ -40,6 +37,11 @@ function Header() {
 		pathname === '/dashboard'
 	)
 		return null;
+
+	const handleClick = () => {
+		setHoverOn(false);
+		setHamburgerOn(false);
+	};
 
 	return (
 		<HeaderStyles is_hover_on={hoverOn}>
@@ -83,9 +85,7 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/" className="title">
-								수강신청
-							</Link>
+							<Link to="/">수강신청</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
@@ -106,9 +106,7 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/" className="title">
-								데뷔 로드맵
-							</Link>
+							<Link to="/">데뷔 로드맵</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
@@ -128,9 +126,7 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/" className="title">
-								회사소개
-							</Link>
+							<Link to="/">회사소개</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
@@ -151,13 +147,15 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/" className="title">
+							<Link to="/faq" onClick={handleClick}>
 								고객지원
 							</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
-								<Link to="/">자주하는 질문</Link>
+								<Link to="/faq" onClick={handleClick}>
+									자주하는 질문
+								</Link>
 							</ItemStyles>
 						</LinkGnbStyles>
 					</ListGnbStyles>
@@ -165,44 +163,48 @@ function Header() {
 				{/* button */}
 				{/*logout  */}
 				{/* my dashboard */}
-				{userState ? (
-					width >= 1024 ? (
-						<Link to="/dashboard">
-							<Button variant="dashboard">
-								내 강의실
-								<FaChalkboardTeacher size={'1.625rem'} />
-							</Button>
-						</Link>
+				<ButtonStyles>
+					{userState ? (
+						<>
+							<div className="web">
+								<Button navtigate_to="/dashboard" variant="dashboard">
+									내 강의실
+									<FaChalkboardTeacher size={'1.5625rem'} />
+								</Button>
+							</div>
+							<Link className="mobile" to="/dashboard">
+								<FaChalkboardTeacher size={'1.5625rem'} />
+							</Link>
+						</>
 					) : (
-						<Link to="/dashboard">
-							<FaUserCircle size={'1.625rem'} />
-						</Link>
-					)
-				) : width >= 1024 ? (
-					<div>
-						<Button
-							navtigate_to="/sign-in"
-							add_styles={tw`lg:mt-[1.125rem] lg:text-[0.9375rem] lg:hover:text-keyColor  `}
-						>
-							로그인
-						</Button>
-						<Button
-							navtigate_to="/sign-up"
-							variant="primary"
-							add_styles={tw`lg:text-[0.9375rem] lg:px-8`}
-						>
-							회원가입
-						</Button>
-					</div>
-				) : (
-					<Button
-						navtigate_to="/sign-in"
-						variant="primary"
-						add_styles={tw`text-[0.9375rem]`}
-					>
-						로그인
-					</Button>
-				)}
+						<>
+							<div className="web">
+								<Button
+									navtigate_to="/sign-in"
+									add_styles={tw`xl:mt-[1.125rem] xl:text-[0.9375rem] xl:hover:text-keyColor  `}
+								>
+									로그인
+								</Button>
+								<Button
+									navtigate_to="/sign-up"
+									variant="primary"
+									add_styles={tw`lg:text-[0.9375rem] lg:px-8`}
+								>
+									회원가입
+								</Button>
+							</div>
+							<div className="mobile">
+								<Button
+									navtigate_to="/sign-in"
+									variant="primary"
+									add_styles={tw`lg:mt-[1.125rem] text-[0.9375rem]`}
+								>
+									로그인
+								</Button>
+							</div>
+						</>
+					)}
+				</ButtonStyles>
 			</NavStyles>
 		</HeaderStyles>
 	);

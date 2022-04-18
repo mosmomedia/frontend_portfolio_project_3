@@ -1,15 +1,12 @@
 import tw, { styled } from 'twin.macro';
 
 export const MainStyles = styled.div`
-	${tw``}
-
 	h2,
 	p {
 		word-break: keep-all;
 	}
 `;
 export const SectionStyles = styled.div`
-	${tw``}
 	${({ variant }) =>
 		variant === 'platform' &&
 		tw`bg-[#fdfafa] border-b border-b-[#eae1f2b7] lg:border-none lg:bg-[#fceded7c]`}
@@ -134,6 +131,7 @@ export const LeftItemStyles = styled.div`
 
 export const RightItemStyles = styled.div`
 	${tw`xl:col-start-4 xl:col-span-2`}
+
 	img {
 		${tw`rounded-2xl`}
 	}

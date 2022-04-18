@@ -1,15 +1,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import firebase from '../config/firebase';
-import OAuth from '../components/OAuth';
+import firebase from '../../config/firebase';
+import OAuth from '../../components/OAuth';
 
-import BackToHomeBar from '../components/BackToHomeBar';
-import Button from '../components/shared/Button';
-import Logo from '../assets/logos/logo_circle.svg';
-import Img from '../assets/st_img_sign_in.png';
+import BackToHomeBar from '../../components/BackToHomeBar';
+import Button from '../../components/shared/Button';
+import Logo from '../../assets/logos/logo_circle.svg';
+import Img from '../../assets/st_img_sign_in.png';
 import { toast } from 'react-toastify';
-import Spinner from '../components/shared/Spinner';
+import Spinner from '../../components/shared/Spinner';
 
 import 'twin.macro';
 import 'styled-components/macro';
@@ -28,7 +28,7 @@ import {
 	AdsInfoStyles,
 	SubmitStyles,
 	LinkStyles,
-} from '../styles/AuthStyles';
+} from '../../styles/AuthStyles';
 
 function SignIn() {
 	const [loading, setLoading] = useState(false);
