@@ -23,23 +23,31 @@ const BaseStyles = createGlobalStyle`
 
 body {
 	${tw`bg-body text-main_text text-sm md:text-base`}
-}
 
-h1{
-	${tw`text-2xl`}
+	h1{
+	${tw`text-3xl font-medium text-[#2f2f2f]`}
 }
 
 h2{
-	${tw`text-xl`}
+	${tw`text-xl font-medium text-[#2f2f2f]`}
 }
+
+h3,
+h4{
+	${tw`text-lg font-medium`}
+}
+
 
 p{
 	${tw`text-base`}
 }
 
-a {
-	${tw` no-underline`}
+
 }
+
+
+
+
 `;
 
 export default BaseStyles;

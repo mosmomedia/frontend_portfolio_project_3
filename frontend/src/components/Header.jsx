@@ -195,7 +195,7 @@ function Header() {
 							<div className="web">
 								<Button
 									navtigate_to="/sign-in"
-									add_styles={tw`xl:mt-[1.125rem] xl:text-[0.9375rem] xl:hover:text-keyColor  `}
+									add_styles={tw`lg:mt-[1.125rem] lg:text-[0.9375rem] xl:hover:text-keyColor  `}
 								>
 									로그인
 								</Button>

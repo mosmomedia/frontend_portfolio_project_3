@@ -62,6 +62,11 @@ export const TextStyles = styled.div`
 		font-weight: 600;
 	}
 
+	h1,
+	h2 {
+		${tw`text-white md:text-main_text`}
+	}
+
 	h2 {
 		${tw`text-xl sm:text-[1.75rem ] mb-1 sm:mb-4 md:text-xl xl:text-2xl`}
 	}

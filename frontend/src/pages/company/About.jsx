@@ -1,6 +1,6 @@
-import { ContainerStyles } from '../../styles';
+import tw from 'twin.macro';
+import { SectionStyles, ContainerStyles } from '../../styles';
 import {
-	SectionStyles,
 	ContentStyles,
 	LeftItemStyles,
 	RightItemStyles,
@@ -13,7 +13,10 @@ import img_tutors2 from '../../assets/st_img_tutors2.png';
 function About() {
 	return (
 		<>
-			<SectionStyles variant="first">
+			<SectionStyles
+				variant="first"
+				add_styles={tw`px-8 space-y-8 md:px-6 xl:pl-4 xl:pr-2 `}
+			>
 				<ContainerStyles>
 					<ContentStyles>
 						<LeftItemStyles>
@@ -45,7 +48,10 @@ function About() {
 				</ContainerStyles>
 			</SectionStyles>
 
-			<SectionStyles variant="even">
+			<SectionStyles
+				variant="even"
+				add_styles={tw`px-10 space-y-8 md:px-6 xl:pl-4 xl:pr-2 `}
+			>
 				<ContainerStyles>
 					<ContentStyles>
 						<LeftItemStyles variant="reverse_section">
@@ -73,7 +79,7 @@ function About() {
 				</ContainerStyles>
 			</SectionStyles>
 
-			<SectionStyles>
+			<SectionStyles add_styles={tw`px-10 space-y-8 md:px-6 xl:pl-4 xl:pr-2 `}>
 				<ContainerStyles>
 					<ContentStyles>
 						<LeftItemStyles>

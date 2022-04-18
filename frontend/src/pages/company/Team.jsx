@@ -1,6 +1,6 @@
-import { ContainerStyles } from '../../styles';
+import { SectionStyles, ContainerStyles } from '../../styles';
+import tw from 'twin.macro';
 import {
-	SectionStyles,
 	ContentStyles,
 	LeftItemStyles,
 	RightItemStyles,
@@ -16,11 +16,11 @@ import img_t6 from '../../assets/img_tutors/t_6.png';
 function Team() {
 	return (
 		<>
-			<SectionStyles variant="first">
+			<SectionStyles variant="first" add_styles={tw`px-6 xl:px-20`}>
 				<ContainerStyles>
-					<h1>People</h1>
 					<ContentStyles>
 						<LeftItemStyles>
+							<h1>People</h1>
 							<h2>스토리 튠즈의 대표 강사진</h2>
 							<br />
 							<h3>박태석 작가</h3>
@@ -43,7 +43,7 @@ function Team() {
 				</ContainerStyles>
 			</SectionStyles>
 
-			<SectionStyles variant="even">
+			<SectionStyles variant="even" add_styles={tw`px-6 xl:px-20`}>
 				<ContainerStyles>
 					<ContentStyles>
 						<LeftItemStyles>
@@ -69,7 +69,7 @@ function Team() {
 				</ContainerStyles>
 			</SectionStyles>
 
-			<SectionStyles>
+			<SectionStyles add_styles={tw`px-6 xl:px-20`}>
 				<ContainerStyles>
 					<ContentStyles>
 						<LeftItemStyles>
@@ -96,7 +96,7 @@ function Team() {
 				</ContainerStyles>
 			</SectionStyles>
 
-			<SectionStyles variant="even">
+			<SectionStyles variant="even" add_styles={tw`px-6 xl:px-20`}>
 				<ContainerStyles>
 					<ContentStyles>
 						<LeftItemStyles>
@@ -121,7 +121,7 @@ function Team() {
 				</ContainerStyles>
 			</SectionStyles>
 
-			<SectionStyles>
+			<SectionStyles add_styles={tw`px-6 xl:px-20`}>
 				<ContainerStyles>
 					<ContentStyles>
 						<LeftItemStyles>
@@ -147,7 +147,7 @@ function Team() {
 				</ContainerStyles>
 			</SectionStyles>
 
-			<SectionStyles variant="even">
+			<SectionStyles variant="even" add_styles={tw`px-6 xl:px-20`}>
 				<ContainerStyles>
 					<ContentStyles>
 						<LeftItemStyles>

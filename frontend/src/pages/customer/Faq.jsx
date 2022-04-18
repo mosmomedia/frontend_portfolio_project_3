@@ -1,22 +1,24 @@
+import tw from 'twin.macro';
+
 import ico_link_fb from '../../assets/icons/ico_link_fb.png';
 import ico_link_insta from '../../assets/icons/ico_link_insta.png';
 import ico_link_kakao from '../../assets/icons/ico_link_kakao.png';
 
-import { ContainerStyles } from '../../styles';
+import { SectionStyles, ContainerStyles } from '../../styles';
 import {
-	SectionStyles,
+	ContentStyles,
 	LeftItemStyles,
 	RightItemStyles,
 } from '../../styles/CustomerStyles';
 
 function Faq() {
 	return (
-		<SectionStyles>
+		<SectionStyles variant="first" add_styles={tw`px-8 md:px-6`}>
 			<ContainerStyles>
-				<h1>FAQ</h1>
 				{/* left - support   */}
-				<div className="items_wrapper">
+				<ContentStyles>
 					<LeftItemStyles>
+						<h1>FAQ</h1>
 						<h2>저희 스토리튠즈에 관한 여러분의 궁금증을 풀어 드립니다.</h2>
 						<h3>FAQ에 없는 내용은 채팅 문의 또는 대표전화로 연락 주세요.</h3>
 						<div className="support_wrapper">
@@ -124,7 +126,7 @@ function Faq() {
 							</li>
 						</ul>
 					</RightItemStyles>
-				</div>
+				</ContentStyles>
 			</ContainerStyles>
 		</SectionStyles>
 	);

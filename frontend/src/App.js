@@ -16,6 +16,8 @@ import ForgotPassword from './pages/accounts/ForgotPassword';
 
 import About from './pages/company/About';
 import Team from './pages/company/Team';
+import Partners from './pages/company/Partners';
+
 import Faq from './pages/customer/Faq';
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
 					{/* company */}
 					<Route path="/about" element={<About />} />
 					<Route path="/team" element={<Team />} />
+					<Route path="/partners" element={<Partners />} />
 					{/*customer  */}
 					<Route path="/faq" element={<Faq />} />
 				</Routes>

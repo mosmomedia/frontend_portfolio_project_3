@@ -60,7 +60,12 @@ export const ListGnbStyles = styled.ul`
 	.title {
 		${tw`lg:relative`}
 	}
-	:hover .title::after {
+
+	.title:hover {
+		${tw`opacity-50`}
+	}
+
+	:hover a::after {
 		${tw`lg:content lg:absolute lg:left-0 lg:-top-7 lg:w-full lg:h-0.5 lg:bg-primary opacity-80`}
 	}
 `;
@@ -78,7 +83,11 @@ export const LinkGnbStyles = styled.ul`
 
 export const ItemStyles = styled.li`
 	${tw`py-2.5 pr-10 text-[#ffe0e0e7]`}
-	${tw`lg:py-2.5 lg:pr-0 lg:text-[#acacac] lg:text-[0.9375rem] lg:hover:text-white`}
+	${tw`lg:py-2.5 lg:pr-0 lg:text-[#acacac] lg:text-[0.9375rem] `}
+
+	a {
+		${tw`lg:hover:text-white`}
+	}
 
 	${({ variant }) => variant === 'mobile' && tw`lg:hidden`}
 	${({ variant }) => variant === 'web' && tw`hidden lg:block`}

@@ -1,20 +1,11 @@
 import tw, { styled } from 'twin.macro';
 
-export const style = styled.div``;
-
-export const SectionStyles = styled.div`
-	${tw`py-16 px-6 space-y-8 sm:py-20 md:px-6 md:py-24 xl:py-28  xl:px-20`}
-
-	h1 {
-		${tw`font-bold text-3xl mb-5 lg:text-4xl `}
-	}
-
-	${({ variant }) => variant === 'first' && tw`mt-[4.25rem]`}
-	${({ variant }) => variant === 'even' && tw`bg-[#fceded7c]`}
-`;
-
 export const ContentStyles = styled.div`
 	${tw`grid grid-cols-2 auto-cols-auto gap-10 lg:gap-72 xl:gap-52 xl:grid-cols-5 `}
+
+	h1 {
+		${tw`mb-5`}
+	}
 `;
 
 export const LeftItemStyles = styled.div`

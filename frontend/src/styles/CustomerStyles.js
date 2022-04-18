@@ -2,19 +2,12 @@ import tw, { styled } from 'twin.macro';
 
 export const style = styled.div``;
 
-export const SectionStyles = styled.div`
-	${tw`mt-[4.25rem] p-8 lg:py-16`}
-
-	* {
-		word-break: keep-all;
-	}
+// mt-[4.25rem] py-16 px-8 sm:py-20 md:px-6 md:py-24 xl:py-32   2xl:py-40
+export const ContentStyles = styled.div`
+	${tw`xl:grid xl:grid-cols-2`}
 
 	h1 {
-		${tw`font-bold text-3xl mb-10 xl:mb-16`}
-	}
-
-	.items_wrapper {
-		${tw`xl:grid xl:grid-cols-2`}
+		${tw`mb-10 xl:mb-16`}
 	}
 `;
 
