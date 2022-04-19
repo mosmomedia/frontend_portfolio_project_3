@@ -1,6 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/auth/AuthContext';
 import { GlobalStyles } from 'twin.macro';
+import ScrollToTop from './components/ScrollToTop';
 
 import BaseStyles from './styles/BaseStyles';
 import { ToastContainer } from 'react-toastify';
@@ -27,24 +28,26 @@ function App() {
 			<GlobalStyles />
 			<BaseStyles />
 			<Router>
-				<Header></Header>
-				<Routes>
-					{/* landing */}
-					<Route path="/" element={<Landing />} />
-					{/* accounts */}
-					<Route path="/sign-in" element={<SignIn />} />
-					<Route path="/sign-up" element={<SignUp />} />
-					<Route path="/forgot-password" element={<ForgotPassword />} />
-					{/* company */}
-					<Route path="/about" element={<About />} />
-					<Route path="/team" element={<Team />} />
-					<Route path="/partners" element={<Partners />} />
-					<Route path="/location" element={<Location />} />
-					{/*customer  */}
-					<Route path="/faq" element={<Faq />} />
-				</Routes>
-				<Footer />
-				<ToastContainer autoClose={2500} />
+				<ScrollToTop>
+					<Header></Header>
+					<Routes>
+						{/* landing */}
+						<Route path="/" element={<Landing />} />
+						{/* accounts */}
+						<Route path="/sign-in" element={<SignIn />} />
+						<Route path="/sign-up" element={<SignUp />} />
+						<Route path="/forgot-password" element={<ForgotPassword />} />
+						{/* company */}
+						<Route path="/about" element={<About />} />
+						<Route path="/team" element={<Team />} />
+						<Route path="/partners" element={<Partners />} />
+						<Route path="/location" element={<Location />} />
+						{/*customer  */}
+						<Route path="/faq" element={<Faq />} />
+					</Routes>
+					<Footer />
+					<ToastContainer autoClose={2500} />
+				</ScrollToTop>
 			</Router>
 		</AuthProvider>
 	);
