@@ -1,11 +1,5 @@
 import tw, { styled } from 'twin.macro';
 
-export const MainStyles = styled.div`
-	h2,
-	p {
-		word-break: keep-all;
-	}
-`;
 export const SectionStyles = styled.div`
 	${({ variant }) =>
 		variant === 'platform' &&

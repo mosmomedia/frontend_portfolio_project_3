@@ -1,5 +1,5 @@
 import tw from 'twin.macro';
-import { SectionStyles, ContainerStyles } from '../../styles';
+import { MainStyles, SectionStyles, ContainerStyles } from '../../styles';
 import {
 	ContentStyles,
 	LeftItemStyles,
@@ -12,7 +12,7 @@ import img_tutors2 from '../../assets/st_img_tutors2.png';
 
 function About() {
 	return (
-		<>
+		<MainStyles>
 			<SectionStyles
 				variant="first"
 				add_styles={tw`px-8 space-y-8 md:px-6 xl:pl-4 xl:pr-2 `}
@@ -107,7 +107,7 @@ function About() {
 					</ContentStyles>
 				</ContainerStyles>
 			</SectionStyles>
-		</>
+		</MainStyles>
 	);
 }
 

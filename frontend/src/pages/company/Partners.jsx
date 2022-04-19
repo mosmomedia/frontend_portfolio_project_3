@@ -1,4 +1,4 @@
-import { SectionStyles, ContainerStyles } from '../../styles';
+import { MainStyles, SectionStyles, ContainerStyles } from '../../styles';
 import tw from 'twin.macro';
 import {
 	ContentStyles,
@@ -11,7 +11,7 @@ import img_t1 from '../../assets/st_img_partners.png';
 
 function Team() {
 	return (
-		<>
+		<MainStyles>
 			<SectionStyles variant="first" add_styles={tw`px-6`}>
 				<ContainerStyles>
 					<ContentStyles>
@@ -147,7 +147,7 @@ function Team() {
 					</PlatformStyles>
 				</ContainerStyles>
 			</SectionStyles>
-		</>
+		</MainStyles>
 	);
 }
 

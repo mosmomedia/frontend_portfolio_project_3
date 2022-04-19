@@ -6,9 +6,8 @@ import HeroSection from './HeroSection';
 import Button from './shared/Button';
 
 // styles
-import { ContainerStyles } from '../styles';
+import { MainStyles, ContainerStyles } from '../styles';
 import {
-	MainStyles,
 	SectionStyles,
 	PlatformStyles,
 	ClassInfoStyles,

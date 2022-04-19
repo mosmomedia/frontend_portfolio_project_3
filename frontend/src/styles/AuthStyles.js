@@ -5,7 +5,7 @@ export const Wrapper = styled.div`
 `;
 
 export const MainStyles = styled.div`
-	${tw`xl:flex xl:items-center `}
+	${tw`xl:flex xl:items-center xl:h-full `}
 `;
 
 export const LeftSectionStyles = styled.div`
@@ -32,8 +32,9 @@ export const SubmitStyles = styled.div`
 `;
 
 export const RightSectionStyles = styled.div`
-	${tw`hidden xl:block  xl:h-screen xl:w-2/5`}
+	${tw`hidden xl:block xl:w-2/5`}
 `;
+
 export const ImageStyles = styled.img`
 	${tw`xl:absolute xl:bottom-0 xl:max-h-[95%]`}
 `;

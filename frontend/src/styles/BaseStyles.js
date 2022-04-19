@@ -19,7 +19,7 @@ const BaseStyles = createGlobalStyle`
 
 :root {
 	font-family: 'Noto Sans KR', sans-serif;
-	${tw`min-h-screen h-full`}
+	${tw`min-h-screen h-full bg-black`}
 }
 
 #root{
