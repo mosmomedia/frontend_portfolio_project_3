@@ -12,24 +12,30 @@ const DisabledStyles = tw`bg-st_bg1 text-gray-500 cursor-not-allowed sm:py-2.5 s
 const DashboardStyle = tw`flex justify-between  items-center w-[8.375rem]  lg:mt-[1rem] bg-st_alt1 text-white lg:text-[0.9375rem] rounded-md lg:py-2.5`;
 //
 
+const ButtonStyles = styled.button`
+	${BaseBtn}
+	${({ variant }) => variant === 'primary' && PrimaryBtn}
+		${({ variant }) => variant === 'secondary' && SecondaryBtn}
+		${({ variant, disabled }) =>
+		variant === 'submit' ? (disabled ? DisabledStyles : SubmitStyles) : null}
+		${({ variant }) => variant === 'dashboard' && DashboardStyle}
+
+		${({ add_styles }) => add_styles && add_styles}
+`;
+
 function Button({ children, variant, add_styles, disabled, navtigate_to }) {
-	const ButtonStyles = styled.button`
-		${BaseBtn}
-		${variant === 'primary' && PrimaryBtn}
-		${variant === 'secondary' && SecondaryBtn}
-		${variant === 'submit' ? (disabled ? DisabledStyles : SubmitStyles) : null}
-		${variant === 'dashboard' && DashboardStyle}
-
-		${add_styles}
-	`;
-
 	const navigate = useNavigate();
 	const handleClick = () => {
 		navigate(navtigate_to);
 	};
 
 	return (
-		<ButtonStyles disabled={disabled} onClick={handleClick}>
+		<ButtonStyles
+			disabled={disabled}
+			variant={variant}
+			add_styles={add_styles}
+			onClick={handleClick}
+		>
 			{children}
 		</ButtonStyles>
 	);
