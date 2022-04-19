@@ -151,7 +151,7 @@ function Header() {
 								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/loaction" onClick={handleClick}>
+								<Link to="/location" onClick={handleClick}>
 									오시는 길
 								</Link>
 							</ItemStyles>

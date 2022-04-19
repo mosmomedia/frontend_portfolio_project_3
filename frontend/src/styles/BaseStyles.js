@@ -17,14 +17,20 @@ const BaseStyles = createGlobalStyle`
 	src: url(${paybooc_B}) format('opentype')
 }
 
-* {
+:root {
 	font-family: 'Noto Sans KR', sans-serif;
+	${tw`min-h-screen h-full`}
+}
+
+#root{
+	${tw`h-full`}
 }
 
 body {
-	${tw`bg-body text-main_text text-sm md:text-base`}
+	${tw`bg-body text-main_text h-full text-sm md:text-base`}
+}
 
-	h1{
+h1{
 	${tw`text-3xl font-medium text-[#2f2f2f]`}
 }
 
@@ -37,13 +43,12 @@ h4{
 	${tw`text-lg font-medium`}
 }
 
-
 p{
 	${tw`text-base`}
 }
 
 
-}
+
 
 
 

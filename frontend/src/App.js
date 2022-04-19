@@ -17,6 +17,7 @@ import ForgotPassword from './pages/accounts/ForgotPassword';
 import About from './pages/company/About';
 import Team from './pages/company/Team';
 import Partners from './pages/company/Partners';
+import Location from './pages/company/Location';
 
 import Faq from './pages/customer/Faq';
 
@@ -38,6 +39,7 @@ function App() {
 					<Route path="/about" element={<About />} />
 					<Route path="/team" element={<Team />} />
 					<Route path="/partners" element={<Partners />} />
+					<Route path="/location" element={<Location />} />
 					{/*customer  */}
 					<Route path="/faq" element={<Faq />} />
 				</Routes>

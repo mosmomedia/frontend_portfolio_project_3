@@ -50,7 +50,7 @@ export const TextWrapper = styled.div`
 	${tw`md:relative md:bottom-[unset]`}
 `;
 export const TextStyles = styled.div`
-	${tw`text-center space-y-12 text-white tracking-wider`}
+	${tw`text-center space-y-12 tracking-wider`}
 	${tw`md:text-st_alt1 md:text-left`}
 
 	h1,
@@ -60,10 +60,6 @@ export const TextStyles = styled.div`
 	h1 span {
 		font-family: 'Paybooc_M';
 		font-weight: 600;
-	}
-
-	h1,
-	h2 {
 		${tw`text-white md:text-main_text`}
 	}
 

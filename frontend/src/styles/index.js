@@ -5,7 +5,7 @@ export const ContainerStyles = styled.div`
 `;
 
 export const SectionStyles = styled.div`
-	${tw`py-16 sm:py-20 md:py-24 xl:py-32 2xl:py-40 `}
+	${tw`py-16  sm:py-20 md:py-24 xl:py-32 2xl:py-40 `}
 
 	* {
 		${tw`tracking-wide`}
@@ -18,6 +18,11 @@ export const SectionStyles = styled.div`
 
 	${({ add_styles }) => add_styles && add_styles}
 
-	${({ variant }) => variant === 'first' && tw`mt-[4.25rem]`}
+	${({ variant }) =>
+		variant === 'first' && tw`pt-32 sm:pt-36 md:pt-40 xl:pt-48 2xl:pt-56`}
 	${({ variant }) => variant === 'even' && tw`bg-[#fceded7c]`}
+
+	@media (min-height: 976px) {
+		${({ variant2 }) => typeof variant2 === 'number' && { height: variant2 }}
+	}
 `;
