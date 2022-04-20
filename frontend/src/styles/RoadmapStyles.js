@@ -3,7 +3,7 @@ import tw, { styled } from 'twin.macro';
 export const name = styled.div``;
 
 export const WrapperStyles = styled.div`
-	${tw`px-4 space-y-4`}
+	${tw`px-4 space-y-4 h-[80vh]`}
 `;
 
 export const HeaderStyles = styled.div`
@@ -23,9 +23,19 @@ export const HeaderStyles = styled.div`
 `;
 
 export const MainStyles = styled.div`
-	${tw`bg-white rounded-lg h-[77vh]`}
+	${tw`bg-white rounded-t-lg h-full`}
 	box-shadow: 0px 0px 4px rgb(50 50 71 / 8%), 0px 12px 32px rgb(50 50 71 / 2%);
-	${tw`overflow-auto`}
+`;
+
+export const SectionWrapperStyles = styled.div`
+	${tw`overflow-auto h-full`}
+	/* Hide scrollbar for Chrome, Safari and Opera */
+	::-webkit-scrollbar {
+		display: none;
+	}
+	/* Hide scrollbar for IE, Edge and Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 `;
 
 export const InfoSectionStyles = styled.section`
@@ -89,4 +99,18 @@ export const SectionStyles = styled.section`
 	p {
 		${tw`leading-7`}
 	}
+`;
+
+export const BarIndicatorStyles = styled.div`
+	${tw`py-3 px-4 bg-white rounded-b-lg border-t-[1px]  border-t-st_bg2   border-solid`}
+`;
+
+export const BarContainerStyles = styled.div`
+	${tw`relative bg-[#f5f5f5] rounded-sm py-0.5`}
+`;
+
+export const BarStyles = styled.div`
+	${tw`absolute w-1/2 top-1/2 -translate-y-1/2 opacity-95`}
+	height: 2px;
+	background: linear-gradient(to right, #ff4d5e, #fc7c89);
 `;
