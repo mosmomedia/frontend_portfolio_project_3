@@ -11,8 +11,7 @@ import {
 } from '../../styles/LocationStyles';
 
 function Location() {
-	// eslint-disable-next-line
-	const { width, height } = useWD();
+	const { height } = useWD();
 	const footerHeight = 376;
 	const calHeight = height - footerHeight;
 

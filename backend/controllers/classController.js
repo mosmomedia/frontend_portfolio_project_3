@@ -1,10 +1,17 @@
 import Class from '../models/classModel.js';
 
-const name = async () => {};
+export const name = async (req, res) => {};
+
+// get all classes
+export const getAllClasses = async (req, res) => {
+	const allClasses = await Class.find();
+
+	res.status(200).json(allClasses);
+};
 
 // open a class
 export const createClass = async (req, res) => {
-	const { uid, isAdmin } = req.user;
+	const { isAdmin } = req.user;
 
 	if (!isAdmin) {
 		res.status(400);
