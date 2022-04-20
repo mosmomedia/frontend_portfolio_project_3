@@ -1,4 +1,8 @@
 import React from 'react';
+
+import 'twin.macro';
+import 'styled-components/macro';
+
 import { ClassProvider } from '../../contexts/class/ClassContext';
 import { MainStyles, SectionStyles, ContainerStyles } from '../../styles';
 
@@ -8,7 +12,7 @@ function Registration() {
 	return (
 		<ClassProvider>
 			<MainStyles>
-				<SectionStyles variant="first">
+				<SectionStyles variant="even">
 					<ContainerStyles>
 						<Roadmap />
 					</ContainerStyles>

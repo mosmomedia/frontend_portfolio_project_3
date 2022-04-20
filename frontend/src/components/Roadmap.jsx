@@ -1,7 +1,205 @@
-import React from 'react';
+import tw from 'twin.macro';
+import {
+	WrapperStyles,
+	HeaderStyles,
+	MainStyles,
+	SectionStyles,
+	CardStyles,
+} from '../styles/RoadmapStyles';
+
+import Button from './shared/Button';
 
 function Roadmap() {
-	return <div>Roadmap</div>;
+	return (
+		<WrapperStyles>
+			{/* header */}
+			<HeaderStyles>
+				<h2>강의 로드맵</h2>
+				{/* btns */}
+				<ul>
+					<li>교육과정 안내</li>
+					<li>실시간 클래스</li>
+					<li>데뷔 클래스</li>
+				</ul>
+			</HeaderStyles>
+			{/* main */}
+			<MainStyles>
+				<SectionStyles variant="first">
+					<h2>스토리튠즈 아카데미 교육과정 안내</h2>
+					<div className="articleWrapper">
+						<CardStyles variant="basic">
+							<div className="card_header">
+								<h3>입문 클래스 (4주 과정)</h3>
+								<Button
+									navtigate_to="/"
+									variant="primary"
+									add_styles={tw`p-2.5 shadow-none`}
+								>
+									신청하기
+								</Button>
+							</div>
+							<div className="card_body">
+								<h4>글쓰기: 어떻게 시작해야할까?</h4>
+								<p>
+									함께 웹소설을 시작하고 옳은 방향으로 집필하는 법을 배웁니다.
+								</p>
+								<p>
+									웹소설 집필에 관심이 있다면 누구나 수강 가능한 클래스입니다.
+								</p>
+								<div>
+									<h4>커리큘럼</h4>
+									<p>1주차 - 웹소설 글쓰기의 시작 ㅣ What과 How</p>
+									<p>2주차 - 글쓰기를 이어가는 힘 ㅣ Who와 Where</p>
+									<p>3주차 - 글이 막히는 건 당연하다ㅣ 물음표와 느낌표</p>
+									<p>4주차 - 웹소설 작가로 살아남기 ㅣ End와 And</p>
+								</div>
+							</div>
+						</CardStyles>
+
+						<CardStyles variant="adv">
+							<div className="card_header">
+								<h3>심화 클래스 (8주 과정)</h3>
+								<Button
+									navtigate_to="/"
+									variant="primary"
+									add_styles={tw`p-2.5 shadow-none`}
+								>
+									신청하기
+								</Button>
+							</div>
+							<div className="card_body">
+								<h4>내 글은 왜 재미가 없을까?</h4>
+								<p>
+									내 원고 위에 대중성을 입히는 방법을 공부합니다. <br />
+									글의 퀄리티나 재미와 별개로, 꾸준히 글을 쓰실 수 있는 분만
+									수강하기를 권장하는 클래스입니다.
+								</p>
+								<div>
+									<p>
+										- 매 주 피드백을 통해, ‘내가 쓴 글’을 객관적로 분석하고
+										개선합니다.
+									</p>
+									<p>
+										- 작법과 연출, 서사와 인물에 대해 좀 더 구체적으로 배웁니다.
+									</p>
+									<p>
+										- 하루 한 편. 매일 글을 쓸 수 있도록 체계적으로 훈련합니다.
+									</p>
+								</div>
+							</div>
+						</CardStyles>
+
+						<CardStyles variant="debut">
+							<div className="card_header">
+								<h3>데뷔 클래스 (8주 과정)</h3>
+								<Button
+									navtigate_to="/"
+									variant="primary"
+									add_styles={tw`p-2.5 shadow-none`}
+								>
+									신청하기
+								</Button>
+							</div>
+							<div className="card_body">
+								<h4>팔리는 글, 팔리지 않는 글.</h4>
+								<p>
+									데뷔를 위한 마지막 벽을 허물고, 카카오페이지에 데뷔합니다.{' '}
+									<br />
+									웹소설을 이해하고, 글쓰기 훈련이 충분히 되신 분만 수강하기를
+									권장하는 클래스입니다.
+								</p>
+								<div>
+									<p>
+										- 입문, 심화 클래스 과정에서 집필한 글을, 대중에게 인정받을
+										수 있는 글이 될 수 있도록 끝없이 다듬는 과정입니다.
+									</p>
+									<p>
+										- 최대 5인 이하의 소수정예로 운영되는, 개인 컨설팅에 가까운
+										클래스입니다.
+									</p>
+								</div>
+							</div>
+						</CardStyles>
+					</div>
+				</SectionStyles>
+
+				<SectionStyles variant="second">
+					<h3>실시간 온라인 클래스 안내</h3>
+					<div>
+						<p>실시간 스트리밍으로 진행되는 강의입니다.</p>
+						<p>
+							현직 최상위 웹소설 작가가 직접 수업을 진행하며, 수강생은 컴퓨터와
+							스마트폰으로 원하는 장소에서 강의를 수강할 수 있습니다.
+						</p>
+						<p>
+							입문반과 심화반의 강의로 구성되어 있으며, 주 1회-150분의 수업이
+							제공됩니다. 마지막 강의 종료 이후 30일 동안 실시간 클래스 영상을
+							자유롭게 시청할 수 있습니다.
+						</p>
+					</div>
+					<div>
+						<h3>* 입문반</h3>
+						<p>정해진 커리큘럼으로 진행되는 이론 강의입니다.</p>
+						<p>
+							장르구분이 없으며 수강 인원의 제한이 없습니다. 매주 출석 체크의
+							과제가 있습니다. 오픈된 강의 시간표에 맞춰 원하는 요일의 원하는
+							시간대를 선택하실 수 있습니다.
+						</p>
+						<p>
+							4주 과정 중 총 1회의 피드백이 제공되며, 제출원고는 자동으로 장학생
+							심사위원에게 전달됩니다.
+						</p>
+					</div>
+					<div>
+						<h3>* 심화반</h3>
+						<p>커리큘럼과 피드백으로 진행되는 이론 + 피드백 강의입니다.</p>
+						<p>
+							장르구분이 존재하며, 본인이 쓰고자 하는 소설의 장르에 맞는 강사를
+							선택해야합니다. 각 클래스의 수강인원은 50명으로 제한됩니다.
+						</p>
+						<p>
+							매주 15,000자의 원고 제출 과제가 있습니다. 꾸준히 글을 써왔으며,
+							매주 15,000자의 원고를 쓸 수 있는 분들께 수강을 권합니다. 오픈된
+							강의 시간표에 맞춰 원하는 요일의 원하는 시간대를 선택하실 수
+							있습니다.
+						</p>
+						<p>
+							8주 과정 중 총 8회의 피드백이 제공되며 제출원고는 자동으로 장학생
+							심사위원에게 전달됩니다.
+						</p>
+					</div>
+				</SectionStyles>
+
+				<SectionStyles variant="third">
+					<h3>데뷔 클래스(오프라인) 안내</h3>
+					<div>
+						<p>
+							서울특별시 성수동에 위치한 스토리튠즈의 본원에서 진행되는
+							소수정예의 오프라인 강의입니다.
+						</p>
+						<p>
+							현직 최상위 웹소설 작가가 직접 수업을 진행하며, 수강생은 본원에
+							직접 방문하여 수강해야합니다. 100% 피드백으로 진행되는 강의입니다.
+						</p>
+						<p>
+							정해진 수업 시간과 횟수가 없으며, 학생과 강사가 꾸준히 소통하며
+							프로 작가에 도전합니다. 장르구분이 존재하며, 본인이 쓰고자하는
+							소설의 장르에 맞는 강사가 배정됩니다.
+						</p>
+						<p>
+							각 클래스의 수강인원은 5명으로 제한됩니다. 8주 과정 중 제출한 모든
+							원고에 피드백이 제공됩니다. 스토리튠즈 본원에서 데뷔 클래스
+							수강생들의 공동 집필 공간을 제공합니다.
+						</p>
+						<p>
+							(단, 방역 수칙을 위반할 시 퇴실 조치될 수 있습니다) 클래스 종료
+							이후, 학생의 의사를 반영해 출판 계약을 주선합니다.
+						</p>
+					</div>
+				</SectionStyles>
+			</MainStyles>
+		</WrapperStyles>
+	);
 }
 
 export default Roadmap;
