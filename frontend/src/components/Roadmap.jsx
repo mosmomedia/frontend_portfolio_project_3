@@ -3,6 +3,7 @@ import {
 	WrapperStyles,
 	HeaderStyles,
 	MainStyles,
+	InfoSectionStyles,
 	SectionStyles,
 	CardStyles,
 } from '../styles/RoadmapStyles';
@@ -24,7 +25,7 @@ function Roadmap() {
 			</HeaderStyles>
 			{/* main */}
 			<MainStyles>
-				<SectionStyles variant="first">
+				<InfoSectionStyles>
 					<h2>스토리튠즈 아카데미 교육과정 안내</h2>
 					<div className="articleWrapper">
 						<CardStyles variant="basic">
@@ -121,7 +122,7 @@ function Roadmap() {
 							</div>
 						</CardStyles>
 					</div>
-				</SectionStyles>
+				</InfoSectionStyles>
 
 				<SectionStyles variant="second">
 					<h3>실시간 온라인 클래스 안내</h3>
@@ -138,7 +139,7 @@ function Roadmap() {
 						</p>
 					</div>
 					<div>
-						<h3>* 입문반</h3>
+						<h4>* 입문반</h4>
 						<p>정해진 커리큘럼으로 진행되는 이론 강의입니다.</p>
 						<p>
 							장르구분이 없으며 수강 인원의 제한이 없습니다. 매주 출석 체크의
@@ -151,7 +152,7 @@ function Roadmap() {
 						</p>
 					</div>
 					<div>
-						<h3>* 심화반</h3>
+						<h4>* 심화반</h4>
 						<p>커리큘럼과 피드백으로 진행되는 이론 + 피드백 강의입니다.</p>
 						<p>
 							장르구분이 존재하며, 본인이 쓰고자 하는 소설의 장르에 맞는 강사를

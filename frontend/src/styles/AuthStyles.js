@@ -32,11 +32,12 @@ export const SubmitStyles = styled.div`
 `;
 
 export const RightSectionStyles = styled.div`
-	${tw`hidden xl:block xl:w-2/5`}
+	${tw`hidden xl:block xl:w-2/5 xl:self-end xl:max-h-[95%]`}
+	${tw`overflow-hidden`}
 `;
 
 export const ImageStyles = styled.img`
-	${tw`xl:absolute xl:bottom-0 xl:max-h-[95%]`}
+	${tw`max-w-[unset] h-full`}
 `;
 
 export const LineStyles = styled.div`

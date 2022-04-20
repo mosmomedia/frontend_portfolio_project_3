@@ -23,15 +23,13 @@ export const HeaderStyles = styled.div`
 `;
 
 export const MainStyles = styled.div`
-	${tw`bg-white rounded-lg `}
+	${tw`bg-white rounded-lg h-[77vh]`}
 	box-shadow: 0px 0px 4px rgb(50 50 71 / 8%), 0px 12px 32px rgb(50 50 71 / 2%);
+	${tw`overflow-auto`}
 `;
 
-export const SectionStyles = styled.section`
-	${({ variant }) => variant === 'first' && tw`bg-[#fffcfc]`}
-	${({ variant }) => variant === 'second' && tw`bg-[#212121] text-white`}
-
-	${tw`pt-2.5 px-2.5 pb-20 space-y-6 rounded-lg`}
+export const InfoSectionStyles = styled.section`
+	${tw`pt-2.5 px-2.5 pb-20 space-y-6 rounded-lg bg-[#fffcfc]`}
 
 	h2 {
 		${tw`bg-[#212121] text-white font-normal py-6 text-center rounded-md`}
@@ -63,10 +61,32 @@ export const CardStyles = styled.article`
 	}
 
 	.card_body {
-		${tw`py-12 pl-6 space-y-7`}
+		${tw`py-12 pl-6 pr-4 space-y-7`}
 
 		div {
 			${tw`space-y-3`}
 		}
+	}
+`;
+
+export const SectionStyles = styled.section`
+	${({ variant }) => variant === 'second' && tw`bg-[#212121] text-white`}
+
+	${tw`pt-2.5 px-2.5 pb-24 space-y-6 `}
+
+	h3 {
+		${tw`text-[1.25rem] font-normal text-center py-14`}
+	}
+
+	h4 {
+		${tw`text-[#ffcd00] text-base pt-10`}
+	}
+
+	div {
+		${tw`space-y-7 px-4`}
+	}
+
+	p {
+		${tw`leading-7`}
 	}
 `;

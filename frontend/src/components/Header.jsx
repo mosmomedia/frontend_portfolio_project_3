@@ -28,7 +28,7 @@ function Header() {
 	const [hoverOn, setHoverOn] = useState(false);
 	const { pathname } = useLocation();
 	const userState = useAuthContext();
-	console.log(userState.accessToken);
+
 	// exclude header in specific components
 	if (
 		pathname === '/sign-in' ||
