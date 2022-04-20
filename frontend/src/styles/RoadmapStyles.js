@@ -25,17 +25,17 @@ export const HeaderStyles = styled.div`
 export const MainStyles = styled.div`
 	${tw`bg-white rounded-t-lg h-full`}
 	box-shadow: 0px 0px 4px rgb(50 50 71 / 8%), 0px 12px 32px rgb(50 50 71 / 2%);
-`;
 
-export const SectionWrapperStyles = styled.div`
-	${tw`overflow-auto h-full`}
-	/* Hide scrollbar for Chrome, Safari and Opera */
+	.SectionWrapperStyles {
+		${tw`overflow-auto h-full`}
+		/* Hide scrollbar for Chrome, Safari and Opera */
 	::-webkit-scrollbar {
-		display: none;
+			display: none;
+		}
+		/* Hide scrollbar for IE, Edge and Firefox */
+		-ms-overflow-style: none; /* IE and Edge */
+		scrollbar-width: none; /* Firefox */
 	}
-	/* Hide scrollbar for IE, Edge and Firefox */
-	-ms-overflow-style: none; /* IE and Edge */
-	scrollbar-width: none; /* Firefox */
 `;
 
 export const InfoSectionStyles = styled.section`
@@ -110,7 +110,9 @@ export const BarContainerStyles = styled.div`
 `;
 
 export const BarStyles = styled.div`
-	${tw`absolute w-1/2 top-1/2 -translate-y-1/2 opacity-95`}
-	height: 2px;
+	${tw`absolute top-1/2 -translate-y-1/2 opacity-95 h-0.5`}
+
+	${({ widthInput }) => widthInput && { width: `${widthInput}%` }}
+	
 	background: linear-gradient(to right, #ff4d5e, #fc7c89);
 `;

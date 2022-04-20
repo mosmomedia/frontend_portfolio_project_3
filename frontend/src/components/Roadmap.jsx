@@ -1,11 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 
 import tw from 'twin.macro';
 import {
 	WrapperStyles,
 	HeaderStyles,
 	MainStyles,
-	SectionWrapperStyles,
 	InfoSectionStyles,
 	SectionStyles,
 	CardStyles,
@@ -17,7 +16,23 @@ import {
 import Button from './shared/Button';
 
 function Roadmap() {
-	const [height, SetHeight] = useState(0);
+	const [widthInput, SetWidthInput] = useState(0);
+
+	const initHeight = useRef();
+
+	useEffect(() => {
+		const { clientHeight, scrollHeight } = initHeight.current;
+		const initHeightRatio = ((clientHeight / scrollHeight) * 100).toFixed(2);
+		SetWidthInput(+initHeightRatio);
+	}, []);
+
+	const handleScroll = ({
+		target: { clientHeight, scrollTop, scrollHeight },
+	}) => {
+		const changedHeight = scrollTop + clientHeight;
+		const calHeight = ((changedHeight / scrollHeight) * 100).toFixed(2);
+		SetWidthInput(+calHeight);
+	};
 
 	return (
 		<WrapperStyles>
@@ -33,7 +48,11 @@ function Roadmap() {
 			</HeaderStyles>
 			{/* main */}
 			<MainStyles>
-				<SectionWrapperStyles>
+				<div
+					className="SectionWrapperStyles"
+					onScroll={handleScroll}
+					ref={initHeight}
+				>
 					<InfoSectionStyles>
 						<h2>스토리튠즈 아카데미 교육과정 안내</h2>
 						<div className="articleWrapper">
@@ -212,10 +231,11 @@ function Roadmap() {
 							</p>
 						</div>
 					</SectionStyles>
-				</SectionWrapperStyles>
+				</div>
+
 				<BarIndicatorStyles>
 					<BarContainerStyles>
-						<BarStyles></BarStyles>
+						<BarStyles widthInput={widthInput} />
 					</BarContainerStyles>
 				</BarIndicatorStyles>
 			</MainStyles>
