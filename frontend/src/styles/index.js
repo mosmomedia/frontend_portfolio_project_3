@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const MainStyles = styled.div`
-	${tw`bg-white tracking-wide`}
+	${tw`bg-body tracking-wide`}
 	word-break: keep-all;
 `;
 

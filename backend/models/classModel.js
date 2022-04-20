@@ -6,9 +6,10 @@ const classSchema = new mongoose.Schema(
 		type: { type: String, required: false },
 		status: { type: String, required: false },
 		week: { type: Number, required: false },
-		period: { type: Number, required: false },
-		hours: { type: Number, required: false },
+		period: { type: String, required: false },
+		hours: { type: String, required: false },
 		tutor: { type: String, required: false },
+		verifyClass: { type: String, required: false },
 	},
 	{
 		timestamps: true,

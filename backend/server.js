@@ -4,6 +4,10 @@ connetDB();
 
 const app = express();
 
+// body parser
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 // Routes
 import classRoutes from './Routes/classRoutes.js';
 app.use('/api/class', classRoutes);
