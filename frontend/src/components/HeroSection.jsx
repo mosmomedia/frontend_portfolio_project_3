@@ -23,7 +23,7 @@ import {
 
 function HeroSection() {
 	return (
-		<SectionStyles variant="hero">
+		<SectionStyles>
 			{/*LeftItem /  submit wrapper */}
 			<LeftItemStyles>
 				<MobileImgStyles>

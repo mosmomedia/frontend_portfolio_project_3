@@ -26,7 +26,7 @@ import img_tutors from '../assets/st_img_tutors.png';
 
 function Landing() {
 	return (
-		<MainStyles>
+		<MainStyles variant="landing">
 			<ContainerStyles>
 				{/* hero */}
 				<HeroSection />

@@ -2,11 +2,9 @@ import tw, { styled } from 'twin.macro';
 
 export const MainStyles = styled.div`
 	${tw`bg-body tracking-wide`}
+	${tw`pt-16`}
 	word-break: keep-all;
-`;
-
-export const ContainerStyles = styled.div`
-	${tw` lg:container lg:mx-auto lg:px-2 xl:max-w-7xl `}
+	${({ variant }) => variant === 'landing' && tw`pt-0`}
 `;
 
 export const SectionStyles = styled.div`
@@ -18,11 +16,13 @@ export const SectionStyles = styled.div`
 
 	${({ add_styles }) => add_styles && add_styles}
 
-	${({ variant }) =>
-		variant === 'first' && tw`pt-32 sm:pt-36 md:pt-40 xl:pt-48 2xl:pt-56`}
 	${({ variant }) => variant === 'even' && tw`bg-[#fceded7c]`}
 
 	@media (min-height: 976px) {
-		${({ variant2 }) => typeof variant2 === 'number' && { height: variant2 }}
+		${({ variant2 }) => typeof variant2 === 'number' && { minHeight: variant2 }}
 	}
+`;
+
+export const ContainerStyles = styled.div`
+	${tw`lg:container lg:mx-auto lg:px-2 xl:max-w-7xl `}
 `;

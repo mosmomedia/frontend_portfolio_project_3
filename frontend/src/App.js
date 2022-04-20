@@ -11,6 +11,8 @@ import Header from './components/Header';
 import Landing from './components/Landing';
 import Footer from './components/Footer';
 
+import Registration from './pages/class/Registration';
+
 import SignIn from './pages/accounts/SignIn';
 import SignUp from './pages/accounts/SignUp';
 import ForgotPassword from './pages/accounts/ForgotPassword';
@@ -37,6 +39,9 @@ function App() {
 						<Route path="/sign-in" element={<SignIn />} />
 						<Route path="/sign-up" element={<SignUp />} />
 						<Route path="/forgot-password" element={<ForgotPassword />} />
+						{/* class registration */}
+						<Route path="/registration" element={<Registration />}></Route>
+
 						{/* company */}
 						<Route path="/about" element={<About />} />
 						<Route path="/team" element={<Team />} />

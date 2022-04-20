@@ -85,22 +85,30 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/" className="title">
+							<Link to="/registration" className="title" onClick={handleClick}>
 								수강신청
 							</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
-								<Link to="/">강의 로드맵</Link>
+								<Link to="/registration" onClick={handleClick}>
+									강의 로드맵
+								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/">실시간 클래스</Link>
+								<Link to="/" onClick={handleClick}>
+									실시간 클래스
+								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/">데뷔 클래스</Link>
+								<Link to="/" onClick={handleClick}>
+									데뷔 클래스
+								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/">스토리튠즈 특강</Link>
+								<Link to="/" onClick={handleClick}>
+									스토리튠즈 특강
+								</Link>
 							</ItemStyles>
 						</LinkGnbStyles>
 					</ListGnbStyles>
