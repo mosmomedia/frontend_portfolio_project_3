@@ -20,9 +20,9 @@ import Button from './shared/Button';
 function Roadmap() {
 	const initHeight = useRef();
 
-	const class_info = useRef();
-	const class_online = useRef();
-	const class_debut = useRef();
+	const class_info_ref = useRef();
+	const class_online_ref = useRef();
+	const class_debut_ref = useRef();
 
 	const [widthInput, setWidthInput] = useState(0);
 	const [selectedNav, setSelectedNav] = useState(null);
@@ -32,23 +32,29 @@ function Roadmap() {
 		class_debut: null,
 	});
 
+	const { class_info, class_online, class_debut } = sectionList;
+
 	useEffect(() => {
 		// get and set height for each section
 		setSectionList((prevState) => ({
 			...prevState,
 			class_info: {
-				offsetT: class_info.current.offsetTop,
-				offsetB: class_info.current.offsetTop + class_info.current.clientHeight,
+				offsetT: class_info_ref.current.offsetTop,
+				offsetB:
+					class_info_ref.current.offsetTop +
+					class_info_ref.current.clientHeight,
 			},
 			class_online: {
-				offsetT: class_online.current.offsetTop,
+				offsetT: class_online_ref.current.offsetTop,
 				offsetB:
-					class_online.current.offsetTop + class_online.current.clientHeight,
+					class_online_ref.current.offsetTop +
+					class_online_ref.current.clientHeight,
 			},
 			class_debut: {
-				offsetT: class_debut.current.offsetTop,
+				offsetT: class_debut_ref.current.offsetTop,
 				offsetB:
-					class_debut.current.offsetTop + class_debut.current.clientHeight,
+					class_debut_ref.current.offsetTop +
+					class_debut_ref.current.clientHeight,
 			},
 		}));
 	}, []);
@@ -60,7 +66,6 @@ function Roadmap() {
 		setWidthInput(+initHeightRatio);
 
 		// to select current nav btn
-		const { class_info, class_online, class_debut } = sectionList;
 		if (class_info && class_online && class_debut) {
 			if (scrollTop >= class_info.offsetT && scrollTop < class_info.offsetB) {
 				setSelectedNav('class_info');
@@ -73,7 +78,7 @@ function Roadmap() {
 				setSelectedNav('class_debut');
 			}
 		}
-	}, [sectionList]);
+	}, [class_info, class_debut, class_online]);
 
 	// changed initial scrollbar height
 	const handleScroll = ({
@@ -82,6 +87,22 @@ function Roadmap() {
 		const changedHeight = scrollTop + clientHeight;
 		const calHeight = ((changedHeight / scrollHeight) * 100).toFixed(2);
 		setWidthInput(+calHeight);
+
+		// select btn when scrolling
+		if (class_info && class_online && class_debut) {
+			if (scrollTop >= class_info.offsetT && scrollTop < class_info.offsetB) {
+				setSelectedNav('class_info');
+			} else if (
+				scrollTop >= class_online.offsetT &&
+				scrollTop < class_online.offsetB &&
+				// check if scroll height == scroll bottom
+				changedHeight !== scrollHeight
+			) {
+				setSelectedNav('class_online');
+			} else {
+				setSelectedNav('class_debut');
+			}
+		}
 	};
 
 	// navigate articles with nav btns
@@ -130,7 +151,7 @@ function Roadmap() {
 					onScroll={handleScroll}
 					ref={initHeight}
 				>
-					<InfoSectionStyles ref={class_info}>
+					<InfoSectionStyles ref={class_info_ref}>
 						<h2>스토리튠즈 아카데미 교육과정 안내</h2>
 						<div className="articleWrapper">
 							<CardStyles variant="basic">
@@ -232,7 +253,7 @@ function Roadmap() {
 						</div>
 					</InfoSectionStyles>
 
-					<SectionStyles variant="second" ref={class_online}>
+					<SectionStyles variant="second" ref={class_online_ref}>
 						<h3>실시간 온라인 클래스 안내</h3>
 						<div>
 							<p>실시간 스트리밍으로 진행되는 강의입니다.</p>
@@ -280,7 +301,7 @@ function Roadmap() {
 						</div>
 					</SectionStyles>
 
-					<SectionStyles variant="third" ref={class_debut}>
+					<SectionStyles variant="third" ref={class_debut_ref}>
 						<h3>데뷔 클래스(오프라인) 안내</h3>
 						<div>
 							<p>
