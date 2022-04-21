@@ -85,13 +85,17 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/registration" className="title" onClick={handleClick}>
+							<Link
+								to="/registration/roadmap"
+								className="title"
+								onClick={handleClick}
+							>
 								수강신청
 							</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
-								<Link to="/registration" onClick={handleClick}>
+								<Link to="/registration/roadmap" onClick={handleClick}>
 									강의 로드맵
 								</Link>
 							</ItemStyles>

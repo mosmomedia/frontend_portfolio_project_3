@@ -1,4 +1,4 @@
-import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
 import 'twin.macro';
 import 'styled-components/macro';
@@ -14,7 +14,9 @@ function Registration() {
 		<ClassProvider>
 			<SectionStyles>
 				<ContainerStyles>
-					<Roadmap />
+					<Routes>
+						<Route path="/roadmap" element={<Roadmap />} />
+					</Routes>
 				</ContainerStyles>
 			</SectionStyles>
 		</ClassProvider>
