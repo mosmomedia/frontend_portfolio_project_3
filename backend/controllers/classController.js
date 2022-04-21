@@ -18,27 +18,32 @@ export const createClass = async (req, res) => {
 		throw new Error('admin issue - Unauthorized');
 	}
 
-	const { title, type, status, week, period, hours, tutor } = req.body;
+	const { title, type, status, month, weeks, period, hours, tutor } = req.body;
 
-	const verifyClass = week + type + period + hours + tutor;
+	const verifyClass = month + weeks + type + period + hours + tutor;
 
-	const foundClass = await Class.findOne({ verifyClass });
+	const newClass = {
+		title,
+		type,
+		status,
+		month,
+		weeks,
+		period,
+		hours,
+		tutor,
+		verifyClass,
+	};
+
+	const foundMonth = await Class.findOne({ month });
+	const foundClass = await Class.findOne({ classInfo: { verifyClass } });
 
 	if (foundClass) {
 		res.status(400);
 		throw new Error('this class already exists');
 	}
 
-	const newClass = await Class.create({
-		title,
-		type,
-		status,
-		week,
-		period,
-		hours,
-		tutor,
-		verifyClass,
-	});
+	if (!foundMonth) {
+	}
 
 	res.status(201).json(newClass);
 };
