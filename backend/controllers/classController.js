@@ -35,14 +35,25 @@ export const createClass = async (req, res) => {
 	};
 
 	const foundMonth = await Class.findOne({ month });
-	const foundClass = await Class.findOne({ classInfo: { verifyClass } });
-
-	if (foundClass) {
-		res.status(400);
-		throw new Error('this class already exists');
-	}
 
 	if (!foundMonth) {
+		const doc = new Class({
+			month,
+			classList: [newClass],
+		});
+		await doc.save();
+	} else {
+		const foundClass = foundMonth.classList.findIndex(
+			(obj) => obj.verifyClass === verifyClass
+		);
+		console.log(foundClass);
+		if (foundClass > -1) {
+			res.status(400);
+			throw new Error('db issue - this class already exists');
+		}
+
+		foundMonth.classList.push(newClass);
+		await foundMonth.save();
 	}
 
 	res.status(201).json(newClass);
