@@ -7,9 +7,9 @@ import { ClassProvider } from '../../contexts/class/ClassContext';
 import { SectionStyles } from '../../styles/RegistrationStyles';
 import { ContainerStyles } from '../../styles';
 
-import Roadmap from '../../components/Roadmap';
+import Roadmap from '../../components/ClassRoadmap';
 
-function Registration() {
+function ClassRegistration() {
 	return (
 		<ClassProvider>
 			<SectionStyles>
@@ -23,4 +23,4 @@ function Registration() {
 	);
 }
 
-export default Registration;
+export default ClassRegistration;

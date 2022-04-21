@@ -16,7 +16,7 @@ import Header from './components/Header';
 import Landing from './components/Landing';
 import Footer from './components/Footer';
 
-import Registration from './pages/class/Registration';
+import ClassRegistration from './pages/class/ClassRegistration';
 
 import SignIn from './pages/accounts/SignIn';
 import SignUp from './pages/accounts/SignUp';
@@ -46,15 +46,18 @@ function App() {
 						<Route path="/sign-up" element={<SignUp />} />
 						<Route path="/forgot-password" element={<ForgotPassword />} />
 						{/* class registration */}
-						<Route path="/registration/*" element={<Registration />}></Route>
+						<Route
+							path="/class-registration/*"
+							element={<ClassRegistration />}
+						></Route>
 
 						{/* company */}
-						<Route path="/about" element={<About />} />
-						<Route path="/team" element={<Team />} />
-						<Route path="/partners" element={<Partners />} />
-						<Route path="/location" element={<Location />} />
+						<Route path="/company/about" element={<About />} />
+						<Route path="/company/team" element={<Team />} />
+						<Route path="/company/partners" element={<Partners />} />
+						<Route path="/company/location" element={<Location />} />
 						{/*customer  */}
-						<Route path="/faq" element={<Faq />} />
+						<Route path="/customer/faq" element={<Faq />} />
 					</Routes>
 					<Footer />
 					<ToastContainer autoClose={2500} />

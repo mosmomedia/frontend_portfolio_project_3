@@ -57,22 +57,28 @@ export const MenuStyles = styled.div`
 `;
 
 export const ListGnbStyles = styled.ul`
-	.title {
-		${tw`lg:relative`}
-	}
-
-	.title:hover {
-		${tw`opacity-50`}
-	}
-
 	:hover a::after {
-		${tw`lg:content lg:absolute lg:left-0 lg:-top-7 lg:w-full lg:h-0.5 lg:bg-primary opacity-80`}
+		${tw`lg:content lg:absolute lg:left-0 lg:-top-7 lg:w-full lg:h-0.5 lg:bg-primary lg:opacity-80`}
 	}
 `;
 
 export const TitleStyles = styled.li`
 	${tw`inline-block py-3 px-6 text-[0.9375rem]`}
 	${tw`lg:py-7 lg:px-12 `}
+
+	/* title */
+	a {
+		${tw`lg:relative`}
+	}
+
+	a:hover {
+		${tw`opacity-50`}
+	}
+
+	/* acitive Nav */
+	.active::after {
+		${tw`lg:content lg:absolute lg:left-0 lg:-bottom-1.5 lg:w-full lg:h-0.5 lg:bg-primary lg:opacity-20`}
+	}
 `;
 
 export const LinkGnbStyles = styled.ul`

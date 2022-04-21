@@ -1,7 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuthContext } from '../contexts/auth/AuthContext';
+
 import tw from 'twin.macro';
+import 'twin.macro';
+import 'styled-components/macro';
 
 import Logo_black from '../assets/logos/logo.svg';
 import Logo_white from '../assets/logos/logo_on.svg';
@@ -26,8 +29,15 @@ import {
 function Header() {
 	const [hamburgerOn, setHamburgerOn] = useState(false);
 	const [hoverOn, setHoverOn] = useState(false);
+
+	const [currentPath, setCurrentPath] = useState('');
+
 	const { pathname } = useLocation();
 	const userState = useAuthContext();
+
+	useEffect(() => {
+		setCurrentPath(pathname.split('/')[1]);
+	}, [pathname]);
 
 	// exclude header in specific components
 	if (
@@ -86,8 +96,12 @@ function Header() {
 						{/* path */}
 						<TitleStyles>
 							<Link
-								to="/registration/roadmap"
-								className="title"
+								to="/class-registration/roadmap"
+								className={
+									currentPath === 'class-registration' && !hoverOn
+										? 'active'
+										: 'inactive'
+								}
 								onClick={handleClick}
 							>
 								수강신청
@@ -95,8 +109,13 @@ function Header() {
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
-								<Link to="/registration/roadmap" onClick={handleClick}>
+								<Link to="/class-registration/roadmap" onClick={handleClick}>
 									강의 로드맵
+								</Link>
+							</ItemStyles>
+							<ItemStyles>
+								<Link to="/" onClick={handleClick}>
+									전체 클래스
 								</Link>
 							</ItemStyles>
 							<ItemStyles>
@@ -109,32 +128,39 @@ function Header() {
 									데뷔 클래스
 								</Link>
 							</ItemStyles>
-							<ItemStyles>
-								<Link to="/" onClick={handleClick}>
-									스토리튠즈 특강
-								</Link>
-							</ItemStyles>
 						</LinkGnbStyles>
 					</ListGnbStyles>
 
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/" className="title">
+							<Link
+								to="/"
+								className={
+									currentPath === 'debut-roadmap' && !hoverOn
+										? 'active'
+										: 'inactive'
+								}
+								onClick={handleClick}
+							>
 								데뷔 로드맵
 							</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
-								<Link to="/">데뷔 히스토리</Link>
+								<Link to="/" onClick={handleClick}>
+									데뷔 히스토리
+								</Link>
 							</ItemStyles>
 							<ItemStyles variant="web">
-								<Link to="/">
+								<Link to="/" onClick={handleClick}>
 									장학생 신청 및 <br /> 작품 투고
 								</Link>
 							</ItemStyles>
 							<ItemStyles variant="mobile">
-								<Link to="/">장학생 신청 및 작품 투고</Link>
+								<Link to="/" onClick={handleClick}>
+									장학생 신청 및 작품 투고
+								</Link>
 							</ItemStyles>
 						</LinkGnbStyles>
 					</ListGnbStyles>
@@ -142,28 +168,34 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/about" className="title" onClick={handleClick}>
+							<Link
+								to="/company/about"
+								onClick={handleClick}
+								className={
+									currentPath === 'company' && !hoverOn ? 'active' : 'inactive'
+								}
+							>
 								회사소개
 							</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
-								<Link to="/about" onClick={handleClick}>
+								<Link to="/company/about" onClick={handleClick}>
 									본원소개
 								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/team" onClick={handleClick}>
+								<Link to="/company/team" onClick={handleClick}>
 									대표 강사진
 								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/partners" onClick={handleClick}>
+								<Link to="/company/partners" onClick={handleClick}>
 									제휴업체
 								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/location" onClick={handleClick}>
+								<Link to="/company/location" onClick={handleClick}>
 									오시는 길
 								</Link>
 							</ItemStyles>
@@ -173,13 +205,19 @@ function Header() {
 					<ListGnbStyles>
 						{/* path */}
 						<TitleStyles>
-							<Link to="/faq" className="title" onClick={handleClick}>
+							<Link
+								to="/customer/faq"
+								onClick={handleClick}
+								className={
+									currentPath === 'customer' && !hoverOn ? 'active' : 'inactive'
+								}
+							>
 								고객지원
 							</Link>
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
-								<Link to="/faq" onClick={handleClick}>
+								<Link to="/customer/faq" onClick={handleClick}>
 									자주하는 질문
 								</Link>
 							</ItemStyles>
