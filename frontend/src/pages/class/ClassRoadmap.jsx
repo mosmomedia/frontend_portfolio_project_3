@@ -7,15 +7,16 @@ import {
 	HeaderStyles,
 	NavStyles,
 	MainStyles,
+	SectionWrapperStyles,
 	InfoSectionStyles,
 	SectionStyles,
 	CardStyles,
 	BarIndicatorStyles,
 	BarContainerStyles,
 	BarStyles,
-} from '../styles/RoadmapStyles';
+} from '../../styles/ClassRoadmapStyles';
 
-import Button from './shared/Button';
+import Button from '../../components/shared/Button';
 
 function Roadmap() {
 	const initHeight = useRef();
@@ -146,7 +147,7 @@ function Roadmap() {
 			</HeaderStyles>
 			{/* main */}
 			<MainStyles>
-				<div
+				<SectionWrapperStyles
 					className="SectionWrapperStyles"
 					onScroll={handleScroll}
 					ref={initHeight}
@@ -329,7 +330,7 @@ function Roadmap() {
 							</p>
 						</div>
 					</SectionStyles>
-				</div>
+				</SectionWrapperStyles>
 
 				<BarIndicatorStyles>
 					<BarContainerStyles>

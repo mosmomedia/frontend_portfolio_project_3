@@ -13,26 +13,28 @@ export const HeaderStyles = styled.div`
 
 export const NavStyles = styled.li`
 	${tw`text-[13px] py-1 px-2.5 bg-white shadow-sm rounded-lg cursor-pointer`}
+
 	:hover {
 		${tw`bg-black text-white`}
 	}
+
 	${({ id, variant }) => id === variant && tw`bg-black text-white`}
 `;
 
 export const MainStyles = styled.div`
 	${tw`bg-white rounded-t-lg h-full`}
 	box-shadow: 0px 0px 4px rgb(50 50 71 / 8%), 0px 12px 32px rgb(50 50 71 / 2%);
+`;
 
-	.SectionWrapperStyles {
-		${tw`relative overflow-auto h-full`}
-		/* Hide scrollbar for Chrome, Safari and Opera */
+export const SectionWrapperStyles = styled.div`
+	${tw`relative overflow-auto h-full`}
+	/* Hide scrollbar for Chrome, Safari and Opera */
 	::-webkit-scrollbar {
-			display: none;
-		}
-		/* Hide scrollbar for IE, Edge and Firefox */
-		-ms-overflow-style: none; /* IE and Edge */
-		scrollbar-width: none; /* Firefox */
+		display: none;
 	}
+	/* Hide scrollbar for IE, Edge and Firefox */
+	-ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
 `;
 
 export const InfoSectionStyles = styled.section`

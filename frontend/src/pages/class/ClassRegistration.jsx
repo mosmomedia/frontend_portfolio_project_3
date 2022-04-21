@@ -1,13 +1,11 @@
 import { Routes, Route } from 'react-router-dom';
 
-import 'twin.macro';
-import 'styled-components/macro';
-
 import { ClassProvider } from '../../contexts/class/ClassContext';
 import { SectionStyles } from '../../styles/RegistrationStyles';
 import { ContainerStyles } from '../../styles';
 
-import Roadmap from '../../components/ClassRoadmap';
+import Roadmap from './ClassRoadmap';
+import ClassAllList from './ClassAllList';
 
 function ClassRegistration() {
 	return (
@@ -16,6 +14,7 @@ function ClassRegistration() {
 				<ContainerStyles>
 					<Routes>
 						<Route path="/roadmap" element={<Roadmap />} />
+						<Route path="/all-classes" element={<ClassAllList />} />
 					</Routes>
 				</ContainerStyles>
 			</SectionStyles>

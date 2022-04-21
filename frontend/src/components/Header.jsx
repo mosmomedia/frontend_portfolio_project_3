@@ -114,17 +114,26 @@ function Header() {
 								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/" onClick={handleClick}>
+								<Link
+									to="/class-registration/all-classes"
+									onClick={handleClick}
+								>
 									전체 클래스
 								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/" onClick={handleClick}>
+								<Link
+									to="/class-registration/online-classes"
+									onClick={handleClick}
+								>
 									실시간 클래스
 								</Link>
 							</ItemStyles>
 							<ItemStyles>
-								<Link to="/" onClick={handleClick}>
+								<Link
+									to="/class-registration/debut-classes"
+									onClick={handleClick}
+								>
 									데뷔 클래스
 								</Link>
 							</ItemStyles>
