@@ -1,9 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 
 import tw from 'twin.macro';
+
 import {
 	WrapperStyles,
 	HeaderStyles,
+	NavStyles,
 	MainStyles,
 	InfoSectionStyles,
 	SectionStyles,
@@ -16,22 +18,79 @@ import {
 import Button from './shared/Button';
 
 function Roadmap() {
-	const [widthInput, SetWidthInput] = useState(0);
-
 	const initHeight = useRef();
 
+	const class_info = useRef();
+	const class_online = useRef();
+	const class_debut = useRef();
+
+	const [widthInput, setWidthInput] = useState(0);
+	const [selectedNav, setSelectedNav] = useState(null);
+	const [sectionList, setSectionList] = useState({
+		class_info: null,
+		class_online: null,
+		class_debut: null,
+	});
+
 	useEffect(() => {
-		const { clientHeight, scrollHeight } = initHeight.current;
-		const initHeightRatio = ((clientHeight / scrollHeight) * 100).toFixed(2);
-		SetWidthInput(+initHeightRatio);
+		// get and set height for each section
+		setSectionList((prevState) => ({
+			...prevState,
+			class_info: {
+				offsetT: class_info.current.offsetTop,
+				offsetB: class_info.current.offsetTop + class_info.current.clientHeight,
+			},
+			class_online: {
+				offsetT: class_online.current.offsetTop,
+				offsetB:
+					class_online.current.offsetTop + class_online.current.clientHeight,
+			},
+			class_debut: {
+				offsetT: class_debut.current.offsetTop,
+				offsetB:
+					class_debut.current.offsetTop + class_debut.current.clientHeight,
+			},
+		}));
 	}, []);
 
+	useEffect(() => {
+		// set initial scrollbar height
+		const { clientHeight, scrollHeight, scrollTop } = initHeight.current;
+		const initHeightRatio = ((clientHeight / scrollHeight) * 100).toFixed(2);
+		setWidthInput(+initHeightRatio);
+
+		// to select current nav btn
+		const { class_info, class_online, class_debut } = sectionList;
+		if (class_info && class_online && class_debut) {
+			if (scrollTop >= class_info.offsetT && scrollTop < class_info.offsetB) {
+				setSelectedNav('class_info');
+			} else if (
+				scrollTop >= class_online.offsetT &&
+				scrollTop < class_online.offsetB
+			) {
+				setSelectedNav('class_online');
+			} else {
+				setSelectedNav('class_debut');
+			}
+		}
+	}, [sectionList]);
+
+	// changed initial scrollbar height
 	const handleScroll = ({
 		target: { clientHeight, scrollTop, scrollHeight },
 	}) => {
 		const changedHeight = scrollTop + clientHeight;
 		const calHeight = ((changedHeight / scrollHeight) * 100).toFixed(2);
-		SetWidthInput(+calHeight);
+		setWidthInput(+calHeight);
+	};
+
+	// navigate articles with nav btns
+	const handleNavClick = ({ target: { id } }) => {
+		const sectionTop = sectionList[id].offsetT;
+		initHeight.current.scrollTo({
+			top: sectionTop,
+			behavior: 'smooth',
+		});
 	};
 
 	return (
@@ -41,9 +100,27 @@ function Roadmap() {
 				<h2>강의 로드맵</h2>
 				{/* btns */}
 				<ul>
-					<li>교육과정 안내</li>
-					<li>실시간 클래스</li>
-					<li>데뷔 클래스</li>
+					<NavStyles
+						id="class_info"
+						onClick={handleNavClick}
+						variant={selectedNav}
+					>
+						교육과정 안내
+					</NavStyles>
+					<NavStyles
+						id="class_online"
+						onClick={handleNavClick}
+						variant={selectedNav}
+					>
+						실시간 클래스
+					</NavStyles>
+					<NavStyles
+						id="class_debut"
+						onClick={handleNavClick}
+						variant={selectedNav}
+					>
+						데뷔 클래스
+					</NavStyles>
 				</ul>
 			</HeaderStyles>
 			{/* main */}
@@ -53,7 +130,7 @@ function Roadmap() {
 					onScroll={handleScroll}
 					ref={initHeight}
 				>
-					<InfoSectionStyles>
+					<InfoSectionStyles ref={class_info}>
 						<h2>스토리튠즈 아카데미 교육과정 안내</h2>
 						<div className="articleWrapper">
 							<CardStyles variant="basic">
@@ -155,7 +232,7 @@ function Roadmap() {
 						</div>
 					</InfoSectionStyles>
 
-					<SectionStyles variant="second">
+					<SectionStyles variant="second" ref={class_online}>
 						<h3>실시간 온라인 클래스 안내</h3>
 						<div>
 							<p>실시간 스트리밍으로 진행되는 강의입니다.</p>
@@ -203,7 +280,7 @@ function Roadmap() {
 						</div>
 					</SectionStyles>
 
-					<SectionStyles variant="third">
+					<SectionStyles variant="third" ref={class_debut}>
 						<h3>데뷔 클래스(오프라인) 안내</h3>
 						<div>
 							<p>
