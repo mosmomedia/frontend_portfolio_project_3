@@ -65,10 +65,13 @@ function HeroSection() {
 					<LinkBtnStyles>
 						{/* upper btn */}
 						<LinkUpperStyles>
-							<Button variant="primary" navtigate_to="/registration">
+							<Button
+								variant="primary"
+								navtigate_to="/class-registration/roadmap"
+							>
 								강의 신청하기
 							</Button>
-							<Button variant="secondary" navtigate_to="/team">
+							<Button variant="secondary" navtigate_to="/company/team">
 								대표 강사진 보기
 							</Button>
 						</LinkUpperStyles>

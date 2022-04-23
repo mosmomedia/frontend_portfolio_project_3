@@ -5,9 +5,10 @@ const ClassContext = createContext();
 
 function ClassProvider({ children }) {
 	const initialState = {
-		classList: [],
+		classDB: [],
+		allClassList: [],
 		currentClass: null,
-		isLoading: false,
+		isLoading: true,
 	};
 
 	const [state, dispatch] = useReducer(ClassReducer, initialState);

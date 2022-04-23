@@ -1,6 +1,11 @@
 import { useState, useRef, useEffect } from 'react';
 
-import tw from 'twin.macro';
+import { getAllClasses } from '../../contexts/class/ClassActions';
+import { useClassContext } from '../../contexts/class/ClassContext';
+
+import ClassCard from './ClassCard';
+
+import Spinner from '../../components/shared/Spinner';
 
 import {
 	WrapperStyles,
@@ -12,35 +17,86 @@ import {
 	BarIndicatorStyles,
 	BarContainerStyles,
 	BarStyles,
-} from '../../styles/ClassAllListstyles';
+} from '../../styles/ClassAllListStyles';
 
 function ClassAllList() {
 	const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(0);
 
+	const { classDB, allClassList, isLoading, dispatch } = useClassContext();
+
 	const initialState = {
-		month: 0,
-		weeks: 0,
+		month: -1,
+		weeks: -1,
 		basicClass: false,
 		advClass: false,
 		debutClass: false,
 	};
 
-	const [filteredList, setFilteredList] = useState(initialState);
-	const { month, weeks, basicClass, advClass, debutClass } = filteredList;
+	const [stateClassList, setStateClassList] = useState(initialState);
+	const { month, weeks, basicClass, advClass, debutClass } = stateClassList;
+
+	const [filteredList, setFilteredList] = useState([]);
 
 	useEffect(() => {
-		// set initial scrollbar height
-		const { clientHeight, scrollHeight } = initHeight.current;
-		const initHeightRatio = ((clientHeight / scrollHeight) * 100).toFixed(2);
-		setWidthInput(+initHeightRatio);
+		const fetchAllClasses = async () => {
+			dispatch({ type: 'LOADING' });
 
-		console.log(filteredList);
-	}, [filteredList]);
+			const classDB = await getAllClasses();
+			const allClassList = [];
+
+			classDB.forEach(({ classList }) => {
+				classList.forEach((item) => {
+					if (item.status === 'open') {
+						allClassList.push(item);
+					}
+				});
+			});
+
+			dispatch({ type: 'GET_ALL_CLASSES', payload: { classDB, allClassList } });
+
+			setFilteredList(allClassList);
+		};
+
+		fetchAllClasses();
+	}, [dispatch]);
+
+	useEffect(() => {
+		if (!isLoading) {
+			// set initial scrollbar height
+			const { clientHeight, scrollHeight } = initHeight.current;
+			const initHeightRatio = ((clientHeight / scrollHeight) * 100).toFixed(2);
+			setWidthInput(+initHeightRatio);
+		}
+	}, [isLoading]);
+
+	useEffect(() => {
+		let newList;
+
+		if (!basicClass && !advClass && !debutClass) {
+			newList = allClassList;
+		} else {
+			newList = allClassList.filter(
+				(item) =>
+					(basicClass && item.type === 'basicClass') ||
+					(advClass && item.type === 'advClass') ||
+					(debutClass && item.type === 'debutClass')
+			);
+		}
+
+		if (month > 0) {
+			newList = newList.filter((item) => item.month === month);
+		}
+		if (weeks > 0) {
+			newList = newList.filter((item) => item.weeks === weeks);
+		}
+
+		setFilteredList(newList);
+	}, [allClassList, basicClass, advClass, debutClass, month, weeks]);
 
 	// changed month
 	const handleChange = ({ target: { name, value } }) => {
-		setFilteredList((prevState) => ({ ...prevState, [name]: +value }));
+		setStateClassList((prevState) => ({ ...prevState, [name]: +value }));
 	};
 
 	// changed initial scrollbar height
@@ -48,8 +104,13 @@ function ClassAllList() {
 
 	// navigate articles with nav btns
 	const handleFilterBtnClick = ({ target: { id } }) => {
-		setFilteredList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
+		setStateClassList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
 	};
+
+	if (isLoading) return <Spinner />;
+
+	// if (!allClassList || allClassList.length === 0)
+	// 	return <p>예정 된 강의가 아직 없습니다.</p>;
 
 	return (
 		<WrapperStyles>
@@ -59,12 +120,21 @@ function ClassAllList() {
 				{/* btns */}
 				<FilterWrapperStyles>
 					<select name="month" onChange={handleChange} value={month}>
-						<option value="0">강의시작</option>
-						<option value="4">4월</option>
-						<option value="5">5월</option>
+						<option value="-1" disabled>
+							강의시작
+						</option>
+						<option value="0">전체보기</option>
+						{classDB.map(({ month }) => (
+							<option key={`monthKey${month}`} value={month}>
+								{month}월
+							</option>
+						))}
 					</select>
 					<select name="weeks" onChange={handleChange} value={weeks}>
-						<option value="0">강의기간</option>
+						<option value="-1" disabled>
+							강의기간
+						</option>
+						<option value="0">전체보기</option>
 						<option value="4">4주</option>
 						<option value="8">8주</option>
 					</select>
@@ -101,7 +171,37 @@ function ClassAllList() {
 					onScroll={handleScroll}
 					ref={initHeight}
 				>
-					{month}
+					{filteredList.map(
+						(
+							{
+								title,
+								type,
+								status,
+								month,
+								weeks,
+								hours,
+								period,
+								tutor,
+								price,
+							},
+							id
+						) => (
+							<ClassCard
+								key={id}
+								value={{
+									title,
+									type,
+									status,
+									month,
+									weeks,
+									hours,
+									period,
+									tutor,
+									price,
+								}}
+							></ClassCard>
+						)
+					)}
 				</SectionWrapperStyles>
 
 				<BarIndicatorStyles>
