@@ -31,8 +31,11 @@ export const MainStyles = styled.div`
 `;
 
 export const SectionWrapperStyles = styled.div`
-	${tw`relative overflow-auto h-full p-4 space-y-5`}
+	${tw`relative overflow-auto h-full`}
+	${tw`p-4 space-y-8 `}
+
 	/* Hide scrollbar for Chrome, Safari and Opera */
+
 	::-webkit-scrollbar {
 		display: none;
 	}

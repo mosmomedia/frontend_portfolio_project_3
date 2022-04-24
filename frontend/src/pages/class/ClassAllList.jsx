@@ -21,7 +21,7 @@ import {
 
 function ClassAllList() {
 	const initHeight = useRef();
-	const [widthInput, setWidthInput] = useState(0);
+	const [widthInput, setWidthInput] = useState(-1);
 
 	const { classDB, allClassList, isLoading, dispatch } = useClassContext();
 
@@ -45,64 +45,133 @@ function ClassAllList() {
 			const classDB = await getAllClasses();
 			const allClassList = [];
 
-			classDB.forEach(({ classList }) => {
-				classList.forEach((item) => {
-					if (item.status === 'open') {
-						allClassList.push(item);
-					}
+			if (classDB.length > 0) {
+				classDB.forEach(({ classList }) => {
+					classList.forEach((item) => {
+						if (item.status === 'open') {
+							allClassList.push(item);
+						}
+					});
 				});
-			});
 
-			dispatch({ type: 'GET_ALL_CLASSES', payload: { classDB, allClassList } });
+				allClassList.sort((a, b) => a.weeks - b.weeks);
 
-			setFilteredList(allClassList);
+				dispatch({
+					type: 'GET_ALL_CLASSES',
+					payload: { classDB, allClassList },
+				});
+
+				setFilteredList(allClassList);
+				setStateClassList((prevState) => ({
+					...prevState,
+					basicClass: true,
+					advClass: true,
+				}));
+			}
 		};
-
 		fetchAllClasses();
 	}, [dispatch]);
 
 	useEffect(() => {
-		if (!isLoading) {
-			// set initial scrollbar height
-			const { clientHeight, scrollHeight } = initHeight.current;
-			const initHeightRatio = ((clientHeight / scrollHeight) * 100).toFixed(2);
-			setWidthInput(+initHeightRatio);
-		}
-	}, [isLoading]);
-
-	useEffect(() => {
 		let newList;
 
-		if (!basicClass && !advClass && !debutClass) {
-			newList = allClassList;
-		} else {
-			newList = allClassList.filter(
-				(item) =>
-					(basicClass && item.type === 'basicClass') ||
-					(advClass && item.type === 'advClass') ||
-					(debutClass && item.type === 'debutClass')
-			);
-		}
+		newList = allClassList.filter(
+			(item) =>
+				(basicClass && item.type === 'basicClass') ||
+				(advClass && item.type === 'advClass') ||
+				(debutClass && item.type === 'debutClass')
+		);
 
 		if (month > 0) {
-			newList = newList.filter((item) => item.month === month);
+			if (!basicClass && !advClass && !debutClass) {
+				newList = allClassList.filter((item) => item.month === month);
+				setStateClassList((prevState) => ({
+					...prevState,
+					basicClass: true,
+					advClass: true,
+					debutClass: true,
+				}));
+			} else {
+				let tmp = { basicClass: false, advClass: false, debutClass: false };
+				newList.forEach((item) => {
+					if (item.month === month) {
+						if (!tmp[item.type]) {
+							tmp[item.type] = true;
+						}
+					}
+				});
+
+				setStateClassList((prevState) => ({
+					...prevState,
+					...tmp,
+				}));
+			}
 		}
+
 		if (weeks > 0) {
-			newList = newList.filter((item) => item.weeks === weeks);
+			if (!basicClass && !advClass && !debutClass) {
+				newList = allClassList.filter((item) => item.weeks === weeks);
+				setStateClassList((prevState) => ({
+					...prevState,
+					basicClass: true,
+					advClass: true,
+					debutClass: true,
+				}));
+			} else {
+				let tmp = { basicClass: false, advClass: false, debutClass: false };
+				newList.forEach((item) => {
+					if (item.weeks === weeks) {
+						if (!tmp[item.type]) {
+							tmp[item.type] = true;
+						}
+					}
+				});
+
+				setStateClassList((prevState) => ({
+					...prevState,
+					...tmp,
+				}));
+			}
 		}
 
 		setFilteredList(newList);
 	}, [allClassList, basicClass, advClass, debutClass, month, weeks]);
+
+	useEffect(() => {
+		if (!isLoading && filteredList.length > 0) {
+			// set initial scrollbar height
+			const { clientHeight, scrollHeight } = initHeight.current;
+			// console.log(clientHeight, scrollHeight, scrollTop);
+			if (clientHeight === scrollHeight) {
+				setWidthInput(0);
+			} else {
+				const initHeightRatio = ((clientHeight / scrollHeight) * 100).toFixed(
+					2
+				);
+				setWidthInput(+initHeightRatio);
+			}
+		}
+	}, [isLoading, filteredList]);
+
+	// changed initial scrollbar height
+	const handleScroll = ({
+		target: { clientHeight, scrollTop, scrollHeight },
+	}) => {
+		const changedHeight = clientHeight + scrollTop;
+
+		if (clientHeight === scrollHeight) {
+			setWidthInput(0);
+		} else {
+			const initHeightRatio = ((changedHeight / scrollHeight) * 100).toFixed(2);
+			setWidthInput(+initHeightRatio);
+		}
+	};
 
 	// changed month
 	const handleChange = ({ target: { name, value } }) => {
 		setStateClassList((prevState) => ({ ...prevState, [name]: +value }));
 	};
 
-	// changed initial scrollbar height
-	const handleScroll = () => {};
-
-	// navigate articles with nav btns
 	const handleFilterBtnClick = ({ target: { id } }) => {
 		setStateClassList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
 	};
@@ -166,49 +235,58 @@ function ClassAllList() {
 			</HeaderStyles>
 			{/* main */}
 			<MainStyles>
-				<SectionWrapperStyles
-					className="SectionWrapperStyles"
-					onScroll={handleScroll}
-					ref={initHeight}
-				>
-					{filteredList.map(
-						(
-							{
-								title,
-								type,
-								status,
-								month,
-								weeks,
-								hours,
-								period,
-								tutor,
-								price,
-							},
-							id
-						) => (
-							<ClassCard
-								key={id}
-								value={{
-									title,
-									type,
-									status,
-									month,
-									weeks,
-									hours,
-									period,
-									tutor,
-									price,
-								}}
-							></ClassCard>
-						)
-					)}
-				</SectionWrapperStyles>
-
-				<BarIndicatorStyles>
-					<BarContainerStyles>
-						<BarStyles widthInput={widthInput} />
-					</BarContainerStyles>
-				</BarIndicatorStyles>
+				<>
+					<SectionWrapperStyles
+						className="SectionWrapperStyles"
+						ref={initHeight}
+						onScroll={handleScroll}
+					>
+						{classDB.length === 0 ? (
+							<div>No classes yet</div>
+						) : filteredList.length === 0 ? (
+							<div>강의 일정 또는 강의 종류를 선택하세요.</div>
+						) : (
+							<>
+								{filteredList.map(
+									(
+										{
+											title,
+											type,
+											status,
+											month,
+											weeks,
+											hours,
+											period,
+											tutor,
+											price,
+										},
+										id
+									) => (
+										<ClassCard
+											key={id}
+											value={{
+												title,
+												type,
+												status,
+												month,
+												weeks,
+												hours,
+												period,
+												tutor,
+												price,
+											}}
+										></ClassCard>
+									)
+								)}
+							</>
+						)}
+					</SectionWrapperStyles>
+					<BarIndicatorStyles>
+						<BarContainerStyles>
+							<BarStyles widthInput={widthInput} />
+						</BarContainerStyles>
+					</BarIndicatorStyles>
+				</>
 			</MainStyles>
 		</WrapperStyles>
 	);

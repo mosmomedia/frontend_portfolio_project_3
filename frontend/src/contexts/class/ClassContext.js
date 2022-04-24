@@ -8,7 +8,7 @@ function ClassProvider({ children }) {
 		classDB: [],
 		allClassList: [],
 		currentClass: null,
-		isLoading: true,
+		isLoading: false,
 	};
 
 	const [state, dispatch] = useReducer(ClassReducer, initialState);
