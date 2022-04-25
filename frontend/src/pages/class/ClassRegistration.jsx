@@ -14,7 +14,7 @@ function ClassRegistration() {
 				<ContainerStyles>
 					<Routes>
 						<Route path="/roadmap" element={<Roadmap />} />
-						<Route path="/all-classes" element={<ClassAllList />} />
+						<Route path="/all-classes/*" element={<ClassAllList />} />
 					</Routes>
 				</ContainerStyles>
 			</SectionStyles>

@@ -126,7 +126,7 @@ function Header() {
 							</ItemStyles>
 							<ItemStyles>
 								<Link
-									to="/class-registration/online-classes"
+									to="/class-registration/all-classes/online"
 									onClick={handleClick}
 								>
 									실시간 클래스
@@ -134,7 +134,7 @@ function Header() {
 							</ItemStyles>
 							<ItemStyles>
 								<Link
-									to="/class-registration/debut-classes"
+									to="/class-registration/all-classes/offline"
 									onClick={handleClick}
 								>
 									데뷔 클래스

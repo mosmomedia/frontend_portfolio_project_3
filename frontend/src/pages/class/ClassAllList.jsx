@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
 import { getAllClasses } from '../../contexts/class/ClassActions';
 import { useClassContext } from '../../contexts/class/ClassContext';
@@ -38,6 +39,8 @@ function ClassAllList() {
 
 	const [filteredList, setFilteredList] = useState([]);
 
+	const { pathname } = useLocation();
+
 	useEffect(() => {
 		const fetchAllClasses = async () => {
 			dispatch({ type: 'LOADING' });
@@ -61,20 +64,31 @@ function ClassAllList() {
 					payload: { classDB, allClassList },
 				});
 
-				setStateClassList((prevState) => ({
-					...prevState,
+				const classState = {
 					basicClass: true,
 					advClass: true,
+					debutClass: true,
+				};
+
+				if (pathname === '/class-registration/all-classes/online') {
+					classState.debutClass = false;
+				} else if (pathname === '/class-registration/all-classes/offline') {
+					classState.basicClass = false;
+					classState.advClass = false;
+				}
+
+				setStateClassList((prevState) => ({
+					...prevState,
+					...classState,
 				}));
 			}
 		};
 		fetchAllClasses();
-	}, [dispatch]);
+	}, [dispatch, pathname]);
 
 	useEffect(() => {
 		let newList;
 
-		console.log(stateClassList);
 		newList = allClassList.filter(
 			(item) =>
 				(basicClass && item.type === 'basicClass') ||
@@ -122,7 +136,7 @@ function ClassAllList() {
 		}
 	};
 
-	// changed month
+	// changed month or weeks
 	const handleChange = ({ target: { name, value } }) => {
 		let getClassState = {
 			basicClass: false,
