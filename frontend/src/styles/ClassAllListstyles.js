@@ -6,6 +6,9 @@ export const WrapperStyles = styled.div`
 
 export const HeaderStyles = styled.div`
 	${tw`flex justify-between items-center`}
+	h2 {
+		${tw`cursor-pointer`}
+	}
 	ul {
 		${tw`flex space-x-1`}
 	}

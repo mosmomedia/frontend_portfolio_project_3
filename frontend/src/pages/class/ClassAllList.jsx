@@ -61,7 +61,6 @@ function ClassAllList() {
 					payload: { classDB, allClassList },
 				});
 
-				setFilteredList(allClassList);
 				setStateClassList((prevState) => ({
 					...prevState,
 					basicClass: true,
@@ -83,57 +82,12 @@ function ClassAllList() {
 		);
 
 		if (month > 0) {
-			if (!basicClass && !advClass && !debutClass) {
-				newList = allClassList.filter((item) => item.month === month);
-				setStateClassList((prevState) => ({
-					...prevState,
-					basicClass: true,
-					advClass: true,
-					debutClass: true,
-				}));
-			} else {
-				let tmp = { basicClass: false, advClass: false, debutClass: false };
-				newList.forEach((item) => {
-					if (item.month === month) {
-						if (!tmp[item.type]) {
-							tmp[item.type] = true;
-						}
-					}
-				});
-
-				setStateClassList((prevState) => ({
-					...prevState,
-					...tmp,
-				}));
-			}
+			newList = newList.filter((item) => item.month === month);
 		}
 
 		if (weeks > 0) {
-			if (!basicClass && !advClass && !debutClass) {
-				newList = allClassList.filter((item) => item.weeks === weeks);
-				setStateClassList((prevState) => ({
-					...prevState,
-					basicClass: true,
-					advClass: true,
-					debutClass: true,
-				}));
-			} else {
-				let tmp = { basicClass: false, advClass: false, debutClass: false };
-				newList.forEach((item) => {
-					if (item.weeks === weeks) {
-						if (!tmp[item.type]) {
-							tmp[item.type] = true;
-						}
-					}
-				});
-
-				setStateClassList((prevState) => ({
-					...prevState,
-					...tmp,
-				}));
-			}
+			newList = newList.filter((item) => item.weeks === weeks);
 		}
-
 		setFilteredList(newList);
 	}, [allClassList, basicClass, advClass, debutClass, month, weeks]);
 
@@ -169,23 +123,65 @@ function ClassAllList() {
 
 	// changed month
 	const handleChange = ({ target: { name, value } }) => {
-		setStateClassList((prevState) => ({ ...prevState, [name]: +value }));
+		let getClassState = {
+			basicClass: false,
+			advClass: false,
+			debutClass: false,
+		};
+
+		console.log(name);
+
+		console.log(month, weeks);
+
+		for (let i = 0; i < allClassList.length; i++) {
+			const item = allClassList[i];
+
+			if (name === 'month' && weeks > 0 && item.weeks !== weeks) {
+				continue;
+			}
+
+			if (name === 'weeks' && month > 0 && item.month !== month) {
+				continue;
+			}
+
+			if (item[name] === +value) {
+				getClassState[item.type] = true;
+			}
+		}
+
+		setStateClassList((prevState) => ({
+			...prevState,
+			[name]: +value,
+			...getClassState,
+		}));
+
+		console.log(filteredList);
+		console.log(getClassState);
 	};
 
 	const handleFilterBtnClick = ({ target: { id } }) => {
 		setStateClassList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
 	};
 
-	if (isLoading) return <Spinner />;
+	// get all list
+	const handleHeaderClick = () => {
+		setStateClassList((prevState) => ({
+			...prevState,
+			month: 0,
+			weeks: 0,
+			basicClass: true,
+			advClass: true,
+			debutClass: true,
+		}));
+	};
 
-	// if (!allClassList || allClassList.length === 0)
-	// 	return <p>예정 된 강의가 아직 없습니다.</p>;
+	if (isLoading) return <Spinner />;
 
 	return (
 		<WrapperStyles>
 			{/* header */}
 			<HeaderStyles>
-				<h2>강의 스케쥴</h2>
+				<h2 onClick={handleHeaderClick}>강의 스케쥴</h2>
 				{/* btns */}
 				<FilterWrapperStyles>
 					<select name="month" onChange={handleChange} value={month}>
