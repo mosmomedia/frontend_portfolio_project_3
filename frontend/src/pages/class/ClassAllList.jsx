@@ -74,6 +74,7 @@ function ClassAllList() {
 	useEffect(() => {
 		let newList;
 
+		console.log(stateClassList);
 		newList = allClassList.filter(
 			(item) =>
 				(basicClass && item.type === 'basicClass') ||
@@ -129,34 +130,57 @@ function ClassAllList() {
 			debutClass: false,
 		};
 
-		console.log(name);
+		if (+value > 0) {
+			for (let i = 0; i < allClassList.length; i++) {
+				const item = allClassList[i];
 
-		console.log(month, weeks);
+				if (name === 'month' && weeks > 0 && item.weeks !== weeks) {
+					continue;
+				}
 
-		for (let i = 0; i < allClassList.length; i++) {
-			const item = allClassList[i];
+				if (name === 'weeks' && month > 0 && item.month !== month) {
+					continue;
+				}
 
-			if (name === 'month' && weeks > 0 && item.weeks !== weeks) {
-				continue;
+				if (item[name] === +value) {
+					getClassState[item.type] = true;
+				}
 			}
 
-			if (name === 'weeks' && month > 0 && item.month !== month) {
-				continue;
+			setStateClassList((prevState) => ({
+				...prevState,
+				[name]: +value,
+				...getClassState,
+			}));
+		} else if (+value === 0 && (month === 0 || weeks === 0)) {
+			handleHeaderClick();
+		} else if (+value === 0 && (month > 0 || weeks > 0)) {
+			let getType;
+			if (name === 'month') {
+				getType = 'weeks';
+			} else if (name === 'weeks') {
+				getType = 'month';
 			}
 
-			if (item[name] === +value) {
-				getClassState[item.type] = true;
+			for (let i = 0; i < allClassList.length; i++) {
+				const item = allClassList[i];
+
+				if (item[getType] === stateClassList[getType]) {
+					getClassState[item.type] = true;
+				}
 			}
+
+			setStateClassList((prevState) => ({
+				...prevState,
+				[name]: +value,
+				...getClassState,
+			}));
+		} else {
+			setStateClassList((prevState) => ({
+				...prevState,
+				[name]: +value,
+			}));
 		}
-
-		setStateClassList((prevState) => ({
-			...prevState,
-			[name]: +value,
-			...getClassState,
-		}));
-
-		console.log(filteredList);
-		console.log(getClassState);
 	};
 
 	const handleFilterBtnClick = ({ target: { id } }) => {
