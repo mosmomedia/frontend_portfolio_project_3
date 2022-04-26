@@ -25,6 +25,10 @@ import img_about from '../assets/st_img_about.png';
 import img_tutors from '../assets/st_img_tutors.png';
 
 function Landing() {
+	const addClassBtnStyles = tw`flex justify-start items-center hover:text-keyColor hover:opacity-80`;
+
+	const addCompanyBtnStyles = tw`flex justify-start items-center hover:text-st_alt1 hover:opacity-80`;
+
 	return (
 		<MainStyles variant="landing">
 			<ContainerStyles>
@@ -84,8 +88,8 @@ function Landing() {
 									<p>장르구분이 없으며 수강 인원의 제한이 없습니다.</p>
 								</div>
 								<Button
-									navtigate_to="/"
-									add_styles={tw`flex justify-start items-center`}
+									navtigate_to="/class-registration/roadmap"
+									add_styles={addClassBtnStyles}
 								>
 									더 알아보기
 									<BsArrowRightShort size={24} />{' '}
@@ -104,10 +108,7 @@ function Landing() {
 										본인이 쓰고자 하는 소설의 장르에 맞는 강사를 선택해야합니다.
 									</p>
 								</div>
-								<Button
-									navtigate_to="/"
-									add_styles={tw`flex justify-start items-center`}
-								>
+								<Button navtigate_to="/" add_styles={addClassBtnStyles}>
 									더 알아보기
 									<BsArrowRightShort size={24} />{' '}
 								</Button>
@@ -123,10 +124,7 @@ function Landing() {
 										오프라인 강의입니다.
 									</p>
 								</div>
-								<Button
-									navtigate_to="/"
-									add_styles={tw`flex justify-start items-center`}
-								>
+								<Button navtigate_to="/" add_styles={addClassBtnStyles}>
 									더 알아보기
 									<BsArrowRightShort size={24} />{' '}
 								</Button>
@@ -142,10 +140,7 @@ function Landing() {
 										구성한 클래스입니다.
 									</p>
 								</div>
-								<Button
-									navtigate_to="/"
-									add_styles={tw`flex justify-start items-center`}
-								>
+								<Button navtigate_to="/" add_styles={addClassBtnStyles}>
 									더 알아보기
 									<BsArrowRightShort size={24} />{' '}
 								</Button>
@@ -174,8 +169,8 @@ function Landing() {
 								지름길입니다.
 							</p>
 							<Button
-								navtigate_to="/"
-								add_styles={tw`flex justify-start items-center`}
+								navtigate_to="/company/about"
+								add_styles={addCompanyBtnStyles}
 							>
 								더 알아보기
 								<BsArrowRightShort size={24} />{' '}
@@ -195,19 +190,24 @@ function Landing() {
 					<ContentStyles>
 						{/* leftitem - text*/}
 						<LeftItemStyles variant="reverse_section">
-							<h2>스토리튠즈 - 웹소설 작가의 꿈이 현실이 되는 곳!</h2>
+							<h2>스토리튠즈의 대표 강사진</h2>
+
 							<p>
-								스토리튠즈 아카데미는 나만의 이야기를 상상하고 풀어내길 바라는
-								모두에게 열려 있습니다.
+								내가 꿈꾼 배경 속에서 자유롭게 움직이는 나를 보면서, 타오르는
+								갈증을 느낍니다.
 							</p>
 							<p>
-								카카오페이지와 스토리튠즈가 공동으로 기획하여 데뷔까지의 모든
-								교육과정을 지원하는 카카오페이지 작가가 되기 위한 가장 빠른
-								지름길입니다.
+								하지만 막상 이야기를 풀어나가려고 하면 어딘지 막막한 기분입니다.
+							</p>
+
+							<p>
+								소재, 연출, 캐릭터, 복선, 시놉시스 등 뛰어난 강사진이 다년간
+								현장에서 ‘글 밥’을 먹으며 터득하고 연구했던 모든 노하우들을
+								가르쳐드립니다.
 							</p>
 							<Button
-								navtigate_to="/"
-								add_styles={tw`flex justify-start items-center`}
+								navtigate_to="/company/team"
+								add_styles={addCompanyBtnStyles}
 							>
 								더 알아보기
 								<BsArrowRightShort size={24} />{' '}

@@ -1,8 +1,5 @@
 import tw, { styled } from 'twin.macro';
 
-export const style = styled.div``;
-
-// mt-[4.25rem] py-16 px-8 sm:py-20 md:px-6 md:py-24 xl:py-32   2xl:py-40
 export const ContentStyles = styled.div`
 	${tw`xl:grid xl:grid-cols-2`}
 

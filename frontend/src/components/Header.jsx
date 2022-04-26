@@ -160,17 +160,17 @@ function Header() {
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
-								<Link to="/" onClick={handleClick}>
+								<Link to="/student/history" onClick={handleClick}>
 									데뷔 히스토리
 								</Link>
 							</ItemStyles>
 							<ItemStyles variant="web">
-								<Link to="/" onClick={handleClick}>
+								<Link to="/student/scholarship" onClick={handleClick}>
 									장학생 신청 및 <br /> 작품 투고
 								</Link>
 							</ItemStyles>
 							<ItemStyles variant="mobile">
-								<Link to="/" onClick={handleClick}>
+								<Link to="/student/scholarship" onClick={handleClick}>
 									장학생 신청 및 작품 투고
 								</Link>
 							</ItemStyles>

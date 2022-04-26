@@ -173,7 +173,7 @@ function ClassAllList() {
 				[name]: +value,
 				...getClassState,
 			}));
-		} else if (+value === 0 && (month === 0 || weeks === 0)) {
+		} else if (+value === 0 && (month <= 0 || weeks <= 0)) {
 			handleHeaderClick();
 		} else if (+value === 0 && (month > 0 || weeks > 0)) {
 			let getType;

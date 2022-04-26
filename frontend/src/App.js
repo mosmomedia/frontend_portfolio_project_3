@@ -22,6 +22,9 @@ import SignIn from './pages/accounts/SignIn';
 import SignUp from './pages/accounts/SignUp';
 import ForgotPassword from './pages/accounts/ForgotPassword';
 
+import DebutHistory from './pages/student/DebutHistory';
+import Scholarship from './pages/student/Scholarship';
+
 import About from './pages/company/About';
 import Team from './pages/company/Team';
 import Partners from './pages/company/Partners';
@@ -45,10 +48,18 @@ function App() {
 						<Route path="/sign-in" element={<SignIn />} />
 						<Route path="/sign-up" element={<SignUp />} />
 						<Route path="/forgot-password" element={<ForgotPassword />} />
+
 						{/* class registration */}
 						<Route
 							path="/class-registration/*"
 							element={<ClassRegistration />}
+						></Route>
+
+						{/* debut - history & scholarship */}
+						<Route path="/student/history" element={<DebutHistory />}></Route>
+						<Route
+							path="/student/scholarship"
+							element={<Scholarship />}
 						></Route>
 
 						{/* company */}
