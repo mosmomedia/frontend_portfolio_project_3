@@ -1,7 +1,8 @@
 import tw, { styled } from 'twin.macro';
 
 export const WrapperStyles = styled.div`
-	${tw`px-4 space-y-4 h-[80vh]`}
+	/* ${tw`px-4 space-y-4 h-[80vh]`} */
+	${tw`px-4 h-screen pt-[68px] md:pt-[80px]`}
 `;
 
 export const HeaderStyles = styled.div`
@@ -12,6 +13,7 @@ export const HeaderStyles = styled.div`
 	ul {
 		${tw`flex space-x-1`}
 	}
+	${tw`h-[10vh]`}
 `;
 
 export const FilterWrapperStyles = styled.div`
@@ -29,7 +31,7 @@ export const FilterStyles = styled.div`
 `;
 
 export const MainStyles = styled.div`
-	${tw`bg-white rounded-t-lg h-full`}
+	${tw`bg-white rounded-t-lg h-[80vh]`}
 	box-shadow: 0px 0px 4px rgb(50 50 71 / 8%), 0px 12px 32px rgb(50 50 71 / 2%);
 `;
 
