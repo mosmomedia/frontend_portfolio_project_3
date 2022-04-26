@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const SectionStyles = styled.div`
-	${tw`pt-0 md:pt-0 md:flex md:items-center md:py-40 xl:py-0  xl:h-screen`}
+	${tw`pt-0 md:pt-0 md:flex md:justify-between md:items-center md:py-28 lg:py-10  xl:py-0  xl:h-screen`}/* ${tw`pt-0 md:pt-0 md:flex md:items-center md:py-40 xl:py-0  xl:h-screen`} */
 `;
 
 export const LeftItemStyles = styled.div`
@@ -26,7 +26,7 @@ export const MobileImgStyles = styled.div`
 
 export const RightItemStyles = styled.div`
 	${tw`hidden md:block`}
-	${tw`relative md:w-1/2 md:p-5 lg:pr-1 xl:p-16 xl:pr-10 2xl:p-12 2xl:pr-0`}
+	${tw`relative md:w-1/2 md:p-5 lg:pr-1 xl:p-16 xl:pr-10 2xl:p-12 2xl:pr-0 2xl:w-[45%]`}
 `;
 
 export const HeroStyles = styled.img`
@@ -40,7 +40,7 @@ export const EffectStyles = styled.img`
 
 export const TextWrapper = styled.div`
 	${tw`absolute bottom-16 space-y-10 w-full`}
-	${tw`md:relative md:bottom-[unset]`}
+	${tw`sm:bottom-32 md:relative md:bottom-[unset]`}
 `;
 export const TextStyles = styled.div`
 	${tw`text-center space-y-12 tracking-wider`}

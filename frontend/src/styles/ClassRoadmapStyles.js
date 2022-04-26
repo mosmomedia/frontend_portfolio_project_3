@@ -1,7 +1,9 @@
 import tw, { styled } from 'twin.macro';
 
 export const WrapperStyles = styled.div`
-	${tw`px-4 space-y-4 h-[80vh]`}
+	${tw`px-4 h-[90vh]`}
+
+	${tw`flex flex-col justify-around`}
 `;
 
 export const HeaderStyles = styled.div`
@@ -9,6 +11,7 @@ export const HeaderStyles = styled.div`
 	ul {
 		${tw`flex space-x-1`}
 	}
+	${tw`flex-auto`}
 `;
 
 export const NavStyles = styled.li`
@@ -22,12 +25,13 @@ export const NavStyles = styled.li`
 `;
 
 export const MainStyles = styled.div`
-	${tw`bg-white rounded-t-lg h-full`}
-	box-shadow: 0px 0px 4px rgb(50 50 71 / 8%), 0px 12px 32px rgb(50 50 71 / 2%);
+	${tw`bg-white rounded-t-lg h-[90%]`}
+	border: 1px solid rgba(255, 0, 0, 0.4);
 `;
 
 export const SectionWrapperStyles = styled.div`
-	${tw`relative overflow-auto h-full`}
+	${tw`relative overflow-auto h-[100%]`}
+
 	/* Hide scrollbar for Chrome, Safari and Opera */
 	::-webkit-scrollbar {
 		display: none;
@@ -40,6 +44,7 @@ export const SectionWrapperStyles = styled.div`
 export const InfoSectionStyles = styled.section`
 	${tw`pt-2.5 px-2.5 pb-20 space-y-6 rounded-lg bg-[#fffcfc]`}
 	${tw`xl:pt-14 xl:pb-20 xl:px-20 xl:space-y-14`}
+
 
 	h2 {
 		${tw`bg-[#212121] text-white font-normal py-6 text-center rounded-md`}

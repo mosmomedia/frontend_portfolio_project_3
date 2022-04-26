@@ -70,9 +70,11 @@ function ClassAllList() {
 					debutClass: true,
 				};
 
-				if (pathname === '/class-registration/all-classes/online') {
+				const API_URI = '/class-registration/all-classes';
+
+				if (pathname === `${API_URI}/online`) {
 					classState.debutClass = false;
-				} else if (pathname === '/class-registration/all-classes/offline') {
+				} else if (pathname === `${API_URI}/offline`) {
 					classState.basicClass = false;
 					classState.advClass = false;
 				}
