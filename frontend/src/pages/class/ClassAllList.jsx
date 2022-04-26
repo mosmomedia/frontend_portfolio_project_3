@@ -8,16 +8,22 @@ import ClassCard from './ClassCard';
 
 import Spinner from '../../components/shared/Spinner';
 
+import tw from 'twin.macro';
+
 import {
 	WrapperStyles,
 	HeaderStyles,
-	FilterWrapperStyles,
-	FilterStyles,
 	MainStyles,
 	SectionWrapperStyles,
 	BarIndicatorStyles,
 	BarContainerStyles,
 	BarStyles,
+} from '../../styles/RegistrationStyles';
+
+import {
+	CardWrapperStyles,
+	FilterWrapperStyles,
+	FilterStyles,
 } from '../../styles/ClassAllListStyles';
 
 function ClassAllList() {
@@ -112,7 +118,6 @@ function ClassAllList() {
 		if (!isLoading && filteredList.length > 0) {
 			// set initial scrollbar height
 			const { clientHeight, scrollHeight } = initHeight.current;
-			// console.log(clientHeight, scrollHeight, scrollTop);
 			if (clientHeight === scrollHeight) {
 				setWidthInput(0);
 			} else {
@@ -276,13 +281,15 @@ function ClassAllList() {
 						className="SectionWrapperStyles"
 						ref={initHeight}
 						onScroll={handleScroll}
+						add_styles={tw`border-[1rem] rounded-t-lg  border-white`}
+						variant="card_col_2"
 					>
 						{classDB.length === 0 ? (
 							<div>No classes yet</div>
 						) : filteredList.length === 0 ? (
 							<div>강의 일정 또는 강의 종류를 선택하세요.</div>
 						) : (
-							<>
+							<CardWrapperStyles>
 								{filteredList.map(
 									(
 										{
@@ -314,7 +321,7 @@ function ClassAllList() {
 										></ClassCard>
 									)
 								)}
-							</>
+							</CardWrapperStyles>
 						)}
 					</SectionWrapperStyles>
 					<BarIndicatorStyles>

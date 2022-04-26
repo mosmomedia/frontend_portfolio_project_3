@@ -5,6 +5,7 @@ import Button from '../../components/shared/Button';
 
 const CardStyles = styled.div`
 	${tw`flex justify-between rounded-md p-4`}
+	${tw`lg:h-40`}
 
 	h2 {
 		${tw`text-white text-[1.375rem] `}
@@ -15,10 +16,7 @@ const CardStyles = styled.div`
 		${tw`text-base font-normal`}
 	}
 
-	${
-		({ variant }) => variant === 'basicClass' && tw`bg-basic`
-		// tw`bg-gradient-to-br from-[#ffcd00] to-[#fccd5f]`
-	}
+	${({ variant }) => variant === 'basicClass' && tw`bg-basic`}
 
 	${({ variant }) =>
 		variant === 'advClass' && tw`bg-gradient-to-tr from-[#5ed8b5] to-[#5bd8b5]`}

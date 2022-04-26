@@ -5,15 +5,18 @@ import tw from 'twin.macro';
 import {
 	WrapperStyles,
 	HeaderStyles,
-	NavStyles,
 	MainStyles,
 	SectionWrapperStyles,
-	InfoSectionStyles,
-	SectionStyles,
-	CardStyles,
 	BarIndicatorStyles,
 	BarContainerStyles,
 	BarStyles,
+} from '../../styles/RegistrationStyles';
+
+import {
+	NavStyles,
+	InfoSectionStyles,
+	SectionStyles,
+	CardStyles,
 } from '../../styles/ClassRoadmapStyles';
 
 import Button from '../../components/shared/Button';
@@ -119,7 +122,9 @@ function Roadmap() {
 		<WrapperStyles>
 			{/* header */}
 			<HeaderStyles>
-				<h2>강의 로드맵</h2>
+				<h2 id="class_info" onClick={handleNavClick}>
+					강의 로드맵
+				</h2>
 				{/* btns */}
 				<ul>
 					<NavStyles
@@ -151,6 +156,7 @@ function Roadmap() {
 					className="SectionWrapperStyles"
 					onScroll={handleScroll}
 					ref={initHeight}
+					add_styles={tw`border-[0.625rem]  rounded-md border-[#fffcfc]`}
 				>
 					<InfoSectionStyles ref={class_info_ref}>
 						<h2>스토리튠즈 아카데미 교육과정 안내</h2>
