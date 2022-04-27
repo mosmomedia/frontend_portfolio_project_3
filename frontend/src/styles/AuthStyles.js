@@ -37,7 +37,7 @@ export const RightSectionStyles = styled.div`
 `;
 
 export const ImageStyles = styled.img`
-	${tw`max-w-[unset] h-full`}
+	${tw`max-w-[unset] `}
 `;
 
 export const LineStyles = styled.div`

@@ -2,6 +2,8 @@ import tw from 'twin.macro';
 import 'twin.macro';
 import 'styled-components/macro';
 
+import useWD from '../../hooks/useWindowDimensions';
+
 import { MainStyles, SectionStyles, ContainerStyles } from '../../styles';
 import {
 	ContentStyles,
@@ -11,9 +13,17 @@ import {
 } from '../../styles/Scholarship';
 
 function Scholarship() {
+	const { height } = useWD();
+	const footerHeight = 376;
+	const calHeight = height - footerHeight;
+
 	return (
 		<MainStyles>
-			<SectionStyles variant="first" add_styles={tw`px-8 md:px-6`}>
+			<SectionStyles
+				variant="first"
+				variant2={calHeight}
+				add_styles={tw`px-8 md:px-6`}
+			>
 				<ContainerStyles>
 					{/* left - support   */}
 					<ContentStyles>
