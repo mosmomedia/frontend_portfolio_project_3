@@ -77,7 +77,10 @@ function HeroSection() {
 						</LinkUpperStyles>
 						{/* lower btn */}
 						<LinkLowerStyles>
-							<Button navtigate_to="/" add_styles={tw`bg-st_alt1 text-white`}>
+							<Button
+								navtigate_to="/"
+								add_styles={tw`bg-st_alt1 text-white sm:hover:opacity-100`}
+							>
 								<div>Collaboration with </div>
 								<span>
 									<img src={logo_kkp} alt="logo kakao page" />{' '}

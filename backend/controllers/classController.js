@@ -48,7 +48,7 @@ export const createClass = async (req, res) => {
 		const foundClass = foundMonth.classList.findIndex(
 			(obj) => obj.verifyClass === verifyClass
 		);
-		console.log(foundClass);
+
 		if (foundClass > -1) {
 			res.status(400);
 			throw new Error('db issue - this class already exists');
