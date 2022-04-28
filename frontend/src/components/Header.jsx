@@ -147,7 +147,7 @@ function Header() {
 						{/* path */}
 						<TitleStyles>
 							<Link
-								to="/"
+								to="/student/debut-history"
 								className={
 									currentPath === 'debut-roadmap' && !hoverOn
 										? 'active'
@@ -160,7 +160,7 @@ function Header() {
 						</TitleStyles>
 						<LinkGnbStyles is_hover_on={hoverOn}>
 							<ItemStyles>
-								<Link to="/student/history" onClick={handleClick}>
+								<Link to="/student/debut-history" onClick={handleClick}>
 									데뷔 히스토리
 								</Link>
 							</ItemStyles>

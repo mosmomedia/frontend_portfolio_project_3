@@ -10,7 +10,7 @@ import {
 	LeftItemStyles,
 	RightItemStyles,
 	SupportStyles,
-} from '../../styles/Scholarship';
+} from '../../styles/ScholarshipStyles';
 
 function Scholarship() {
 	const { height } = useWD();

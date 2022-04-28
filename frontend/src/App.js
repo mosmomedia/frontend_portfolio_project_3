@@ -22,8 +22,7 @@ import SignIn from './pages/accounts/SignIn';
 import SignUp from './pages/accounts/SignUp';
 import ForgotPassword from './pages/accounts/ForgotPassword';
 
-import DebutHistory from './pages/student/DebutHistory';
-import Scholarship from './pages/student/Scholarship';
+import DebutRoadmap from './pages/student/DebutRoadmap';
 
 import About from './pages/company/About';
 import Team from './pages/company/Team';
@@ -37,6 +36,7 @@ function App() {
 		<AuthProvider>
 			<GlobalStyles />
 			<BaseStyles />
+
 			<Router>
 				<ScrollToTop>
 					<Header></Header>
@@ -56,11 +56,7 @@ function App() {
 						></Route>
 
 						{/* debut - history & scholarship */}
-						<Route path="/student/history" element={<DebutHistory />}></Route>
-						<Route
-							path="/student/scholarship"
-							element={<Scholarship />}
-						></Route>
+						<Route path="/student/*" element={<DebutRoadmap />}></Route>
 
 						{/* company */}
 						<Route path="/company/about" element={<About />} />

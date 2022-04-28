@@ -6,8 +6,8 @@ const bookInfoSchema = new mongoose.Schema(
 		author: { type: String, required: true },
 		genre: { type: String, required: true },
 		view: { type: Number, required: true },
+		kkp_id: { type: Number, required: true },
 		img_url: { type: String, required: true },
-		kkp_id: { type: String, required: true },
 		complete: { type: Boolean, required: true },
 	},
 	{
