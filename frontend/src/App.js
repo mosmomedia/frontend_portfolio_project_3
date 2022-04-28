@@ -31,6 +31,8 @@ import Location from './pages/company/Location';
 
 import Faq from './pages/customer/Faq';
 
+import NotFound from './pages/etc/NotFound';
+
 function App() {
 	return (
 		<AuthProvider>
@@ -41,7 +43,9 @@ function App() {
 				<ScrollToTop>
 					<Header></Header>
 					<Routes>
-						<Route path="*" element={<Navigate to="/" replace />} />
+						{/* <Route path="*" element={<Navigate to="/" replace />} /> */}
+						<Route path="*" element={<NotFound />} />
+
 						{/* landing */}
 						<Route path="/" element={<Landing />} />
 						{/* accounts */}
