@@ -1,9 +1,4 @@
-import {
-	BrowserRouter as Router,
-	Routes,
-	Route,
-	Navigate,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './contexts/auth/AuthContext';
 import { GlobalStyles } from 'twin.macro';
 import ScrollToTop from './components/ScrollToTop';
@@ -43,7 +38,6 @@ function App() {
 				<ScrollToTop>
 					<Header></Header>
 					<Routes>
-						{/* <Route path="*" element={<Navigate to="/" replace />} /> */}
 						<Route path="*" element={<NotFound />} />
 
 						{/* landing */}

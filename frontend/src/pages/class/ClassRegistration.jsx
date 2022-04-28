@@ -4,6 +4,8 @@ import { ClassProvider } from '../../contexts/class/ClassContext';
 import { SectionStyles } from '../../styles/RegistrationStyles';
 import { ContainerStyles } from '../../styles';
 
+import NotFound from '../etc/NotFound';
+
 import Roadmap from './ClassRoadmap';
 import ClassAllList from './ClassAllList';
 
@@ -13,6 +15,7 @@ function ClassRegistration() {
 			<SectionStyles>
 				<ContainerStyles>
 					<Routes>
+						<Route path="*" element={<NotFound />} />
 						<Route path="/roadmap" element={<Roadmap />} />
 						<Route path="/all-classes/*" element={<ClassAllList />} />
 					</Routes>
