@@ -1,8 +1,13 @@
 import { useEffect } from 'react';
-
 import Select from 'react-select';
-
+import makeAnimated from 'react-select/animated';
 import { useBookContext } from '../contexts/book/BookContext';
+
+import {
+	GroupLabelStyles,
+	GroupOptionLabelStyles,
+	GroupBadgeStyles,
+} from '../styles/GroupSelectStyles';
 
 const genreOptions = [
 	{ type: 'genre', value: '판타지', label: '판타지' },
@@ -40,30 +45,11 @@ const groupedOptions = [
 	},
 ];
 
-const groupStyles = {
-	display: 'flex',
-	alignItems: 'center',
-	justifyContent: 'space-between',
-};
-
-const groupBadgeStyles = {
-	backgroundColor: '#EBECF0',
-	borderRadius: '2em',
-	color: '#172B4D',
-	display: 'inline-block',
-	fontSize: 12,
-	fontWeight: 'normal',
-	lineHeight: '1',
-	minWidth: 1,
-	padding: '0.16666666666667em 0.5em',
-	textAlign: 'center',
-};
-
 const formatGroupLabel = (groupedOptions) => (
-	<div style={groupStyles}>
-		<span>{groupedOptions.label}</span>
-		<span style={groupBadgeStyles}>{groupedOptions.options.length}</span>
-	</div>
+	<GroupLabelStyles>
+		<GroupOptionLabelStyles>{groupedOptions.label}</GroupOptionLabelStyles>
+		<GroupBadgeStyles>{groupedOptions.options.length}</GroupBadgeStyles>
+	</GroupLabelStyles>
 );
 
 export const GroupSelect = ({ setBookList }) => {
@@ -90,6 +76,8 @@ export const GroupSelect = ({ setBookList }) => {
 			});
 		}
 	}, [allBooksList]);
+
+	const animatedComponents = makeAnimated();
 
 	const handleChange = (selectedList) => {
 		let filteredGenreList = [];
@@ -120,9 +108,11 @@ export const GroupSelect = ({ setBookList }) => {
 		<Select
 			onChange={handleChange}
 			options={groupedOptions}
+			placeholder="장르, 작품 또는 작가를 검색하세요.."
 			isMulti
 			autoFocus
 			isSearchable
+			components={animatedComponents}
 			formatGroupLabel={formatGroupLabel}
 		/>
 	);

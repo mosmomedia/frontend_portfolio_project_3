@@ -9,8 +9,9 @@ import GroupSelect from '../../components/GroupSelect';
 import BookCard from '../../components/BookCard';
 
 // style
-import { MainStyles, SectionStyles, ContainerStyles } from '../../styles';
+import { MainStyles, ContainerStyles } from '../../styles';
 import {
+	SectionStyles,
 	ContentStyles,
 	BookListStyles,
 	LeftItemStyles,
@@ -36,7 +37,7 @@ function DebutHistory() {
 
 	return (
 		<MainStyles>
-			<SectionStyles variant="even" add_styles={tw`px-6`}>
+			<SectionStyles variant="even" add_styles={tw`px-6 min-h-screen`}>
 				<ContainerStyles>
 					<ContentStyles>
 						<LeftItemStyles>
@@ -44,7 +45,7 @@ function DebutHistory() {
 								<h1>Debut History</h1>
 								<h2>스토리튠즈가 배출한 데뷔 작가와 대표 작품들</h2>
 							</div>
-							<GroupSelect setBookList={setBookList} bookList={bookList} />
+							<GroupSelect setBookList={setBookList} />
 						</LeftItemStyles>
 						<RightItemStyles>
 							<BookListStyles>
