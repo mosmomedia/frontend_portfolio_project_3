@@ -5,7 +5,7 @@ import { BookProvider } from '../../contexts/book/BookContext';
 import DebutHistory from './DebutHistory';
 import Scholarship from './Scholarship';
 
-function ClassRegistration() {
+function DebutRoadmap() {
 	return (
 		<BookProvider>
 			<Routes>
@@ -16,4 +16,4 @@ function ClassRegistration() {
 	);
 }
 
-export default ClassRegistration;
+export default DebutRoadmap;

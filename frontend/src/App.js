@@ -7,6 +7,8 @@ import BaseStyles from './styles/BaseStyles';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+import PrivateRoute from './components/PrivateRoute';
+
 import Header from './components/Header';
 import Landing from './components/Landing';
 import Footer from './components/Footer';
@@ -25,6 +27,8 @@ import Partners from './pages/company/Partners';
 import Location from './pages/company/Location';
 
 import Faq from './pages/customer/Faq';
+
+import Dashboard from './pages/dashboard/Dashboard';
 
 import NotFound from './pages/etc/NotFound';
 
@@ -63,6 +67,11 @@ function App() {
 						<Route path="/company/location" element={<Location />} />
 						{/*customer  */}
 						<Route path="/customer/faq" element={<Faq />} />
+
+						{/* Dashboard */}
+						<Route path="/dashboard" element={<PrivateRoute />}>
+							<Route path="/dashboard" element={<Dashboard />} />
+						</Route>
 					</Routes>
 					<Footer />
 					<ToastContainer autoClose={2500} />
