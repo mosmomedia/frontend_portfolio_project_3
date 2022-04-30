@@ -5,9 +5,6 @@ import Main from './components/Main';
 
 import { MainStyles } from './styles';
 
-import 'twin.macro';
-import 'styled-components/macro';
-
 function Dashboard() {
 	useEffect(() => {}, []);
 

@@ -24,7 +24,7 @@ import {
 	CardWrapperStyles,
 	FilterWrapperStyles,
 	FilterStyles,
-} from '../../styles/ClassAllListstyles';
+} from '../../styles/ClassAllListStyles';
 
 function ClassAllList() {
 	const initHeight = useRef();
