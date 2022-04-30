@@ -1,7 +1,9 @@
-import { Routes, Route } from 'react-router-dom';
 import { useEffect } from 'react';
 
 import Sidebar from './components/Sidebar';
+import Main from './components/Main';
+
+import { MainStyles } from './styles';
 
 import 'twin.macro';
 import 'styled-components/macro';
@@ -10,13 +12,10 @@ function Dashboard() {
 	useEffect(() => {}, []);
 
 	return (
-		<>
-			<div>
-				<Routes>
-					<Route path="/" element={<Sidebar />} />
-				</Routes>
-			</div>
-		</>
+		<MainStyles>
+			<Sidebar />
+			<Main />
+		</MainStyles>
 	);
 }
 
