@@ -7,8 +7,6 @@ import BaseStyles from './styles/BaseStyles';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
-import PrivateRoute from './components/PrivateRoute';
-
 import Header from './components/Header';
 import Landing from './components/Landing';
 import Footer from './components/Footer';
@@ -19,7 +17,8 @@ import SignIn from './pages/accounts/SignIn';
 import SignUp from './pages/accounts/SignUp';
 import ForgotPassword from './pages/accounts/ForgotPassword';
 
-import DebutRoadmap from './pages/student/DebutRoadmap';
+import DebutHistory from './pages/student/DebutHistory';
+import Scholarship from './pages/student/Scholarship';
 
 import About from './pages/company/About';
 import Team from './pages/company/Team';
@@ -43,6 +42,7 @@ function App() {
 					<Header></Header>
 					<Routes>
 						<Route path="*" element={<NotFound />} />
+						<Route path="/notfound" element={<NotFound />} />
 
 						{/* landing */}
 						<Route path="/" element={<Landing />} />
@@ -55,10 +55,11 @@ function App() {
 						<Route
 							path="/class-registration/*"
 							element={<ClassRegistration />}
-						></Route>
+						/>
 
 						{/* debut - history & scholarship */}
-						<Route path="/student/*" element={<DebutRoadmap />}></Route>
+						<Route path="/student/debut-history" element={<DebutHistory />} />
+						<Route path="/student/scholarship" element={<Scholarship />} />
 
 						{/* company */}
 						<Route path="/company/about" element={<About />} />
@@ -70,9 +71,7 @@ function App() {
 						<Route path="/customer/faq" element={<Faq />} />
 
 						{/* Dashboard */}
-						<Route path="/dashboard" element={<PrivateRoute />}>
-							<Route path="/dashboard" element={<Dashboard />} />
-						</Route>
+						<Route path="/dashboard/*" element={<Dashboard />} />
 					</Routes>
 					<Footer />
 					<ToastContainer autoClose={2500} />

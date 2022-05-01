@@ -49,7 +49,8 @@ function Header() {
 		pathname === '/sign-in' ||
 		pathname === '/sign-up' ||
 		pathname === '/forgot-password' ||
-		pathname === '/dashboard'
+		pathname === '/dashboard' ||
+		pathname === '/dashboard/*'
 	)
 		return null;
 

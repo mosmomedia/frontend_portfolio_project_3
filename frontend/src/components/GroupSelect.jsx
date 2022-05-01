@@ -1,13 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import { useBookContext } from '../contexts/book/BookContext';
+import axios from 'axios';
+
+import Spinner from '../components/shared/Spinner';
 
 import {
 	GroupLabelStyles,
 	GroupOptionLabelStyles,
 	GroupBadgeStyles,
 } from '../styles/GroupSelectStyles';
+
+const API_URI = '/api/book/';
 
 const genreOptions = [
 	{ type: 'genre', value: '판타지', label: '판타지' },
@@ -17,15 +21,6 @@ const genreOptions = [
 	{ type: 'genre', value: '무협', label: '무협' },
 	{ type: 'genre', value: '판드', label: '판드' },
 ];
-
-const genreSet = {
-	판타지: [],
-	로맨스: [],
-	로판: [],
-	현판: [],
-	무협: [],
-	판드: [],
-};
 
 const workOptions = [];
 const authorOptions = [];
@@ -53,56 +48,108 @@ const formatGroupLabel = (groupedOptions) => (
 );
 
 export const GroupSelect = ({ setBookList }) => {
-	const { allBooksList } = useBookContext();
+	const initSelctedState = { genre: [], title: [], author: [] };
+	const [isLoading, setIsLoading] = useState(false);
+	const [selectState, setSelectState] = useState(initSelctedState);
+	const [sortedList, setSortedList] = useState([]);
 
 	useEffect(() => {
-		if (allBooksList.length > 0) {
-			allBooksList.forEach((book) => {
-				genreSet[book.genre].push(book);
+		const fetchData = async () => {
+			try {
+				setIsLoading(true);
+				const res = await axios.get(API_URI);
+				const allBooksList = res.data;
 
-				workOptions.push({
-					type: 'title',
-					value: book.title,
-					label: book.title,
-					data: book,
-				});
+				if (allBooksList.length > 0) {
+					allBooksList.forEach((book) => {
+						workOptions.push({
+							type: 'title',
+							value: book.title,
+							label: book.title,
+							data: book,
+						});
+						authorOptions.push({
+							type: 'author',
+							value: book.author,
+							label: book.author,
+							data: book,
+						});
+					});
+					setIsLoading(false);
+					setBookList(allBooksList);
+					setSortedList(allBooksList);
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		};
 
-				authorOptions.push({
-					type: 'author',
-					value: book.author,
-					label: book.author,
-					data: book,
+		fetchData();
+	}, []);
+
+	useEffect(() => {
+		const filteredList = [];
+		if (selectState.genre.length > 0) {
+			selectState.genre.forEach((type) => {
+				sortedList.forEach((item) => {
+					if (item.genre === type) {
+						const isOwnItem = filteredList.findIndex(
+							(work) => work._id === item._id
+						);
+						if (isOwnItem) {
+							filteredList.push(item);
+						}
+					}
 				});
 			});
 		}
-	}, [allBooksList]);
+
+		if (selectState.title.length > 0) {
+			selectState.title.forEach((item) => {
+				const isOwnItem = filteredList.findIndex(
+					(work) => work._id === item._id
+				);
+				if (isOwnItem) {
+					filteredList.push(item);
+				}
+			});
+		}
+
+		if (selectState.author.length > 0) {
+			selectState.author.forEach((item) => {
+				const isOwnItem = filteredList.findIndex(
+					(work) => work._id === item._id
+				);
+				if (isOwnItem) {
+					filteredList.push(item);
+				}
+			});
+		}
+
+		if (filteredList.length > 0) {
+			setBookList(filteredList);
+		} else {
+			setBookList(sortedList);
+		}
+	}, [selectState]);
 
 	const animatedComponents = makeAnimated();
 
 	const handleChange = (selectedList) => {
-		let filteredGenreList = [];
-		const filteredBookList = new Set();
+		const tmpSelectState = { genre: [], title: [], author: [] };
 
 		selectedList.forEach((item) => {
 			if (item.type === 'genre') {
-				filteredGenreList = [...filteredGenreList, ...genreSet[item.value]];
+				tmpSelectState[item.type].push(item.value);
 			} else {
-				filteredBookList.add(item.data);
+				tmpSelectState[item.type].push(item.data);
 			}
 		});
 
-		if (filteredGenreList.length > 0) {
-			filteredGenreList.forEach((item) => filteredBookList.add(item));
-		}
-
-		const resArr = Array.from(filteredBookList);
-
-		if (resArr.length > 0) {
-			setBookList(resArr);
-		} else {
-			setBookList(allBooksList);
-		}
+		setSelectState(tmpSelectState);
 	};
+
+	if (isLoading) return <Spinner />;
 
 	return (
 		<Select

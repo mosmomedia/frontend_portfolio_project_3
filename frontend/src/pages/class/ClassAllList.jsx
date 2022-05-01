@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getAllClasses } from '../../contexts/class/ClassActions';
 import { useClassContext } from '../../contexts/class/ClassContext';
@@ -46,6 +46,7 @@ function ClassAllList() {
 	const [filteredList, setFilteredList] = useState([]);
 
 	const { pathname } = useLocation();
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const fetchAllClasses = async () => {
@@ -54,45 +55,45 @@ function ClassAllList() {
 			const classDB = await getAllClasses();
 			const allClassList = [];
 
-			if (classDB.length > 0) {
-				classDB.forEach(({ classList }) => {
-					classList.forEach((item) => {
-						if (item.status === 'open') {
-							allClassList.push(item);
-						}
-					});
+			classDB.forEach(({ classList }) => {
+				classList.forEach((item) => {
+					if (item.status === 'open') {
+						allClassList.push(item);
+					}
 				});
+			});
 
-				allClassList.sort((a, b) => a.weeks - b.weeks);
+			allClassList.sort((a, b) => a.weeks - b.weeks);
 
-				dispatch({
-					type: 'GET_ALL_CLASSES',
-					payload: { classDB, allClassList },
-				});
+			dispatch({
+				type: 'GET_ALL_CLASSES',
+				payload: { classDB, allClassList },
+			});
 
-				const classState = {
-					basicClass: true,
-					advClass: true,
-					debutClass: true,
-				};
+			const classState = {
+				basicClass: true,
+				advClass: true,
+				debutClass: true,
+			};
 
-				const API_URI = '/class-registration/all-classes';
+			const API_URI = '/class-registration/all-classes';
 
-				if (pathname === `${API_URI}/online`) {
-					classState.debutClass = false;
-				} else if (pathname === `${API_URI}/offline`) {
-					classState.basicClass = false;
-					classState.advClass = false;
-				}
-
-				setStateClassList((prevState) => ({
-					...prevState,
-					...classState,
-				}));
+			if (pathname === `${API_URI}/online`) {
+				classState.debutClass = false;
+			} else if (pathname === `${API_URI}/offline`) {
+				classState.basicClass = false;
+				classState.advClass = false;
+			} else if (pathname !== `${API_URI}`) {
+				return navigate('/notfound');
 			}
+
+			setStateClassList((prevState) => ({
+				...prevState,
+				...classState,
+			}));
 		};
 		fetchAllClasses();
-	}, [dispatch, pathname]);
+	}, [dispatch, pathname, navigate]);
 
 	useEffect(() => {
 		let newList;

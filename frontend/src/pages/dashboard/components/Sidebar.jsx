@@ -33,12 +33,14 @@ function Sidebar() {
 			<MenuStyles>
 				<MainMenuStyles>
 					<MenuItemStyles>
-						<SidebarIcon1 />
-						<h3>나의 강의실</h3>
-						<ol>
-							<li>실시간 강의</li>
-							<li>녹화 강의</li>
-						</ol>
+						<Link to="/dashboard/my-classroom">
+							<SidebarIcon1 />
+							<h3>나의 강의실</h3>
+							<ol>
+								<li>실시간 강의</li>
+								<li>녹화 강의</li>
+							</ol>
+						</Link>
 					</MenuItemStyles>
 
 					<MenuItemStyles>

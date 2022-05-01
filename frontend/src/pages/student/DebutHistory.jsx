@@ -1,9 +1,5 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import tw from 'twin.macro';
-
-import { useBookContext } from '../../contexts/book/BookContext';
-import { getAllbooks } from '../../contexts/book/BookActions';
-import Spinner from '../../components/shared/Spinner';
 
 import GroupSelect from '../../components/GroupSelect';
 import BookCard from '../../components/BookCard';
@@ -19,21 +15,8 @@ import {
 } from '../../styles/DebutHistoryStyles';
 
 function DebutHistory() {
-	const { isLoading, dispatch } = useBookContext();
+	// fetchData from GroupSelect component
 	const [bookList, setBookList] = useState([]);
-
-	useEffect(() => {
-		const fetchData = async () => {
-			dispatch({ type: 'LOADING' });
-			const payload = await getAllbooks();
-			dispatch({ type: 'GET_ALL_LIST', payload });
-			setBookList(payload);
-		};
-
-		fetchData();
-	}, [dispatch]);
-
-	if (isLoading) return <Spinner />;
 
 	return (
 		<MainStyles>
