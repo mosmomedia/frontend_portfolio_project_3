@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react';
 import Select from 'react-select';
 import makeAnimated from 'react-select/animated';
-import axios from 'axios';
 
 import Spinner from '../components/shared/Spinner';
+import useFetch from '../hooks/useFetch';
 
 import {
 	GroupLabelStyles,
 	GroupOptionLabelStyles,
 	GroupBadgeStyles,
 } from '../styles/GroupSelectStyles';
-
-const API_URI = '/api/book/';
 
 const genreOptions = [
 	{ type: 'genre', value: '판타지', label: '판타지' },
@@ -48,57 +46,54 @@ const formatGroupLabel = (groupedOptions) => (
 );
 
 export const GroupSelect = ({ setBookList }) => {
-	const initSelctedState = { genre: [], title: [], author: [] };
-	const [isLoading, setIsLoading] = useState(false);
-	const [selectState, setSelectState] = useState(initSelctedState);
-	const [sortedList, setSortedList] = useState([]);
+	const API_URI = '/api/book/';
+	const { loading, data } = useFetch(API_URI);
+
+	const [selectState, setSelectState] = useState({
+		genre: [],
+		title: [],
+		author: [],
+	});
+
+	const [allList, setAllList] = useState([]);
 
 	useEffect(() => {
-		const fetchData = async () => {
-			try {
-				setIsLoading(true);
-				const res = await axios.get(API_URI);
-				const allBooksList = res.data;
+		const allBooksList = data;
+		if (!loading && allBooksList.length > 0) {
+			allBooksList.forEach((book) => {
+				workOptions.push({
+					type: 'title',
+					value: book.title,
+					label: book.title,
+					data: book,
+				});
+				authorOptions.push({
+					type: 'author',
+					value: book.author,
+					label: book.author,
+					data: book,
+				});
+			});
+			setBookList(allBooksList);
+			setAllList(allBooksList);
+		}
+	}, [loading]);
 
-				if (allBooksList.length > 0) {
-					allBooksList.forEach((book) => {
-						workOptions.push({
-							type: 'title',
-							value: book.title,
-							label: book.title,
-							data: book,
-						});
-						authorOptions.push({
-							type: 'author',
-							value: book.author,
-							label: book.author,
-							data: book,
-						});
-					});
-					setIsLoading(false);
-					setBookList(allBooksList);
-					setSortedList(allBooksList);
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		};
-
-		fetchData();
-	}, []);
+	// set filtereList function
+	const findAndUpdateitem = (arr, item) => {
+		const isOwnItem = arr.findIndex((work) => work._id === item._id);
+		if (isOwnItem === -1) {
+			arr.push(item);
+		}
+	};
 
 	useEffect(() => {
 		const filteredList = [];
 		if (selectState.genre.length > 0) {
 			selectState.genre.forEach((type) => {
-				sortedList.forEach((item) => {
+				allList.forEach((item) => {
 					if (item.genre === type) {
-						const isOwnItem = filteredList.findIndex(
-							(work) => work._id === item._id
-						);
-						if (isOwnItem) {
-							filteredList.push(item);
-						}
+						findAndUpdateitem(filteredList, item);
 					}
 				});
 			});
@@ -106,32 +101,22 @@ export const GroupSelect = ({ setBookList }) => {
 
 		if (selectState.title.length > 0) {
 			selectState.title.forEach((item) => {
-				const isOwnItem = filteredList.findIndex(
-					(work) => work._id === item._id
-				);
-				if (isOwnItem) {
-					filteredList.push(item);
-				}
+				findAndUpdateitem(filteredList, item);
 			});
 		}
 
 		if (selectState.author.length > 0) {
 			selectState.author.forEach((item) => {
-				const isOwnItem = filteredList.findIndex(
-					(work) => work._id === item._id
-				);
-				if (isOwnItem) {
-					filteredList.push(item);
-				}
+				findAndUpdateitem(filteredList, item);
 			});
 		}
 
 		if (filteredList.length > 0) {
 			setBookList(filteredList);
 		} else {
-			setBookList(sortedList);
+			setBookList(allList);
 		}
-	}, [selectState]);
+	}, [selectState, setBookList]);
 
 	const animatedComponents = makeAnimated();
 
@@ -149,7 +134,7 @@ export const GroupSelect = ({ setBookList }) => {
 		setSelectState(tmpSelectState);
 	};
 
-	if (isLoading) return <Spinner />;
+	if (loading) return <Spinner />;
 
 	return (
 		<Select
