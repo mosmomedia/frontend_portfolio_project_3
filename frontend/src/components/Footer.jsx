@@ -27,7 +27,11 @@ function Footer() {
 		pathname === '/sign-in' ||
 		pathname === '/sign-up' ||
 		pathname === '/forgot-password' ||
-		pathname === '/dashboard'
+		pathname === '/dashboard/my-classroom' ||
+		pathname === '/dashboard/my-classroom/stream' ||
+		pathname === '/dashboard/my-classroom/recording' ||
+		pathname === '/dashboard/my-board' ||
+		pathname === '/dashboard/my-page'
 	)
 		return null;
 

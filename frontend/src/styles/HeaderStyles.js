@@ -38,7 +38,7 @@ export const HamburgerStyles = styled.button`
 
 export const LogoStyles = styled.div`
 	${tw`h-12`}
-	${tw`lg:mt-4 lg:-ml-1 xl:mt-[1rem] xl:h-[3.25rem]`}
+	${tw`lg:mt-4 lg:-ml-1 xl:mt-3.5 xl:h-[54px]`}
 `;
 
 export const ImgStyles = styled.img`

@@ -50,7 +50,11 @@ function Header() {
 		pathname === '/sign-up' ||
 		pathname === '/forgot-password' ||
 		pathname === '/dashboard' ||
-		pathname === '/dashboard/*'
+		pathname === '/dashboard/my-classroom' ||
+		pathname === '/dashboard/my-classroom/stream' ||
+		pathname === '/dashboard/my-classroom/recording' ||
+		pathname === '/dashboard/my-board' ||
+		pathname === '/dashboard/my-page'
 	)
 		return null;
 
@@ -246,12 +250,15 @@ function Header() {
 					{userState ? (
 						<>
 							<div className="web">
-								<Button navtigate_to="/dashboard" variant="dashboard">
+								<Button
+									navtigate_to="/dashboard/my-classroom"
+									variant="dashboard"
+								>
 									내 강의실
 									<FaChalkboardTeacher size={'1.5625rem'} />
 								</Button>
 							</div>
-							<Link className="mobile" to="/dashboard">
+							<Link className="mobile" to="/dashboard/my-classroom">
 								<FaChalkboardTeacher size={'1.5625rem'} />
 							</Link>
 						</>

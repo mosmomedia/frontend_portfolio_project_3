@@ -1,6 +1,15 @@
-function ico_sidebar_3() {
+import tw, { styled } from 'twin.macro';
+
+const SvgStyles = styled.svg`
+	${tw``}
+	.st0 {
+		${({ variant }) => variant === 'iconActive' && tw`fill-[#ffcc00]`}
+	}
+`;
+
+function ico_sidebar_3({ variant }) {
 	return (
-		<svg viewBox="0 0 40 40">
+		<SvgStyles viewBox="0 0 40 40" variant={variant}>
 			<path
 				className="st2"
 				fill="transparent"
@@ -34,7 +43,7 @@ function ico_sidebar_3() {
 					d="M20,21c-3.86,0-7-3.141-7-7s3.14-7,7-7s7,3.141,7,7S23.86,21,20,21z M20,8c-3.309,0-6,2.691-6,6 s2.691,6,6,6s6-2.691,6-6S23.309,8,20,8z"
 				/>
 			</g>
-		</svg>
+		</SvgStyles>
 	);
 }
 

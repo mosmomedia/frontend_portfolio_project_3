@@ -11,25 +11,25 @@ import Header from './components/Header';
 import Landing from './components/Landing';
 import Footer from './components/Footer';
 
-import ClassRegistration from './pages/class/ClassRegistration';
-
 import SignIn from './pages/accounts/SignIn';
 import SignUp from './pages/accounts/SignUp';
 import ForgotPassword from './pages/accounts/ForgotPassword';
 
+import ClassRegistration from './pages/class/ClassRegistration';
 import DebutHistory from './pages/student/DebutHistory';
 import Scholarship from './pages/student/Scholarship';
 
-import About from './pages/company/About';
-import Team from './pages/company/Team';
-import Partners from './pages/company/Partners';
-import Location from './pages/company/Location';
+import Company from './pages/company/Company';
 
 import Faq from './pages/customer/Faq';
 
 import Dashboard from './pages/dashboard/Dashboard';
+import MyClassRoom from './pages/dashboard/MyClassRoom';
+import MyBoard from './pages/dashboard/MyBoard';
+import MyPage from './pages/dashboard/MyPage';
 
 import NotFound from './pages/etc/NotFound';
+import PrivateRoute from './components/PrivateRoute';
 
 function App() {
 	return (
@@ -46,6 +46,7 @@ function App() {
 
 						{/* landing */}
 						<Route path="/" element={<Landing />} />
+
 						{/* accounts */}
 						<Route path="/sign-in" element={<SignIn />} />
 						<Route path="/sign-up" element={<SignUp />} />
@@ -62,16 +63,19 @@ function App() {
 						<Route path="/student/scholarship" element={<Scholarship />} />
 
 						{/* company */}
-						<Route path="/company/about" element={<About />} />
-						<Route path="/company/team" element={<Team />} />
-						<Route path="/company/partners" element={<Partners />} />
-						<Route path="/company/location" element={<Location />} />
+						<Route path="/company/*" element={<Company />} />
 
 						{/*customer  */}
 						<Route path="/customer/faq" element={<Faq />} />
 
 						{/* Dashboard */}
-						<Route path="/dashboard/*" element={<Dashboard />} />
+						<Route path="/dashboard" element={<PrivateRoute />}>
+							<Route path="/dashboard" element={<Dashboard />}>
+								<Route path="my-classroom/*" element={<MyClassRoom />} />
+								<Route path="my-board" element={<MyBoard />} />
+								<Route path="my-page" element={<MyPage />} />
+							</Route>
+						</Route>
 					</Routes>
 					<Footer />
 					<ToastContainer autoClose={2500} />

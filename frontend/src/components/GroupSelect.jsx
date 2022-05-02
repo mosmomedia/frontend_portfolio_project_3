@@ -77,6 +77,7 @@ export const GroupSelect = ({ setBookList }) => {
 			setBookList(allBooksList);
 			setAllList(allBooksList);
 		}
+		// eslint-disable-next-line
 	}, [loading]);
 
 	// set filtereList function
@@ -116,6 +117,7 @@ export const GroupSelect = ({ setBookList }) => {
 		} else {
 			setBookList(allList);
 		}
+		// eslint-disable-next-line
 	}, [selectState, setBookList]);
 
 	const animatedComponents = makeAnimated();
