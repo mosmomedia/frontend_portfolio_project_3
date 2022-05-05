@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Steam() {
-	return <div>Steam</div>;
+function Stream() {
+	return <div>Stream</div>;
 }
 
-export default Steam;
+export default Stream;

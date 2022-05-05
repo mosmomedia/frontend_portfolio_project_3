@@ -2,7 +2,9 @@ import Class from '../models/classModel.js';
 
 export const name = async (req, res) => {};
 
-// get all classes
+// @desc get all classes
+// @route GET /api/class
+// @access Public
 export const getAllClasses = async (req, res) => {
 	const allClasses = await Class.find();
 
@@ -10,6 +12,9 @@ export const getAllClasses = async (req, res) => {
 };
 
 // open a class
+// @desc open a class
+// @route Post /api/class
+// @access Private
 export const createClass = async (req, res) => {
 	const { isAdmin } = req.user;
 

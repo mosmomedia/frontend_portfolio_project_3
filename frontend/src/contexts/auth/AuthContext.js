@@ -12,7 +12,11 @@ function AuthProvider({ children }) {
 		return <Spinner />;
 	}
 
-	return <AuthContext.Provider value={user}>{children} </AuthContext.Provider>;
+	return (
+		<AuthContext.Provider value={{ user, loading }}>
+			{children}{' '}
+		</AuthContext.Provider>
+	);
 }
 
 function useAuthContext() {

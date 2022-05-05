@@ -18,7 +18,7 @@ import {
 	RightItemStyles,
 } from '../styles/LandingStyles';
 
-import ico_kko from '../assets/icons/ico_partner_kkp.png';
+import ico_kkp from '../assets/icons/ico_partner_kkp.png';
 import ico_naver from '../assets/icons/ico_partner_n.png';
 import ico_ridi from '../assets/icons/ico_partner_ridi.png';
 import img_about from '../assets/st_img_about.png';
@@ -44,7 +44,7 @@ function Landing() {
 							<h4>Platform</h4>
 							<ul>
 								<li>
-									<img src={ico_kko} alt="" />
+									<img src={ico_kkp} alt="" />
 									<h5>kakaopage</h5>
 								</li>
 								<li>
@@ -115,14 +115,14 @@ function Landing() {
 								{/* point color */}
 								<span></span>
 							</CardStyles>
-							<CardStyles variant="debut">
+							<CardStyles variant="info">
 								<div>
-									<h3>데뷔 클래스</h3>
-									<h4>오프라인 강의입니다.</h4>
+									<h3>PD 클래스</h3>
+									<h4>온라인 실시간 스트리밍 강의입니다.</h4>
 									<p>
-										스토리튠즈의 본원에서 진행되는 작가 지망생을 위한 소수정예의
-										오프라인 강의입니다.
+										커리큘럼과 피드백으로 진행되는 이론 + 피드백 강의입니다.
 									</p>
+									<p>직무 수행 능력을 기르는 실전형 강의입니다.</p>
 								</div>
 								<Button navtigate_to="/" add_styles={addClassBtnStyles}>
 									더 알아보기
@@ -131,13 +131,13 @@ function Landing() {
 								{/* point color */}
 								<span></span>
 							</CardStyles>
-							<CardStyles variant="kkp">
+							<CardStyles variant="debut">
 								<div>
-									<h3>스토리튠즈 특강</h3>
-									<h4>온라인 강의입니다.</h4>
+									<h3>데뷔 클래스</h3>
+									<h4>오프라인 강의입니다.</h4>
 									<p>
-										입문반과 심화반의 실시간 클래스를 녹화 강의의 형식으로
-										구성한 클래스입니다.
+										스토리튠즈의 본원에서 진행되는 작가 지망생을 위한 소수정예의
+										오프라인 강의입니다.
 									</p>
 								</div>
 								<Button navtigate_to="/" add_styles={addClassBtnStyles}>

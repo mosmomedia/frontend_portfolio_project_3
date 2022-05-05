@@ -1,49 +1,34 @@
-import React from 'react';
-import tw, { styled } from 'twin.macro';
+import { useNavigate } from 'react-router-dom';
+import { useAuthContext } from '../../contexts/auth/AuthContext';
+import { placeOrder } from '../../contexts/order/OrderActions';
 
-import Button from '../../components/shared/Button';
+import { toast } from 'react-toastify';
 
-const CardStyles = styled.div`
-	${tw`flex justify-between rounded-md p-4`}
-	${tw`lg:h-40`}
-
-	h2 {
-		${tw`text-white text-[1.375rem] `}
-		text-shadow: 1px 1px 2px rgba(150, 150, 150, 0.5);
-	}
-
-	h3 {
-		${tw`text-base font-normal`}
-	}
-
-	${({ variant }) => variant === 'basicClass' && tw`bg-basic`}
-
-	${({ variant }) =>
-		variant === 'advClass' && tw`bg-gradient-to-tr from-[#5ed8b5] to-[#5bd8b5]`}
-	${({ variant }) => variant === 'debutClass' && tw`bg-debut text-white`}
-`;
-
-const LeftItemStyles = styled.div`
-	${tw`space-y-6`}
-	div {
-		${tw`space-y-[1px]`}
-	}
-`;
-const RightItemStyles = styled.div`
-	${tw`flex flex-col justify-between items-center text-center`}
-
-	h2 {
-		${tw`text-2xl tracking-wider`}
-	}
-
-	h3 {
-		${tw`text-lg`}
-	}
-`;
+import {
+	CardStyles,
+	LeftItemStyles,
+	RightItemStyles,
+	ButtonStyles,
+} from '../../styles/ClassBtnStyles';
 
 function ClassCard({
 	value: { title, type, status, month, weeks, hours, period, tutor, price },
 }) {
+	const { user, loading } = useAuthContext();
+	const navigate = useNavigate();
+	console.log(user, loading);
+	const handleOnClick = async () => {
+		if (!user) {
+			navigate('/sign-in');
+			toast.error('수강신청 시 로그인이 필요합니다.');
+		} else {
+			if (window.confirm('[테스트] 신청..?')) {
+				const res = await placeOrder();
+				console.log(res);
+				// console.log(title, type, tutor, price);
+			}
+		}
+	};
 	return (
 		<CardStyles variant={type}>
 			{/* left item - title, tutor, hours, period  */}
@@ -59,7 +44,7 @@ function ClassCard({
 			<RightItemStyles>
 				<h2>{weeks}주</h2>
 				<h3>{price.toLocaleString('ko-KR')}원</h3>
-				<Button variant="primary">신청하기</Button>
+				<ButtonStyles onClick={handleOnClick}>신청하기</ButtonStyles>
 			</RightItemStyles>
 		</CardStyles>
 	);

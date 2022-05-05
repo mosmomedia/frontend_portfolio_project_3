@@ -37,11 +37,11 @@ function ClassAllList() {
 		weeks: -1,
 		basicClass: false,
 		advClass: false,
-		debutClass: false,
+		infoClass: false,
 	};
 
 	const [stateClassList, setStateClassList] = useState(initialState);
-	const { month, weeks, basicClass, advClass, debutClass } = stateClassList;
+	const { month, weeks, basicClass, advClass, infoClass } = stateClassList;
 
 	const [filteredList, setFilteredList] = useState([]);
 
@@ -73,14 +73,20 @@ function ClassAllList() {
 			const classState = {
 				basicClass: true,
 				advClass: true,
-				debutClass: true,
+				infoClass: true,
 			};
 
 			const API_URI = '/class-registration/all-classes';
 
 			if (pathname === `${API_URI}/online`) {
-				classState.debutClass = false;
-			} else if (pathname === `${API_URI}/offline`) {
+				classState.infoClass = false;
+			} else if (pathname === `${API_URI}/online/basic`) {
+				classState.advClass = false;
+				classState.infoClass = false;
+			} else if (pathname === `${API_URI}/online/adv`) {
+				classState.basicClass = false;
+				classState.infoClass = false;
+			} else if (pathname === `${API_URI}/online/info`) {
 				classState.basicClass = false;
 				classState.advClass = false;
 			} else if (pathname !== `${API_URI}`) {
@@ -102,7 +108,7 @@ function ClassAllList() {
 			(item) =>
 				(basicClass && item.type === 'basicClass') ||
 				(advClass && item.type === 'advClass') ||
-				(debutClass && item.type === 'debutClass')
+				(infoClass && item.type === 'infoClass')
 		);
 
 		if (month > 0) {
@@ -113,7 +119,7 @@ function ClassAllList() {
 			newList = newList.filter((item) => item.weeks === weeks);
 		}
 		setFilteredList(newList);
-	}, [allClassList, basicClass, advClass, debutClass, month, weeks]);
+	}, [allClassList, basicClass, advClass, infoClass, month, weeks]);
 
 	useEffect(() => {
 		if (!isLoading && filteredList.length > 0) {
@@ -149,7 +155,7 @@ function ClassAllList() {
 		let getClassState = {
 			basicClass: false,
 			advClass: false,
-			debutClass: false,
+			infoClass: false,
 		};
 
 		if (+value > 0) {
@@ -217,7 +223,7 @@ function ClassAllList() {
 			weeks: 0,
 			basicClass: true,
 			advClass: true,
-			debutClass: true,
+			infoClass: true,
 		}));
 	};
 
@@ -266,11 +272,11 @@ function ClassAllList() {
 							심화
 						</FilterStyles>
 						<FilterStyles
-							id="debutClass"
-							is_selected={debutClass}
+							id="infoClass"
+							is_selected={infoClass}
 							onClick={handleFilterBtnClick}
 						>
-							데뷔
+							PD
 						</FilterStyles>
 					</ul>
 				</FilterWrapperStyles>

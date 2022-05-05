@@ -33,7 +33,7 @@ function Header() {
 	const [currentPath, setCurrentPath] = useState('');
 
 	const { pathname } = useLocation();
-	const userState = useAuthContext();
+	const { user } = useAuthContext();
 
 	//* tmp -  get token
 	// if (userState) {
@@ -247,7 +247,7 @@ function Header() {
 				{/*logout  */}
 				{/* my dashboard */}
 				<ButtonStyles>
-					{userState ? (
+					{user ? (
 						<>
 							<div className="web">
 								<Button

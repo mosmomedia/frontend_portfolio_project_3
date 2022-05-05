@@ -165,7 +165,7 @@ function Roadmap() {
 								<div className="card_header">
 									<h3>입문 클래스 (4주 과정)</h3>
 									<Button
-										navtigate_to="/"
+										navtigate_to="/class-registration/all-classes/online/basic"
 										variant="primary"
 										add_styles={tw`p-2.5 shadow-none`}
 									>
@@ -194,7 +194,7 @@ function Roadmap() {
 								<div className="card_header">
 									<h3>심화 클래스 (8주 과정)</h3>
 									<Button
-										navtigate_to="/"
+										navtigate_to="/class-registration/all-classes/online/adv"
 										variant="primary"
 										add_styles={tw`p-2.5 shadow-none`}
 									>
@@ -225,16 +225,46 @@ function Roadmap() {
 								</div>
 							</CardStyles>
 
-							<CardStyles variant="debut">
+							<CardStyles variant="info">
 								<div className="card_header">
-									<h3>데뷔 클래스 (8주 과정)</h3>
+									<h3>PD 클래스 (8주 과정)</h3>
 									<Button
-										navtigate_to="/"
+										navtigate_to="/class-registration/all-classes/online/info"
 										variant="primary"
 										add_styles={tw`p-2.5 shadow-none`}
 									>
 										신청하기
 									</Button>
+								</div>
+								<div className="card_body">
+									<h4>웹소설 PD? 그게 뭐 하는 건데?</h4>
+									<p>
+										웹소설 PD로써 직무 수행 능력을 기르는 방법을 공부합니다.
+										<br />
+										관련 직군에 취업을 희망하시거나, 관심은 있지만 무슨 일을
+										하는지 몰랐던 분들에게 수강을 권장드립니다.
+									</p>
+									<div>
+										<p>
+											-기존 작품들의 분석을 통해, 웹소설의 구조를 파악합니다.
+										</p>
+
+										<p>
+											-실제 원고를 피드백함으로써 기획 과정을 체험하고, 개선
+											방향을 배웁니다.
+										</p>
+
+										<p>
+											-업계 전망, 실무 팁. 어디서 물어보지 못했던 궁금증을
+											해소해줍니다.
+										</p>
+									</div>
+								</div>
+							</CardStyles>
+
+							<CardStyles variant="debut">
+								<div className="card_header">
+									<h3>데뷔 클래스 (8주 과정)</h3>
 								</div>
 								<div className="card_body">
 									<h4>팔리는 글, 팔리지 않는 글.</h4>

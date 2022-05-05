@@ -41,6 +41,7 @@ export const CardStyles = styled.article`
 			variant === 'adv' && {
 				background: 'linear-gradient(45deg, #5ed8b5, #5bd8b5)',
 			}}
+		${({ variant }) => variant === 'info' && tw`bg-[#6979f8] text-white`}
 		${({ variant }) => variant === 'debut' && tw`bg-debut text-white`}
 	}
 
