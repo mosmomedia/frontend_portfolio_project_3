@@ -11,19 +11,23 @@ import {
 	ButtonStyles,
 } from '../../styles/ClassBtnStyles';
 
-function ClassCard({
-	value: { title, type, status, month, weeks, hours, period, tutor, price },
-}) {
+function ClassCard({ item }) {
+	const { _id, title, type, weeks, hours, period, tutor, price } = item;
 	const { user, loading } = useAuthContext();
 	const navigate = useNavigate();
-	console.log(user, loading);
+	// console.log(user, loading);
 	const handleOnClick = async () => {
 		if (!user) {
 			navigate('/sign-in');
 			toast.error('수강신청 시 로그인이 필요합니다.');
 		} else {
 			if (window.confirm('[테스트] 신청..?')) {
-				const res = await placeOrder();
+				const formData = {
+					...item,
+					classId: _id,
+					paymentMethod: 'Credit',
+				};
+				const res = await placeOrder(formData);
 				console.log(res);
 				// console.log(title, type, tutor, price);
 			}

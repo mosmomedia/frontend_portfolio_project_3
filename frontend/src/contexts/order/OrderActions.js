@@ -30,12 +30,11 @@ export const ClassActions = async () => {};
 
 //  place order
 
-export const placeOrder = async () => {
+export const placeOrder = async (formdata) => {
 	try {
-		const header = await createPayloadHeader;
-		return header;
-		// const res = await axios.post(API_URI);
-		// return res.data;
+		const header = await createPayloadHeader();
+		const res = await axios.post(API_URI, formdata, header);
+		return res.data;
 	} catch (error) {
 		console.log(error);
 	}

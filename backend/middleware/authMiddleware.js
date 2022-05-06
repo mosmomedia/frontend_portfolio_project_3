@@ -21,7 +21,7 @@ const authMiddleware = async (req, res, next) => {
 			if (docSnap.exists) {
 				const userDB = docSnap.data();
 
-				req.user = { ...userDB, uid: userDB.uid };
+				req.user = { ...userDB };
 			}
 
 			next();

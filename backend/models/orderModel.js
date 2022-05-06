@@ -7,9 +7,11 @@ const orderSchema = mongoose.Schema(
 			required: true,
 		},
 
-		orderItems: [
+		orderedItems: [
 			{
 				title: { type: String, required: true },
+				type: { type: String, required: true },
+				tutor: { type: String, required: true },
 				price: { type: Number, required: true },
 				class: {
 					type: mongoose.Schema.Types.ObjectId,
@@ -25,10 +27,9 @@ const orderSchema = mongoose.Schema(
 		},
 
 		paymentResult: {
-			id: { type: String },
-			status: { type: String },
-			update_time: { type: String },
-			email_adress: { type: String },
+			user_id: { type: String },
+			user_email: { type: String },
+			updatedAt: { type: Date },
 		},
 
 		totalPrice: {

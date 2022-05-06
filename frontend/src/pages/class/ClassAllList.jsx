@@ -297,37 +297,9 @@ function ClassAllList() {
 							<div>강의 일정 또는 강의 종류를 선택하세요.</div>
 						) : (
 							<CardWrapperStyles>
-								{filteredList.map(
-									(
-										{
-											title,
-											type,
-											status,
-											month,
-											weeks,
-											hours,
-											period,
-											tutor,
-											price,
-										},
-										id
-									) => (
-										<ClassCard
-											key={id}
-											value={{
-												title,
-												type,
-												status,
-												month,
-												weeks,
-												hours,
-												period,
-												tutor,
-												price,
-											}}
-										></ClassCard>
-									)
-								)}
+								{filteredList.map((item, id) => (
+									<ClassCard key={id} item={item}></ClassCard>
+								))}
 							</CardWrapperStyles>
 						)}
 					</SectionWrapperStyles>
