@@ -3,9 +3,9 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import firebase from '../../config/firebase';
 import OAuth from '../../components/OAuth';
+import { createStudent } from '../../contexts/auth/AuthActions';
 
 import BackToHomeBar from '../../components/BackToHomeBar';
-import Button from '../../components/shared/Button';
 import Logo from '../../assets/logos/logo_circle.svg';
 import Img from '../../assets/st_img_sign_up.png';
 import { toast } from 'react-toastify';
@@ -13,7 +13,6 @@ import Spinner from '../../components/shared/Spinner';
 
 import 'twin.macro';
 import 'styled-components/macro';
-import tw from 'twin.macro';
 
 import {
 	Wrapper,
@@ -28,6 +27,7 @@ import {
 	InfoStyles,
 	SubmitStyles,
 	AdsInfoStyles,
+	ButtonStyles,
 } from '../../styles/AuthStyles';
 
 function SignUp() {
@@ -81,11 +81,22 @@ function SignUp() {
 					displayName: name,
 				});
 
-				// create ObjId for mongoDB
-				const userObjectId = firebase.createMongoObjectId();
+				const { uid } = userCredential.user;
+
+				// create a student in mongodb
+
+				const newStudent = await createStudent({
+					firebaseId: uid,
+					email,
+					name,
+				});
+
+				const { _id } = newStudent;
+
+				console.log(newStudent);
 
 				const userProfile = {
-					userObjectId,
+					userObjectId: _id,
 					email,
 					name,
 					nickname,
@@ -93,8 +104,6 @@ function SignUp() {
 					isAdmin,
 					createdAt: firebase.serverTimestamp(),
 				};
-
-				const { uid } = userCredential.user;
 
 				await firebase.setDoc(
 					firebase.doc(firebase.db, 'users', uid),
@@ -225,17 +234,13 @@ function SignUp() {
 								</label>
 							</InfoStyles>
 							<SubmitStyles>
-								<Button
-									disabled={isDisabled}
-									variant="submit"
-									add_styles={tw`flex justify-between items-center w-full  text-base`}
-								>
+								<ButtonStyles isDisabled={isDisabled}>
 									<span>
 										<img src={Logo} tw="w-5" alt="" />
 									</span>
 									<span>가입하기</span>
 									<span tw="w-5"></span>
-								</Button>
+								</ButtonStyles>
 								<LineStyles>
 									<span>or</span>
 								</LineStyles>

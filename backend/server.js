@@ -9,6 +9,11 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 // Routes
+
+//* Student
+import studentRoutes from './Routes/studentRoutes.js';
+app.use('/api/student', studentRoutes);
+
 //* Class
 import classRoutes from './Routes/classRoutes.js';
 app.use('/api/class', classRoutes);

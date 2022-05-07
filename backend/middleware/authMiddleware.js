@@ -13,16 +13,19 @@ const authMiddleware = async (req, res, next) => {
 			if (firebaseToken) {
 				firebaseUser = await firebaseAdmin.auth.verifyIdToken(firebaseToken);
 			}
-			const docSnap = await firebaseAdmin.db
-				.collection('users')
-				.doc(firebaseUser.uid)
-				.get();
 
-			if (docSnap.exists) {
-				const userDB = docSnap.data();
+			req.user = firebaseUser;
 
-				req.user = { ...userDB };
-			}
+			// const docSnap = await firebaseAdmin.db
+			// 	.collection('users')
+			// 	.doc(firebaseUser.uid)
+			// 	.get();
+
+			// if (docSnap.exists) {
+			// 	const userDB = docSnap.data();
+
+			// 	req.user = { ...userDB };
+			// }
 
 			next();
 		} catch (error) {

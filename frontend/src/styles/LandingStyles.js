@@ -47,7 +47,7 @@ export const PlatformStyles = styled.div`
 //@ class info
 
 export const ClassInfoStyles = styled.div`
-	${tw`py-20 px-6 sm:px-8 md:py-32 lg:py-36 xl:py-40`}
+	${tw`py-20 px-6 sm:px-8 md:py-32 lg:px-0 lg:py-36 xl:py-40`}
 
 	h2 {
 		${tw`font-bold text-[1.25rem] text-center mb-14  lg:mb-24`}

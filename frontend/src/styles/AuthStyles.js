@@ -78,3 +78,13 @@ export const LinkStyles = styled.div`
 		${tw`text-[#ea4b4e]`}
 	}
 `;
+
+export const ButtonStyles = styled.button`
+	${tw`py-1.5 px-3 sm:py-2.5 sm:px-4 tracking-wider rounded-lg sm:hover:opacity-90`}
+	${tw`bg-[#ea4b4e] text-white `}
+	${tw`flex justify-between items-center w-full  text-base`}
+
+	${({ isDisabled }) =>
+		isDisabled &&
+		tw`bg-st_bg1 text-gray-500 cursor-not-allowed sm:hover:opacity-100`}
+`;

@@ -1,9 +1,11 @@
 import mongoose from 'mongoose';
 
-const userSchema = new mongoose.Schema(
+const studentSchema = new mongoose.Schema(
 	{
 		firebaseId: { type: String, required: true },
-		myClassList: [
+		name: { type: String, required: true },
+		email: { type: String, required: true },
+		myClasses: [
 			{
 				classId: {
 					type: mongoose.Schema.Types.ObjectId,
@@ -17,4 +19,4 @@ const userSchema = new mongoose.Schema(
 	}
 );
 
-export default mongoose.model('User', userSchema);
+export default mongoose.model('Student', studentSchema);
