@@ -9,12 +9,12 @@ const classInfoSchema = new mongoose.Schema(
 				type: { type: String, required: true },
 				shortdescription: {
 					type: String,
-					required: true,
+					required: false,
 					maxLength: 50,
 				},
 				description: {
 					type: String,
-					required: true,
+					required: false,
 				},
 				status: { type: String, required: true },
 				month: { type: Number, required: true },

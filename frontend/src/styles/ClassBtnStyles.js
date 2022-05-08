@@ -17,7 +17,7 @@ export const CardStyles = styled.div`
 
 	${({ variant }) =>
 		variant === 'advClass' && tw`bg-gradient-to-tr from-[#5ed8b5] to-[#5bd8b5]`}
-	${({ variant }) => variant === 'debutClass' && tw`bg-debut text-white`}
+	${({ variant }) => variant === 'pdClass' && tw`bg-pd text-white`}
 `;
 
 export const LeftItemStyles = styled.div`

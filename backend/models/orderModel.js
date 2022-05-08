@@ -7,19 +7,31 @@ const orderSchema = mongoose.Schema(
 			required: true,
 		},
 
-		orderedItems: [
-			{
-				title: { type: String, required: true },
-				type: { type: String, required: true },
-				tutor: { type: String, required: true },
-				price: { type: Number, required: true },
-				class: {
-					type: mongoose.Schema.Types.ObjectId,
-					required: true,
-					ref: 'Class',
-				},
+		orderedItem: {
+			title: { type: String, required: true },
+			type: { type: String, required: true },
+			tutor: { type: String, required: true },
+			price: { type: Number, required: true },
+			class: {
+				type: mongoose.Schema.Types.ObjectId,
+				required: true,
+				ref: 'Class',
 			},
-		],
+		},
+
+		// orderedItems: [
+		// 	{
+		// 		title: { type: String, required: true },
+		// 		type: { type: String, required: true },
+		// 		tutor: { type: String, required: true },
+		// 		price: { type: Number, required: true },
+		// 		class: {
+		// 			type: mongoose.Schema.Types.ObjectId,
+		// 			required: true,
+		// 			ref: 'Class',
+		// 		},
+		// 	},
+		// ],
 
 		paymentMethod: {
 			type: String,

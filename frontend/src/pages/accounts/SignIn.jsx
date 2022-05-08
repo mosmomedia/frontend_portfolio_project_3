@@ -5,7 +5,6 @@ import firebase from '../../config/firebase';
 import OAuth from '../../components/OAuth';
 
 import BackToHomeBar from '../../components/BackToHomeBar';
-import Button from '../../components/shared/Button';
 import Logo from '../../assets/logos/logo_circle.svg';
 import Img from '../../assets/st_img_sign_in.png';
 import { toast } from 'react-toastify';
@@ -13,7 +12,6 @@ import Spinner from '../../components/shared/Spinner';
 
 import 'twin.macro';
 import 'styled-components/macro';
-import tw from 'twin.macro';
 
 import {
 	Wrapper,
@@ -28,6 +26,7 @@ import {
 	AdsInfoStyles,
 	SubmitStyles,
 	LinkStyles,
+	ButtonStyles,
 } from '../../styles/AuthStyles';
 
 function SignIn() {
@@ -116,17 +115,13 @@ function SignIn() {
 							</InputGroupStyles>
 
 							<SubmitStyles>
-								<Button
-									disabled={isDisabled}
-									variant="submit"
-									add_styles={tw`flex justify-between items-center w-full  text-base`}
-								>
+								<ButtonStyles isDisabled={isDisabled}>
 									<span>
 										<img src={Logo} tw="w-5" alt="" />
 									</span>
 									<span>로그인</span>
 									<span tw="w-5"></span>
-								</Button>
+								</ButtonStyles>
 								<LineStyles>
 									<span>or</span>
 								</LineStyles>

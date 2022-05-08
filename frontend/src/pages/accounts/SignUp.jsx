@@ -93,8 +93,6 @@ function SignUp() {
 
 				const { _id } = newStudent;
 
-				console.log(newStudent);
-
 				const userProfile = {
 					userObjectId: _id,
 					email,

@@ -1,4 +1,4 @@
-function MyClassReducer(state, action) {
+function AuthReducer(state, action) {
 	switch (action.type) {
 		case 'GET_MY_CLASSES':
 			return {
@@ -15,4 +15,4 @@ function MyClassReducer(state, action) {
 	}
 }
 
-export default MyClassReducer;
+export default AuthReducer;

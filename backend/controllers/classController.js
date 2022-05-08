@@ -11,7 +11,6 @@ export const getAllClasses = async (req, res) => {
 	res.status(200).json(allClasses);
 };
 
-// open a class
 // @desc open a class
 // @route Post /api/class
 // @access Private
@@ -64,4 +63,38 @@ export const createClass = async (req, res) => {
 	}
 
 	res.status(201).json(newClass);
+};
+
+// @desc enroll student to ordered class
+// @route Post /api/class/:id
+// @access Private
+export const enrollStudentToClass = async (req, res) => {
+	const { userObjectId } = req.user;
+	const month = req.body;
+	const classId = req.params.id;
+
+	const findClassByMonth = await Class.findOne(month);
+	const findOrderedClassId = findClassByMonth.classList.findIndex(
+		(item) => item._id.toString() === classId
+	);
+
+	if (findOrderedClassId === -1) {
+		throw new Error('no ordered class');
+	}
+
+	const orderedClass = findClassByMonth.classList[findOrderedClassId];
+
+	const findStudentId = orderedClass.students.findIndex(
+		(std) => std.toString() === userObjectId
+	);
+
+	if (findStudentId !== -1) {
+		throw new Error('student already exists');
+	}
+
+	orderedClass.students.push(userObjectId);
+
+	await findClassByMonth.save();
+
+	res.status(200).json(true);
 };

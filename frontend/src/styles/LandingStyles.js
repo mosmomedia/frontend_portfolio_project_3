@@ -81,7 +81,7 @@ export const CardStyles = styled.div`
 		${({ variant }) => variant === 'basic' && tw`bg-basic`}
 		${({ variant }) => variant === 'adv' && tw`bg-adv`}
 		${({ variant }) => variant === 'debut' && tw`bg-debut`}
-		${({ variant }) => variant === 'info' && tw`bg-info`}
+		${({ variant }) => variant === 'pd' && tw`bg-pd`}
 	}
 
 	button {

@@ -19,7 +19,7 @@ module.exports = {
 				basic: '#ffcc00',
 				adv: '#4abb9b',
 				debut: '#000',
-				info: '#6979f8',
+				pd: '#6979f8',
 			},
 			textColor: {
 				primary: '#fff',
@@ -27,7 +27,7 @@ module.exports = {
 				basic: '#141414',
 				adv: '#141414',
 				debut: '#fff',
-				info: '#fff',
+				pd: '#fff',
 			},
 		},
 	},

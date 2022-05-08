@@ -36,8 +36,8 @@ function Header() {
 	const { user } = useAuthContext();
 
 	//* tmp -  get token
-	// if (userState) {
-	// 	console.log(userState.accessToken);
+	// if (user) {
+	// 	console.log(user.accessToken);
 	// }
 
 	useEffect(() => {

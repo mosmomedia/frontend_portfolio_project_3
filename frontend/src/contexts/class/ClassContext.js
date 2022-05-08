@@ -7,7 +7,6 @@ function ClassProvider({ children }) {
 	const initialState = {
 		classDB: [],
 		allClassList: [],
-		currentClass: null,
 		isLoading: false,
 	};
 

@@ -7,7 +7,7 @@ import Order from '../models/orderModel.js';
 export const placeOrder = async (req, res) => {
 	const { userObjectId, email } = req.user;
 	const { title, type, tutor, price, classId, paymentMethod } = req.body;
-	const orderItem = {
+	const orderedItem = {
 		class: classId,
 		title,
 		type,
@@ -15,9 +15,19 @@ export const placeOrder = async (req, res) => {
 		price,
 	};
 
-	console.log({
+	const findStudentByUserId = await Order.find({ user: userObjectId });
+
+	const findClassIdx = findStudentByUserId.findIndex(
+		(item) => item.orderedItem.class.toString() === classId
+	);
+
+	if (findClassIdx !== -1) {
+		throw new Error('this student already ordered this class');
+	}
+
+	await Order.create({
 		user: userObjectId,
-		orderItem,
+		orderedItem,
 		paymentMethod,
 		paymentResult: {
 			user_id: userObjectId,
@@ -26,16 +36,5 @@ export const placeOrder = async (req, res) => {
 		totalPrice: price,
 	});
 
-	const newOrder = await Order.create({
-		user: userObjectId,
-		orderItem,
-		paymentMethod,
-		paymentResult: {
-			user_id: userObjectId,
-			user_email: email,
-		},
-		totalPrice: price,
-	});
-
-	res.status(200).json(newOrder);
+	res.status(200).json(true);
 };

@@ -115,7 +115,7 @@ function Landing() {
 								{/* point color */}
 								<span></span>
 							</CardStyles>
-							<CardStyles variant="info">
+							<CardStyles variant="pd">
 								<div>
 									<h3>PD 클래스</h3>
 									<h4>온라인 실시간 스트리밍 강의입니다.</h4>

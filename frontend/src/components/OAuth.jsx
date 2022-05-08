@@ -2,6 +2,8 @@ import firebase from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
+import { createStudent } from '../contexts/auth/AuthActions';
+
 import tw, { styled } from 'twin.macro';
 import googleIcon from '../assets/icons/ico_link_google.png';
 
@@ -31,10 +33,18 @@ function OAuth({ setLoading }) {
 			const docSnap = await firebase.getDoc(docRef);
 
 			if (!docSnap.exists()) {
-				let userObjectId = firebase.createMongoObjectId();
+				const newStudent = await createStudent({
+					firebaseId: uid,
+					email,
+					name: displayName,
+				});
+
+				const { _id } = newStudent;
+
+				// let userObjectId = firebase.createMongoObjectId();
 
 				const userProfile = {
-					userObjectId,
+					userObjectId: _id,
 					email,
 					name: displayName,
 					nickname: '',
