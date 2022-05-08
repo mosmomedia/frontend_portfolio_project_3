@@ -40,3 +40,21 @@ export const addClassToStudent = async (req, res) => {
 
 	res.status(200).json(true);
 };
+
+// @ get my classes in student db
+// @ GET /api/student/:id
+// @ private
+
+export const getMyClasses = async (req, res) => {
+	const { userObjectId } = req.user;
+
+	const findStudentById = await Student.findById(userObjectId);
+
+	if (!findStudentById) {
+		throw new Error('cannot find student db by user ID');
+	}
+
+	const { myClasses } = findStudentById;
+
+	res.status(200).json(myClasses);
+};

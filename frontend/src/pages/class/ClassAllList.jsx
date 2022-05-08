@@ -4,6 +4,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getAllClasses } from '../../contexts/class/ClassActions';
 import { useClassContext } from '../../contexts/class/ClassContext';
 
+import firebase from '../../config/firebase';
+import { useAuthContext } from '../../contexts/auth/AuthContext';
+import { getMyClasses } from '../../contexts/auth/AuthActions';
+
 import ClassCard from './ClassCard';
 
 import Spinner from '../../components/shared/Spinner';
@@ -29,6 +33,8 @@ import {
 function ClassAllList() {
 	const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(-1);
+
+	const { user, dispatch: authDispatch } = useAuthContext();
 
 	const { classDB, allClassList, isLoading, dispatch } = useClassContext();
 
@@ -58,12 +64,38 @@ function ClassAllList() {
 			classDB.forEach(({ classList }) => {
 				classList.forEach((item) => {
 					if (item.status === 'open') {
+						item.isPurchased = false;
 						allClassList.push(item);
 					}
 				});
 			});
 
 			allClassList.sort((a, b) => a.weeks - b.weeks);
+
+			if (user) {
+				dispatch({ type: 'LOADING' });
+
+				const docSnap = firebase.doc(firebase.db, 'users', user.uid);
+				const getUserDb = await firebase.getDoc(docSnap);
+				const { userObjectId } = getUserDb.data();
+				const payload = await getMyClasses(userObjectId);
+
+				const sortedList = allClassList.map((item) => {
+					const findMyclassId = payload.findIndex(
+						(classId) => classId === item._id
+					);
+
+					if (findMyclassId !== -1) {
+						item.isPurchased = true;
+					}
+
+					return item;
+				});
+
+				authDispatch({ type: 'GET_MY_CLASSES', payload });
+
+				dispatch({ type: 'OFF_LOADING' });
+			}
 
 			dispatch({
 				type: 'GET_ALL_CLASSES',
@@ -100,7 +132,7 @@ function ClassAllList() {
 			}));
 		};
 		fetchAllClasses();
-	}, [dispatch, pathname, navigate]);
+	}, [dispatch, pathname, navigate, user, authDispatch]);
 
 	useEffect(() => {
 		let newList;

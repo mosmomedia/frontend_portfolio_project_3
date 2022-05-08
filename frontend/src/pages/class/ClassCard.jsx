@@ -19,8 +19,23 @@ import {
 
 function ClassCard({ item }) {
 	const [isLoading, setIsLoading] = useState(false);
-	const { _id, title, type, month, weeks, hours, period, tutor, price } = item;
-	const { user } = useAuthContext();
+
+	const {
+		_id,
+		title,
+		type,
+		month,
+		weeks,
+		hours,
+		period,
+		tutor,
+		price,
+		isPurchased,
+	} = item;
+
+	const [purchasedClass, setPurchasedClass] = useState(isPurchased);
+
+	const { user, myClassList, dispatch } = useAuthContext();
 	const navigate = useNavigate();
 	const handleOnClick = async () => {
 		if (!user) {
@@ -35,9 +50,9 @@ function ClassCard({ item }) {
 					paymentMethod: 'Credit',
 				};
 
-				const docSnap = firebase.doc(firebase.db, 'users', user.uid);
-				const getUserDb = await firebase.getDoc(docSnap);
-				const { userObjectId } = getUserDb.data();
+				const docRef = firebase.doc(firebase.db, 'users', user.uid);
+				const docSnap = await firebase.getDoc(docRef);
+				const { userObjectId } = docSnap.data();
 
 				const [isEnrolled, isPlaced, isAdded] = await Promise.all([
 					enrollStudentToClass(_id, month),
@@ -46,6 +61,9 @@ function ClassCard({ item }) {
 				]);
 
 				if (isEnrolled && isPlaced && isAdded) {
+					// const payload = myClassList.push(_id);
+					// dispatch({ type: 'GET_MY_CLASSES', payload });
+					setPurchasedClass(true);
 					toast('강의 신청 성공! 감사합니다.');
 				} else {
 					toast('강의 신청에 실패 했습니다.');
@@ -72,7 +90,13 @@ function ClassCard({ item }) {
 			<RightItemStyles>
 				<h2>{weeks}주</h2>
 				<h3>{price.toLocaleString('ko-KR')}원</h3>
-				<ButtonStyles onClick={handleOnClick}>신청하기</ButtonStyles>
+				<ButtonStyles
+					onClick={handleOnClick}
+					disabled={purchasedClass}
+					isPurchased={purchasedClass}
+				>
+					{purchasedClass ? '신청완료' : '신청하기'}
+				</ButtonStyles>
 			</RightItemStyles>
 		</CardStyles>
 	);

@@ -2,7 +2,8 @@ import firebase from '../config/firebase';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { createStudent } from '../contexts/auth/AuthActions';
+import { createStudent, getMyClasses } from '../contexts/auth/AuthActions';
+import { useAuthContext } from '../contexts/auth/AuthContext';
 
 import tw, { styled } from 'twin.macro';
 import googleIcon from '../assets/icons/ico_link_google.png';
@@ -17,6 +18,7 @@ const ImageStyle = styled.img`
 `;
 
 function OAuth({ setLoading }) {
+	const { dispatch } = useAuthContext();
 	const navigate = useNavigate();
 	const onGoogleClick = async () => {
 		setLoading(true);

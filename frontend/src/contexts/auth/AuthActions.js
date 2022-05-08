@@ -55,3 +55,18 @@ export const addClassToStudent = async (userId, classId) => {
 		console.log(error);
 	}
 };
+
+// @ get my classes in student db
+// @ GET /api/student/:id
+// @ private
+
+export const getMyClasses = async (userId) => {
+	try {
+		const header = await createPayloadHeader();
+
+		const res = await axios.get(API_URI + userId, header);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};

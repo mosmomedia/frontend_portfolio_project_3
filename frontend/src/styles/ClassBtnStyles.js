@@ -38,4 +38,10 @@ export const RightItemStyles = styled.div`
 	}
 `;
 
-export const ButtonStyles = tw.button`py-1.5 px-3 lg:py-2.5 lg:px-4 tracking-wider rounded-lg sm:hover:opacity-90 bg-primary text-primary`;
+export const ButtonStyles = styled.button`
+	${tw`py-1.5 px-3 lg:py-2.5 lg:px-4 tracking-wider rounded-lg sm:hover:opacity-90 bg-primary text-primary`}
+
+	${({ isPurchased }) =>
+		isPurchased &&
+		tw`bg-st_alt1 text-gray-400 hover:opacity-100 cursor-default`}
+`;

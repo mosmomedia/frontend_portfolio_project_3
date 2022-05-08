@@ -14,8 +14,6 @@ const authMiddleware = async (req, res, next) => {
 				firebaseUser = await firebaseAdmin.auth.verifyIdToken(firebaseToken);
 			}
 
-			// req.user = firebaseUser;
-
 			const docSnap = await firebaseAdmin.db
 				.collection('users')
 				.doc(firebaseUser.uid)
