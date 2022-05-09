@@ -28,5 +28,5 @@ export const FilterStyles = styled.div`
 	${({ is_selected, id }) =>
 		is_selected && id === 'advClass' && tw`bg-adv text-white`}
 	${({ is_selected, id }) =>
-		is_selected && id === 'debutClass' && tw`bg-black text-white`}
+		is_selected && id === 'pdClass' && tw`bg-pd text-white`}
 `;
