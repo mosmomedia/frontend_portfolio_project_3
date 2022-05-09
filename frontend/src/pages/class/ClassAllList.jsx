@@ -75,12 +75,9 @@ function ClassAllList() {
 			if (user) {
 				dispatch({ type: 'LOADING' });
 
-				const docSnap = firebase.doc(firebase.db, 'users', user.uid);
-				const getUserDb = await firebase.getDoc(docSnap);
-				const { userObjectId } = getUserDb.data();
-				const payload = await getMyClasses(userObjectId);
+				const payload = await getMyClasses();
 
-				const sortedList = allClassList.map((item) => {
+				allClassList.forEach((item) => {
 					const findMyclassId = payload.findIndex(
 						(classId) => classId === item._id
 					);
