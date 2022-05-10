@@ -12,15 +12,15 @@ import {
 } from '../styles/ClassMainStyles';
 
 function Main() {
-	const { isLoading, myClassList } = useMyClassContext();
+	const { myClassList } = useMyClassContext();
 	//* tmp class history numbers
 	const myClassHistory = [];
 
-	useEffect(() => {
-		if (myClassList.length > 0) {
-			console.log(myClassList);
-		}
-	}, [myClassList]);
+	// useEffect(() => {
+	// 	if (myClassList.length > 0) {
+	// 		console.log(myClassList);
+	// 	}
+	// }, [myClassList]);
 
 	return (
 		<SectionStyles>
@@ -28,12 +28,12 @@ function Main() {
 			<HeaderStyles></HeaderStyles>
 			{/* main */}
 			<NoticeStyles>
-				<h3>강의 리스트</h3>
+				<h3>강의 정보</h3>
 				{myClassList.length > 0 ? (
 					<CardStyles>
 						<h4>
 							현재 <span className="stress_col">{myClassList.length}</span>개의
-							온라인 강의를 수강하고 있습니다.
+							강의를 수강하고 있습니다.
 						</h4>
 
 						<ButtonStyles variant="primary">
@@ -42,12 +42,9 @@ function Main() {
 					</CardStyles>
 				) : (
 					<CardStyles>
-						<h4>현재 수강 중인 실시간 강의가 없습니다.</h4>
-						<ButtonStyles
-							variant="primary"
-							navtigate_to="/class-registration/all-classes"
-						>
-							신청하기
+						<h4>현재 수강 중인 강의가 없습니다.</h4>
+						<ButtonStyles variant="primary">
+							<Link to="/class-registration/all-classes">신청하기</Link>
 						</ButtonStyles>
 					</CardStyles>
 				)}

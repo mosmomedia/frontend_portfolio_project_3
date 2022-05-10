@@ -4,10 +4,6 @@ export const SidebarStyles = styled.div`
 	${tw` bg-st_alt1`}
 `;
 
-export const ContainerStyles = styled.div`
-	${tw`container mx-auto`}
-`;
-
 export const HeaderStyles = styled.header`
 	${tw`fixed inset-x-0 top-0 bg-st_alt1 `}
 	.headerWrapper {
@@ -23,7 +19,7 @@ export const LogoStyles = styled.div`
 `;
 
 export const MobileNavStyles = styled.ul`
-	${tw`text-gray-500 space-x-5 hidden`}
+	${tw`text-gray-500 space-x-8 hidden`}
 
 	${({ is_active }) => is_active === 1 && tw`flex items-center`}
 
@@ -33,6 +29,7 @@ export const MobileNavStyles = styled.ul`
 `;
 
 export const MobileNavChildStyles = styled.li`
+	${tw`hover:text-white duration-300 cursor-pointer`}
 	${({ is_selected }) => is_selected === 1 && tw`text-[#ffe0e0]`}
 `;
 

@@ -5,7 +5,7 @@ export const nameStyles = styled.div`
 `;
 
 export const SectionStyles = styled.div`
-	${tw`container mx-auto p-6 mt-[68px] `}
+	${tw`container mx-auto px-6 pt-[68px] `}
 `;
 
 export const HeaderStyles = styled.div`
@@ -21,10 +21,10 @@ export const NoticeStyles = styled.div`
 `;
 
 export const CardStyles = styled.div`
-	${tw`bg-white  rounded-lg p-4 flex flex-col space-y-8`}
+	${tw`bg-white  rounded-lg p-4 flex flex-col space-y-14`}
 
 	h4 {
-		${tw`text-[15px] font-normal text-[#4d4d4d]`}
+		${tw`text-[15px] font-normal text-gray-700`}
 	}
 
 	.stress_col {
@@ -33,7 +33,7 @@ export const CardStyles = styled.div`
 `;
 
 export const ButtonStyles = styled.button`
-	${tw`text-sm py-2 px-3 self-end tracking-wider rounded-lg sm:hover:opacity-90 lg:py-2.5 lg:px-4`}
+	${tw`text-sm py-2 px-4 self-end tracking-wider rounded-lg sm:hover:opacity-90 lg:py-2.5 lg:px-4`}
 
 	${({ variant }) =>
 		variant === 'primary' &&

@@ -1,4 +1,7 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useMyClassContext } from '../../../contexts/myClassRoom/MyClassContext';
+
+import { toast } from 'react-toastify';
 
 import Logo from '../../../assets/logos/logo_circle.svg';
 
@@ -8,7 +11,6 @@ import SidebarIcon3 from '../../../assets/icons/ico_sidebar_3';
 
 import {
 	SidebarStyles,
-	ContainerStyles,
 	HeaderStyles,
 	MobileNavStyles,
 	MobileNavChildStyles,
@@ -21,11 +23,30 @@ import {
 
 function Sidebar() {
 	const { pathname } = useLocation();
+	const navigate = useNavigate();
+	const { myClassList } = useMyClassContext();
+	// * tmp class history
+	const myClassHistory = [];
+
+	const handleStreamClick = () => {
+		if (myClassList.length > 0) {
+			navigate('/dashboard/my-classroom/stream');
+		} else {
+			toast.error('현재 등록한 강의가 없습니다.');
+		}
+	};
+
+	const handleRecordingClick = (params) => {
+		if (myClassHistory.length > 0) {
+			navigate('/dashboard/my-classroom/recording');
+		} else {
+			toast.error('과거에 수강했던 강의가 없습니다.');
+		}
+	};
 	return (
 		<SidebarStyles>
 			{/* side nav bar */}
 			{/* header for mobile */}
-			{/* <ContainerStyles> */}
 			<HeaderStyles>
 				<div className="headerWrapper">
 					<LogoStyles>
@@ -43,24 +64,22 @@ function Sidebar() {
 								: 0
 						}
 					>
-						<Link to="/dashboard/my-classroom/stream">
-							<MobileNavChildStyles
-								is_selected={
-									pathname === '/dashboard/my-classroom/stream' ? 1 : 0
-								}
-							>
-								실시간 강의
-							</MobileNavChildStyles>
-						</Link>
-						<Link to="/dashboard/my-classroom/recording">
-							<MobileNavChildStyles
-								is_selected={
-									pathname === '/dashboard/my-classroom/recording' ? 1 : 0
-								}
-							>
-								녹화 강의
-							</MobileNavChildStyles>
-						</Link>
+						<MobileNavChildStyles
+							is_selected={
+								pathname === '/dashboard/my-classroom/stream' ? 1 : 0
+							}
+							onClick={handleStreamClick}
+						>
+							나의 강의 리스트
+						</MobileNavChildStyles>
+						<MobileNavChildStyles
+							is_selected={
+								pathname === '/dashboard/my-classroom/recording' ? 1 : 0
+							}
+							onClick={handleRecordingClick}
+						>
+							강의 히스토리
+						</MobileNavChildStyles>
 					</MobileNavStyles>
 					<MobileNavStyles
 						is_active={pathname === '/dashboard/my-board' ? 1 : 0}
@@ -139,7 +158,6 @@ function Sidebar() {
 				</MainMenuStyles>
 				<LogoutStyles>로그아웃</LogoutStyles>
 			</MenuStyles>
-			{/* </ContainerStyles> */}
 
 			{/* main */}
 		</SidebarStyles>

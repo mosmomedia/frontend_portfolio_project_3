@@ -74,7 +74,11 @@ function SignIn() {
 				}
 			} catch (error) {
 				if (error.code === 'auth/wrong-password') {
-					toast.error('auth or wong-password');
+					toast.error('auth issue or wong-password');
+				}
+
+				if (error.code === 'auth/user-not-found') {
+					toast.error('회원 정보를 찾을 수가 없습니다.');
 				}
 				console.log(error);
 				setLoading(false);
