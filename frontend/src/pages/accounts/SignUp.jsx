@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import firebase from '../../config/firebase';
 import OAuth from '../../components/OAuth';
-import { createStudent } from '../../contexts/auth/AuthActions';
+import { createStudent } from '../../contexts/myClassRoom/MyClassActions';
 
 import BackToHomeBar from '../../components/BackToHomeBar';
 import Logo from '../../assets/logos/logo_circle.svg';

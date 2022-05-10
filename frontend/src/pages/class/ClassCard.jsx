@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuthContext } from '../../contexts/auth/AuthContext';
 import { placeOrder } from '../../contexts/order/OrderActions';
 import { enrollStudentToClass } from '../../contexts/class/ClassActions';
-import { addClassToStudent } from '../../contexts/auth/AuthActions';
+import { addClassToStudent } from '../../contexts/myClassRoom/MyClassActions';
 
 import firebase from '../../config/firebase';
 
@@ -35,7 +35,7 @@ function ClassCard({ item }) {
 
 	const [purchasedClass, setPurchasedClass] = useState(isPurchased);
 
-	const { user, myClassList, dispatch } = useAuthContext();
+	const { user } = useAuthContext();
 	const navigate = useNavigate();
 	const handleOnClick = async () => {
 		if (!user) {
@@ -61,8 +61,6 @@ function ClassCard({ item }) {
 				]);
 
 				if (isEnrolled && isPlaced && isAdded) {
-					// const payload = myClassList.push(_id);
-					// dispatch({ type: 'GET_MY_CLASSES', payload });
 					setPurchasedClass(true);
 					toast('강의 신청 성공! 감사합니다.');
 				} else {

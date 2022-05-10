@@ -33,7 +33,7 @@ function ClassAllList() {
 	const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(-1);
 
-	const { user, dispatch: authDispatch } = useAuthContext();
+	const { user } = useAuthContext();
 
 	const { classDB, allClassList, isLoading, dispatch } = useClassContext();
 
@@ -88,8 +88,6 @@ function ClassAllList() {
 					return item;
 				});
 
-				authDispatch({ type: 'GET_MY_CLASSES', payload });
-
 				dispatch({ type: 'OFF_LOADING' });
 			}
 
@@ -128,7 +126,7 @@ function ClassAllList() {
 			}));
 		};
 		fetchAllClasses();
-	}, [dispatch, pathname, navigate, user, authDispatch]);
+	}, [dispatch, pathname, navigate, user]);
 
 	useEffect(() => {
 		let newList;
