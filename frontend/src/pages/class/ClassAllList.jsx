@@ -4,7 +4,6 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { getAllClasses } from '../../contexts/class/ClassActions';
 import { useClassContext } from '../../contexts/class/ClassContext';
 
-import firebase from '../../config/firebase';
 import { useAuthContext } from '../../contexts/auth/AuthContext';
 import { getMyClasses } from '../../contexts/auth/AuthActions';
 

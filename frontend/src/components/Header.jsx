@@ -156,9 +156,7 @@ function Header() {
 							<Link
 								to="/student/debut-history"
 								className={
-									currentPath === 'debut-roadmap' && !hoverOn
-										? 'active'
-										: 'inactive'
+									currentPath === 'student' && !hoverOn ? 'active' : 'inactive'
 								}
 								onClick={handleClick}
 							>

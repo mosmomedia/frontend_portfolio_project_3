@@ -60,7 +60,7 @@ export const addClassToStudent = async (userId, classId) => {
 // @ GET /api/student/:id
 // @ private
 
-export const getMyClasses = async (userId) => {
+export const getMyClasses = async () => {
 	try {
 		const user = firebase.auth.currentUser;
 		const header = await createPayloadHeader();
