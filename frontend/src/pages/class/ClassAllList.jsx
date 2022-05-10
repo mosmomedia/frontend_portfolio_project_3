@@ -5,7 +5,7 @@ import { getAllClasses } from '../../contexts/class/ClassActions';
 import { useClassContext } from '../../contexts/class/ClassContext';
 
 import { useAuthContext } from '../../contexts/auth/AuthContext';
-import { getMyClasses } from '../../contexts/auth/AuthActions';
+import { getMyClasses } from '../../contexts/myClassRoom/MyClassActions';
 
 import ClassCard from './ClassCard';
 

@@ -12,7 +12,7 @@ function MyClassProvider({ children }) {
 		isTutor: false,
 	};
 
-	const [state, dispatch] = useReducer(MyClassContext, initialState);
+	const [state, dispatch] = useReducer(MyClassReducer, initialState);
 
 	return (
 		<MyClassContext.Provider value={{ ...state, dispatch }}>
@@ -21,8 +21,8 @@ function MyClassProvider({ children }) {
 	);
 }
 
-function useClassContext() {
-	return useContext(MyClassReducer);
+function useMyClassContext() {
+	return useContext(MyClassContext);
 }
 
-export { MyClassProvider, useClassContext };
+export { MyClassProvider, useMyClassContext };

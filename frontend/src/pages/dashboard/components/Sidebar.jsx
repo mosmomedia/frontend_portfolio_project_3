@@ -25,8 +25,9 @@ function Sidebar() {
 		<SidebarStyles>
 			{/* side nav bar */}
 			{/* header for mobile */}
-			<ContainerStyles>
-				<HeaderStyles>
+			{/* <ContainerStyles> */}
+			<HeaderStyles>
+				<div className="headerWrapper">
 					<LogoStyles>
 						{/* logo */}
 						<Link to="/">
@@ -80,64 +81,65 @@ function Sidebar() {
 						<MobileNavChildStyles>정보변경</MobileNavChildStyles>
 						<MobileNavChildStyles>로그아웃</MobileNavChildStyles>
 					</MobileNavStyles>
-				</HeaderStyles>
-				{/* menu items */}
-				<MenuStyles>
-					<MainMenuStyles>
-						<MenuItemStyles>
-							<Link
-								to="/dashboard/my-classroom"
-								className={
-									pathname === '/dashboard/my-classroom' ||
-									pathname === '/dashboard/my-classroom/stream' ||
-									pathname === '/dashboard/my-classroom/recording'
-										? 'active'
-										: 'inactive'
-								}
-							>
-								<SidebarIcon1 />
-								<h3>나의 강의실</h3>
-								<ol>
-									<li>실시간 강의</li>
-									<li>녹화 강의</li>
-								</ol>
-							</Link>
-						</MenuItemStyles>
+				</div>
+			</HeaderStyles>
+			{/* menu items */}
+			<MenuStyles>
+				<MainMenuStyles>
+					<MenuItemStyles>
+						<Link
+							to="/dashboard/my-classroom"
+							className={
+								pathname === '/dashboard/my-classroom' ||
+								pathname === '/dashboard/my-classroom/stream' ||
+								pathname === '/dashboard/my-classroom/recording'
+									? 'active'
+									: 'inactive'
+							}
+						>
+							<SidebarIcon1 />
+							<h3>나의 강의실</h3>
+							<ol>
+								<li>실시간 강의</li>
+								<li>녹화 강의</li>
+							</ol>
+						</Link>
+					</MenuItemStyles>
 
-						<MenuItemStyles>
-							<Link
-								to="/dashboard/my-board"
-								className={
-									pathname === '/dashboard/my-board' ? 'active' : 'inactive'
-								}
-							>
-								<SidebarIcon2 />
-								<h3>연재 게시판</h3>
-							</Link>
-						</MenuItemStyles>
+					<MenuItemStyles>
+						<Link
+							to="/dashboard/my-board"
+							className={
+								pathname === '/dashboard/my-board' ? 'active' : 'inactive'
+							}
+						>
+							<SidebarIcon2 />
+							<h3>연재 게시판</h3>
+						</Link>
+					</MenuItemStyles>
 
-						<MenuItemStyles>
-							<Link
-								to="/dashboard/my-page"
-								className={
-									pathname === '/dashboard/my-page' ? 'active' : 'inactive'
-								}
-							>
-								<SidebarIcon3
-									variant={pathname === '/dashboard/my-page' && 'iconActive'}
-								/>
-								<h3>나의 정보</h3>
-								<ol>
-									<li>할인쿠폰</li>
-									<li>정보변경</li>
-									<li>회원탈퇴</li>
-								</ol>
-							</Link>
-						</MenuItemStyles>
-					</MainMenuStyles>
-					<LogoutStyles>로그아웃</LogoutStyles>
-				</MenuStyles>
-			</ContainerStyles>
+					<MenuItemStyles>
+						<Link
+							to="/dashboard/my-page"
+							className={
+								pathname === '/dashboard/my-page' ? 'active' : 'inactive'
+							}
+						>
+							<SidebarIcon3
+								variant={pathname === '/dashboard/my-page' && 'iconActive'}
+							/>
+							<h3>나의 정보</h3>
+							<ol>
+								<li>할인쿠폰</li>
+								<li>정보변경</li>
+								<li>회원탈퇴</li>
+							</ol>
+						</Link>
+					</MenuItemStyles>
+				</MainMenuStyles>
+				<LogoutStyles>로그아웃</LogoutStyles>
+			</MenuStyles>
+			{/* </ContainerStyles> */}
 
 			{/* main */}
 		</SidebarStyles>

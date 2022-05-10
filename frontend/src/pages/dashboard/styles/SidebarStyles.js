@@ -8,8 +8,12 @@ export const ContainerStyles = styled.div`
 	${tw`container mx-auto`}
 `;
 
-export const HeaderStyles = styled.div`
-	${tw`px-6  py-5 flex items-center justify-between`}
+export const HeaderStyles = styled.header`
+	${tw`fixed inset-x-0 top-0 bg-st_alt1 `}
+	.headerWrapper {
+		${tw`container mx-auto`}
+		${tw`px-6  py-5 flex items-center justify-between`}
+	}
 `;
 
 export const LogoStyles = styled.div`
@@ -32,8 +36,8 @@ export const MobileNavChildStyles = styled.li`
 	${({ is_selected }) => is_selected === 1 && tw`text-[#ffe0e0]`}
 `;
 
-export const MenuStyles = styled.div`
-	${tw`fixed  bottom-0 left-0 w-full  bg-st_alt1 `}
+export const MenuStyles = styled.footer`
+	${tw`fixed  inset-x-0 bottom-0  bg-st_alt1 `}
 `;
 
 export const MainMenuStyles = styled.ul`
