@@ -95,38 +95,43 @@ function ClassAllList() {
 				type: 'GET_ALL_CLASSES',
 				payload: { classDB, allClassList },
 			});
-
-			const classState = {
-				basicClass: true,
-				advClass: true,
-				pdClass: true,
-			};
-
-			const API_URI = '/class-registration/all-classes';
-
-			if (pathname === `${API_URI}/online/basic`) {
-				classState.advClass = false;
-				classState.pdClass = false;
-			} else if (pathname === `${API_URI}/online/adv`) {
-				classState.basicClass = false;
-				classState.pdClass = false;
-			} else if (pathname === `${API_URI}/online/pd`) {
-				classState.basicClass = false;
-				classState.advClass = false;
-			} else if (
-				pathname !== `${API_URI}` &&
-				pathname !== `${API_URI}/online`
-			) {
-				return navigate('/notfound');
-			}
-
-			setStateClassList((prevState) => ({
-				...prevState,
-				...classState,
-			}));
 		};
+
 		fetchAllClasses();
-	}, [dispatch, pathname, navigate, user]);
+	}, [dispatch, user]);
+
+	useEffect(() => {
+		const classState = {
+			basicClass: true,
+			advClass: true,
+			pdClass: true,
+		};
+
+		const API_REG_URI = '/class-registration/all-classes';
+		const API_MY_CLASS_URI = '/dashboard/my-classroom';
+
+		if (pathname === `${API_MY_CLASS_URI}`) {
+		} else if (pathname === `${API_REG_URI}/online/basic`) {
+			classState.advClass = false;
+			classState.pdClass = false;
+		} else if (pathname === `${API_REG_URI}/online/adv`) {
+			classState.basicClass = false;
+			classState.pdClass = false;
+		} else if (pathname === `${API_REG_URI}/online/pd`) {
+			classState.basicClass = false;
+			classState.advClass = false;
+		} else if (
+			pathname !== `${API_REG_URI}` &&
+			pathname !== `${API_REG_URI}/online`
+		) {
+			return navigate('/notfound');
+		}
+
+		setStateClassList((prevState) => ({
+			...prevState,
+			...classState,
+		}));
+	}, [navigate, pathname]);
 
 	useEffect(() => {
 		let newList;

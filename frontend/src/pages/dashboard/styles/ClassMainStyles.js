@@ -12,6 +12,18 @@ export const HeaderStyles = styled.div`
 	${tw`hidden`}
 `;
 
+export const MainStyles = styled.div`
+	${tw`lg:flex`}
+`;
+
+export const LeftItemStyles = styled.div`
+	${tw``}
+`;
+
+export const RightItemStyles = styled.div`
+	${tw`hidden lg:block`}
+`;
+
 export const NoticeStyles = styled.div`
 	${tw`space-y-4 py-10`}
 

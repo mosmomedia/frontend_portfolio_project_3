@@ -11,17 +11,17 @@ import ClassAllList from './ClassAllList';
 
 function ClassRegistration() {
 	return (
-		<ClassProvider>
-			<SectionStyles>
-				<ContainerStyles>
-					<Routes>
-						<Route path="*" element={<NotFound />} />
-						<Route path="/roadmap" element={<Roadmap />} />
-						<Route path="/all-classes/*" element={<ClassAllList />} />
-					</Routes>
-				</ContainerStyles>
-			</SectionStyles>
-		</ClassProvider>
+		// <ClassProvider>
+		<SectionStyles>
+			<ContainerStyles>
+				<Routes>
+					<Route path="*" element={<NotFound />} />
+					<Route path="/roadmap" element={<Roadmap />} />
+					<Route path="/all-classes/*" element={<ClassAllList />} />
+				</Routes>
+			</ContainerStyles>
+		</SectionStyles>
+		// </ClassProvider>
 	);
 }
 
