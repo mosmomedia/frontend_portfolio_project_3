@@ -91,6 +91,8 @@ function ClassAllList() {
 				dispatch({ type: 'OFF_LOADING' });
 			}
 
+			setFilteredList(allClassList);
+
 			dispatch({
 				type: 'GET_ALL_CLASSES',
 				payload: { classDB, allClassList },
@@ -135,7 +137,6 @@ function ClassAllList() {
 
 	useEffect(() => {
 		let newList;
-
 		newList = allClassList.filter(
 			(item) =>
 				(basicClass && item.type === 'basicClass') ||
@@ -150,6 +151,7 @@ function ClassAllList() {
 		if (weeks > 0) {
 			newList = newList.filter((item) => item.weeks === weeks);
 		}
+
 		setFilteredList(newList);
 	}, [allClassList, basicClass, advClass, pdClass, month, weeks]);
 
@@ -243,6 +245,7 @@ function ClassAllList() {
 		}
 	};
 
+	// click filter btns
 	const handleFilterBtnClick = ({ target: { id } }) => {
 		setStateClassList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
 	};
@@ -257,6 +260,11 @@ function ClassAllList() {
 			advClass: true,
 			pdClass: true,
 		}));
+	};
+
+	// reload list when purchasing a class
+	const handlePurchase = () => {
+		setFilteredList();
 	};
 
 	if (isLoading) return <Spinner />;
@@ -330,7 +338,11 @@ function ClassAllList() {
 						) : (
 							<CardWrapperStyles>
 								{filteredList.map((item, id) => (
-									<ClassCard key={id} item={item}></ClassCard>
+									<ClassCard
+										key={id}
+										item={item}
+										handlePurchase={handlePurchase}
+									></ClassCard>
 								))}
 							</CardWrapperStyles>
 						)}

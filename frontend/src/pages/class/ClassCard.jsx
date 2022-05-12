@@ -17,7 +17,7 @@ import {
 	ButtonStyles,
 } from '../../styles/ClassBtnStyles';
 
-function ClassCard({ item }) {
+function ClassCard({ item, handlePurchase }) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const {
@@ -32,8 +32,6 @@ function ClassCard({ item }) {
 		price,
 		isPurchased,
 	} = item;
-
-	const [purchasedClass, setPurchasedClass] = useState(isPurchased);
 
 	const { user } = useAuthContext();
 	const navigate = useNavigate();
@@ -61,7 +59,7 @@ function ClassCard({ item }) {
 				]);
 
 				if (isEnrolled && isPlaced && isAdded) {
-					setPurchasedClass(true);
+					handlePurchase();
 					toast('강의 신청 성공! 감사합니다.');
 				} else {
 					toast('강의 신청에 실패 했습니다.');
@@ -90,10 +88,10 @@ function ClassCard({ item }) {
 				<h3>{price.toLocaleString('ko-KR')}원</h3>
 				<ButtonStyles
 					onClick={handleOnClick}
-					disabled={purchasedClass}
-					isPurchased={purchasedClass}
+					disabled={isPurchased}
+					isPurchased={isPurchased}
 				>
-					{purchasedClass ? '신청완료' : '신청하기'}
+					{isPurchased ? '신청완료' : '신청하기'}
 				</ButtonStyles>
 			</RightItemStyles>
 		</CardStyles>
