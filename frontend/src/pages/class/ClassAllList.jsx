@@ -54,6 +54,8 @@ function ClassAllList() {
 	const navigate = useNavigate();
 
 	useEffect(() => {
+		let isComponentMounted = true;
+
 		const fetchAllClasses = async () => {
 			dispatch({ type: 'LOADING' });
 
@@ -87,19 +89,21 @@ function ClassAllList() {
 
 					return item;
 				});
-
 				dispatch({ type: 'OFF_LOADING' });
 			}
-
-			setFilteredList(allClassList);
 
 			dispatch({
 				type: 'GET_ALL_CLASSES',
 				payload: { classDB, allClassList },
 			});
+
+			if (isComponentMounted) {
+				setFilteredList(allClassList);
+			}
 		};
 
 		fetchAllClasses();
+		return () => (isComponentMounted = false);
 	}, [dispatch, user]);
 
 	useEffect(() => {
