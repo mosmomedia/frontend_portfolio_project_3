@@ -266,11 +266,6 @@ function ClassAllList() {
 		}));
 	};
 
-	// reload list when purchasing a class
-	const handlePurchase = () => {
-		setFilteredList();
-	};
-
 	if (isLoading) return <Spinner />;
 
 	return (
@@ -342,11 +337,7 @@ function ClassAllList() {
 						) : (
 							<CardWrapperStyles>
 								{filteredList.map((item, id) => (
-									<ClassCard
-										key={id}
-										item={item}
-										handlePurchase={handlePurchase}
-									></ClassCard>
+									<ClassCard key={id} item={item}></ClassCard>
 								))}
 							</CardWrapperStyles>
 						)}

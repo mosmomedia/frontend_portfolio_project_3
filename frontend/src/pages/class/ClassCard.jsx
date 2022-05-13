@@ -17,7 +17,7 @@ import {
 	ButtonStyles,
 } from '../../styles/ClassBtnStyles';
 
-function ClassCard({ item, handlePurchase }) {
+function ClassCard({ item }) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const {
@@ -59,7 +59,7 @@ function ClassCard({ item, handlePurchase }) {
 				]);
 
 				if (isEnrolled && isPlaced && isAdded) {
-					handlePurchase();
+					window.location.reload(false);
 					toast('강의 신청 성공! 감사합니다.');
 				} else {
 					toast('강의 신청에 실패 했습니다.');
