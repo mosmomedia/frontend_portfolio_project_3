@@ -1,6 +1,5 @@
 import { Routes, Route } from 'react-router-dom';
 
-import { ClassProvider } from '../../contexts/class/ClassContext';
 import { SectionStyles } from '../../styles/RegistrationStyles';
 import { ContainerStyles } from '../../styles';
 
@@ -11,7 +10,6 @@ import ClassAllList from './ClassAllList';
 
 function ClassRegistration() {
 	return (
-		// <ClassProvider>
 		<SectionStyles>
 			<ContainerStyles>
 				<Routes>
@@ -21,7 +19,6 @@ function ClassRegistration() {
 				</Routes>
 			</ContainerStyles>
 		</SectionStyles>
-		// </ClassProvider>
 	);
 }
 

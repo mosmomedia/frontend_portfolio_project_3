@@ -1,8 +1,10 @@
 import { useMyClassContext } from '../../../contexts/myClassRoom/MyClassContext';
 
+import useWidthState from '../../../hooks/useWindowDimensions';
+
 import { Link } from 'react-router-dom';
 
-import ClassAllList from '../../class/ClassAllList';
+import ClassAllList from './ClassAllList';
 
 import {
 	SectionStyles,
@@ -19,7 +21,8 @@ function Main() {
 	const { myClassList } = useMyClassContext();
 	//* tmp class history numbers
 	const myClassHistory = [];
-
+	const { width } = useWidthState();
+	console.log(width);
 	return (
 		<SectionStyles>
 			{/* header */}
@@ -76,7 +79,7 @@ function Main() {
 				{/* registration */}
 				<RightItemStyles>
 					{/*  */}
-					<ClassAllList />
+					{width >= 1024 ? <ClassAllList /> : null}
 					{/*  */}
 				</RightItemStyles>
 			</MainStyles>
