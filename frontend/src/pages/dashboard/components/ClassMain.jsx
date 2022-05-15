@@ -22,7 +22,6 @@ function Main() {
 	//* tmp class history numbers
 	const myClassHistory = [];
 	const { width } = useWidthState();
-	console.log(width);
 	return (
 		<SectionStyles>
 			{/* header */}

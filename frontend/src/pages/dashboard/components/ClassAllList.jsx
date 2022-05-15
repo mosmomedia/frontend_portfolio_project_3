@@ -7,7 +7,7 @@ import { useClassContext } from '../../../contexts/class/ClassContext';
 import { useAuthContext } from '../../../contexts/auth/AuthContext';
 import { getMyClasses } from '../../../contexts/myClassRoom/MyClassActions';
 
-import ClassCard from './ClassCard';
+import ClassCard from '../../class/ClassCard';
 
 import Spinner from '../../../components/shared/Spinner';
 
@@ -272,7 +272,7 @@ function ClassAllList() {
 		<WrapperStyles>
 			{/* header */}
 			<HeaderStyles>
-				<h2 onClick={handleHeaderClick}>강의 스케쥴</h2>
+				<h2 onClick={handleHeaderClick}>강의 구매하기</h2>
 				{/* btns */}
 				<FilterWrapperStyles>
 					<select name="month" onChange={handleChange} value={month}>

@@ -1,29 +1,23 @@
 import tw, { styled } from 'twin.macro';
 
-export const SectionStyles = styled.div`
-	${tw`bg-[#fceded7c] `}
-`;
-
 export const WrapperStyles = styled.div`
-	${tw`px-4 h-screen pt-[68px]  md:pt-[80px]`}
+	${tw`space-y-7`}
 `;
 
 export const HeaderStyles = styled.div`
-	${tw`flex justify-between items-center`}
+	${tw`flex justify-between items-center pt-10`}
 
 	h2 {
-		${tw`cursor-pointer`}
+		${tw`cursor-pointer font-normal text-lg`}
 	}
 
 	ul {
 		${tw`flex space-x-1`}
 	}
-
-	${tw`h-[10vh]`}
 `;
 
 export const MainStyles = styled.div`
-	${tw`bg-white rounded-t-lg h-[79vh]`}
+	${tw`bg-white rounded-t-lg h-[68vh]`}
 	box-shadow: 0px 0px 4px rgb(50 50 71 / 8%), 0px 12px 32px rgb(50 50 71 / 2%);
 `;
 
@@ -31,8 +25,6 @@ export const SectionWrapperStyles = styled.div`
 	${tw`relative overflow-auto h-full`}
 
 	${({ add_styles }) => add_styles}
-
-
 
 	/* Hide scrollbar for Chrome, Safari and Opera */
 	::-webkit-scrollbar {

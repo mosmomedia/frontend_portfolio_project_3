@@ -13,7 +13,7 @@ export const HeaderStyles = styled.div`
 `;
 
 export const MainStyles = styled.div`
-	${tw`lg:flex`}
+	${tw`lg:grid lg:grid-cols-2 lg:gap-6 xl:gap-12`}
 `;
 
 export const LeftItemStyles = styled.div`
@@ -21,14 +21,14 @@ export const LeftItemStyles = styled.div`
 `;
 
 export const RightItemStyles = styled.div`
-	${tw`hidden lg:block`}
+	${tw`hidden lg:block `}
 `;
 
 export const NoticeStyles = styled.div`
-	${tw`space-y-4 py-10`}
+	${tw`space-y-4 py-10 lg:space-y-8`}
 
 	h3 {
-		${tw`text-base font-normal`}
+		${tw`text-base font-normal lg:text-lg`}
 	}
 `;
 
@@ -36,7 +36,7 @@ export const CardStyles = styled.div`
 	${tw`bg-white  rounded-lg p-4 flex flex-col space-y-14`}
 
 	h4 {
-		${tw`text-[15px] font-normal text-gray-700`}
+		${tw`text-[15px] font-normal text-gray-700 lg:text-base`}
 	}
 
 	.stress_col {

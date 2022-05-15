@@ -108,7 +108,10 @@ function Landing() {
 										본인이 쓰고자 하는 소설의 장르에 맞는 강사를 선택해야합니다.
 									</p>
 								</div>
-								<Button navtigate_to="/" add_styles={addClassBtnStyles}>
+								<Button
+									navtigate_to="/class-registration/roadmap"
+									add_styles={addClassBtnStyles}
+								>
 									더 알아보기
 									<BsArrowRightShort size={24} />{' '}
 								</Button>
@@ -124,7 +127,10 @@ function Landing() {
 									</p>
 									<p>직무 수행 능력을 기르는 실전형 강의입니다.</p>
 								</div>
-								<Button navtigate_to="/" add_styles={addClassBtnStyles}>
+								<Button
+									navtigate_to="/class-registration/roadmap"
+									add_styles={addClassBtnStyles}
+								>
 									더 알아보기
 									<BsArrowRightShort size={24} />{' '}
 								</Button>
@@ -140,7 +146,10 @@ function Landing() {
 										오프라인 강의입니다.
 									</p>
 								</div>
-								<Button navtigate_to="/" add_styles={addClassBtnStyles}>
+								<Button
+									navtigate_to="/class-registration/roadmap"
+									add_styles={addClassBtnStyles}
+								>
 									더 알아보기
 									<BsArrowRightShort size={24} />{' '}
 								</Button>
