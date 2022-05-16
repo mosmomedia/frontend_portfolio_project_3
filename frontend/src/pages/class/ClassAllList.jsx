@@ -83,7 +83,7 @@ function ClassAllList() {
 				if (payload) {
 					allClassList.forEach((item) => {
 						const findMyclassId = payload.findIndex(
-							(classId) => classId === item._id
+							(myClass) => myClass._id === item._id
 						);
 
 						if (findMyclassId !== -1) {

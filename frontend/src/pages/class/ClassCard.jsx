@@ -51,21 +51,19 @@ function ClassCard({ item }) {
 				const docSnap = await firebase.getDoc(docRef);
 				const { userObjectId } = docSnap.data();
 
-				// const [isEnrolled, isPlaced, isAdded] = await Promise.all([
-				// 	enrollStudentToClass(_id, month),
-				// 	placeOrder(formData),
-				// 	addClassToStudent(userObjectId, _id),
-				// ]);
+				const [isEnrolled, isPlaced, isAdded] = await Promise.all([
+					enrollStudentToClass(_id, month),
+					placeOrder(formData),
+					addClassToStudent(userObjectId, _id),
+				]);
 
-				const res = await addClassToStudent(userObjectId, formData);
-				console.log(res);
-				// if (isEnrolled && isPlaced && isAdded) {
-				// 	window.location.reload(false);
-				// 	toast('강의 신청 성공! 감사합니다.');
-				// } else {
-				// 	toast('강의 신청에 실패 했습니다.');
-				// 	console.log('Error: cannot order the class');
-				// }
+				if (isEnrolled && isPlaced && isAdded) {
+					window.location.reload(false);
+					toast('강의 신청 성공! 감사합니다.');
+				} else {
+					toast('강의 신청에 실패 했습니다.');
+					console.log('Error: cannot order the class');
+				}
 
 				setIsLoading(false);
 			}

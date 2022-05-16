@@ -1,4 +1,5 @@
 import Student from '../models/studentModel.js';
+import Class from '../models/classModel.js';
 
 export const name = async (req, res) => {};
 
@@ -16,9 +17,7 @@ export const createStudent = async (req, res) => {
 
 export const addClassToStudent = async (req, res) => {
 	const { userObjectId } = req.user;
-	const { _id, title, hours, month } = req.body;
-
-	// const newClass {}
+	const { classId } = req.body;
 
 	const findStudentById = await Student.findById(userObjectId);
 
@@ -27,50 +26,21 @@ export const addClassToStudent = async (req, res) => {
 	}
 
 	const { myClasses } = findStudentById;
+	if (myClasses.length === 0) {
+		myClasses.push(classId);
+	} else {
+		const findClassId = myClasses.findIndex((item) => item === classId);
+		if (findClassId !== -1) {
+			throw new Error('class already added');
+		}
 
-	// if (myClasses.length === 0) {
-	// 	myClasses.push(classId);
-	// } else {
-	// 	const findClassId = myClasses.findIndex((item) => item === classId);
-	// 	if (findClassId !== -1) {
-	// 		throw new Error('class already added');
-	// 	}
+		myClasses.push(classId);
+	}
 
-	// 	myClasses.push(classId);
-	// }
-
-	// await findStudentById.save();
+	await findStudentById.save();
 
 	res.status(200).json(myClasses);
 };
-
-// export const addClassToStudent = async (req, res) => {
-// 	const { userObjectId } = req.user;
-// 	const { classId } = req.body;
-
-// 	const findStudentById = await Student.findById(userObjectId);
-
-// 	if (!findStudentById) {
-// 		throw new Error('cannot find student db by user ID');
-// 	}
-
-// 	const { myClasses } = findStudentById;
-
-// 	if (myClasses.length === 0) {
-// 		myClasses.push(classId);
-// 	} else {
-// 		const findClassId = myClasses.findIndex((item) => item === classId);
-// 		if (findClassId !== -1) {
-// 			throw new Error('class already added');
-// 		}
-
-// 		myClasses.push(classId);
-// 	}
-
-// 	await findStudentById.save();
-
-// 	res.status(200).json(true);
-// };
 
 // @ get my classes in student db
 // @ GET /api/student/:id
@@ -81,11 +51,22 @@ export const getMyClasses = async (req, res) => {
 
 	const findStudentById = await Student.findById(userObjectId);
 
-	if (findStudentById) {
-		const { myClasses } = findStudentById;
-		res.status(200).json(myClasses);
-	} else {
-		res.status(200).json(null);
-		console.log('CHECK_POINT : cannot find student db by user ID');
+	if (!findStudentById) {
+		throw new Error('cannot find student db by user ID');
 	}
+
+	const { myClasses } = findStudentById;
+	console.log(myClasses[0]._id);
+	const findClass = await Class.findById(myClasses[0]._id);
+	console.log(findClass);
+	// const test = await findStudentById.populate('myClasses.0._id');
+	// console.log(test.myClasses);
+	// console.log(myClasses);
+	// myClasses.forEach(async (myClass) => {
+	// 	console.log(myClass._id);
+	// 	const findClass = await Class.findById(userObjectId);
+	// 	console.log(findClass);
+	// });
+
+	res.status(200).json(myClasses);
 };

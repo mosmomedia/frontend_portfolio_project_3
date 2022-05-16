@@ -5,7 +5,14 @@ const studentSchema = new mongoose.Schema(
 		firebaseId: { type: String, required: true },
 		name: { type: String, required: true },
 		email: { type: String, required: true },
-		myClasses: [],
+		myClasses: [
+			{
+				classId: {
+					type: mongoose.Schema.Types.ObjectId,
+					ref: 'Class',
+				},
+			},
+		],
 	},
 	{
 		timestamps: true,

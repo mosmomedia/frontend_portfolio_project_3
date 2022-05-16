@@ -46,25 +46,15 @@ export const createStudent = async (formData) => {
 // @ POST /api/student/:id
 // @ private
 
-export const addClassToStudent = async (userId, formData) => {
+export const addClassToStudent = async (userId, classId) => {
 	try {
 		const header = await createPayloadHeader();
-		const res = await axios.post(API_URI + userId, formData, header);
+		const res = await axios.post(API_URI + userId, { classId }, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);
 	}
 };
-
-// export const addClassToStudent = async (userId, classId) => {
-// 	try {
-// 		const header = await createPayloadHeader();
-// 		const res = await axios.post(API_URI + userId, { classId }, header);
-// 		return res.data;
-// 	} catch (error) {
-// 		console.log(error);
-// 	}
-// };
 
 // @ get my classes in student db
 // @ GET /api/student/:id

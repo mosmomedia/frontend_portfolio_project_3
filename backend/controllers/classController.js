@@ -22,8 +22,18 @@ export const createClass = async (req, res) => {
 		throw new Error('admin issue - Unauthorized');
 	}
 
-	const { title, type, status, month, weeks, period, hours, tutor, price } =
-		req.body;
+	const {
+		title,
+		type,
+		status,
+		month,
+		weeks,
+		period,
+		hours,
+		tutor,
+		price,
+		homework,
+	} = req.body;
 
 	const classDetail = [];
 
@@ -48,6 +58,7 @@ export const createClass = async (req, res) => {
 		period,
 		hours,
 		tutor,
+		homework,
 		price,
 		verifyClass,
 		classDetail,

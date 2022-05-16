@@ -36,9 +36,9 @@ function Header() {
 	const { user } = useAuthContext();
 
 	//* tmp -  get token
-	if (user) {
-		console.log(user.accessToken);
-	}
+	// if (user) {
+	// 	console.log(user.accessToken);
+	// }
 
 	useEffect(() => {
 		setCurrentPath(pathname.split('/')[1]);
