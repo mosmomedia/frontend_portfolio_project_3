@@ -25,6 +25,18 @@ export const createClass = async (req, res) => {
 	const { title, type, status, month, weeks, period, hours, tutor, price } =
 		req.body;
 
+	const classDetail = [];
+
+	for (let i = 0; i < weeks; i++) {
+		const tmpClass = {
+			classOrder: i,
+			isOpen: false,
+			isCompleted: false,
+			checkedInStudents: [],
+		};
+		classDetail.push(tmpClass);
+	}
+
 	const verifyClass = month + weeks + type + period + hours + tutor;
 
 	const newClass = {
@@ -38,6 +50,7 @@ export const createClass = async (req, res) => {
 		tutor,
 		price,
 		verifyClass,
+		classDetail,
 	};
 
 	const foundMonth = await Class.findOne({ month });

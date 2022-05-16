@@ -6,9 +6,9 @@ import Order from '../models/orderModel.js';
 
 export const placeOrder = async (req, res) => {
 	const { userObjectId, email } = req.user;
-	const { title, type, tutor, price, classId, paymentMethod } = req.body;
+	const { _id, title, type, tutor, price, paymentMethod } = req.body;
 	const orderedItem = {
-		class: classId,
+		class: _id,
 		title,
 		type,
 		tutor,
@@ -18,7 +18,7 @@ export const placeOrder = async (req, res) => {
 	const findStudentByUserId = await Order.find({ user: userObjectId });
 
 	const findClassIdx = findStudentByUserId.findIndex(
-		(item) => item.orderedItem.class.toString() === classId
+		(item) => item.orderedItem.class.toString() === _id
 	);
 
 	if (findClassIdx !== -1) {

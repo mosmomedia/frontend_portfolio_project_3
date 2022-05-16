@@ -13,9 +13,12 @@ export const createStudent = async (req, res) => {
 // @desc add class to student db
 // @route Post /api/student/:id
 // @access Private
+
 export const addClassToStudent = async (req, res) => {
 	const { userObjectId } = req.user;
-	const { classId } = req.body;
+	const { _id, title, hours, month } = req.body;
+
+	// const newClass {}
 
 	const findStudentById = await Student.findById(userObjectId);
 
@@ -25,21 +28,49 @@ export const addClassToStudent = async (req, res) => {
 
 	const { myClasses } = findStudentById;
 
-	if (myClasses.length === 0) {
-		myClasses.push(classId);
-	} else {
-		const findClassId = myClasses.findIndex((item) => item === classId);
-		if (findClassId !== -1) {
-			throw new Error('class already added');
-		}
+	// if (myClasses.length === 0) {
+	// 	myClasses.push(classId);
+	// } else {
+	// 	const findClassId = myClasses.findIndex((item) => item === classId);
+	// 	if (findClassId !== -1) {
+	// 		throw new Error('class already added');
+	// 	}
 
-		myClasses.push(classId);
-	}
+	// 	myClasses.push(classId);
+	// }
 
-	await findStudentById.save();
+	// await findStudentById.save();
 
-	res.status(200).json(true);
+	res.status(200).json(myClasses);
 };
+
+// export const addClassToStudent = async (req, res) => {
+// 	const { userObjectId } = req.user;
+// 	const { classId } = req.body;
+
+// 	const findStudentById = await Student.findById(userObjectId);
+
+// 	if (!findStudentById) {
+// 		throw new Error('cannot find student db by user ID');
+// 	}
+
+// 	const { myClasses } = findStudentById;
+
+// 	if (myClasses.length === 0) {
+// 		myClasses.push(classId);
+// 	} else {
+// 		const findClassId = myClasses.findIndex((item) => item === classId);
+// 		if (findClassId !== -1) {
+// 			throw new Error('class already added');
+// 		}
+
+// 		myClasses.push(classId);
+// 	}
+
+// 	await findStudentById.save();
+
+// 	res.status(200).json(true);
+// };
 
 // @ get my classes in student db
 // @ GET /api/student/:id
@@ -50,11 +81,11 @@ export const getMyClasses = async (req, res) => {
 
 	const findStudentById = await Student.findById(userObjectId);
 
-	if (!findStudentById) {
-		throw new Error('cannot find student db by user ID');
+	if (findStudentById) {
+		const { myClasses } = findStudentById;
+		res.status(200).json(myClasses);
+	} else {
+		res.status(200).json(null);
+		console.log('CHECK_POINT : cannot find student db by user ID');
 	}
-
-	const { myClasses } = findStudentById;
-
-	res.status(200).json(myClasses);
 };

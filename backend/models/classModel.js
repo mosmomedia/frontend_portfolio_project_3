@@ -23,10 +23,23 @@ const classInfoSchema = new mongoose.Schema(
 				hours: { type: String, required: true },
 				tutor: { type: String, required: true },
 				price: { type: Number, required: true },
+				homwork: { type: Boolean, required: true, default: true },
 				verifyClass: { type: String, required: true },
 				students: [
 					{
 						type: mongoose.Schema.Types.ObjectId,
+					},
+				],
+				classDetail: [
+					{
+						classOrder: { type: Number, required: true },
+						isOpen: { type: Boolean, required: true, default: false },
+						isCompleted: { type: Boolean, required: true, default: false },
+						checkedInStudents: [
+							{
+								type: mongoose.Schema.Types.ObjectId,
+							},
+						],
 					},
 				],
 			},

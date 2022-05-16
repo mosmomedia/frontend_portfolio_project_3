@@ -71,24 +71,28 @@ function ClassAllList() {
 				});
 			});
 
-			allClassList.sort((a, b) => a.weeks - b.weeks);
+			if (allClassList.length > 1) {
+				allClassList.sort((a, b) => a.weeks - b.weeks);
+			}
 
-			if (user) {
+			if (user && allClassList.length > 0) {
 				dispatch({ type: 'LOADING' });
 
 				const payload = await getMyClasses();
 
-				allClassList.forEach((item) => {
-					const findMyclassId = payload.findIndex(
-						(classId) => classId === item._id
-					);
+				if (payload) {
+					allClassList.forEach((item) => {
+						const findMyclassId = payload.findIndex(
+							(classId) => classId === item._id
+						);
 
-					if (findMyclassId !== -1) {
-						item.isPurchased = true;
-					}
+						if (findMyclassId !== -1) {
+							item.isPurchased = true;
+						}
 
-					return item;
-				});
+						return item;
+					});
+				}
 				dispatch({ type: 'OFF_LOADING' });
 			}
 
