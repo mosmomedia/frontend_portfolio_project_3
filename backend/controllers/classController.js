@@ -64,27 +64,13 @@ export const createClass = async (req, res) => {
 		classDetail,
 	};
 
-	const foundMonth = await Class.findOne({ month });
+	// if (foundClass > -1) {
+	// 	res.status(400);
+	// 	throw new Error('db issue - this class already exists');
+	// }
 
-	if (!foundMonth) {
-		const doc = new Class({
-			month,
-			classList: [newClass],
-		});
-		await doc.save();
-	} else {
-		const foundClass = foundMonth.classList.findIndex(
-			(obj) => obj.verifyClass === verifyClass
-		);
-
-		if (foundClass > -1) {
-			res.status(400);
-			throw new Error('db issue - this class already exists');
-		}
-
-		foundMonth.classList.push(newClass);
-		await foundMonth.save();
-	}
+	// foundMonth.classList.push(newClass);
+	await Class.create(newClass);
 
 	res.status(201).json(newClass);
 };
@@ -94,21 +80,14 @@ export const createClass = async (req, res) => {
 // @access Private
 export const enrollStudentToClass = async (req, res) => {
 	const { userObjectId } = req.user;
-	const month = req.body;
 	const classId = req.params.id;
 
-	const findClassByMonth = await Class.findOne(month);
-	const findOrderedClassId = findClassByMonth.classList.findIndex(
-		(item) => item._id.toString() === classId
-	);
-
-	if (findOrderedClassId === -1) {
+	const findOrderedClass = await Class.findById(classId);
+	if (!findOrderedClass) {
 		throw new Error('no ordered class');
 	}
 
-	const orderedClass = findClassByMonth.classList[findOrderedClassId];
-
-	const findStudentId = orderedClass.students.findIndex(
+	const findStudentId = findOrderedClass.students.findIndex(
 		(std) => std.toString() === userObjectId
 	);
 
@@ -116,9 +95,9 @@ export const enrollStudentToClass = async (req, res) => {
 		throw new Error('student already exists');
 	}
 
-	orderedClass.students.push(userObjectId);
+	findOrderedClass.students.push(userObjectId);
 
-	await findClassByMonth.save();
+	await findOrderedClass.save();
 
 	res.status(200).json(true);
 };

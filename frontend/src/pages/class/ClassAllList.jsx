@@ -35,7 +35,7 @@ function ClassAllList() {
 
 	const { user } = useAuthContext();
 
-	const { classDB, allClassList, isLoading, dispatch } = useClassContext();
+	const { classDB, isLoading, dispatch } = useClassContext();
 
 	const initialState = {
 		month: -1,
@@ -47,6 +47,7 @@ function ClassAllList() {
 
 	const [stateClassList, setStateClassList] = useState(initialState);
 	const { month, weeks, basicClass, advClass, pdClass } = stateClassList;
+	const [monthList, setMonthList] = useState(null);
 
 	const [filteredList, setFilteredList] = useState([]);
 
@@ -60,30 +61,30 @@ function ClassAllList() {
 			dispatch({ type: 'LOADING' });
 
 			const classDB = await getAllClasses();
-			const allClassList = [];
+			const months = new Set();
 
-			classDB.forEach(({ classList }) => {
-				classList.forEach((item) => {
-					if (item.status === 'open') {
-						item.isPurchased = false;
-						allClassList.push(item);
-					}
-				});
+			classDB.forEach((item) => {
+				if (item.status === 'open') {
+					months.add(item.month);
+					item.isPurchased = false;
+				}
 			});
 
-			if (allClassList.length > 1) {
-				allClassList.sort((a, b) => a.weeks - b.weeks);
+			// find months
+			const monthsArr = Array.from(months);
+
+			if (classDB.length > 1) {
+				classDB.sort((a, b) => a.weeks - b.weeks);
 			}
 
-			if (user && allClassList.length > 0) {
+			if (user && classDB.length > 0) {
 				dispatch({ type: 'LOADING' });
 
 				const payload = await getMyClasses();
-
 				if (payload) {
-					allClassList.forEach((item) => {
+					classDB.forEach((item) => {
 						const findMyclassId = payload.findIndex(
-							(myClass) => myClass._id === item._id
+							(e) => e.myClass._id === item._id
 						);
 
 						if (findMyclassId !== -1) {
@@ -95,14 +96,14 @@ function ClassAllList() {
 				}
 				dispatch({ type: 'OFF_LOADING' });
 			}
-
 			dispatch({
 				type: 'GET_ALL_CLASSES',
-				payload: { classDB, allClassList },
+				payload: classDB,
 			});
 
 			if (isComponentMounted) {
-				setFilteredList(allClassList);
+				setMonthList(monthsArr);
+				setFilteredList(classDB);
 			}
 		};
 
@@ -145,7 +146,7 @@ function ClassAllList() {
 
 	useEffect(() => {
 		let newList;
-		newList = allClassList.filter(
+		newList = classDB.filter(
 			(item) =>
 				(basicClass && item.type === 'basicClass') ||
 				(advClass && item.type === 'advClass') ||
@@ -161,8 +162,9 @@ function ClassAllList() {
 		}
 
 		setFilteredList(newList);
-	}, [allClassList, basicClass, advClass, pdClass, month, weeks]);
+	}, [classDB, basicClass, advClass, pdClass, month, weeks]);
 
+	// scrollbar
 	useEffect(() => {
 		if (!isLoading && filteredList.length > 0) {
 			// set initial scrollbar height
@@ -201,8 +203,8 @@ function ClassAllList() {
 		};
 
 		if (+value > 0) {
-			for (let i = 0; i < allClassList.length; i++) {
-				const item = allClassList[i];
+			for (let i = 0; i < classDB.length; i++) {
+				const item = classDB[i];
 
 				if (name === 'month' && weeks > 0 && item.weeks !== weeks) {
 					continue;
@@ -232,8 +234,8 @@ function ClassAllList() {
 				getType = 'month';
 			}
 
-			for (let i = 0; i < allClassList.length; i++) {
-				const item = allClassList[i];
+			for (let i = 0; i < classDB.length; i++) {
+				const item = classDB[i];
 
 				if (item[getType] === stateClassList[getType]) {
 					getClassState[item.type] = true;
@@ -284,11 +286,12 @@ function ClassAllList() {
 							강의시작
 						</option>
 						<option value="0">전체보기</option>
-						{classDB.map(({ month }) => (
-							<option key={`monthKey${month}`} value={month}>
-								{month}월
-							</option>
-						))}
+						{monthList &&
+							monthList.map((month, id) => (
+								<option key={`monthKey${month}/${id}`} value={month}>
+									{month}월
+								</option>
+							))}
 					</select>
 					<select name="weeks" onChange={handleChange} value={weeks}>
 						<option value="-1" disabled>

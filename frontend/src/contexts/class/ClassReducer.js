@@ -3,8 +3,7 @@ function ClassReducer(state, action) {
 		case 'GET_ALL_CLASSES':
 			return {
 				...state,
-				allClassList: action.payload.allClassList,
-				classDB: action.payload.classDB,
+				classDB: action.payload,
 				isLoading: false,
 			};
 

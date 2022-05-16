@@ -46,11 +46,11 @@ export const getAllClasses = async () => {
 // @ POST /api/class/
 // @ private
 
-export const enrollStudentToClass = async (classId, month) => {
+export const enrollStudentToClass = async (classId) => {
 	const header = await createPayloadHeader();
 
 	try {
-		const res = await axios.post(API_URI + classId, { month }, header);
+		const res = await axios.post(API_URI + classId, { classId }, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);

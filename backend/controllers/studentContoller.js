@@ -26,15 +26,16 @@ export const addClassToStudent = async (req, res) => {
 	}
 
 	const { myClasses } = findStudentById;
+
 	if (myClasses.length === 0) {
-		myClasses.push(classId);
+		myClasses.push({ classId });
 	} else {
 		const findClassId = myClasses.findIndex((item) => item === classId);
 		if (findClassId !== -1) {
 			throw new Error('class already added');
 		}
 
-		myClasses.push(classId);
+		myClasses.push({ classId });
 	}
 
 	await findStudentById.save();
@@ -56,17 +57,26 @@ export const getMyClasses = async (req, res) => {
 	}
 
 	const { myClasses } = findStudentById;
-	console.log(myClasses[0]._id);
-	const findClass = await Class.findById(myClasses[0]._id);
-	console.log(findClass);
-	// const test = await findStudentById.populate('myClasses.0._id');
-	// console.log(test.myClasses);
 	// console.log(myClasses);
+	const findMyList = [];
+
+	for (let i = 0; i < myClasses.length; i++) {
+		await findStudentById.populate(`myClasses.${i}.myClass`);
+	}
+
+	console.log(myClasses);
+	// myClasses.forEach((item) => {
+	// 	console.log(item.populate('clsssId'));
+	// });
+	// console.log(test.myClasses);
+	// console.log(myClasses[0]._id);
 	// myClasses.forEach(async (myClass) => {
 	// 	console.log(myClass._id);
-	// 	const findClass = await Class.findById(userObjectId);
+	// 	const findClass = await Class.findById(myClass._id);
 	// 	console.log(findClass);
 	// });
+
+	// console.log(test.myClasses[1].classId);
 
 	res.status(200).json(myClasses);
 };

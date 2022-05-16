@@ -20,18 +20,8 @@ import {
 function ClassCard({ item }) {
 	const [isLoading, setIsLoading] = useState(false);
 
-	const {
-		_id,
-		title,
-		type,
-		month,
-		weeks,
-		hours,
-		period,
-		tutor,
-		price,
-		isPurchased,
-	} = item;
+	const { _id, title, type, weeks, hours, period, tutor, price, isPurchased } =
+		item;
 
 	const { user } = useAuthContext();
 	const navigate = useNavigate();
@@ -51,8 +41,17 @@ function ClassCard({ item }) {
 				const docSnap = await firebase.getDoc(docRef);
 				const { userObjectId } = docSnap.data();
 
+				// const res = await addClassToStudent(userObjectId, _id);
+				// console.log(res);
+
+				// const res = await placeOrder(formData);
+				// console.log(res);
+
+				// const res = await enrollStudentToClass(_id);
+				// console.log(res);
+
 				const [isEnrolled, isPlaced, isAdded] = await Promise.all([
-					enrollStudentToClass(_id, month),
+					enrollStudentToClass(_id),
 					placeOrder(formData),
 					addClassToStudent(userObjectId, _id),
 				]);

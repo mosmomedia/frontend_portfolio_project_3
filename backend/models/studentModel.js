@@ -7,7 +7,7 @@ const studentSchema = new mongoose.Schema(
 		email: { type: String, required: true },
 		myClasses: [
 			{
-				classId: {
+				myClass: {
 					type: mongoose.Schema.Types.ObjectId,
 					ref: 'Class',
 				},

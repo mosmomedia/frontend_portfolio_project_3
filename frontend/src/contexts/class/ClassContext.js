@@ -6,7 +6,6 @@ const ClassContext = createContext();
 function ClassProvider({ children }) {
 	const initialState = {
 		classDB: [],
-		allClassList: [],
 		isLoading: false,
 	};
 
