@@ -33,6 +33,8 @@ export const createClass = async (req, res) => {
 		tutor,
 		price,
 		homework,
+		isOnAir,
+		completedAt,
 	} = req.body;
 
 	const classDetail = [];
@@ -59,6 +61,8 @@ export const createClass = async (req, res) => {
 		hours,
 		tutor,
 		homework,
+		isOnAir,
+		completedAt,
 		price,
 		verifyClass,
 		classDetail,

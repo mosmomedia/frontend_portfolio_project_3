@@ -96,6 +96,7 @@ function ClassAllList() {
 				}
 				dispatch({ type: 'OFF_LOADING' });
 			}
+
 			dispatch({
 				type: 'GET_ALL_CLASSES',
 				payload: classDB,

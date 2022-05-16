@@ -10,6 +10,9 @@ function MyClassReducer(state, action) {
 		case 'LOADING':
 			return { ...state, isLoading: true };
 
+		case 'OFF_LOADING':
+			return { ...state, isLoading: false };
+
 		default:
 			throw new Error();
 	}

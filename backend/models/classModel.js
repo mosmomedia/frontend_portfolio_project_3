@@ -4,15 +4,6 @@ const classInfoSchema = new mongoose.Schema(
 	{
 		title: { type: String, required: true },
 		type: { type: String, required: true },
-		shortdescription: {
-			type: String,
-			required: false,
-			maxLength: 50,
-		},
-		description: {
-			type: String,
-			required: false,
-		},
 		status: { type: String, required: true },
 		month: { type: Number, required: true },
 		weeks: { type: Number, required: true },
@@ -28,6 +19,8 @@ const classInfoSchema = new mongoose.Schema(
 				ref: 'User',
 			},
 		],
+		isOnAir: { type: Boolean, default: false },
+		completedAt: { type: Number, default: 0 },
 		classDetail: [
 			{
 				classOrder: { type: Number, required: true },
