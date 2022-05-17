@@ -7,6 +7,13 @@ function MyClassReducer(state, action) {
 				isLoading: false,
 			};
 
+		case 'GET_MY_CURRENT_CLASS':
+			return {
+				...state,
+				currentClass: action.payload,
+				isLoading: false,
+			};
+
 		case 'LOADING':
 			return { ...state, isLoading: true };
 

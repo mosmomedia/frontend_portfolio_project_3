@@ -18,6 +18,8 @@ export const CardStyles = styled.div`
 	${({ variant }) =>
 		variant === 'advClass' && tw`bg-gradient-to-tr from-[#5ed8b5] to-[#5bd8b5]`}
 	${({ variant }) => variant === 'pdClass' && tw`bg-pd text-white`}
+
+	${({ add_styles }) => add_styles}
 `;
 
 export const LeftItemStyles = styled.div`
@@ -51,4 +53,8 @@ export const RightItemStyles = styled.div`
 
 export const ButtonStyles = styled.div`
 	${tw`py-2 px-3 bg-keyColor text-primary cursor-pointer  tracking-wider rounded-lg hover:bg-st_bg1 duration-200 md:text-[15px] `}
+
+	${({ isOnAir }) =>
+		!isOnAir &&
+		tw`bg-st_alt1 text-gray-400 hover:bg-st_alt1 cursor-not-allowed`}
 `;
