@@ -31,7 +31,8 @@ export const RightItemStyles = styled.div`
 	${tw`flex flex-col justify-between items-center text-center`}
 
 	h2 {
-		${tw`text-2xl tracking-wider`}
+		${tw`text-2xl tracking-wider `}
+		${tw`border-solid border-[3px] border-white px-4 py-2 rounded-md`}
 	}
 
 	h3 {
@@ -40,5 +41,5 @@ export const RightItemStyles = styled.div`
 `;
 
 export const ButtonStyles = styled.div`
-	${tw`py-1.5 px-3 bg-st_alt1 text-primary cursor-pointer  tracking-wider rounded-lg sm:hover:opacity-90 lg:py-2.5 lg:px-4 `}
+	${tw`py-2 px-3 bg-keyColor text-primary cursor-pointer  tracking-wider rounded-lg hover:bg-st_bg1 duration-200  lg:py-2.5 lg:px-4 `}
 `;

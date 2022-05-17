@@ -8,7 +8,8 @@ import {
 } from '../styles/MyClassCardStyles';
 
 function MyClassCard({ item: { myClass } }) {
-	const { title, type, weeks, hours, period, tutor, isOnAir } = myClass;
+	const { title, type, weeks, hours, period, tutor, isOnAir, completedAt } =
+		myClass;
 	return (
 		<CardStyles variant={type}>
 			{/* left item - title, tutor, hours, period  */}
@@ -22,7 +23,9 @@ function MyClassCard({ item: { myClass } }) {
 			</LeftItemStyles>
 			{/* right item - weeks, price, checkout btn */}
 			<RightItemStyles>
-				<h2>{weeks}주</h2>
+				<h2>
+					{completedAt} / {weeks}
+				</h2>
 				<ButtonStyles
 				// onClick={handleOnClick}
 				>

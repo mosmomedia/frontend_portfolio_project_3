@@ -65,7 +65,7 @@ function Stream() {
 		<SectionStyles>
 			{/* header */}
 			<HeaderStyles>
-				<h2>강의 리스트</h2>
+				<h2>현재 수강 중인 강의 목록</h2>
 			</HeaderStyles>
 			{/*main */}
 			<MainStyles>

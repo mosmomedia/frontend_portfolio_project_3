@@ -97,53 +97,80 @@ function ClassAllList() {
 				dispatch({ type: 'OFF_LOADING' });
 			}
 
+			const classState = {
+				basicClass: true,
+				advClass: true,
+				pdClass: true,
+			};
+
+			const API_REG_URI = '/class-registration/all-classes';
+			const API_MY_CLASS_URI = '/dashboard/my-classroom';
+
+			if (pathname === `${API_MY_CLASS_URI}`) {
+			} else if (pathname === `${API_REG_URI}/online/basic`) {
+				classState.advClass = false;
+				classState.pdClass = false;
+			} else if (pathname === `${API_REG_URI}/online/adv`) {
+				classState.basicClass = false;
+				classState.pdClass = false;
+			} else if (pathname === `${API_REG_URI}/online/pd`) {
+				classState.basicClass = false;
+				classState.advClass = false;
+			} else if (
+				pathname !== `${API_REG_URI}` &&
+				pathname !== `${API_REG_URI}/online`
+			) {
+				return navigate('/notfound');
+			}
+
+			if (isComponentMounted) {
+				setMonthList(monthsArr);
+				setStateClassList(classState);
+				setFilteredList(classDB);
+			}
+
 			dispatch({
 				type: 'GET_ALL_CLASSES',
 				payload: classDB,
 			});
-
-			if (isComponentMounted) {
-				setMonthList(monthsArr);
-				setFilteredList(classDB);
-			}
 		};
 
 		fetchAllClasses();
 		return () => (isComponentMounted = false);
 	}, [dispatch, user]);
 
-	useEffect(() => {
-		const classState = {
-			basicClass: true,
-			advClass: true,
-			pdClass: true,
-		};
+	// useEffect(() => {
+	// 	const classState = {
+	// 		basicClass: true,
+	// 		advClass: true,
+	// 		pdClass: true,
+	// 	};
 
-		const API_REG_URI = '/class-registration/all-classes';
-		const API_MY_CLASS_URI = '/dashboard/my-classroom';
+	// 	const API_REG_URI = '/class-registration/all-classes';
+	// 	const API_MY_CLASS_URI = '/dashboard/my-classroom';
 
-		if (pathname === `${API_MY_CLASS_URI}`) {
-		} else if (pathname === `${API_REG_URI}/online/basic`) {
-			classState.advClass = false;
-			classState.pdClass = false;
-		} else if (pathname === `${API_REG_URI}/online/adv`) {
-			classState.basicClass = false;
-			classState.pdClass = false;
-		} else if (pathname === `${API_REG_URI}/online/pd`) {
-			classState.basicClass = false;
-			classState.advClass = false;
-		} else if (
-			pathname !== `${API_REG_URI}` &&
-			pathname !== `${API_REG_URI}/online`
-		) {
-			return navigate('/notfound');
-		}
+	// 	if (pathname === `${API_MY_CLASS_URI}`) {
+	// 	} else if (pathname === `${API_REG_URI}/online/basic`) {
+	// 		classState.advClass = false;
+	// 		classState.pdClass = false;
+	// 	} else if (pathname === `${API_REG_URI}/online/adv`) {
+	// 		classState.basicClass = false;
+	// 		classState.pdClass = false;
+	// 	} else if (pathname === `${API_REG_URI}/online/pd`) {
+	// 		classState.basicClass = false;
+	// 		classState.advClass = false;
+	// 	} else if (
+	// 		pathname !== `${API_REG_URI}` &&
+	// 		pathname !== `${API_REG_URI}/online`
+	// 	) {
+	// 		return navigate('/notfound');
+	// 	}
 
-		setStateClassList((prevState) => ({
-			...prevState,
-			...classState,
-		}));
-	}, [navigate, pathname]);
+	// 	setStateClassList((prevState) => ({
+	// 		...prevState,
+	// 		...classState,
+	// 	}));
+	// }, [navigate, pathname]);
 
 	useEffect(() => {
 		let newList;

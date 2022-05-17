@@ -229,7 +229,7 @@ function Roadmap() {
 								<div className="card_header">
 									<h3>PD 클래스 (8주 과정)</h3>
 									<Button
-										navtigate_to="/class-registration/all-classes/online/info"
+										navtigate_to="/class-registration/all-classes/online/pd"
 										variant="primary"
 										add_styles={tw`p-2.5 shadow-none`}
 									>
@@ -334,6 +334,15 @@ function Roadmap() {
 							<p>
 								8주 과정 중 총 8회의 피드백이 제공되며 제출원고는 자동으로
 								장학생 심사위원에게 전달됩니다.
+							</p>
+						</div>
+						<div>
+							<h4>* PD반</h4>
+							<p>커리큘럼과 피드백으로 진행되는 이론 + 피드백 강의입니다.</p>
+							<p>웹소설 PD로써 직무 수행 능력을 기르는 방법을 공부합니다.</p>
+							<p>
+								관련 직군에 취업을 희망하시거나, 관심은 있지만 무슨 일을 하는지
+								몰랐던 분들에게 수강을 권장드립니다.
 							</p>
 						</div>
 					</SectionStyles>
