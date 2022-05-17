@@ -21,16 +21,7 @@ function Stream() {
 	const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(-1);
 
-	const { myClassList, dispatch } = useMyClassContext();
-
-	useEffect(() => {
-		dispatch({ type: 'LOADING' });
-		if (myClassList.length > 0) {
-			console.log(myClassList);
-		}
-
-		dispatch({ type: 'OFF_LOADING' });
-	}, [myClassList, dispatch]);
+	const { myClassList } = useMyClassContext();
 
 	useEffect(() => {
 		if (myClassList.length > 0) {

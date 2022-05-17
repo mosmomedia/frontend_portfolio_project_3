@@ -34,15 +34,17 @@ function Header() {
 
 	const { pathname } = useLocation();
 	const { user } = useAuthContext();
-
 	//* tmp -  get token
 	// if (user) {
 	// 	console.log(user.accessToken);
 	// }
 
+	const splitURI = pathname.split('/');
+	const id = splitURI[splitURI.length - 1];
+
 	useEffect(() => {
-		setCurrentPath(pathname.split('/')[1]);
-	}, [pathname]);
+		setCurrentPath(splitURI[1]);
+	}, [splitURI]);
 
 	// exclude header in specific components
 	if (
@@ -52,6 +54,7 @@ function Header() {
 		pathname === '/dashboard' ||
 		pathname === '/dashboard/my-classroom' ||
 		pathname === '/dashboard/my-classroom/stream' ||
+		pathname === `/dashboard/my-classroom/stream/${id}` ||
 		pathname === '/dashboard/my-classroom/recording' ||
 		pathname === '/dashboard/my-board' ||
 		pathname === '/dashboard/my-page'

@@ -22,8 +22,17 @@ export const CardStyles = styled.div`
 
 export const LeftItemStyles = styled.div`
 	${tw`space-y-6`}
+
 	div {
 		${tw`space-y-[1px]`}
+	}
+
+	.headerTitle {
+		${tw`flex `}
+	}
+
+	img {
+		${tw`w-7 ml-3.5 pt-0.5 opacity-90`}
 	}
 `;
 
@@ -41,5 +50,5 @@ export const RightItemStyles = styled.div`
 `;
 
 export const ButtonStyles = styled.div`
-	${tw`py-2 px-3 bg-keyColor text-primary cursor-pointer  tracking-wider rounded-lg hover:bg-st_bg1 duration-200  lg:py-2.5 lg:px-4 `}
+	${tw`py-2 px-3 bg-keyColor text-primary cursor-pointer  tracking-wider rounded-lg hover:bg-st_bg1 duration-200 md:text-[15px] `}
 `;

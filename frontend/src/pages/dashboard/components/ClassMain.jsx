@@ -19,9 +19,11 @@ import {
 
 function Main() {
 	const { myClassList } = useMyClassContext();
+
 	//* tmp class history numbers
 	const myClassHistory = [];
 	const { width } = useWidthState();
+
 	return (
 		<SectionStyles>
 			{/* header */}
@@ -38,16 +40,16 @@ function Main() {
 									개의 강의를 수강하고 있습니다.
 								</h4>
 
-								<ButtonStyles variant="primary">
-									<Link to="/dashboard/my-classroom/stream">보러가기</Link>
-								</ButtonStyles>
+								<Link to="/dashboard/my-classroom/stream">
+									<ButtonStyles variant="primary">보러가기</ButtonStyles>
+								</Link>
 							</CardStyles>
 						) : (
 							<CardStyles>
 								<h4>현재 수강 중인 강의가 없습니다.</h4>
-								<ButtonStyles variant="primary">
-									<Link to="/class-registration/all-classes">신청하기</Link>
-								</ButtonStyles>
+								<Link to="/class-registration/all-classes">
+									<ButtonStyles variant="primary">신청하기</ButtonStyles>
+								</Link>
 							</CardStyles>
 						)}
 					</NoticeStyles>
@@ -58,19 +60,18 @@ function Main() {
 								이전에{' '}
 								<span className="stress_col">{myClassHistory.length}</span>
 								개의 강의를 수강했습니다.
-								<ButtonStyles
-									variant="primary"
-									navtigate_to="/dashboard/my-classroom/stream"
-								>
-									보러가기
-								</ButtonStyles>
+								<Link to="/dashboard/my-classroom/stream">
+									<ButtonStyles variant="primary">보러가기</ButtonStyles>
+								</Link>
 							</CardStyles>
 						) : (
 							<CardStyles>
 								<h4>과거에 수강했던 강의가 없습니다.</h4>
-								<ButtonStyles variant="disabled" disabled={true}>
-									강의듣기
-								</ButtonStyles>
+								<Link to="">
+									<ButtonStyles variant="disabled" disabled={true}>
+										강의듣기
+									</ButtonStyles>
+								</Link>
 							</CardStyles>
 						)}
 					</NoticeStyles>

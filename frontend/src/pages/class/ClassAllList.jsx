@@ -137,7 +137,7 @@ function ClassAllList() {
 
 		fetchAllClasses();
 		return () => (isComponentMounted = false);
-	}, [dispatch, user]);
+	}, [dispatch, user, pathname, navigate]);
 
 	// useEffect(() => {
 	// 	const classState = {

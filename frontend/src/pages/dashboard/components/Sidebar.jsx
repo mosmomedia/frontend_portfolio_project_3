@@ -23,8 +23,13 @@ import {
 
 function Sidebar() {
 	const { pathname } = useLocation();
+
 	const navigate = useNavigate();
 	const { myClassList } = useMyClassContext();
+	const splitURI = pathname.split('/');
+
+	const id = splitURI[splitURI.length - 1];
+
 	// * tmp class history
 	const myClassHistory = [];
 
@@ -36,7 +41,7 @@ function Sidebar() {
 		}
 	};
 
-	const handleRecordingClick = (params) => {
+	const handleRecordingClick = () => {
 		if (myClassHistory.length > 0) {
 			navigate('/dashboard/my-classroom/recording');
 		} else {
@@ -59,6 +64,7 @@ function Sidebar() {
 						is_active={
 							pathname === '/dashboard/my-classroom' ||
 							pathname === '/dashboard/my-classroom/stream' ||
+							pathname === `/dashboard/my-classroom/stream/${id}` ||
 							pathname === '/dashboard/my-classroom/recording'
 								? 1
 								: 0
@@ -111,6 +117,7 @@ function Sidebar() {
 							className={
 								pathname === '/dashboard/my-classroom' ||
 								pathname === '/dashboard/my-classroom/stream' ||
+								pathname === `/dashboard/my-classroom/stream/${id}` ||
 								pathname === '/dashboard/my-classroom/recording'
 									? 'active'
 									: 'inactive'

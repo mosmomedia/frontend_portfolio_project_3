@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
 
 import { getAllClasses } from '../../../contexts/class/ClassActions';
 import { useClassContext } from '../../../contexts/class/ClassContext';
@@ -40,9 +39,9 @@ function ClassAllList() {
 	const initialState = {
 		month: -1,
 		weeks: -1,
-		basicClass: false,
-		advClass: false,
-		pdClass: false,
+		basicClass: true,
+		advClass: true,
+		pdClass: true,
 	};
 
 	const [stateClassList, setStateClassList] = useState(initialState);
@@ -50,9 +49,6 @@ function ClassAllList() {
 	const [monthList, setMonthList] = useState(null);
 
 	const [filteredList, setFilteredList] = useState([]);
-
-	const { pathname } = useLocation();
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		let isComponentMounted = true;
@@ -72,6 +68,10 @@ function ClassAllList() {
 
 			// find months
 			const monthsArr = Array.from(months);
+
+			if (classDB.length > 1) {
+				classDB.sort((a, b) => a.weeks - b.weeks);
+			}
 
 			if (user && classDB.length > 0) {
 				dispatch({ type: 'LOADING' });
@@ -94,53 +94,20 @@ function ClassAllList() {
 				dispatch({ type: 'OFF_LOADING' });
 			}
 
-			dispatch({
-				type: 'GET_ALL_CLASSES',
-				payload: classDB,
-			});
-
 			if (isComponentMounted) {
 				setMonthList(monthsArr);
 				setFilteredList(classDB);
 			}
+
+			dispatch({
+				type: 'GET_ALL_CLASSES',
+				payload: classDB,
+			});
 		};
 
 		fetchAllClasses();
 		return () => (isComponentMounted = false);
 	}, [dispatch, user]);
-
-	useEffect(() => {
-		const classState = {
-			basicClass: true,
-			advClass: true,
-			pdClass: true,
-		};
-
-		const API_REG_URI = '/class-registration/all-classes';
-		const API_MY_CLASS_URI = '/dashboard/my-classroom';
-
-		if (pathname === `${API_MY_CLASS_URI}`) {
-		} else if (pathname === `${API_REG_URI}/online/basic`) {
-			classState.advClass = false;
-			classState.pdClass = false;
-		} else if (pathname === `${API_REG_URI}/online/adv`) {
-			classState.basicClass = false;
-			classState.pdClass = false;
-		} else if (pathname === `${API_REG_URI}/online/pd`) {
-			classState.basicClass = false;
-			classState.advClass = false;
-		} else if (
-			pathname !== `${API_REG_URI}` &&
-			pathname !== `${API_REG_URI}/online`
-		) {
-			return navigate('/notfound');
-		}
-
-		setStateClassList((prevState) => ({
-			...prevState,
-			...classState,
-		}));
-	}, [navigate, pathname]);
 
 	useEffect(() => {
 		let newList;

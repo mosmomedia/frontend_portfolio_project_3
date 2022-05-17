@@ -42,10 +42,14 @@ export const CardStyles = styled.div`
 	.stress_col {
 		${tw`text-keyColor`}
 	}
+
+	a {
+		${tw`self-end`}
+	}
 `;
 
 export const ButtonStyles = styled.button`
-	${tw`text-sm py-2 px-4 self-end tracking-wider rounded-lg sm:hover:opacity-90 lg:py-2.5 lg:px-4`}
+	${tw`text-sm py-2 px-4  tracking-wider rounded-lg sm:hover:opacity-90 lg:py-2.5 lg:px-4`}
 
 	${({ variant }) =>
 		variant === 'primary' &&
