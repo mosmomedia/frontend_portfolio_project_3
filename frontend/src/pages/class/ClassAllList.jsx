@@ -80,7 +80,7 @@ function ClassAllList() {
 			if (user && classDB.length > 0) {
 				dispatch({ type: 'LOADING' });
 
-				const payload = await getMyClasses();
+				const { myClasses: payload } = await getMyClasses();
 				if (payload) {
 					classDB.forEach((item) => {
 						const findMyclassId = payload.findIndex(

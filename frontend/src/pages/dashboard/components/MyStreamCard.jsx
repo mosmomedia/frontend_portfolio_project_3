@@ -1,5 +1,5 @@
-import OnAirIcon from '../../../assets/icons/ico_onAir.png';
 import { FaRss } from 'react-icons/fa';
+import { toast } from 'react-toastify';
 
 import tw from 'twin.macro';
 import {
@@ -8,7 +8,6 @@ import {
 	RightItemStyles,
 	MyButtonStyles,
 } from '../styles/MyClassCardStyles';
-import { toast } from 'react-toastify';
 
 function MyClassCard({ myClass }) {
 	const {

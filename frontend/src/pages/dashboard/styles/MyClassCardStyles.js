@@ -2,7 +2,7 @@ import tw, { styled } from 'twin.macro';
 
 export const CardStyles = styled.div`
 	${tw`flex justify-between rounded-md p-4`}
-	${tw`lg:h-40`}
+	${tw`lg:px-6 lg:py-5`}
 
 	h2 {
 		${tw`text-white text-[1.375rem] `}

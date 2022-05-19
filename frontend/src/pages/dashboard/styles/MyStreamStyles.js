@@ -1,11 +1,12 @@
 import tw, { styled } from 'twin.macro';
 
 export const SectionStyles = styled.div`
-	${tw`container mx-auto px-6 pt-[68px] space-y-5 `}
+	${tw`container mx-auto px-6 pt-[68px]  xl:max-w-6xl 2xl:max-w-6xl`}
 `;
 
 export const HeaderStyles = styled.div`
-	${tw`pt-10`}
+	${tw`pt-10 pb-5 lg:py-10`}
+
 	h2 {
 		${tw`text-[17px] md:text-lg xl:text-[19px] `}
 	}
@@ -18,5 +19,5 @@ export const MainStyles = styled.div`
 `;
 
 export const InfoWrapperStyles = styled.div`
-	${tw`flex flex-col`}
+	${tw`grid md:px-4  lg:grid-cols-2 lg:gap-10 lg:py-10 lg:px-2`}
 `;

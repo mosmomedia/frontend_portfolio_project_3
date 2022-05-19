@@ -25,9 +25,13 @@ function CheckIn({ myClass: { currentClass, userObjectId } }) {
 			} else {
 				getClassInfo.push({ status: 'absent' });
 			}
-		} else if (isOnAir && completedAt + 1 === item.classOrder) {
+		} else if (isOnAir && item.isOpen && completedAt + 1 === item.classOrder) {
 			getClassInfo.push({ status: 'onAir' });
-		} else if (!isOnAir && completedAt + 1 === item.classOrder) {
+		} else if (
+			!isOnAir &&
+			!item.isOpen &&
+			completedAt + 1 === item.classOrder
+		) {
 			getClassInfo.push({ status: 'offAir' });
 		} else {
 			getClassInfo.push({ status: 'wating' });

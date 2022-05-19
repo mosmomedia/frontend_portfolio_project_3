@@ -13,7 +13,7 @@ export const BoxWrapperStyles = styled.div`
 `;
 
 export const BoxStyles = styled.button`
-	${tw`rounded-lg relative cursor-default`}
+	${tw`rounded-lg relative cursor-default max-h-24`}
 
 	box-shadow: rgba(99, 99, 99, 0.3) 0px 2px 6px 0px;
 
