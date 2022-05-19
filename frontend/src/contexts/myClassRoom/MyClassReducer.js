@@ -3,7 +3,8 @@ function MyClassReducer(state, action) {
 		case 'GET_MY_CLASSES':
 			return {
 				...state,
-				myClassList: action.payload,
+				userObjectId: action.payload.userObjectId,
+				myClassList: action.payload.myClasses,
 				isLoading: false,
 			};
 

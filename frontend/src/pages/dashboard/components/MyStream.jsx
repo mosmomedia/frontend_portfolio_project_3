@@ -4,45 +4,24 @@ import { useParams } from 'react-router-dom';
 import { useMyClassContext } from '../../../contexts/myClassRoom/MyClassContext';
 
 import MyStreamCard from './MyStreamCard';
+import CheckIn from './CheckIn';
+import Homework from './Homework';
 
 import {
 	SectionStyles,
 	HeaderStyles,
 	MainStyles,
+	InfoWrapperStyles,
 } from '../styles/MyStreamStyles';
 
 import Spinner from '../../../components/shared/Spinner';
 
 function MyStream() {
 	const { id } = useParams();
-	const { isLoading, myClassList, dispatch } = useMyClassContext();
+	const { isLoading, userObjectId, myClassList, dispatch } =
+		useMyClassContext();
 
-	const [currentClass, setCurrentClass] = useState({
-		_id: '',
-		title: '',
-		period: '',
-		hours: '',
-		weeks: -1,
-		completedAt: -1,
-		isOnAir: false,
-		students: [],
-		tutor: '',
-		type: '',
-	});
-
-	const {
-		_id,
-		title,
-		hours,
-		weeks,
-		period,
-		completedAt,
-		isOnAir,
-		students,
-		tutor,
-		type,
-	} = currentClass;
-
+	const [currentClass, setCurrentClass] = useState(null);
 	useEffect(() => {
 		dispatch({ type: 'LOADING' });
 		if (myClassList.length > 0) {
@@ -57,37 +36,14 @@ function MyStream() {
 					break;
 				}
 			}
+			setCurrentClass(getCurrentClass);
 
-			const {
-				_id,
-				title,
-				hours,
-				weeks,
-				period,
-				completedAt,
-				isOnAir,
-				students,
-				tutor,
-				type,
-			} = getCurrentClass;
-
-			setCurrentClass({
-				_id,
-				title,
-				hours,
-				weeks,
-				period,
-				completedAt,
-				isOnAir,
-				students,
-				tutor,
-				type,
-			});
 			dispatch({ type: 'OFF_LOADING' });
 		}
 	}, []);
 
-	if (isLoading) return <Spinner />;
+	if (isLoading || currentClass === null || userObjectId === null)
+		return <Spinner />;
 
 	return (
 		<SectionStyles>
@@ -99,6 +55,12 @@ function MyStream() {
 			{/*main */}
 			<MainStyles>
 				<MyStreamCard myClass={currentClass} />
+				<InfoWrapperStyles>
+					{/* checkin */}
+					<CheckIn myClass={{ currentClass, userObjectId }} />
+					{/* homework */}
+					<Homework myClass={currentClass} />
+				</InfoWrapperStyles>
 			</MainStyles>
 		</SectionStyles>
 	);

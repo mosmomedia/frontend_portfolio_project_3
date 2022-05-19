@@ -1,18 +1,32 @@
 import OnAirIcon from '../../../assets/icons/ico_onAir.png';
-import tw, { styled } from 'twin.macro';
+import { FaRss } from 'react-icons/fa';
+
+import tw from 'twin.macro';
 import {
 	CardStyles,
 	LeftItemStyles,
 	RightItemStyles,
-	ButtonStyles,
+	MyButtonStyles,
 } from '../styles/MyClassCardStyles';
+import { toast } from 'react-toastify';
 
 function MyClassCard({ myClass }) {
-	const { title, type, weeks, hours, period, tutor, isOnAir, completedAt } =
-		myClass;
+	const {
+		title,
+		type,
+		weeks,
+		hours,
+		period,
+		tutor,
+		isOnAir,
+		completedAt,
+		isCompleted,
+	} = myClass;
+
+	// ! enter on-Air room
 	const handleClick = (e) => {
 		if (isOnAir) {
-			console.log(e.target);
+			toast('서비스 준비 중입니다.');
 		}
 	};
 
@@ -22,7 +36,8 @@ function MyClassCard({ myClass }) {
 			<LeftItemStyles>
 				<div className="headerTitle">
 					<h2>{title}</h2>
-					{isOnAir && <img src={OnAirIcon} alt="streamingNow" />}
+					{/* {isOnAir && <img src={OnAirIcon} alt="streamingNow" />} */}
+					{isOnAir && <FaRss size="22" />}
 				</div>
 				<div>
 					<h3>강사 : {tutor}</h3>
@@ -33,15 +48,19 @@ function MyClassCard({ myClass }) {
 			{/* right item - weeks, price, checkout btn */}
 			<RightItemStyles>
 				<h2>
-					{completedAt} / {weeks}
+					{isOnAir ? completedAt + 2 : completedAt + 1} / {weeks}
 				</h2>
-				<ButtonStyles
-					onClick={handleClick}
-					isOnAir={isOnAir}
-					disabled={!isOnAir}
-				>
-					수업 참여
-				</ButtonStyles>
+				{isCompleted ? (
+					<MyButtonStyles>수업 종료</MyButtonStyles>
+				) : (
+					<MyButtonStyles
+						onClick={handleClick}
+						isOnAir={isOnAir}
+						disabled={!isOnAir}
+					>
+						수업 참여
+					</MyButtonStyles>
+				)}
 			</RightItemStyles>
 		</CardStyles>
 	);

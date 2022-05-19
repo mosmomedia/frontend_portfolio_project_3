@@ -19,10 +19,10 @@ import {
 
 function Main() {
 	const { myClassList } = useMyClassContext();
+	const { width } = useWidthState();
 
 	//* tmp class history numbers
 	const myClassHistory = [];
-	const { width } = useWidthState();
 
 	return (
 		<SectionStyles>

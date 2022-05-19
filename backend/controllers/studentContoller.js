@@ -1,5 +1,4 @@
 import Student from '../models/studentModel.js';
-import Class from '../models/classModel.js';
 
 export const name = async (req, res) => {};
 
@@ -62,5 +61,5 @@ export const getMyClasses = async (req, res) => {
 		await findStudentById.populate(`myClasses.${i}.myClass`);
 	}
 
-	res.status(200).json(myClasses);
+	res.status(200).json({ myClasses, userObjectId });
 };

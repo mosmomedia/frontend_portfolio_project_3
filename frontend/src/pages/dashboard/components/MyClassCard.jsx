@@ -21,6 +21,7 @@ function MyClassCard({ item: { myClass } }) {
 		tutor,
 		isOnAir,
 		completedAt,
+		isCompleted,
 	} = myClass;
 
 	return (
@@ -40,7 +41,7 @@ function MyClassCard({ item: { myClass } }) {
 			{/* right item - weeks, price, checkout btn */}
 			<RightItemStyles>
 				<h2>
-					{completedAt} / {weeks}
+					{isOnAir ? completedAt + 2 : completedAt + 1} / {weeks}
 				</h2>
 				<Link to={URI + _id}>
 					<ButtonStyles>강의실 입장</ButtonStyles>

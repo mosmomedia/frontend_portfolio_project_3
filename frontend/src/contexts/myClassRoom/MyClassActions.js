@@ -70,7 +70,6 @@ export const getMyClasses = async () => {
 		const { userObjectId } = getUserDb.data();
 
 		const res = await axios.get(API_URI + userObjectId, header);
-
 		return res.data;
 	} catch (error) {
 		console.log(error);

@@ -5,6 +5,7 @@ const MyClassContext = createContext();
 
 function MyClassProvider({ children }) {
 	const initialState = {
+		userObjectId: null,
 		myClassList: [],
 		currentClass: null,
 		isLoading: false,
