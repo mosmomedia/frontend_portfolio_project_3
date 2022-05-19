@@ -10,7 +10,7 @@ import {
 
 const URI = '/dashboard/my-classroom/stream/';
 
-function MyClassCard({ item: { myClass } }) {
+function MyClassCard({ item: myClass }) {
 	const {
 		_id,
 		title,
@@ -21,7 +21,6 @@ function MyClassCard({ item: { myClass } }) {
 		tutor,
 		isOnAir,
 		completedAt,
-		isCompleted,
 	} = myClass;
 
 	return (

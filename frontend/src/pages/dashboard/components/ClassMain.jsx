@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { useMyClassContext } from '../../../contexts/myClassRoom/MyClassContext';
 
 import useWidthState from '../../../hooks/useWindowDimensions';
@@ -21,8 +22,16 @@ function Main() {
 	const { myClassList } = useMyClassContext();
 	const { width } = useWidthState();
 
-	//* tmp class history numbers
-	const myClassHistory = [];
+	const myCurrentList = [];
+	const myHistoryList = [];
+
+	myClassList.forEach(({ myClass }) => {
+		if (myClass.isCompleted) {
+			myHistoryList.push(myClass);
+		} else {
+			myCurrentList.push(myClass);
+		}
+	});
 
 	return (
 		<SectionStyles>
@@ -33,10 +42,11 @@ function Main() {
 				<LeftItemStyles>
 					<NoticeStyles>
 						<h3>강의 정보</h3>
-						{myClassList.length > 0 ? (
+						{myCurrentList.length > 0 ? (
 							<CardStyles>
 								<h4>
-									현재 <span className="stress_col">{myClassList.length}</span>
+									현재{' '}
+									<span className="stress_col">{myCurrentList.length}</span>
 									개의 강의를 수강하고 있습니다.
 								</h4>
 
@@ -55,12 +65,15 @@ function Main() {
 					</NoticeStyles>
 					<NoticeStyles>
 						<h3>강의 히스토리</h3>
-						{myClassHistory.length > 0 ? (
+						{myHistoryList.length > 0 ? (
 							<CardStyles>
-								이전에{' '}
-								<span className="stress_col">{myClassHistory.length}</span>
-								개의 강의를 수강했습니다.
-								<Link to="/dashboard/my-classroom/stream">
+								<h4>
+									이전에{' '}
+									<span className="stress_col">{myHistoryList.length}</span>
+									개의 강의를 수강했습니다.
+								</h4>
+
+								<Link to="/dashboard/my-classroom/history">
 									<ButtonStyles variant="primary">보러가기</ButtonStyles>
 								</Link>
 							</CardStyles>

@@ -17,22 +17,22 @@ import {
 	BarStyles,
 } from '../../../styles/RegistrationStyles';
 
-function Stream() {
+function History() {
 	const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(-1);
 
 	const { myClassList } = useMyClassContext();
 
-	const myCurrentList = [];
+	const myHistoryList = [];
 
 	myClassList.forEach(({ myClass }) => {
-		if (!myClass.isCompleted) {
-			myCurrentList.push(myClass);
+		if (myClass.isCompleted) {
+			myHistoryList.push(myClass);
 		}
 	});
 
 	useEffect(() => {
-		if (myCurrentList.length > 0) {
+		if (myHistoryList.length > 0) {
 			// set initial scrollbar height
 			const { clientHeight, scrollHeight } = initHeight.current;
 			if (clientHeight === scrollHeight) {
@@ -44,7 +44,7 @@ function Stream() {
 				setWidthInput(+initHeightRatio);
 			}
 		}
-	}, [myCurrentList.length]);
+	}, [myHistoryList.length]);
 
 	// changed initial scrollbar height
 	const handleScroll = ({
@@ -64,14 +64,14 @@ function Stream() {
 		<SectionStyles>
 			{/* header */}
 			<HeaderStyles>
-				<h2>현재 수강 중인 강의 목록</h2>
+				<h2>지난 강의 목록</h2>
 			</HeaderStyles>
 			{/*main */}
 			<MainStyles>
 				<>
 					<SectionWrapperStyles ref={initHeight} onScroll={handleScroll}>
 						<CardWrapperStyles>
-							{myCurrentList.map((item) => (
+							{myHistoryList.map((item) => (
 								<MyClassCard key={item._id} item={item} />
 							))}
 						</CardWrapperStyles>
@@ -87,4 +87,4 @@ function Stream() {
 	);
 }
 
-export default Stream;
+export default History;

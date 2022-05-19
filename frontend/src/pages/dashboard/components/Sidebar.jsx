@@ -30,11 +30,19 @@ function Sidebar() {
 
 	const id = splitURI[splitURI.length - 1];
 
-	// * tmp class history
-	const myClassHistory = [];
+	const myCurrentList = [];
+	const myHistoryList = [];
+
+	myClassList.forEach(({ myClass }) => {
+		if (myClass.isCompleted) {
+			myHistoryList.push(myClass);
+		} else {
+			myCurrentList.push(myClass);
+		}
+	});
 
 	const handleStreamClick = () => {
-		if (myClassList.length > 0) {
+		if (myCurrentList.length > 0) {
 			navigate('/dashboard/my-classroom/stream');
 		} else {
 			toast.error('현재 등록한 강의가 없습니다.');
@@ -42,8 +50,8 @@ function Sidebar() {
 	};
 
 	const handleRecordingClick = () => {
-		if (myClassHistory.length > 0) {
-			navigate('/dashboard/my-classroom/recording');
+		if (myHistoryList.length > 0) {
+			navigate('/dashboard/my-classroom/history');
 		} else {
 			toast.error('과거에 수강했던 강의가 없습니다.');
 		}
@@ -65,7 +73,7 @@ function Sidebar() {
 							pathname === '/dashboard/my-classroom' ||
 							pathname === '/dashboard/my-classroom/stream' ||
 							pathname === `/dashboard/my-classroom/stream/${id}` ||
-							pathname === '/dashboard/my-classroom/recording'
+							pathname === '/dashboard/my-classroom/history'
 								? 1
 								: 0
 						}
@@ -80,7 +88,7 @@ function Sidebar() {
 						</MobileNavChildStyles>
 						<MobileNavChildStyles
 							is_selected={
-								pathname === '/dashboard/my-classroom/recording' ? 1 : 0
+								pathname === '/dashboard/my-classroom/history' ? 1 : 0
 							}
 							onClick={handleRecordingClick}
 						>
@@ -118,7 +126,7 @@ function Sidebar() {
 								pathname === '/dashboard/my-classroom' ||
 								pathname === '/dashboard/my-classroom/stream' ||
 								pathname === `/dashboard/my-classroom/stream/${id}` ||
-								pathname === '/dashboard/my-classroom/recording'
+								pathname === '/dashboard/my-classroom/history'
 									? 'active'
 									: 'inactive'
 							}

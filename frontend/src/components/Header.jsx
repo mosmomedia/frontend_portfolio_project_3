@@ -55,7 +55,7 @@ function Header() {
 		pathname === '/dashboard/my-classroom' ||
 		pathname === '/dashboard/my-classroom/stream' ||
 		pathname === `/dashboard/my-classroom/stream/${id}` ||
-		pathname === '/dashboard/my-classroom/recording' ||
+		pathname === '/dashboard/my-classroom/history' ||
 		pathname === '/dashboard/my-board' ||
 		pathname === '/dashboard/my-page'
 	)
