@@ -51,13 +51,15 @@ function Sidebar() {
 		}
 	};
 
-	const handleRecordingClick = () => {
+	const handleHistoryClick = () => {
 		if (myHistoryList.length > 0) {
 			navigate('/dashboard/my-classroom/history');
 		} else {
 			toast.error('과거에 수강했던 강의가 없습니다.');
 		}
 	};
+
+	const handleChangeInfoClick = (params) => {};
 
 	const handleLogoutClick = () => {
 		firebase.auth.signOut();
@@ -99,7 +101,7 @@ function Sidebar() {
 							is_selected={
 								pathname === '/dashboard/my-classroom/history' ? 1 : 0
 							}
-							onClick={handleRecordingClick}
+							onClick={handleHistoryClick}
 						>
 							강의 히스토리
 						</MobileNavChildStyles>
@@ -117,9 +119,21 @@ function Sidebar() {
 					</MobileNavStyles>
 
 					<MobileNavStyles
-						is_active={pathname === '/dashboard/my-page' ? 1 : 0}
+						is_active={
+							pathname === '/dashboard/my-page' ||
+							pathname === '/dashboard/my-page/change-myinfo'
+								? 1
+								: 0
+						}
 					>
-						<MobileNavChildStyles>정보변경</MobileNavChildStyles>
+						<MobileNavChildStyles
+							is_selected={
+								pathname === '/dashboard/my-page/change-myinfo' ? 1 : 0
+							}
+							onClick={handleChangeInfoClick}
+						>
+							정보변경
+						</MobileNavChildStyles>
 						<MobileNavChildStyles>
 							<button onClick={handleLogoutClick}>로그아웃</button>
 						</MobileNavChildStyles>
@@ -164,13 +178,20 @@ function Sidebar() {
 
 					<MenuItemStyles>
 						<Link
-							to="/dashboard/my-page"
+							to="/dashboard/my-page/change-myinfo"
 							className={
-								pathname === '/dashboard/my-page' ? 'active' : 'inactive'
+								pathname === '/dashboard/my-page' ||
+								pathname === '/dashboard/my-page/change-myinfo'
+									? 'active'
+									: 'inactive'
 							}
 						>
 							<SidebarIcon3
-								variant={pathname === '/dashboard/my-page' && 'iconActive'}
+								variant={
+									pathname === '/dashboard/my-page' ||
+									(pathname === '/dashboard/my-page/change-myinfo' &&
+										'iconActive')
+								}
 							/>
 							<h3>나의 정보</h3>
 							<ol>

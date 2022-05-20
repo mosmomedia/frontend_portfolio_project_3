@@ -35,6 +35,7 @@ function Footer() {
 		pathname === `/dashboard/my-classroom/stream/${id}` ||
 		pathname === '/dashboard/my-classroom/history' ||
 		pathname === '/dashboard/my-board' ||
+		pathname === '/dashboard/my-page/change-myinfo' ||
 		pathname === '/dashboard/my-page'
 	)
 		return null;
