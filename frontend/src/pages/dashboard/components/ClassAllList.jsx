@@ -57,51 +57,51 @@ function ClassAllList() {
 			dispatch({ type: 'LOADING' });
 
 			const classDB = await getAllClasses();
+
 			const months = new Set();
+
+			let filteredClassDB = [];
 
 			classDB.forEach((item) => {
 				if (item.status === 'open') {
 					months.add(item.month);
 					item.isPurchased = false;
+					filteredClassDB.push(item);
 				}
 			});
 
 			// find months
 			const monthsArr = Array.from(months);
 
-			if (classDB.length > 1) {
-				classDB.sort((a, b) => a.weeks - b.weeks);
-			}
-
-			if (user && classDB.length > 0) {
+			if (user && filteredClassDB.length > 0) {
 				dispatch({ type: 'LOADING' });
 
 				const { myClasses: payload } = await getMyClasses();
-
 				if (payload) {
-					classDB.forEach((item) => {
+					filteredClassDB = filteredClassDB.filter((item) => {
 						const findMyclassId = payload.findIndex(
 							(e) => e.myClass._id === item._id
 						);
-
 						if (findMyclassId !== -1) {
 							item.isPurchased = true;
+							return false;
 						}
 
-						return item;
+						return true;
 					});
 				}
+
 				dispatch({ type: 'OFF_LOADING' });
 			}
 
 			if (isComponentMounted) {
 				setMonthList(monthsArr);
-				setFilteredList(classDB);
+				setFilteredList(filteredClassDB);
 			}
 
 			dispatch({
 				type: 'GET_ALL_CLASSES',
-				payload: classDB,
+				payload: filteredClassDB,
 			});
 		};
 
@@ -242,7 +242,7 @@ function ClassAllList() {
 		<WrapperStyles>
 			{/* header */}
 			<HeaderStyles>
-				<h2 onClick={handleHeaderClick}>강의 구매하기</h2>
+				<h2 onClick={handleHeaderClick}>추천 강의 목록</h2>
 				{/* btns */}
 				<FilterWrapperStyles>
 					<select name="month" onChange={handleChange} value={month}>

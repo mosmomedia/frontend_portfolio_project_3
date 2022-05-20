@@ -1,3 +1,5 @@
+import firebase from '../../../config/firebase';
+
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useMyClassContext } from '../../../contexts/myClassRoom/MyClassContext';
 
@@ -56,6 +58,13 @@ function Sidebar() {
 			toast.error('과거에 수강했던 강의가 없습니다.');
 		}
 	};
+
+	const handleLogoutClick = () => {
+		firebase.auth.signOut();
+		toast.success('로그아웃 성공!');
+		navigate('/');
+	};
+
 	return (
 		<SidebarStyles>
 			{/* side nav bar */}
@@ -110,9 +119,10 @@ function Sidebar() {
 					<MobileNavStyles
 						is_active={pathname === '/dashboard/my-page' ? 1 : 0}
 					>
-						<MobileNavChildStyles>할인쿠폰</MobileNavChildStyles>
 						<MobileNavChildStyles>정보변경</MobileNavChildStyles>
-						<MobileNavChildStyles>로그아웃</MobileNavChildStyles>
+						<MobileNavChildStyles>
+							<button onClick={handleLogoutClick}>로그아웃</button>
+						</MobileNavChildStyles>
 					</MobileNavStyles>
 				</div>
 			</HeaderStyles>
@@ -164,7 +174,6 @@ function Sidebar() {
 							/>
 							<h3>나의 정보</h3>
 							<ol>
-								<li>할인쿠폰</li>
 								<li>정보변경</li>
 								<li>회원탈퇴</li>
 							</ol>

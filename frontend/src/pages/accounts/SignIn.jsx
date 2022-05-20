@@ -1,8 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { useAuthContext } from '../../contexts/auth/AuthContext';
-
 import firebase from '../../config/firebase';
 import OAuth from '../../components/OAuth';
 

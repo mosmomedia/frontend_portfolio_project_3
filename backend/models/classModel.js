@@ -20,7 +20,6 @@ const classInfoSchema = new mongoose.Schema(
 			},
 		],
 		isOnAir: { type: Boolean, default: false },
-		isCompleted: { type: Boolean, default: false },
 		completedAt: { type: Number, default: 0 },
 		classDetail: [
 			{

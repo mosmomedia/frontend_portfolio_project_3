@@ -63,26 +63,30 @@ function ClassAllList() {
 			const classDB = await getAllClasses();
 			const months = new Set();
 
+			const filteredClassDB = [];
+
 			classDB.forEach((item) => {
 				if (item.status === 'open') {
 					months.add(item.month);
 					item.isPurchased = false;
+
+					filteredClassDB.push(item);
 				}
 			});
 
 			// find months
-			const monthsArr = Array.from(months);
+			const monthsArr = Array.from(months).sort((x, y) => x - y);
 
-			if (classDB.length > 1) {
-				classDB.sort((a, b) => a.weeks - b.weeks);
+			if (filteredClassDB.length > 1) {
+				filteredClassDB.sort((a, b) => a.weeks - b.weeks);
 			}
 
-			if (user && classDB.length > 0) {
+			if (user && filteredClassDB.length > 0) {
 				dispatch({ type: 'LOADING' });
 
 				const { myClasses: payload } = await getMyClasses();
 				if (payload) {
-					classDB.forEach((item) => {
+					filteredClassDB.forEach((item) => {
 						const findMyclassId = payload.findIndex(
 							(e) => e.myClass._id === item._id
 						);
@@ -126,12 +130,12 @@ function ClassAllList() {
 			if (isComponentMounted) {
 				setMonthList(monthsArr);
 				setStateClassList(classState);
-				setFilteredList(classDB);
+				setFilteredList(filteredClassDB);
 			}
 
 			dispatch({
 				type: 'GET_ALL_CLASSES',
-				payload: classDB,
+				payload: filteredClassDB,
 			});
 		};
 

@@ -1,4 +1,3 @@
-import { useEffect } from 'react';
 import { useMyClassContext } from '../../../contexts/myClassRoom/MyClassContext';
 
 import useWidthState from '../../../hooks/useWindowDimensions';
@@ -26,7 +25,7 @@ function Main() {
 	const myHistoryList = [];
 
 	myClassList.forEach(({ myClass }) => {
-		if (myClass.isCompleted) {
+		if (myClass.status === 'completed') {
 			myHistoryList.push(myClass);
 		} else {
 			myCurrentList.push(myClass);

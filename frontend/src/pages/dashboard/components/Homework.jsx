@@ -11,7 +11,7 @@ function Homework({ myClass: { completedAt, classDetail } }) {
 
 	return (
 		<WrapperStyles>
-			<h3>과제 제출 현황</h3>
+			<h3>과제 제출 현황 (서비스 준비 중)</h3>
 			<BoxWrapperStyles>
 				{classDetail.map((item, id) => (
 					<BoxStyles key={id}>

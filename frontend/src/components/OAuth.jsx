@@ -54,6 +54,7 @@ function OAuth({ setLoading }) {
 			}
 
 			toast(`Welcome, ${displayName}!`);
+
 			navigate('/');
 		} catch (error) {
 			console.log(error);

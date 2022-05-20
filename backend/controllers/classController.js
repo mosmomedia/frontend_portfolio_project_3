@@ -35,7 +35,6 @@ export const createClass = async (req, res) => {
 		homework,
 		isOnAir,
 		completedAt,
-		isCompleted,
 	} = req.body;
 
 	const classDetail = [];
@@ -44,7 +43,6 @@ export const createClass = async (req, res) => {
 		const tmpClass = {
 			classOrder: i,
 			isOpen: false,
-			isCompleted: false,
 			checkedInStudents: [],
 		};
 		classDetail.push(tmpClass);
@@ -67,7 +65,6 @@ export const createClass = async (req, res) => {
 		price,
 		verifyClass,
 		classDetail,
-		isCompleted,
 	};
 
 	// if (foundClass > -1) {
