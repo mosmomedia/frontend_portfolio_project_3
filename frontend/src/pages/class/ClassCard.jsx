@@ -41,15 +41,6 @@ function ClassCard({ item }) {
 				const docSnap = await firebase.getDoc(docRef);
 				const { userObjectId } = docSnap.data();
 
-				// const res = await addClassToStudent(userObjectId, _id);
-				// console.log(res);
-
-				// const res = await placeOrder(formData);
-				// console.log(res);
-
-				// const res = await enrollStudentToClass(_id);
-				// console.log(res);
-
 				const [isEnrolled, isPlaced, isAdded] = await Promise.all([
 					enrollStudentToClass(_id),
 					placeOrder(formData),

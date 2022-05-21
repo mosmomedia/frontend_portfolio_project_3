@@ -5,7 +5,8 @@ export const SidebarStyles = styled.div`
 `;
 
 export const HeaderStyles = styled.header`
-	${tw`fixed inset-x-0 top-0 bg-st_alt1 `}
+	${tw`fixed inset-x-0 top-0 bg-st_alt1  h-[8vh] z-50`}
+
 	.headerWrapper {
 		${tw`container mx-auto`}
 		${tw`px-6  py-5 flex items-center justify-between`}
@@ -34,7 +35,8 @@ export const MobileNavChildStyles = styled.li`
 `;
 
 export const MenuStyles = styled.footer`
-	${tw`fixed  inset-x-0 bottom-0  bg-st_alt1 `}
+	${tw`fixed  inset-x-0 bottom-0  bg-st_alt1 z-50`}
+	${tw`h-[10vh]`}
 `;
 
 export const MainMenuStyles = styled.ul`

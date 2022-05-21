@@ -5,14 +5,21 @@ export const Wrapper = styled.div`
 `;
 
 export const MainStyles = styled.div`
-	${tw` pt-[124px] `}
+	${tw`pt-[100px]  h-screen relative`}
 `;
 
 export const FormStyles = styled.form`
 	${tw`space-y-5 max-w-sm sm:max-w-md mx-auto p-5 py-7 bg-white rounded-lg shadow-sm`}
 
+	${tw`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2`}
+
+
 	h2 {
-		${tw`text-center mb-10`}
+		${tw`text-center mb-5`}
+	}
+
+	label {
+		${tw`text-sm`}
 	}
 `;
 export const InputGroupStyles = styled.div`

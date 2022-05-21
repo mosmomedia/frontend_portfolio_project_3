@@ -3,6 +3,8 @@ import { Link, useNavigate } from 'react-router-dom';
 
 import { useAuthContext } from '../../../contexts/auth/AuthContext';
 
+import firebase from '../../../config/firebase';
+
 import Spinner from '../../../components/shared/Spinner';
 
 import 'twin.macro';
@@ -22,9 +24,8 @@ import {
 function ChangeUserInfo() {
 	const { isLoading, user } = useAuthContext();
 	const [loading, setLoading] = useState(false);
-	const [isChecked, setIsChecked] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
-	console.log(user);
+
 	const [formData, setFormData] = useState({
 		email: '',
 		password: '',
@@ -33,23 +34,54 @@ function ChangeUserInfo() {
 		name: '',
 		nickname: '',
 		phone: '',
-		isAdmin: false,
 	});
 
-	const { email, password, newPassword, newPassword2, name, nickname, phone } =
+	const { email, password, newPassword, newPassword2, phone, name, nickname } =
 		formData;
 
-	useEffect(() => {}, []);
+	useEffect(() => {
+		const fetchData = async () => {
+			setLoading(true);
+			const docRef = firebase.doc(firebase.db, 'users', user.uid);
+			const docSnap = await firebase.getDoc(docRef);
+
+			const { email, name, nickname, phone } = docSnap.data();
+			setFormData((prevState) => ({
+				...prevState,
+				email,
+				name,
+				nickname,
+				phone,
+			}));
+
+			setLoading(false);
+		};
+
+		fetchData();
+	}, []);
+
+	// useEffect(() => {
+	// 	if (email && password && name) {
+	// 		setIsDisabled(false);
+	// 	} else {
+	// 		setIsDisabled(true);
+	// 	}
+	// }, [email, password, name]);
 
 	const handleSubmit = (params) => {};
-	const handleChange = (params) => {};
 
-	if (isLoading) return <Spinner />;
+	const handleChange = ({ target }) => {
+		setFormData((prevState) => ({
+			...prevState,
+			[target.id]: target.value,
+		}));
+	};
+
+	if (isLoading || loading) return <Spinner />;
 
 	return (
 		<MainStyles>
 			<FormStyles onSubmit={handleSubmit}>
-				<h2>정보 변경</h2>
 				<InputGroupStyles>
 					<label htmlFor="email">
 						<span tw="text-keyColor">*</span> 이메일
@@ -58,9 +90,9 @@ function ChangeUserInfo() {
 						type="email"
 						id="email"
 						value={email}
-						onChange={handleChange}
 						isRequired={true}
 						required
+						readOnly
 					/>
 				</InputGroupStyles>
 
@@ -72,9 +104,9 @@ function ChangeUserInfo() {
 						type="text"
 						id="name"
 						value={name}
-						onChange={handleChange}
 						isRequired={true}
 						required
+						readOnly
 					/>
 				</InputGroupStyles>
 
@@ -86,9 +118,8 @@ function ChangeUserInfo() {
 						type="password"
 						id="password"
 						value={password}
-						onChange={handleChange}
 						isRequired={true}
-						required
+						onChange={handleChange}
 					/>
 				</InputGroupStyles>
 

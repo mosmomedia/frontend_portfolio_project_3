@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const SectionStyles = styled.div`
-	${tw`container mx-auto px-6 space-y-7 pt-[68px] 2xl:px-32`}
+	${tw`container mx-auto px-6 space-y-7 pt-[8vh] 2xl:px-32`}
 `;
 
 export const HeaderStyles = styled.div`
@@ -12,7 +12,7 @@ export const HeaderStyles = styled.div`
 `;
 
 export const MainStyles = styled.div`
-	${tw`bg-white rounded-t-lg h-[69vh]`}
+	${tw`bg-white rounded-t-lg h-[66vh]`}
 
 	box-shadow: 0px 0px 4px rgb(50 50 71 / 8%), 0px 12px 32px rgb(50 50 71 / 2%);
 `;
