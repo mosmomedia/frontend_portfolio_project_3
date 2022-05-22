@@ -11,18 +11,14 @@ const studentSchema = new mongoose.Schema(
 					type: mongoose.Schema.Types.ObjectId,
 					ref: 'Class',
 				},
-				// myCheckIn: [
-				// 	{
-				// 		order: { type: Number, required: true },
-				// 		isCheckedIn: { type: Boolean, required: true },
-				// 	},
-				// ],
-				// myHomework: [
-				// 	{
-				// 		order: { type: Number, required: true },
-				// 		isSubmitted: { type: Boolean, required: true },
-				// 	},
-				// ],
+			},
+		],
+		myWorks: [
+			{
+				myWork: {
+					type: mongoose.Schema.Types.ObjectId,
+					ref: 'Work',
+				},
 			},
 		],
 	},

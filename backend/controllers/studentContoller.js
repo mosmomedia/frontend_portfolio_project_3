@@ -7,6 +7,7 @@ export const name = async (req, res) => {};
 // @access Private
 export const createStudent = async (req, res) => {
 	const newStudent = await Student.create({ ...req.body });
+	console.log(newStudent);
 	res.status(200).json(newStudent);
 };
 
@@ -43,14 +44,12 @@ export const addClassToStudent = async (req, res) => {
 };
 
 // @ get my classes in student db
-// @ GET /api/student/:id
+// @ GET /api/student/myclass/:id
 // @ private
 
 export const getMyClasses = async (req, res) => {
 	const { userObjectId } = req.user;
-
 	const findStudentById = await Student.findById(userObjectId);
-
 	if (!findStudentById) {
 		throw new Error('cannot find student db by user ID');
 	}
@@ -62,4 +61,58 @@ export const getMyClasses = async (req, res) => {
 	}
 
 	res.status(200).json({ myClasses, userObjectId });
+};
+
+// @desc add work to student db
+// @route Post /api/student/mywork/:id
+// @access Private
+
+export const addWorkToStudent = async (req, res) => {
+	const { userObjectId } = req.user;
+	const { myWork } = req.body;
+	console.log(req.body);
+	const findStudentById = await Student.findById(userObjectId);
+
+	if (!findStudentById) {
+		throw new Error('cannot find student db by user ID');
+	}
+
+	const { myWorks } = findStudentById;
+
+	if (myWorks.length === 0) {
+		myWorks.push({ myWork });
+	} else {
+		const findClassId = myWorks.findIndex((item) => item === myWork);
+		if (findClassId !== -1) {
+			throw new Error('class already added');
+		}
+
+		myClasses.push({ myWork });
+	}
+
+	await findStudentById.save();
+
+	res.status(200).json({ myWorks, userObjectId });
+};
+
+// @ get my works in student db
+// @ GET /api/student/mywork/:id
+// @ private
+
+export const getMyWorks = async (req, res) => {
+	const { userObjectId } = req.user;
+
+	const findStudentById = await Student.findById(userObjectId);
+
+	if (!findStudentById) {
+		throw new Error('cannot find student db by user ID');
+	}
+
+	const { myWorks } = findStudentById;
+
+	for (let i = 0; i < myWorks.length; i++) {
+		await findStudentById.populate(`myWorks.${i}.myWork`);
+	}
+
+	res.status(200).json({ myWorks, userObjectId });
 };

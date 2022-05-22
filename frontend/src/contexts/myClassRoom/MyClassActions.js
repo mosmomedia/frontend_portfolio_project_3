@@ -49,7 +49,11 @@ export const createStudent = async (formData) => {
 export const addClassToStudent = async (userId, myClass) => {
 	try {
 		const header = await createPayloadHeader();
-		const res = await axios.post(API_URI + userId, { myClass }, header);
+		const res = await axios.post(
+			API_URI + '/myclass/' + userId,
+			{ myClass },
+			header
+		);
 		return res.data;
 	} catch (error) {
 		console.log(error);
@@ -69,7 +73,7 @@ export const getMyClasses = async () => {
 		const getUserDb = await firebase.getDoc(docSnap);
 		const { userObjectId } = getUserDb.data();
 
-		const res = await axios.get(API_URI + userObjectId, header);
+		const res = await axios.get(API_URI + '/myclass/' + userObjectId, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);

@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
 import PhoneInput from 'react-phone-number-input/input';
 
 import { useAuthContext } from '../../../contexts/auth/AuthContext';

@@ -26,5 +26,9 @@ app.use('/api/book', bookRoutes);
 import orderRoutes from './Routes/orderRoutes.js';
 app.use('/api/order', orderRoutes);
 
+//* Works
+import worksRoutes from './Routes/workRoutes.js';
+app.use('/api/work', worksRoutes);
+
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

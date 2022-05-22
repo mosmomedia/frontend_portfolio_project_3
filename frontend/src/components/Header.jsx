@@ -34,10 +34,11 @@ function Header() {
 
 	const { pathname } = useLocation();
 	const { user } = useAuthContext();
+
 	//* tmp -  get token
-	// if (user) {
-	// 	console.log(user.accessToken);
-	// }
+	if (user) {
+		console.log(user.accessToken);
+	}
 
 	const splitURI = pathname.split('/');
 	const id = splitURI[splitURI.length - 1];

@@ -6,17 +6,27 @@ import {
 	createStudent,
 	addClassToStudent,
 	getMyClasses,
+	getMyWorks,
+	addWorkToStudent,
 } from '../controllers/studentContoller.js';
 
 // auth middleware
 import authMiddleware from '../middleware/authMiddleware.js';
 
-// router.route('/')
+// student
 router.route('/').post(authMiddleware, createStudent);
 
+// student - class
 router
-	.route('/:id')
+	.route('/myclass/:id')
 	.get(authMiddleware, getMyClasses)
 	.post(authMiddleware, addClassToStudent);
+
+// student - work
+
+router
+	.route('/mywork/:id')
+	.get(authMiddleware, getMyWorks)
+	.post(authMiddleware, addWorkToStudent);
 
 export default router;
