@@ -4,6 +4,7 @@ import {
 	doc,
 	setDoc,
 	getDoc,
+	updateDoc,
 	collection,
 	serverTimestamp,
 } from 'firebase/firestore';
@@ -12,11 +13,14 @@ import {
 	getAuth,
 	onAuthStateChanged,
 	updateProfile,
+	updatePassword,
 	signInWithPopup,
 	signInWithEmailAndPassword,
 	sendPasswordResetEmail,
 	GoogleAuthProvider,
 	createUserWithEmailAndPassword,
+	reauthenticateWithCredential,
+	EmailAuthProvider,
 } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -48,15 +52,19 @@ const firebase = {
 	db: getFirestore(),
 	onAuthStateChanged,
 	updateProfile,
+	updatePassword,
 	signInWithPopup,
 	signInWithEmailAndPassword,
 	sendPasswordResetEmail,
 	GoogleAuthProvider,
+	EmailAuthProvider,
 	createUserWithEmailAndPassword,
+	reauthenticateWithCredential,
 	createMongoObjectId,
 	doc,
-	setDoc,
 	getDoc,
+	setDoc,
+	updateDoc,
 	collection,
 	serverTimestamp,
 };

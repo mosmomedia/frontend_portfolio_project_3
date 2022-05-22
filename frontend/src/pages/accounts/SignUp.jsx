@@ -43,10 +43,19 @@ function SignUp() {
 		nickname: '',
 		phone: '',
 		isAdmin: false,
+		isProvided: false,
 	});
 
-	const { email, password, password2, name, nickname, phone, isAdmin } =
-		formData;
+	const {
+		email,
+		password,
+		password2,
+		name,
+		nickname,
+		phone,
+		isAdmin,
+		isProvided,
+	} = formData;
 
 	const navigate = useNavigate();
 
@@ -100,6 +109,7 @@ function SignUp() {
 					nickname,
 					phone,
 					isAdmin,
+					isProvided,
 					createdAt: firebase.serverTimestamp(),
 				};
 

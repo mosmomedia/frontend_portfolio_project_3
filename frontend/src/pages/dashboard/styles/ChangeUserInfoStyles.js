@@ -19,17 +19,19 @@ export const FormStyles = styled.form`
 	}
 
 	label {
-		${tw`text-sm`}
+		${tw`text-[15px]`}
 	}
 `;
 export const InputGroupStyles = styled.div`
 	${tw`flex flex-col space-y-1.5 `}
+
+	.phoneInput {
+		${tw`text-st_bg1 text-base py-0.5 px-1 min-w-[324px] rounded-sm border-[#4d4d4d] border-solid border-[1px] border-opacity-30`}
+	}
 `;
 
 export const InputStyles = styled.input`
-	${tw`text-st_bg1 text-base py-0.5 px-1 min-w-[324px] rounded-sm border-[#4d4d4d] border-solid border-[1px] border-opacity-30`}
-
-	${tw``}
+	${tw`text-st_bg1 text-sm py-1 px-1 tracking-wide min-w-[324px] rounded-sm border-[#4d4d4d] border-solid border-[1px] border-opacity-30`}
 
 	${({ isRequired }) => isRequired && tw`bg-[#f5f5f5]`}
 `;
