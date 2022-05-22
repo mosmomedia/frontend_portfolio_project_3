@@ -75,7 +75,7 @@ function App() {
 							<Route path="/dashboard" element={<PrivateRoute />}>
 								<Route path="/dashboard" element={<Dashboard />}>
 									<Route path="my-classroom/*" element={<MyClassRoom />} />
-									<Route path="my-board" element={<MyBoard />} />
+									<Route path="my-board/*" element={<MyBoard />} />
 									<Route path="my-page/*" element={<MyPage />} />
 								</Route>
 							</Route>

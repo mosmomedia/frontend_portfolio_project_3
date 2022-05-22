@@ -1,7 +1,7 @@
 import axios from 'axios';
 import firebase from '../../config/firebase';
 
-const API_URI = '/api/student/';
+const API_URI = '/api/student/mywork/';
 
 const createPayloadHeader = async () => {
 	const user = firebase.auth.currentUser;
@@ -26,45 +26,25 @@ const createPayloadHeader = async () => {
 	}
 };
 
-export const name = async () => {};
-
-// @ create student
-// @ POST /api/student/
+// @ add work to student db
+// @ POST /api/student/mywork/:id
 // @ private
 
-export const createStudent = async (formData) => {
+export const addWorkToStudent = async (userId, myWork) => {
 	try {
 		const header = await createPayloadHeader();
-		const res = await axios.post(API_URI, formData, header);
+		const res = await axios.post(API_URI + userId, { myWork }, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);
 	}
 };
 
-// @ add class to student db
-// @ POST /api/student/myclass/:id
+// @ get my works in student db
+// @ GET /api/student/mywork/:id
 // @ private
 
-export const addClassToStudent = async (userId, myClass) => {
-	try {
-		const header = await createPayloadHeader();
-		const res = await axios.post(
-			API_URI + '/myclass/' + userId,
-			{ myClass },
-			header
-		);
-		return res.data;
-	} catch (error) {
-		console.log(error);
-	}
-};
-
-// @ get my classes in student db
-// @ GET /api/student/myclass/:id
-// @ private
-
-export const getMyClasses = async () => {
+export const getMyWorks = async () => {
 	try {
 		const user = firebase.auth.currentUser;
 		const header = await createPayloadHeader();
@@ -73,7 +53,7 @@ export const getMyClasses = async () => {
 		const getUserDb = await firebase.getDoc(docSnap);
 		const { userObjectId } = getUserDb.data();
 
-		const res = await axios.get(API_URI + '/myclass/' + userObjectId, header);
+		const res = await axios.get(API_URI + userObjectId, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);

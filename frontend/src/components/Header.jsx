@@ -37,7 +37,7 @@ function Header() {
 
 	//* tmp -  get token
 	if (user) {
-		console.log(user.accessToken);
+		// console.log(user.accessToken);
 	}
 
 	const splitURI = pathname.split('/');
