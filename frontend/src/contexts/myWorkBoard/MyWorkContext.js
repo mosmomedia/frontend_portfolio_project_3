@@ -16,7 +16,9 @@ function MyWorkProvider({ children }) {
 	const [state, dispatch] = useReducer(MyWorkReducer, initialState);
 
 	return (
-		<MyWorkProvider value={{ ...state, dispatch }}>{children}</MyWorkProvider>
+		<MyWorkContext.Provider value={{ ...state, dispatch }}>
+			{children}
+		</MyWorkContext.Provider>
 	);
 }
 

@@ -1,14 +1,14 @@
 import tw, { styled } from 'twin.macro';
 
 export const SidebarStyles = styled.div`
-	${tw` bg-st_alt1`}
+	${tw` bg-st_alt1 relative`}
 `;
 
 export const HeaderStyles = styled.header`
-	${tw`fixed inset-x-0 top-0 bg-st_alt1  h-[8vh] z-50`}
+	${tw`fixed inset-x-0 top-0 bg-st_alt1  h-[8vh] z-50 grid`}
 
 	.headerWrapper {
-		${tw`container mx-auto`}
+		${tw`container mx-auto `}
 		${tw`px-6  py-5 flex items-center justify-between`}
 	}
 `;
@@ -17,6 +17,13 @@ export const LogoStyles = styled.div`
 	img {
 		${tw`h-7`}
 	}
+`;
+
+export const MobileTitleStyles = styled.ul`
+	${tw`hidden absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 `}
+
+	${({ is_active }) =>
+		is_active === 1 && tw`block text-[#ffe0e0] text-base tracking-wide`}
 `;
 
 export const MobileNavStyles = styled.ul`
@@ -35,12 +42,12 @@ export const MobileNavChildStyles = styled.li`
 `;
 
 export const MenuStyles = styled.footer`
-	${tw`fixed  inset-x-0 bottom-0  bg-st_alt1 z-50`}
+	${tw`fixed  inset-x-0 bottom-0  bg-st_alt1 z-50 grid`}
 	${tw`h-[10vh]`}
 `;
 
 export const MainMenuStyles = styled.ul`
-	${tw`container mx-auto flex justify-between px-6`}
+	${tw`container mx-auto flex justify-between items-center px-6`}
 
 	h3 {
 		${tw`text-sm tracking-wide font-normal`}
@@ -52,7 +59,6 @@ export const MainMenuStyles = styled.ul`
 `;
 
 export const MenuItemStyles = styled.div`
-	${tw`p-4`}
 	svg {
 		${tw` h-9 mx-auto py-2`}
 	}

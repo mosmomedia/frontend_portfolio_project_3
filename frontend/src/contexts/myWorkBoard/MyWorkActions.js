@@ -26,6 +26,20 @@ const createPayloadHeader = async () => {
 	}
 };
 
+// @ create new work
+// @ POST /api/student/mywork/
+// @ private
+
+export const createNewWork = async (formData) => {
+	try {
+		const header = await createPayloadHeader();
+		const res = await axios.post('/api/work', formData, header);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 // @ add work to student db
 // @ POST /api/student/mywork/:id
 // @ private

@@ -14,6 +14,7 @@ import SidebarIcon3 from '../../../assets/icons/ico_sidebar_3';
 import {
 	SidebarStyles,
 	HeaderStyles,
+	MobileTitleStyles,
 	MobileNavStyles,
 	MobileNavChildStyles,
 	MainMenuStyles,
@@ -109,7 +110,7 @@ function Sidebar() {
 					<MobileNavStyles
 						is_active={pathname === '/dashboard/my-board' ? 1 : 0}
 					>
-						<Link to="/dashboard/my-board/new-item">
+						<Link to="/dashboard/my-board/publish">
 							<MobileNavChildStyles
 								is_selected={pathname === '/dashboard/my-board' ? 1 : 0}
 							>
@@ -117,6 +118,12 @@ function Sidebar() {
 							</MobileNavChildStyles>
 						</Link>
 					</MobileNavStyles>
+
+					<MobileTitleStyles
+						is_active={pathname === '/dashboard/my-board/publish' ? 1 : 0}
+					>
+						새 연재 시작하기
+					</MobileTitleStyles>
 
 					<MobileNavStyles
 						is_active={
@@ -168,7 +175,10 @@ function Sidebar() {
 						<Link
 							to="/dashboard/my-board"
 							className={
-								pathname === '/dashboard/my-board' ? 'active' : 'inactive'
+								pathname === '/dashboard/my-board' ||
+								pathname === '/dashboard/my-board/publish'
+									? 'active'
+									: 'inactive'
 							}
 						>
 							<SidebarIcon2 />

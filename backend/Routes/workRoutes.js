@@ -10,6 +10,5 @@ import authMiddleware from '../middleware/authMiddleware.js';
 router.route('/').post(authMiddleware, createWork);
 
 router.route('/:id').get(authMiddleware, getMyWorks);
-// 	.post(authMiddleware, addClassToStudent);
 
 export default router;

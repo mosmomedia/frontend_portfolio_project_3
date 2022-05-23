@@ -70,7 +70,6 @@ export const getMyClasses = async (req, res) => {
 export const addWorkToStudent = async (req, res) => {
 	const { userObjectId } = req.user;
 	const { myWork } = req.body;
-	console.log(req.body);
 	const findStudentById = await Student.findById(userObjectId);
 
 	if (!findStudentById) {
@@ -87,12 +86,12 @@ export const addWorkToStudent = async (req, res) => {
 			throw new Error('class already added');
 		}
 
-		myClasses.push({ myWork });
+		myWorks.push({ myWork });
 	}
 
 	await findStudentById.save();
 
-	res.status(200).json({ myWorks, userObjectId });
+	res.status(200).json({ message: 'success' });
 };
 
 // @ get my works in student db

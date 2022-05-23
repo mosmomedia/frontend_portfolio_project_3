@@ -4,7 +4,7 @@ function MyWorkReducer(state, action) {
 			return {
 				...state,
 				userObjectId: action.payload.userObjectId,
-				myClassList: action.payload.myWorks,
+				myWorkList: action.payload.myWorks,
 				isLoading: false,
 			};
 

@@ -7,7 +7,7 @@ const workSchema = new mongoose.Schema(
 			ref: 'User',
 		},
 		title: { type: String, required: true },
-		category: { type: String, required: true },
+		genre: { type: String, required: true },
 		shortDesc: { type: String, required: true },
 		contentList: [
 			{

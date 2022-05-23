@@ -142,10 +142,9 @@ function ChangeUserInfo() {
 			}, 2000);
 		} catch (error) {
 			console.log(error);
+			setLoading(false);
 			toast.error('비밀번호가 틀립니다.');
 		}
-
-		setLoading(false);
 	};
 
 	const handleChange = ({ target }) => {

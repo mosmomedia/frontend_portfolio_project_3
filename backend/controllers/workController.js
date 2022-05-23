@@ -7,10 +7,10 @@ export const name = async (req, res) => {};
 // @access Private
 export const createWork = async (req, res) => {
 	const { userObjectId } = req.user;
-	const { title, category, shortDesc } = req.body;
-	const newWork = { user: userObjectId, title, category, shortDesc };
-	await Work.create(newWork);
-	res.status(200).json(newWork);
+	const { title, genre, shortDesc } = req.body;
+	const newWork = { user: userObjectId, title, genre, shortDesc };
+	const createdWork = await Work.create(newWork);
+	res.status(200).json(createdWork);
 };
 
 // @desc get my works
