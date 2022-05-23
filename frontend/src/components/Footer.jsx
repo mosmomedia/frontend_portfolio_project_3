@@ -22,9 +22,8 @@ import {
 function Footer() {
 	const { pathname } = useLocation();
 
-	const splitURI = pathname.split('/');
+	const splitURI = pathname.trim().split('/');
 	const id = splitURI[splitURI.length - 1];
-
 	// exclude footer in specific components
 	if (
 		pathname === '/sign-in' ||
@@ -35,7 +34,8 @@ function Footer() {
 		pathname === `/dashboard/my-classroom/stream/${id}` ||
 		pathname === '/dashboard/my-classroom/history' ||
 		pathname === '/dashboard/my-board' ||
-		pathname === `/dashboard/my-board/works/${id}` ||
+		pathname === `/dashboard/my-board/${id}` ||
+		pathname === `/dashboard/my-board/works/edit/${id}` ||
 		pathname === '/dashboard/my-board/publish' ||
 		pathname === '/dashboard/my-page/change-myinfo' ||
 		pathname === '/dashboard/my-page'

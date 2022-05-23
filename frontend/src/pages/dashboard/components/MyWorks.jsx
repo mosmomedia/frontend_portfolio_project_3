@@ -1,6 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
 
-import { Link } from 'react-router-dom';
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
 import MyWorkCard from './MyWorkCard';
@@ -45,7 +44,7 @@ function MyWorks() {
 					<SectionWrapperStyles ref={initHeight} onScroll={handleScroll}>
 						<CardWrapperStyles>
 							{myWorkList.map((item) => (
-								<MyWorkCard key={item._id} item={item.myWork} />
+								<MyWorkCard key={item._id} item={item} />
 							))}
 						</CardWrapperStyles>
 					</SectionWrapperStyles>

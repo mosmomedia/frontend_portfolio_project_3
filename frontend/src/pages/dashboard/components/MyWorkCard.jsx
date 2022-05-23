@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
 import { FaEdit } from 'react-icons/fa';
 
@@ -15,7 +17,17 @@ import {
 
 function MyWorkCard({ item: myWork }) {
 	const { _id, title, genre, shortDesc, contentList } = myWork;
-	console.log(_id);
+
+	const { dispatch } = useMyWorkContext();
+
+	const navgate = useNavigate();
+
+	const handleClick = (e) => {
+		dispatch({ type: 'LOADING' });
+		dispatch({ type: 'GET_MY_CURRENT_WORK', payload: myWork });
+		navgate(`/dashboard/my-board/works/edit/${_id}`);
+	};
+
 	return (
 		<CardStyles variant="">
 			{/* header */}
@@ -25,9 +37,11 @@ function MyWorkCard({ item: myWork }) {
 					<span>|</span>
 					<h4>{genre}</h4>
 				</div>
-				<Link to="">
+				{/* <Link to={`/dashboard/my-board/works/edit/${_id}`}> */}
+				<button onClick={handleClick}>
 					<FaEdit />
-				</Link>
+				</button>
+				{/* </Link> */}
 			</HeaderStyles>
 			<DescriptionStyles>{shortDesc} </DescriptionStyles>
 			<CountStyles>

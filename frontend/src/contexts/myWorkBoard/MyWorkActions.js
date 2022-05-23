@@ -73,3 +73,21 @@ export const getMyWorks = async () => {
 		console.log(error);
 	}
 };
+
+// @ update myWork
+// @ POST /api/student/mywork/
+// @ private
+
+export const updateMyWork = async (formData, workId) => {
+	try {
+		const header = await createPayloadHeader();
+		const res = await axios.put(
+			'/api/work/' + workId,
+			{ formData, workId },
+			header
+		);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};

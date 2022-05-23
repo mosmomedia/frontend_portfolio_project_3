@@ -1,8 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { createNewWork } from '../../../contexts/myWorkBoard/MyWorkActions';
-import { addWorkToStudent } from '../../../contexts/myWorkBoard/MyWorkActions';
+import {
+	createNewWork,
+	addWorkToStudent,
+} from '../../../contexts/myWorkBoard/MyWorkActions';
+import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
 import Spinner from '../../../components/shared/Spinner';
 import { toast } from 'react-toastify';
@@ -23,6 +26,8 @@ import {
 function CreateWork() {
 	const [loading, setLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
+
+	const { myWorkList, dispatch } = useMyWorkContext();
 
 	const genreArr = [
 		'판타지',
@@ -57,15 +62,20 @@ function CreateWork() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		setLoading(true);
+
 		try {
-			const { user: userObjectId, _id: myWorkId } = await createNewWork(
-				formData
-			);
+			const createdWork = await createNewWork(formData);
+
+			const { user: userObjectId, _id: myWorkId } = createdWork;
 
 			const { message } = await addWorkToStudent(userObjectId, myWorkId);
+
 			setLoading(false);
 
 			if (message === 'success') {
+				const payload = [...myWorkList, createdWork];
+
+				dispatch({ type: 'ADD_NEW_WORK', payload });
 				navigate('/dashboard/my-board');
 				toast.success('새 연재를 등록했습니다.');
 			} else {

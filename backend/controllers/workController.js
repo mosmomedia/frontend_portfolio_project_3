@@ -13,11 +13,25 @@ export const createWork = async (req, res) => {
 	res.status(200).json(createdWork);
 };
 
-// @desc get my works
-// @route Post /api/work/:id
+// @desc update a work
+// @route PUT /api/work/:id
 // @access Private
-export const getMyWorks = async (req, res) => {
-	const user = req.params.id;
+export const updateWork = async (req, res) => {
+	const { userObjectId } = req.user;
+	const { formData, workId } = req.body;
 
-	res.status(200).json(userObjectId);
+	const { title, genre, shortDesc } = formData;
+	const findWork = await Work.findById(workId);
+
+	if (!findWork || findWork.user.toString() !== userObjectId) {
+		throw new Error('cannot find work');
+	}
+
+	findWork.title = title;
+	findWork.genre = genre;
+	findWork.shortDesc = shortDesc;
+
+	await findWork.save();
+
+	res.status(200).json({ findWork, message: 'success' });
 };

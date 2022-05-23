@@ -19,9 +19,9 @@ function MyBoard() {
 	useEffect(() => {
 		const fetchData = async () => {
 			dispatch({ type: 'LOADING' });
-			const payload = await getMyWorks();
-
-			dispatch({ type: 'GET_MY_WORKS', payload });
+			const { userObjectId, myWorks } = await getMyWorks();
+			const myWorksArr = myWorks.map(({ myWork }) => myWork);
+			dispatch({ type: 'GET_MY_WORKS', payload: { userObjectId, myWorksArr } });
 		};
 
 		fetchData();
@@ -33,7 +33,7 @@ function MyBoard() {
 			<Route path="*" element={<NotFound />} />
 			<Route path="/" element={<Home />} />
 			<Route path="/:id" element={<MyWorks />} />
-			<Route path="/works/:id/edit" element={<MyWorkEdit />} />
+			<Route path="/works/edit/:id" element={<MyWorkEdit />} />
 			<Route path="/publish" element={<PublishWork />} />
 		</Routes>
 	);
