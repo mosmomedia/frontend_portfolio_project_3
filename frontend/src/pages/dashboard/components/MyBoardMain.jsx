@@ -1,10 +1,6 @@
-import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
-import { getMyWorks } from '../../../contexts/myWorkBoard/MyWorkActions';
-
-import Spinner from '../../../components/shared/Spinner';
 
 import {
 	SectionStyles,
@@ -16,21 +12,6 @@ import {
 
 function MyBoardMain() {
 	const { userObjectId, myWorkList } = useMyWorkContext();
-
-	const { isLoading, dispatch } = useMyWorkContext();
-
-	useEffect(() => {
-		const fetchData = async () => {
-			dispatch({ type: 'LOADING' });
-			const payload = await getMyWorks();
-
-			dispatch({ type: 'GET_MY_WORKS', payload });
-		};
-
-		fetchData();
-	}, [dispatch]);
-
-	if (isLoading) return <Spinner />;
 
 	return (
 		<SectionStyles>
@@ -45,7 +26,7 @@ function MyBoardMain() {
 								개의 작품을 연재 중입니다.
 							</h4>
 
-							<Link to={`/dashboard/my-board/works/${userObjectId}`}>
+							<Link to={`/dashboard/my-board/${userObjectId}`}>
 								<ButtonStyles variant="primary">보러가기</ButtonStyles>
 							</Link>
 						</CardStyles>

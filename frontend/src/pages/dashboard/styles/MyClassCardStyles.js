@@ -55,13 +55,13 @@ export const RightItemStyles = styled.div`
 	}
 `;
 
-export const ButtonStyles = styled.div`
+export const ButtonStyles = styled.button`
 	${tw`py-2 px-3 bg-keyColor text-primary cursor-pointer  tracking-wider rounded-lg hover:bg-st_bg1 duration-200 md:text-[15px] `}
 
 	${({ variant }) => variant === 'expired' && tw`bg-st_bg1 px-[1.125rem]`}
 `;
 
-export const MyButtonStyles = styled.div`
+export const MyButtonStyles = styled.button`
 	${tw`py-2 px-3 bg-keyColor text-primary cursor-pointer  tracking-wider rounded-lg hover:bg-st_bg1 duration-200 md:text-[15px] `}
 
 	${({ isOnAir }) =>

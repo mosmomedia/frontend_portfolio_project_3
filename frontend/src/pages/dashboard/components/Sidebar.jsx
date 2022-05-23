@@ -125,6 +125,12 @@ function Sidebar() {
 						새 연재 시작하기
 					</MobileTitleStyles>
 
+					<MobileTitleStyles
+						is_active={pathname === `/dashboard/my-board/${id}` ? 1 : 0}
+					>
+						나의 연재 리스트
+					</MobileTitleStyles>
+
 					<MobileNavStyles
 						is_active={
 							pathname === '/dashboard/my-page' ||
@@ -176,6 +182,7 @@ function Sidebar() {
 							to="/dashboard/my-board"
 							className={
 								pathname === '/dashboard/my-board' ||
+								pathname === `/dashboard/my-board/${id}` ||
 								pathname === '/dashboard/my-board/publish'
 									? 'active'
 									: 'inactive'
