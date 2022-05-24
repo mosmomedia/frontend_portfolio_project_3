@@ -35,3 +35,20 @@ export const updateWork = async (req, res) => {
 
 	res.status(200).json({ findWork, message: 'success' });
 };
+
+// @desc remove my work
+// @route PUT /api/work/:id
+// @access Private
+export const removeWork = async (req, res) => {
+	const { userObjectId } = req.user;
+	const { workId } = req.body;
+	const findWork = await Work.findById(workId);
+
+	if (!findWork || findWork.user.toString() !== userObjectId) {
+		throw new Error('cannot find work');
+	}
+
+	await findWork.remove();
+
+	res.status(200).json({ message: 'success' });
+};

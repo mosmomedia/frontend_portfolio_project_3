@@ -8,6 +8,7 @@ import {
 	getMyClasses,
 	getMyWorks,
 	addWorkToStudent,
+	removeMyWorkInStudentDb,
 } from '../controllers/studentContoller.js';
 
 // auth middleware
@@ -27,6 +28,7 @@ router
 router
 	.route('/mywork/:id')
 	.get(authMiddleware, getMyWorks)
-	.post(authMiddleware, addWorkToStudent);
+	.post(authMiddleware, addWorkToStudent)
+	.put(authMiddleware, removeMyWorkInStudentDb);
 
 export default router;

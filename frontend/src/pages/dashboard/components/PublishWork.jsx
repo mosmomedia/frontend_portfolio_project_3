@@ -61,31 +61,29 @@ function CreateWork() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setLoading(true);
 
 		try {
+			setLoading(true);
+
 			const createdWork = await createNewWork(formData);
 
 			const { user: userObjectId, _id: myWorkId } = createdWork;
 
 			const { message } = await addWorkToStudent(userObjectId, myWorkId);
 
-			setLoading(false);
-
 			if (message === 'success') {
 				const payload = [...myWorkList, createdWork];
-
 				dispatch({ type: 'ADD_NEW_WORK', payload });
 				navigate('/dashboard/my-board');
 				toast.success('새 연재를 등록했습니다.');
 			} else {
-				toast.error('문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
+				throw new Error('cannot publish a new work');
 			}
 		} catch (error) {
 			console.log(error);
 			toast.error('문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
+			setLoading(false);
 		}
-		setLoading(false);
 	};
 
 	const handleChange = ({ target: { name, value } }) => {
@@ -151,7 +149,7 @@ function CreateWork() {
 					/>
 				</InputGroupStyles>
 
-				<SubmitStyles>
+				<SubmitStyles variant="publish">
 					<ButtonStyles
 						type="submit"
 						id="submit-button"

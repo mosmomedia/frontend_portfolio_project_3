@@ -56,7 +56,8 @@ export const DescriptionStyles = styled.textarea`
 `;
 
 export const SubmitStyles = styled.div`
-	${tw``};
+	${({ variant }) =>
+		variant === 'edit' && tw`grid grid-cols-2 gap-2 text-[15px]`}
 `;
 
 export const ButtonStyles = styled.button`
@@ -67,4 +68,10 @@ export const ButtonStyles = styled.button`
 	${({ isDisabled }) =>
 		isDisabled &&
 		tw`bg-st_bg1 text-gray-500 cursor-not-allowed sm:hover:opacity-100`}
+`;
+
+export const RemoveButtonStyles = styled.div`
+	${tw`py-2.5 px-3 w-full  sm:px-4 tracking-wider rounded-lg sm:hover:opacity-90 cursor-pointer`}
+
+	${tw`bg-keyColor text-white text-center`}
 `;

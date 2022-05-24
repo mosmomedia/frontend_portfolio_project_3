@@ -5,6 +5,7 @@ function MyWorkReducer(state, action) {
 				...state,
 				userObjectId: action.payload.userObjectId,
 				myWorkList: action.payload.myWorksArr,
+				currentWork: null,
 				isLoading: false,
 			};
 
@@ -27,6 +28,14 @@ function MyWorkReducer(state, action) {
 			return {
 				...state,
 				currentWork: action.payload,
+				isLoading: false,
+			};
+
+		case 'DELETE_MY_CURRENT_WORK':
+			return {
+				...state,
+				myWorkList: action.payload,
+				currentWork: null,
 				isLoading: false,
 			};
 

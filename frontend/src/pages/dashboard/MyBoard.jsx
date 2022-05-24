@@ -21,6 +21,7 @@ function MyBoard() {
 			dispatch({ type: 'LOADING' });
 			const { userObjectId, myWorks } = await getMyWorks();
 			const myWorksArr = myWorks.map(({ myWork }) => myWork);
+
 			dispatch({ type: 'GET_MY_WORKS', payload: { userObjectId, myWorksArr } });
 		};
 

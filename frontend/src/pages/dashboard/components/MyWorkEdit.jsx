@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { updateMyWork } from '../../../contexts/myWorkBoard/MyWorkActions';
+import {
+	updateMyWork,
+	removeMyWork,
+	removeWorkInStudentDb,
+} from '../../../contexts/myWorkBoard/MyWorkActions';
 
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
@@ -19,13 +23,15 @@ import {
 	GenreInputStyles,
 	SubmitStyles,
 	ButtonStyles,
+	RemoveButtonStyles,
 } from '../styles/PublishWorkStyles';
 
 function CreateWork() {
 	const [loading, setLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
 
-	const { currentWork, dispatch, myWorkList } = useMyWorkContext();
+	const { userObjectId, currentWork, dispatch, myWorkList } =
+		useMyWorkContext();
 
 	const genreArr = [
 		'판타지',
@@ -68,10 +74,11 @@ function CreateWork() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setLoading(true);
 		const { _id: workId } = currentWork;
 
 		try {
+			setLoading(true);
+
 			const { findWork, message } = await updateMyWork(formData, workId);
 
 			const payload = myWorkList.map((item) => {
@@ -82,24 +89,47 @@ function CreateWork() {
 				}
 			});
 
-			setLoading(false);
-
 			if (message === 'success') {
 				dispatch({ type: 'UPDATE_MY_WORKS', payload });
 				toast.success('정보 변경 성공했습니다.');
 				navigate('/dashboard/my-board');
 			} else {
-				toast.error('문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
+				throw new Error('cannot change mywork');
 			}
 		} catch (error) {
 			console.log(error);
+			setLoading(false);
 			toast.error('문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
 		}
-		setLoading(false);
 	};
 
 	const handleChange = ({ target: { name, value } }) => {
 		setFormData((prevState) => ({ ...prevState, [name]: value }));
+	};
+
+	const handleRemoveClick = async () => {
+		if (window.confirm('정말 삭제 하시겠습니까?')) {
+			try {
+				const { _id: workId } = currentWork;
+
+				const { message: deleteMyWork } = await removeMyWork(workId);
+				const { message: deleteMyWorkInStudentDb } =
+					await removeWorkInStudentDb(userObjectId, workId);
+
+				if (
+					deleteMyWork === 'success' &&
+					deleteMyWorkInStudentDb === 'success'
+				) {
+					const payload = myWorkList.filter((item) => item._id !== workId);
+
+					dispatch({ type: 'DELETE_MY_CURRENT_WORK', payload });
+					toast.success('삭제가 완료 되었습니다.');
+					navigate('/dashboard/my-board');
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
 	};
 
 	if (loading) return <Spinner />;
@@ -161,7 +191,10 @@ function CreateWork() {
 					/>
 				</InputGroupStyles>
 
-				<SubmitStyles>
+				<SubmitStyles variant="edit">
+					<RemoveButtonStyles id="remove-button" onClick={handleRemoveClick}>
+						삭제하기
+					</RemoveButtonStyles>
 					<ButtonStyles
 						type="submit"
 						id="submit-button"

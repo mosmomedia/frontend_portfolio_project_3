@@ -83,7 +83,7 @@ export const addWorkToStudent = async (req, res) => {
 	} else {
 		const findClassId = myWorks.findIndex((item) => item === myWork);
 		if (findClassId !== -1) {
-			throw new Error('class already added');
+			throw new Error('work already added');
 		}
 
 		myWorks.push({ myWork });
@@ -112,6 +112,37 @@ export const getMyWorks = async (req, res) => {
 	for (let i = 0; i < myWorks.length; i++) {
 		await findStudentById.populate(`myWorks.${i}.myWork`);
 	}
-
+	console.log(myWorks);
 	res.status(200).json({ myWorks, userObjectId });
+};
+
+// @desc remove my work in student db
+// @route Delete /api/student/mywork/:id
+// @access Private
+
+export const removeMyWorkInStudentDb = async (req, res) => {
+	const { userObjectId } = req.user;
+	const { workId } = req.body;
+	const findStudentById = await Student.findById(userObjectId);
+
+	if (!findStudentById) {
+		throw new Error('cannot find student db by user ID');
+	}
+
+	let { myWorks } = findStudentById;
+
+	let filteredMyWorks;
+	if (myWorks.length === 0) {
+		throw new Error('cannot find the work in this db');
+	} else {
+		filteredMyWorks = myWorks.filter(
+			({ myWork }) => myWork.toString() !== workId
+		);
+	}
+
+	await Student.findByIdAndUpdate(userObjectId, {
+		myWorks: filteredMyWorks,
+	});
+
+	res.status(200).json({ message: 'success' });
 };

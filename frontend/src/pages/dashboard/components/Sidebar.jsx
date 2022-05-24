@@ -30,7 +30,6 @@ function Sidebar() {
 	const navigate = useNavigate();
 	const { myClassList } = useMyClassContext();
 	const splitURI = pathname.split('/');
-
 	const id = splitURI[splitURI.length - 1];
 
 	const myCurrentList = [];
@@ -126,7 +125,11 @@ function Sidebar() {
 					</MobileTitleStyles>
 
 					<MobileTitleStyles
-						is_active={pathname === `/dashboard/my-board/${id}` ? 1 : 0}
+						is_active={
+							id !== 'publish' && pathname === `/dashboard/my-board/${id}`
+								? 1
+								: 0
+						}
 					>
 						나의 연재 리스트
 					</MobileTitleStyles>
@@ -136,7 +139,7 @@ function Sidebar() {
 							pathname === `/dashboard/my-board/works/edit/${id}` ? 1 : 0
 						}
 					>
-						나의 연재 수정하기
+						나의 연재 정보
 					</MobileTitleStyles>
 
 					<MobileNavStyles

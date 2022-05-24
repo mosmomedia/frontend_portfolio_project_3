@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef } from 'react';
 
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
@@ -22,7 +22,6 @@ function MyWorks() {
 	const [widthInput, setWidthInput] = useState(-1);
 
 	const { myWorkList } = useMyWorkContext();
-
 	// changed initial scrollbar height
 	const handleScroll = ({
 		target: { clientHeight, scrollTop, scrollHeight },
@@ -43,9 +42,10 @@ function MyWorks() {
 				<>
 					<SectionWrapperStyles ref={initHeight} onScroll={handleScroll}>
 						<CardWrapperStyles>
-							{myWorkList.map((item) => (
-								<MyWorkCard key={item._id} item={item} />
-							))}
+							{myWorkList.length > 0 &&
+								myWorkList.map((item) => (
+									<MyWorkCard key={item._id} item={item} />
+								))}
 						</CardWrapperStyles>
 					</SectionWrapperStyles>
 					<BarIndicatorStyles>

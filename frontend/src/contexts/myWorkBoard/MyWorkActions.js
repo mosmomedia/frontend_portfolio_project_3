@@ -40,6 +40,41 @@ export const createNewWork = async (formData) => {
 	}
 };
 
+// @ update myWork
+// @ POST /api/work/:id
+// @ private
+
+export const updateMyWork = async (formData, workId) => {
+	try {
+		const header = await createPayloadHeader();
+		const res = await axios.put(
+			'/api/work/' + workId,
+			{ formData, workId },
+			header
+		);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// @ remove myWork
+// @ POST /api/work/:id
+// @ private
+
+export const removeMyWork = async (workId) => {
+	try {
+		const { headers } = await createPayloadHeader();
+		const res = await axios.delete('/api/work/' + workId, {
+			headers,
+			data: { workId },
+		});
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
 // @ add work to student db
 // @ POST /api/student/mywork/:id
 // @ private
@@ -74,18 +109,15 @@ export const getMyWorks = async () => {
 	}
 };
 
-// @ update myWork
-// @ POST /api/student/mywork/
+// @ remove a work in student db
+// @ PUT /api/student/mywork/:id
 // @ private
 
-export const updateMyWork = async (formData, workId) => {
+export const removeWorkInStudentDb = async (userId, workId) => {
 	try {
 		const header = await createPayloadHeader();
-		const res = await axios.put(
-			'/api/work/' + workId,
-			{ formData, workId },
-			header
-		);
+		const res = await axios.put(API_URI + userId, { workId }, header);
+
 		return res.data;
 	} catch (error) {
 		console.log(error);
