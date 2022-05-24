@@ -74,7 +74,7 @@ function CreateWork() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		const { _id: workId } = currentWork;
+		const { _id: workId, user } = currentWork;
 
 		try {
 			setLoading(true);
@@ -91,8 +91,8 @@ function CreateWork() {
 
 			if (message === 'success') {
 				dispatch({ type: 'UPDATE_MY_WORKS', payload });
-				toast.success('정보 변경 성공했습니다.');
-				navigate('/dashboard/my-board');
+				toast.success('정보를 성공적으로 변경 했습니다.');
+				navigate(`/dashboard/my-board/${user}`);
 			} else {
 				throw new Error('cannot change mywork');
 			}

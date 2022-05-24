@@ -107,11 +107,21 @@ function Sidebar() {
 						</MobileNavChildStyles>
 					</MobileNavStyles>
 					<MobileNavStyles
-						is_active={pathname === '/dashboard/my-board' ? 1 : 0}
+						is_active={
+							pathname === '/dashboard/my-board' ||
+							(id !== 'publish' && pathname === `/dashboard/my-board/${id}`)
+								? 1
+								: 0
+						}
 					>
 						<Link to="/dashboard/my-board/publish">
 							<MobileNavChildStyles
-								is_selected={pathname === '/dashboard/my-board' ? 1 : 0}
+								is_selected={
+									pathname === '/dashboard/my-board' ||
+									(id !== 'publish' && pathname === `/dashboard/my-board/${id}`)
+										? 1
+										: 0
+								}
 							>
 								새로운 연재 시작하기 <span className="add_icon">+</span>{' '}
 							</MobileNavChildStyles>
@@ -124,7 +134,7 @@ function Sidebar() {
 						새 연재 시작하기
 					</MobileTitleStyles>
 
-					<MobileTitleStyles
+					{/* <MobileTitleStyles
 						is_active={
 							id !== 'publish' && pathname === `/dashboard/my-board/${id}`
 								? 1
@@ -132,7 +142,7 @@ function Sidebar() {
 						}
 					>
 						나의 연재 리스트
-					</MobileTitleStyles>
+					</MobileTitleStyles> */}
 
 					<MobileTitleStyles
 						is_active={

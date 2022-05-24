@@ -5,7 +5,7 @@ export const SectionStyles = styled.div`
 `;
 
 export const LeftItemStyles = styled.div`
-	${tw`relative bg-[#ffe0e0] md:w-1/2 md:bg-body md:p-5 lg:pr-16  xl:pr-[8rem]`}
+	${tw`relative bg-[#ffe0e0] md:w-1/2 md:bg-body md:p-5 lg:pr-16  xl:pr-[6rem]`}
 
 	.mobile {
 		${tw`md:hidden`}

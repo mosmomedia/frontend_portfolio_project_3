@@ -1,4 +1,4 @@
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
@@ -21,7 +21,23 @@ function MyWorks() {
 	const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(-1);
 
-	const { myWorkList } = useMyWorkContext();
+	const { isLoading, myWorkList } = useMyWorkContext();
+
+	useEffect(() => {
+		if (!isLoading && myWorkList.length > 0) {
+			// set initial scrollbar height
+			const { clientHeight, scrollHeight } = initHeight.current;
+			if (clientHeight === scrollHeight) {
+				setWidthInput(0);
+			} else {
+				const initHeightRatio = ((clientHeight / scrollHeight) * 100).toFixed(
+					2
+				);
+				setWidthInput(+initHeightRatio);
+			}
+		}
+	}, [isLoading, myWorkList]);
+
 	// changed initial scrollbar height
 	const handleScroll = ({
 		target: { clientHeight, scrollTop, scrollHeight },
@@ -35,25 +51,24 @@ function MyWorks() {
 			setWidthInput(+initHeightRatio);
 		}
 	};
+
 	return (
 		<SectionStyles>
 			{/*main */}
 			<MainStyles>
-				<>
-					<SectionWrapperStyles ref={initHeight} onScroll={handleScroll}>
-						<CardWrapperStyles>
-							{myWorkList.length > 0 &&
-								myWorkList.map((item) => (
-									<MyWorkCard key={item._id} item={item} />
-								))}
-						</CardWrapperStyles>
-					</SectionWrapperStyles>
-					<BarIndicatorStyles>
-						<BarContainerStyles>
-							<BarStyles widthInput={widthInput} />
-						</BarContainerStyles>
-					</BarIndicatorStyles>
-				</>
+				<SectionWrapperStyles ref={initHeight} onScroll={handleScroll}>
+					<CardWrapperStyles>
+						{myWorkList.length > 0 &&
+							myWorkList.map((item) => (
+								<MyWorkCard key={item._id} item={item} />
+							))}
+					</CardWrapperStyles>
+				</SectionWrapperStyles>
+				<BarIndicatorStyles>
+					<BarContainerStyles>
+						<BarStyles widthInput={widthInput} />
+					</BarContainerStyles>
+				</BarIndicatorStyles>
 			</MainStyles>
 		</SectionStyles>
 	);

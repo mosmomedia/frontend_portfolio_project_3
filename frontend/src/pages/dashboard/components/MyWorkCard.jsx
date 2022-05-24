@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
@@ -14,6 +14,7 @@ import {
 	CountStyles,
 	ButtonStyles,
 } from '../styles/MyWorkCardStyles';
+import { toast } from 'react-toastify';
 
 function MyWorkCard({ item: myWork }) {
 	const { _id, title, genre, shortDesc, contentList } = myWork;
@@ -37,11 +38,9 @@ function MyWorkCard({ item: myWork }) {
 					<span>|</span>
 					<h4>{genre}</h4>
 				</div>
-				{/* <Link to={`/dashboard/my-board/works/edit/${_id}`}> */}
 				<button onClick={handleClick}>
 					<FaEdit />
 				</button>
-				{/* </Link> */}
 			</HeaderStyles>
 			<DescriptionStyles>{shortDesc} </DescriptionStyles>
 			<CountStyles>
@@ -55,7 +54,12 @@ function MyWorkCard({ item: myWork }) {
 				>
 					연재 게시판
 				</ButtonStyles>
-				<ButtonStyles variant="create">연재하기</ButtonStyles>
+				<ButtonStyles
+					variant="create"
+					onClick={() => toast('서비스 준비 중입니다.')}
+				>
+					연재하기
+				</ButtonStyles>
 			</ButtonGroupStyles>
 		</CardStyles>
 	);

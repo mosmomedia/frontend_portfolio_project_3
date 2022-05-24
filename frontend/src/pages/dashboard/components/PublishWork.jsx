@@ -74,7 +74,9 @@ function CreateWork() {
 			if (message === 'success') {
 				const payload = [...myWorkList, createdWork];
 				dispatch({ type: 'ADD_NEW_WORK', payload });
-				navigate('/dashboard/my-board');
+				// navigate('/dashboard/my-board');
+				navigate(`/dashboard/my-board/${userObjectId}`);
+
 				toast.success('새 연재를 등록했습니다.');
 			} else {
 				throw new Error('cannot publish a new work');

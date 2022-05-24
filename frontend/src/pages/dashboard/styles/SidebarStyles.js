@@ -43,7 +43,7 @@ export const MobileNavChildStyles = styled.li`
 
 export const MenuStyles = styled.footer`
 	${tw`fixed  inset-x-0 bottom-0  bg-st_alt1 z-50 grid`}
-	${tw`h-[10vh]`}
+	${tw`h-[8vh]`}
 `;
 
 export const MainMenuStyles = styled.ul`
