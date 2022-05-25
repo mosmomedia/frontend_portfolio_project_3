@@ -11,8 +11,11 @@ const workSchema = new mongoose.Schema(
 		shortDesc: { type: String, required: true },
 		contentList: [
 			{
-				order: { type: Number, required: true },
-				content: { type: String, required: true },
+				subTitle: { type: String, required: true },
+				subContentHtml: { type: String, required: true },
+			},
+			{
+				timestamps: true,
 			},
 		],
 	},

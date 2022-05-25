@@ -22,10 +22,16 @@ function MyWorkCard({ item: myWork }) {
 
 	const navgate = useNavigate();
 
-	const handleClick = (e) => {
+	const handleEditClick = (e) => {
 		dispatch({ type: 'LOADING' });
 		dispatch({ type: 'GET_MY_CURRENT_WORK', payload: myWork });
 		navgate(`/dashboard/my-board/edit/${_id}`);
+	};
+
+	const handleWriteClick = (e) => {
+		dispatch({ type: 'LOADING' });
+		dispatch({ type: 'GET_MY_CURRENT_WORK', payload: myWork });
+		navgate(`/dashboard/my-board/work/write/${_id}`);
 	};
 
 	return (
@@ -37,7 +43,7 @@ function MyWorkCard({ item: myWork }) {
 					<span>|</span>
 					<h4>{genre}</h4>
 				</div>
-				<button onClick={handleClick}>
+				<button onClick={handleEditClick}>
 					<FaEdit />
 				</button>
 			</HeaderStyles>
@@ -47,7 +53,7 @@ function MyWorkCard({ item: myWork }) {
 				개의 게시글이 있습니다.
 			</CountStyles>
 			<ButtonGroupStyles>
-				<Link to="/">
+				<Link to={`/dashboard/my-board/work/list/${_id}`}>
 					<ButtonStyles
 						variant={contentList.length === 0 ? 'disabled' : 'edit'}
 						disabled={contentList.length === 0 ? 1 : 0}
@@ -56,9 +62,9 @@ function MyWorkCard({ item: myWork }) {
 					</ButtonStyles>
 				</Link>
 
-				<Link to={`/dashboard/my-board/work/write/${_id}`}>
-					<ButtonStyles variant="create">연재하기</ButtonStyles>
-				</Link>
+				<ButtonStyles variant="create" onClick={handleWriteClick}>
+					연재하기
+				</ButtonStyles>
 			</ButtonGroupStyles>
 		</CardStyles>
 	);

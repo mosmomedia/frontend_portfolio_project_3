@@ -31,6 +31,13 @@ function MyWorkReducer(state, action) {
 				isLoading: false,
 			};
 
+		case 'ADD_SUB_WORK':
+			return {
+				...state,
+				myWorkList: action.payload,
+				isLoading: false,
+			};
+
 		case 'DELETE_MY_CURRENT_WORK':
 			return {
 				...state,

@@ -1,6 +1,11 @@
+import { useEffect } from 'react';
+
 import { Link } from 'react-router-dom';
 
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
+import { getMyWorks } from '../../../contexts/myWorkBoard/MyWorkActions';
+
+import Spinner from '../../../components/shared/Spinner';
 
 import {
 	SectionStyles,
@@ -11,7 +16,22 @@ import {
 } from '../styles/MyBoardMainStyles';
 
 function MyBoardMain() {
-	const { userObjectId, myWorkList } = useMyWorkContext();
+	// const { userObjectId, myWorkList } = useMyWorkContext();
+
+	const { isLoading, userObjectId, myWorkList, dispatch } = useMyWorkContext();
+
+	useEffect(() => {
+		const fetchData = async () => {
+			dispatch({ type: 'LOADING' });
+			const { userObjectId, myWorks } = await getMyWorks();
+			const myWorksArr = myWorks.map(({ myWork }) => myWork);
+
+			dispatch({ type: 'GET_MY_WORKS', payload: { userObjectId, myWorksArr } });
+		};
+		fetchData();
+	}, [dispatch]);
+
+	if (isLoading) return <Spinner />;
 
 	return (
 		<SectionStyles>
