@@ -39,7 +39,7 @@ export const ButtonGroupStyles = styled.div`
 `;
 
 export const ButtonStyles = styled.button`
-	${tw`py-2 px-3 bg-keyColor text-primary cursor-pointer tracking-wider rounded-md hover:bg-st_bg1 duration-200 md:text-[15px] `}
+	${tw`py-2 px-3 bg-keyColor text-primary cursor-pointer tracking-wider  w-full  rounded-md hover:bg-st_bg1 duration-200 md:text-[15px] `}
 
 	${({ variant }) => variant === 'edit' && tw`bg-pd`}
 	${({ variant }) =>

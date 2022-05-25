@@ -1,8 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const MainStyles = styled.div`
-	${tw`h-screen relative`}
-	${tw`grid place-content-center`}
+	${tw`h-screen relative grid place-content-center`}
 `;
 
 export const FormStyles = styled.form`

@@ -7,7 +7,6 @@ export const name = async (req, res) => {};
 // @access Private
 export const createStudent = async (req, res) => {
 	const newStudent = await Student.create({ ...req.body });
-	console.log(newStudent);
 	res.status(200).json(newStudent);
 };
 
@@ -112,7 +111,6 @@ export const getMyWorks = async (req, res) => {
 	for (let i = 0; i < myWorks.length; i++) {
 		await findStudentById.populate(`myWorks.${i}.myWork`);
 	}
-	console.log(myWorks);
 	res.status(200).json({ myWorks, userObjectId });
 };
 

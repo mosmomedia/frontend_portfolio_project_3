@@ -134,6 +134,14 @@ function Sidebar() {
 						새 연재 시작하기
 					</MobileTitleStyles>
 
+					<MobileTitleStyles
+						is_active={
+							pathname === `/dashboard/my-board/work/write/${id}` ? 1 : 0
+						}
+					>
+						새로운 글쓰기
+					</MobileTitleStyles>
+
 					{/* <MobileTitleStyles
 						is_active={
 							id !== 'publish' && pathname === `/dashboard/my-board/${id}`
@@ -145,9 +153,7 @@ function Sidebar() {
 					</MobileTitleStyles> */}
 
 					<MobileTitleStyles
-						is_active={
-							pathname === `/dashboard/my-board/works/edit/${id}` ? 1 : 0
-						}
+						is_active={pathname === `/dashboard/my-board/edit/${id}` ? 1 : 0}
 					>
 						나의 연재 정보
 					</MobileTitleStyles>
@@ -204,7 +210,8 @@ function Sidebar() {
 							className={
 								pathname === '/dashboard/my-board' ||
 								pathname === `/dashboard/my-board/${id}` ||
-								pathname === `/dashboard/my-board/works/edit/${id}` ||
+								pathname === `/dashboard/my-board/edit/${id}` ||
+								pathname === `/dashboard/my-board/work/write/${id}` ||
 								pathname === '/dashboard/my-board/publish'
 									? 'active'
 									: 'inactive'

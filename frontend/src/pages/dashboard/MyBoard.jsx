@@ -11,6 +11,7 @@ import Home from './components/MyBoardMain';
 import PublishWork from './components/PublishWork';
 import MyWorks from './components/MyWorks';
 import MyWorkEdit from './components/MyWorkEdit';
+import MyWorkWrite from './components/MyWorkWrite';
 import NotFound from '../etc/NotFound';
 
 function MyBoard() {
@@ -34,8 +35,9 @@ function MyBoard() {
 			<Route path="*" element={<NotFound />} />
 			<Route path="/" element={<Home />} />
 			<Route path="/:id" element={<MyWorks />} />
-			<Route path="/works/edit/:id" element={<MyWorkEdit />} />
+			<Route path="/edit/:id" element={<MyWorkEdit />} />
 			<Route path="/publish" element={<PublishWork />} />
+			<Route path="/work/write/:id" element={<MyWorkWrite />} />
 		</Routes>
 	);
 }
