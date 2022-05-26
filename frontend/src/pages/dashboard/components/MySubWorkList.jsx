@@ -1,7 +1,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { CgEnter } from 'react-icons/cg';
+
 import Pagination from './Pagination';
+
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 import Spinner from '../../../components/shared/Spinner';
 
@@ -15,6 +18,8 @@ import {
 	ShortDescriptionStyles,
 	MainStyles,
 	PostsStyles,
+	MySubWorkStyles,
+	TitleStyles,
 } from '../styles/MySubWorkListStyle';
 
 function MySubWorkList() {
@@ -63,7 +68,12 @@ function MySubWorkList() {
 				<MainStyles>
 					<PostsStyles>
 						{posts.slice(offset, offset + limit).map((post) => (
-							<div key={post._id}>{post.subTitle}</div>
+							<MySubWorkStyles key={post._id}>
+								<h4>{post.subTitle} </h4>
+								<ButtonStyles variant="edit" onClick={handleClick}>
+									수정하기
+								</ButtonStyles>
+							</MySubWorkStyles>
 						))}
 					</PostsStyles>
 					<Pagination
