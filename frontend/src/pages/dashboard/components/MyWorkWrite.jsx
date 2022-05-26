@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
 import { addSubWork } from '../../../contexts/myWorkBoard/MyWorkActions';
@@ -64,6 +64,7 @@ function MyWorkWrite() {
 		const content = editorState.getCurrentContent();
 
 		if (content.hasText()) {
+			dispatch({ type: 'LOADING' });
 			const subContentHtml = draftToHtml(convertToRaw(content));
 
 			const formData = { subTitle, subContentHtml };
@@ -92,11 +93,13 @@ function MyWorkWrite() {
 			<FormStyles onSubmit={handleSubmit}>
 				<HeaderStyles>
 					<UpperGroupStyles>
-						<InfoStyles>
-							<h2>{title}</h2>
-							<span>|</span>
-							<h4>{genre}</h4>
-						</InfoStyles>
+						<Link to={`/dashboard/my-board/work/list/${classId}`}>
+							<InfoStyles>
+								<h2>{title}</h2>
+								<span>|</span>
+								<h4>{genre}</h4>
+							</InfoStyles>
+						</Link>
 						<ButtonStyles>등록하기</ButtonStyles>
 					</UpperGroupStyles>
 					<InputGroupStyles>

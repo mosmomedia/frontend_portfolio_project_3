@@ -18,8 +18,13 @@ ${tw`w-96 md:w-80 lg:w-96 xl:w-[444px]`}
 
 export const HeaderStyles = styled.header`
 	${tw`flex items-center justify-between`}
+
 	.left_item {
 		${tw`flex items-center space-x-2`}
+	}
+
+	.edit-link {
+		${tw`cursor-pointer`}
 	}
 `;
 

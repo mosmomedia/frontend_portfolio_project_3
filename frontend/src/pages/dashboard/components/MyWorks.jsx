@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef } from 'react';
 
+import { useNavigate } from 'react-router-dom';
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
 import MyWorkCard from './MyWorkCard';
+import Spinner from '../../../components/shared/Spinner';
 
 import {
 	SectionStyles,
@@ -22,9 +24,10 @@ function MyWorks() {
 	const [widthInput, setWidthInput] = useState(-1);
 
 	const { isLoading, myWorkList } = useMyWorkContext();
+	const navigate = useNavigate();
 
 	useEffect(() => {
-		if (!isLoading && myWorkList.length > 0) {
+		if (myWorkList.length > 0) {
 			// set initial scrollbar height
 			const { clientHeight, scrollHeight } = initHeight.current;
 			if (clientHeight === scrollHeight) {
@@ -35,8 +38,10 @@ function MyWorks() {
 				);
 				setWidthInput(+initHeightRatio);
 			}
+		} else {
+			navigate('/dashboard/my-board/');
 		}
-	}, [isLoading, myWorkList]);
+	}, [navigate, myWorkList]);
 
 	// changed initial scrollbar height
 	const handleScroll = ({
@@ -52,16 +57,17 @@ function MyWorks() {
 		}
 	};
 
+	if (isLoading || myWorkList.length === 0) return <Spinner />;
+
 	return (
 		<SectionStyles>
 			{/*main */}
 			<MainStyles>
 				<SectionWrapperStyles ref={initHeight} onScroll={handleScroll}>
 					<CardWrapperStyles>
-						{myWorkList.length > 0 &&
-							myWorkList.map((item) => (
-								<MyWorkCard key={item._id} item={item} />
-							))}
+						{myWorkList.map((item) => (
+							<MyWorkCard key={item._id} item={item} />
+						))}
 					</CardWrapperStyles>
 				</SectionWrapperStyles>
 				<BarIndicatorStyles>

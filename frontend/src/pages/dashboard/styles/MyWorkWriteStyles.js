@@ -10,7 +10,7 @@ export const FormStyles = styled.form`
 `;
 
 export const HeaderStyles = styled.div`
-	${tw`bg-st_alt1 p-5 rounded-t-lg`}
+	${tw`bg-st_bg1 p-5 rounded-t-lg`}
 	${tw`flex flex-col justify-between`}
 	${tw`row-span-1 tracking-wide`}
 `;

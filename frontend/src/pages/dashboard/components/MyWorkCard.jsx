@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
@@ -20,18 +20,16 @@ function MyWorkCard({ item: myWork }) {
 
 	const { dispatch } = useMyWorkContext();
 
-	const navgate = useNavigate();
+	const navigate = useNavigate();
 
-	const handleEditClick = (e) => {
+	const handleClick = ({ currentTarget: { name, id } }) => {
 		dispatch({ type: 'LOADING' });
 		dispatch({ type: 'GET_MY_CURRENT_WORK', payload: myWork });
-		navgate(`/dashboard/my-board/edit/${_id}`);
-	};
-
-	const handleWriteClick = (e) => {
-		dispatch({ type: 'LOADING' });
-		dispatch({ type: 'GET_MY_CURRENT_WORK', payload: myWork });
-		navgate(`/dashboard/my-board/work/write/${_id}`);
+		if (id === 'edit') {
+			navigate(`/dashboard/my-board/edit/${_id}`);
+		} else if (name) {
+			navigate(`/dashboard/my-board/work/${name}/${_id}`);
+		}
 	};
 
 	return (
@@ -43,9 +41,7 @@ function MyWorkCard({ item: myWork }) {
 					<span>|</span>
 					<h4>{genre}</h4>
 				</div>
-				<button onClick={handleEditClick}>
-					<FaEdit />
-				</button>
+				<FaEdit className="edit-link" id="edit" onClick={handleClick} />
 			</HeaderStyles>
 			<DescriptionStyles>{shortDesc} </DescriptionStyles>
 			<CountStyles>
@@ -53,16 +49,16 @@ function MyWorkCard({ item: myWork }) {
 				개의 게시글이 있습니다.
 			</CountStyles>
 			<ButtonGroupStyles>
-				<Link to={`/dashboard/my-board/work/list/${_id}`}>
-					<ButtonStyles
-						variant={contentList.length === 0 ? 'disabled' : 'edit'}
-						disabled={contentList.length === 0 ? 1 : 0}
-					>
-						연재 게시판
-					</ButtonStyles>
-				</Link>
+				<ButtonStyles
+					variant={contentList.length === 0 ? 'disabled' : 'edit'}
+					disabled={contentList.length === 0 ? 1 : 0}
+					name="list"
+					onClick={handleClick}
+				>
+					연재 게시판
+				</ButtonStyles>
 
-				<ButtonStyles variant="create" onClick={handleWriteClick}>
+				<ButtonStyles name="write" onClick={handleClick}>
 					연재하기
 				</ButtonStyles>
 			</ButtonGroupStyles>
