@@ -6,6 +6,7 @@ function MyWorkReducer(state, action) {
 				userObjectId: action.payload.userObjectId,
 				myWorkList: action.payload.myWorksArr,
 				currentWork: null,
+				currentSubWork: null,
 				isLoading: false,
 			};
 
@@ -14,6 +15,7 @@ function MyWorkReducer(state, action) {
 				...state,
 				myWorkList: action.payload,
 				currentWork: null,
+				currentSubWork: null,
 				isLoading: false,
 			};
 
@@ -31,6 +33,13 @@ function MyWorkReducer(state, action) {
 				isLoading: false,
 			};
 
+		case 'GET_MY_SUB_WORK':
+			return {
+				...state,
+				currentSubWork: action.payload,
+				isLoading: false,
+			};
+
 		case 'ADD_SUB_WORK':
 			return {
 				...state,
@@ -43,6 +52,7 @@ function MyWorkReducer(state, action) {
 				...state,
 				myWorkList: action.payload,
 				currentWork: null,
+				currentSubWork: null,
 				isLoading: false,
 			};
 

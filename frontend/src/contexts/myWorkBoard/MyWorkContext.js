@@ -8,6 +8,7 @@ function MyWorkProvider({ children }) {
 		userObjectId: null,
 		myWorkList: [],
 		currentWork: null,
+		currentSubWork: null,
 		isLoading: false,
 		isAdmin: false,
 		isTutor: false,

@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { CgEnter } from 'react-icons/cg';
-
 import Pagination from './Pagination';
+import MySubWork from './MySubWork';
 
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 import Spinner from '../../../components/shared/Spinner';
@@ -19,7 +18,6 @@ import {
 	MainStyles,
 	PostsStyles,
 	MySubWorkStyles,
-	TitleStyles,
 } from '../styles/MySubWorkListStyle';
 
 function MySubWorkList() {
@@ -41,8 +39,16 @@ function MySubWorkList() {
 		}
 	}, []);
 
-	const handleClick = () => {
+	const handleWriteClick = () => {
 		navigate(`/dashboard/my-board/work/write/${currentWork._id}`);
+	};
+
+	const handleEditClick = (e) => {
+		e.preventDefault();
+		const {
+			currentTarget: { id },
+		} = e;
+		navigate(`/dashboard/my-board/work/edit/${id}`);
 	};
 
 	if (isLoading || !currentWork) return <Spinner />;
@@ -57,7 +63,7 @@ function MySubWorkList() {
 							<span>|</span>
 							<h4>{currentWork.genre}</h4>
 						</InfoStyles>
-						<ButtonStyles onClick={handleClick}>연재하기</ButtonStyles>
+						<ButtonStyles onClick={handleWriteClick}>연재하기</ButtonStyles>
 					</UpperGroupStyles>
 
 					<ShortDescriptionStyles>
@@ -68,12 +74,18 @@ function MySubWorkList() {
 				<MainStyles>
 					<PostsStyles>
 						{posts.slice(offset, offset + limit).map((post) => (
-							<MySubWorkStyles key={post._id}>
-								<h4>{post.subTitle} </h4>
-								<ButtonStyles variant="edit" onClick={handleClick}>
-									수정하기
-								</ButtonStyles>
-							</MySubWorkStyles>
+							<MySubWork key={post._id} post={post} />
+							// <MySubWorkStyles key={post._id}>
+							// 	<h4>{post.subTitle} </h4>
+							// 	<ButtonStyles
+							// 		variant="edit"
+							// 		id={post._id}
+							// 		item={post}
+							// 		onClick={handleEditClick}
+							// 	>
+							// 		수정하기
+							// 	</ButtonStyles>
+							// </MySubWorkStyles>
 						))}
 					</PostsStyles>
 					<Pagination

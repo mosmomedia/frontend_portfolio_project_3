@@ -144,6 +144,14 @@ function Sidebar() {
 
 					<MobileTitleStyles
 						is_active={
+							pathname === `/dashboard/my-board/work/edit/${id}` ? 1 : 0
+						}
+					>
+						나의 글 수정하기
+					</MobileTitleStyles>
+
+					<MobileTitleStyles
+						is_active={
 							pathname === `/dashboard/my-board/work/list/${id}` ? 1 : 0
 						}
 					>
@@ -210,6 +218,7 @@ function Sidebar() {
 								pathname === `/dashboard/my-board/${id}` ||
 								pathname === `/dashboard/my-board/edit/${id}` ||
 								pathname === `/dashboard/my-board/work/write/${id}` ||
+								pathname === `/dashboard/my-board/work/edit/${id}` ||
 								pathname === `/dashboard/my-board/work/list/${id}` ||
 								pathname === '/dashboard/my-board/publish'
 									? 'active'

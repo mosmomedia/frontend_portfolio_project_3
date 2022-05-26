@@ -70,10 +70,6 @@ export const PostsStyles = styled.div`
 	${tw`grid grid-rows-5 row-span-5`}
 `;
 
-export const TitleStyles = styled.div`
-	${tw`flex items-center space-x-2`}
-`;
-
 export const MySubWorkStyles = styled.div`
 	${tw`p-5 flex justify-between items-center`}
 	${tw`border-b-st_alt1 border-solid border-[1px] border-opacity-50`}
