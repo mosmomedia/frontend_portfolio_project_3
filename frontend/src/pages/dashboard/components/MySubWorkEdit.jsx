@@ -72,22 +72,27 @@ function MySubWorkEdit() {
 			);
 
 			const formData = { subTitle, subContentHtml };
-			console.log(formData);
-			// const updatedMyWork = await updateSubWork(formData, currentWork._id);
-			// const { _id: updatedWorkId } = updatedMyWork;
 
-			// const payload = myWorkList.map((item) => {
-			// 	if (item._id === updatedWorkId) {
-			// 		return updatedMyWork;
-			// 	} else {
-			// 		return item;
-			// 	}
-			// });
+			const updatedMyWork = await updateSubWork(
+				formData,
+				currentWork._id,
+				currentSubWork._id
+			);
 
-			// dispatch({ type: 'GET_MY_CURRENT_WORK', payload: updatedMyWork });
-			// dispatch({ type: 'ADD_SUB_WORK', payload });
-			// toast('새 글이 성공적으로 등록 되었습니다.');
-			// navigate(`/dashboard/my-board/work/list/${currentWork._id}`);
+			const { _id: updatedWorkId } = updatedMyWork;
+
+			const payload = myWorkList.map((item) => {
+				if (item._id === updatedWorkId) {
+					return updatedMyWork;
+				} else {
+					return item;
+				}
+			});
+
+			dispatch({ type: 'GET_MY_CURRENT_WORK', payload: updatedMyWork });
+			dispatch({ type: 'UPDATE_SUB_WORK', payload });
+			toast('성공적으로 수정 되었습니다.');
+			navigate(`/dashboard/my-board/work/list/${currentWork._id}`);
 		} else {
 			toast.error('본문 내용을 입력하세요.');
 		}

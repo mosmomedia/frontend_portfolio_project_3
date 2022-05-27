@@ -79,16 +79,24 @@ export const addSubWork = async (req, res) => {
 export const updateSubWork = async (req, res) => {
 	const { userObjectId } = req.user;
 	const { id } = req.params;
-	const { subTitle, subContentHtml } = req.body;
+	const { formData, subWorkId } = req.body;
 	const findWork = await Work.findById(id);
 
 	if (!findWork || findWork.user.toString() !== userObjectId) {
 		throw new Error('cannot find work');
 	}
 
-	// findWork.contentList.push({ subTitle, subContentHtml });
+	const updatedList = findWork.contentList.map((item) => {
+		if (item._id == subWorkId) {
+			return formData;
+		} else {
+			return item;
+		}
+	});
 
-	// await findWork.save();
+	findWork.contentList = updatedList;
+
+	await findWork.save();
 
 	res.status(200).json(findWork);
 };

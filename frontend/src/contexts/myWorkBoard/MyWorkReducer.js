@@ -41,6 +41,7 @@ function MyWorkReducer(state, action) {
 			};
 
 		case 'ADD_SUB_WORK':
+		case 'UPDATE_SUB_WORK':
 			return {
 				...state,
 				myWorkList: action.payload,

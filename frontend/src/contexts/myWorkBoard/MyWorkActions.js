@@ -142,10 +142,14 @@ export const addSubWork = async (formData, classId) => {
 // @ POST /api/work/sub/:id
 // @ private
 
-export const updateSubWork = async (formData, classId) => {
+export const updateSubWork = async (formData, workId, subWorkId) => {
 	try {
 		const header = await createPayloadHeader();
-		const res = await axios.put(`/api/work/sub/${classId}`, formData, header);
+		const res = await axios.put(
+			`/api/work/sub/${workId}`,
+			{ formData, subWorkId },
+			header
+		);
 		return res.data;
 	} catch (error) {
 		console.log(error);
