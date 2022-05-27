@@ -43,14 +43,6 @@ function MySubWorkList() {
 		navigate(`/dashboard/my-board/work/write/${currentWork._id}`);
 	};
 
-	const handleEditClick = (e) => {
-		e.preventDefault();
-		const {
-			currentTarget: { id },
-		} = e;
-		navigate(`/dashboard/my-board/work/edit/${id}`);
-	};
-
 	if (isLoading || !currentWork) return <Spinner />;
 
 	return (
@@ -75,17 +67,6 @@ function MySubWorkList() {
 					<PostsStyles>
 						{posts.slice(offset, offset + limit).map((post) => (
 							<MySubWork key={post._id} post={post} />
-							// <MySubWorkStyles key={post._id}>
-							// 	<h4>{post.subTitle} </h4>
-							// 	<ButtonStyles
-							// 		variant="edit"
-							// 		id={post._id}
-							// 		item={post}
-							// 		onClick={handleEditClick}
-							// 	>
-							// 		수정하기
-							// 	</ButtonStyles>
-							// </MySubWorkStyles>
 						))}
 					</PostsStyles>
 					<Pagination

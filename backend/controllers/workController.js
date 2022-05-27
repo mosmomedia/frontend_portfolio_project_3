@@ -53,7 +53,7 @@ export const removeWork = async (req, res) => {
 	res.status(200).json({ message: 'success' });
 };
 
-// @desc add a sub work
+// @desc add a subwork
 // @route POST /api/work/sub/:id
 // @access Private
 export const addSubWork = async (req, res) => {
@@ -69,6 +69,26 @@ export const addSubWork = async (req, res) => {
 	findWork.contentList.push({ subTitle, subContentHtml });
 
 	await findWork.save();
+
+	res.status(200).json(findWork);
+};
+
+// @desc update my subwork
+// @route POST /api/work/sub/:id
+// @access Private
+export const updateSubWork = async (req, res) => {
+	const { userObjectId } = req.user;
+	const { id } = req.params;
+	const { subTitle, subContentHtml } = req.body;
+	const findWork = await Work.findById(id);
+
+	if (!findWork || findWork.user.toString() !== userObjectId) {
+		throw new Error('cannot find work');
+	}
+
+	// findWork.contentList.push({ subTitle, subContentHtml });
+
+	// await findWork.save();
 
 	res.status(200).json(findWork);
 };

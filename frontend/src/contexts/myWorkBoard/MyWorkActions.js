@@ -124,7 +124,7 @@ export const removeWorkInStudentDb = async (userId, workId) => {
 	}
 };
 
-// @ aad a sub work
+// @ add a subwork
 // @ POST /api/work/sub/:id
 // @ private
 
@@ -132,6 +132,20 @@ export const addSubWork = async (formData, classId) => {
 	try {
 		const header = await createPayloadHeader();
 		const res = await axios.post(`/api/work/sub/${classId}`, formData, header);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// @ update my subwork
+// @ POST /api/work/sub/:id
+// @ private
+
+export const updateSubWork = async (formData, classId) => {
+	try {
+		const header = await createPayloadHeader();
+		const res = await axios.put(`/api/work/sub/${classId}`, formData, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);

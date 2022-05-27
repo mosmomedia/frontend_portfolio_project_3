@@ -7,6 +7,7 @@ import {
 	updateWork,
 	removeWork,
 	addSubWork,
+	updateSubWork,
 } from '../controllers/workController.js';
 
 // auth middleware
@@ -19,6 +20,9 @@ router
 	.put(authMiddleware, updateWork)
 	.delete(authMiddleware, removeWork);
 
-router.route('/sub/:id').post(authMiddleware, addSubWork);
+router
+	.route('/sub/:id')
+	.post(authMiddleware, addSubWork)
+	.put(authMiddleware, updateSubWork);
 
 export default router;
