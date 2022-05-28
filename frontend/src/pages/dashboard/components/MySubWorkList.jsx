@@ -17,7 +17,6 @@ import {
 	ShortDescriptionStyles,
 	MainStyles,
 	PostsStyles,
-	MySubWorkStyles,
 } from '../styles/MySubWorkListStyle';
 
 function MySubWorkList() {

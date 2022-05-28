@@ -106,6 +106,7 @@ function Sidebar() {
 							강의 히스토리
 						</MobileNavChildStyles>
 					</MobileNavStyles>
+
 					<MobileNavStyles
 						is_active={
 							pathname === '/dashboard/my-board' ||
@@ -155,7 +156,7 @@ function Sidebar() {
 							pathname === `/dashboard/my-board/work/list/${id}` ? 1 : 0
 						}
 					>
-						나의 연재 리스트
+						<Link to={`/dashboard/my-board/${id}`}>나의 연재 리스트</Link>
 					</MobileTitleStyles>
 
 					<MobileTitleStyles

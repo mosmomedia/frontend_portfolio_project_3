@@ -29,7 +29,7 @@ export const HeaderStyles = styled.header`
 `;
 
 export const DescriptionStyles = styled.div`
-	${tw`py-2`}
+	${tw`py-2 text-gray-500 truncate`}
 `;
 
 export const CountStyles = styled.div`
