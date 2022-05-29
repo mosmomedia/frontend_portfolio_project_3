@@ -39,6 +39,7 @@ function Footer() {
 		pathname === `/dashboard/my-board/work/write/${id}` ||
 		pathname === `/dashboard/my-board/work/edit/${id}` ||
 		pathname === `/dashboard/my-board/work/list/${id}` ||
+		pathname === `/dashboard/my-board/work/viewer/${id}` ||
 		pathname === '/dashboard/my-board/publish' ||
 		pathname === '/dashboard/my-page/change-myinfo' ||
 		pathname === '/dashboard/my-page'

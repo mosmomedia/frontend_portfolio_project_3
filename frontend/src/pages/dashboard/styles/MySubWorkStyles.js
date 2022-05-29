@@ -12,6 +12,10 @@ export const MySubWorkStyles = styled.div`
 	}
 `;
 
+export const TitleStyles = styled.h4`
+	${tw`cursor-pointer`}
+`;
+
 export const ButtonStyles = styled.button`
 	${tw`py-1.5 px-3 lg:py-2.5 lg:px-4 tracking-wider rounded-md sm:hover:opacity-90`}
 

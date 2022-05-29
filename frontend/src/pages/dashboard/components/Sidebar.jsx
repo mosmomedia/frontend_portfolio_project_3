@@ -160,6 +160,14 @@ function Sidebar() {
 					</MobileTitleStyles>
 
 					<MobileTitleStyles
+						is_active={
+							pathname === `/dashboard/my-board/work/viewer/${id}` ? 1 : 0
+						}
+					>
+						<Link to={`/dashboard/my-board/${id}`}>나의 연재 보기</Link>
+					</MobileTitleStyles>
+
+					<MobileTitleStyles
 						is_active={pathname === `/dashboard/my-board/edit/${id}` ? 1 : 0}
 					>
 						나의 연재 정보
@@ -221,6 +229,7 @@ function Sidebar() {
 								pathname === `/dashboard/my-board/work/write/${id}` ||
 								pathname === `/dashboard/my-board/work/edit/${id}` ||
 								pathname === `/dashboard/my-board/work/list/${id}` ||
+								pathname === `/dashboard/my-board/work/viewer/${id}` ||
 								pathname === '/dashboard/my-board/publish'
 									? 'active'
 									: 'inactive'

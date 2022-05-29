@@ -6,6 +6,7 @@ import MyWorks from './components/MyWorks';
 import MyWorkEdit from './components/MyWorkEdit';
 import MySubWorkWrite from './components/MySubWorkWrite';
 import MySubWorkEdit from './components/MySubWorkEdit';
+import MySubWorkViewer from './components/MySubWorkViewer';
 import MySubWorkList from './components/MySubWorkList';
 import NotFound from '../etc/NotFound';
 
@@ -19,6 +20,7 @@ function MyBoard() {
 			<Route path="/publish" element={<PublishWork />} />
 			<Route path="/work/write/:id" element={<MySubWorkWrite />} />
 			<Route path="/work/edit/:id" element={<MySubWorkEdit />} />
+			<Route path="/work/viewer/:id" element={<MySubWorkViewer />} />
 			<Route path="/work/list/:id" element={<MySubWorkList />} />
 		</Routes>
 	);

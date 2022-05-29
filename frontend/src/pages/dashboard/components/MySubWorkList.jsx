@@ -36,6 +36,7 @@ function MySubWorkList() {
 		} else {
 			navigate('/dashboard/my-board/');
 		}
+		// eslint-disable-next-line
 	}, []);
 
 	const handleWriteClick = () => {

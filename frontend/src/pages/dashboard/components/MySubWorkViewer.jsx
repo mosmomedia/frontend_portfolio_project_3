@@ -10,7 +10,7 @@ import Spinner from '../../../components/shared/Spinner';
 
 import {
 	SectionStyles,
-	FormStyles,
+	WrapperStyles,
 	HeaderStyles,
 	InputGroupStyles,
 	InfoStyles,
@@ -18,7 +18,7 @@ import {
 	EditorStyles,
 	EditorOutlineStyles,
 	ButtonStyles,
-} from '../styles/MyWorkWriteStyles';
+} from '../styles/MySubWorkViewerStyles';
 import { toast } from 'react-toastify';
 
 function MySubWorkEdit() {
@@ -52,54 +52,11 @@ function MySubWorkEdit() {
 		editor.current.focus();
 	}
 
-	const handleChange = ({ target: { value } }) => {
-		setSubTitle(value);
-	};
-
-	const handleSubmit = async (e) => {
-		e.preventDefault();
-
-		const content = editorState.getCurrentContent();
-
-		if (content.hasText()) {
-			// dispatch({ type: 'LOADING' });
-
-			const subContentHtml = JSON.stringify(
-				convertToRaw(editorState.getCurrentContent())
-			);
-
-			const formData = { subTitle, subContentHtml };
-
-			const updatedMyWork = await updateSubWork(
-				formData,
-				currentWork._id,
-				currentSubWork._id
-			);
-
-			const { _id: updatedWorkId } = updatedMyWork;
-
-			const payload = myWorkList.map((item) => {
-				if (item._id === updatedWorkId) {
-					return updatedMyWork;
-				} else {
-					return item;
-				}
-			});
-
-			dispatch({ type: 'GET_MY_CURRENT_WORK', payload: updatedMyWork });
-			dispatch({ type: 'UPDATE_SUB_WORK', payload });
-			toast('성공적으로 수정 되었습니다.');
-			navigate(`/dashboard/my-board/work/list/${currentWork._id}`);
-		} else {
-			toast.error('본문 내용을 입력하세요.');
-		}
-	};
-
 	if (isLoading || !currentWork) return <Spinner />;
 
 	return (
 		<SectionStyles>
-			<FormStyles onSubmit={handleSubmit}>
+			<WrapperStyles>
 				<HeaderStyles>
 					<UpperGroupStyles>
 						<Link to={`/dashboard/my-board/work/list/${currentWork._id}`}>
@@ -109,20 +66,9 @@ function MySubWorkEdit() {
 								<h4>{currentWork.genre}</h4>
 							</InfoStyles>
 						</Link>
-						<ButtonStyles>변경하기</ButtonStyles>
 					</UpperGroupStyles>
 					<InputGroupStyles>
-						<label htmlFor="subTitle">
-							<h4>챕터 제목</h4>
-						</label>
-						<input
-							type="text"
-							id="subTitle"
-							name="subTitle"
-							value={subTitle}
-							onChange={handleChange}
-							required
-						/>
+						<h4>{subTitle}</h4>
 					</InputGroupStyles>
 				</HeaderStyles>
 
@@ -131,11 +77,12 @@ function MySubWorkEdit() {
 						<Editor
 							ref={editor}
 							editorState={editorState}
+							readOnly={true}
 							onChange={setEditorState}
 						/>
 					</EditorOutlineStyles>
 				</EditorStyles>
-			</FormStyles>
+			</WrapperStyles>
 		</SectionStyles>
 	);
 }
