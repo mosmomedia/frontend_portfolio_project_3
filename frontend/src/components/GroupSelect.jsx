@@ -11,14 +11,7 @@ import {
 	GroupBadgeStyles,
 } from '../styles/GroupSelectStyles';
 
-const genreOptions = [
-	{ type: 'genre', value: '판타지', label: '판타지' },
-	{ type: 'genre', value: '로맨스', label: '로맨스' },
-	{ type: 'genre', value: '로판', label: '로판' },
-	{ type: 'genre', value: '현판', label: '현판' },
-	{ type: 'genre', value: '무협', label: '무협' },
-	{ type: 'genre', value: '판드', label: '판드' },
-];
+const genreOptions = [];
 
 const workOptions = [];
 const authorOptions = [];
@@ -59,21 +52,42 @@ export const GroupSelect = ({ setBookList }) => {
 
 	useEffect(() => {
 		const allBooksList = data;
+
 		if (!loading && allBooksList.length > 0) {
 			allBooksList.forEach((book) => {
+				const findGenreId = genreOptions.findIndex(
+					(item) => item.value === book.genre
+				);
+
+				if (findGenreId === -1) {
+					genreOptions.push({
+						type: 'genre',
+						value: book.genre,
+						label: book.genre,
+						data: book,
+					});
+				}
 				workOptions.push({
 					type: 'title',
 					value: book.title,
 					label: book.title,
 					data: book,
 				});
-				authorOptions.push({
-					type: 'author',
-					value: book.author,
-					label: book.author,
-					data: book,
-				});
+
+				const findAuthorId = authorOptions.findIndex(
+					(item) => item.value === book.author
+				);
+
+				if (findAuthorId === -1) {
+					authorOptions.push({
+						type: 'author',
+						value: book.author,
+						label: book.author,
+						data: book,
+					});
+				}
 			});
+
 			setBookList(allBooksList);
 			setAllList(allBooksList);
 		}
@@ -107,8 +121,13 @@ export const GroupSelect = ({ setBookList }) => {
 		}
 
 		if (selectState.author.length > 0) {
-			selectState.author.forEach((item) => {
-				findAndUpdateitem(filteredList, item);
+			selectState.author.forEach((type) => {
+				console.log(type);
+				allList.forEach((item) => {
+					if (item.author === type) {
+						findAndUpdateitem(filteredList, item);
+					}
+				});
 			});
 		}
 
@@ -126,7 +145,7 @@ export const GroupSelect = ({ setBookList }) => {
 		const tmpSelectState = { genre: [], title: [], author: [] };
 
 		selectedList.forEach((item) => {
-			if (item.type === 'genre') {
+			if (item.type === 'genre' || item.type === 'author') {
 				tmpSelectState[item.type].push(item.value);
 			} else {
 				tmpSelectState[item.type].push(item.data);
