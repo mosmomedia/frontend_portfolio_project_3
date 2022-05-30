@@ -44,6 +44,7 @@ function MySubWorkEdit() {
 
 		setEditorState(subContentHtml);
 		setSubTitle(currentSubWork.subTitle);
+		// eslint-disable-next-line
 	}, []);
 
 	const editor = useRef(null);
@@ -62,7 +63,7 @@ function MySubWorkEdit() {
 		const content = editorState.getCurrentContent();
 
 		if (content.hasText()) {
-			// dispatch({ type: 'LOADING' });
+			dispatch({ type: 'LOADING' });
 
 			const subContentHtml = JSON.stringify(
 				convertToRaw(editorState.getCurrentContent())

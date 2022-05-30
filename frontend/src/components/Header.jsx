@@ -151,14 +151,6 @@ function Header() {
 									실시간 클래스
 								</Link>
 							</ItemStyles>
-							<ItemStyles>
-								<Link
-									to="/class-registration/all-classes/offline"
-									onClick={handleClick}
-								>
-									데뷔 클래스
-								</Link>
-							</ItemStyles>
 						</LinkGnbStyles>
 					</ListGnbStyles>
 

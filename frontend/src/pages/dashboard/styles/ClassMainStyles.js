@@ -49,11 +49,13 @@ export const CardStyles = styled.div`
 `;
 
 export const ButtonStyles = styled.button`
-	${tw`text-sm py-2 px-4  tracking-wider rounded-lg sm:hover:opacity-90 lg:py-2.5 lg:px-4`}
+	${tw`text-sm py-2 px-4  tracking-wider rounded sm:hover:opacity-90 lg:py-2.5 lg:px-4`}
 
 	${({ variant }) =>
 		variant === 'primary' &&
-		tw`bg-primary text-primary rounded-lg shadow-md sm:hover:shadow-inner`}
+		tw`bg-primary text-primary  shadow-md sm:hover:shadow-inner`}
+
+${({ variant }) => variant === 'secondary' && tw`bg-pd text-white`}		
 
 ${({ disabled }) =>
 		disabled &&

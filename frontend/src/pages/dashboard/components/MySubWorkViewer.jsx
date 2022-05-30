@@ -2,9 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
-import { updateSubWork } from '../../../contexts/myWorkBoard/MyWorkActions';
-
-import { Editor, EditorState, convertFromRaw, convertToRaw } from 'draft-js';
+import { Editor, EditorState, convertFromRaw } from 'draft-js';
 
 import Spinner from '../../../components/shared/Spinner';
 
@@ -17,13 +15,10 @@ import {
 	UpperGroupStyles,
 	EditorStyles,
 	EditorOutlineStyles,
-	ButtonStyles,
 } from '../styles/MySubWorkViewerStyles';
-import { toast } from 'react-toastify';
 
 function MySubWorkEdit() {
-	const { isLoading, currentSubWork, currentWork, myWorkList, dispatch } =
-		useMyWorkContext();
+	const { isLoading, currentSubWork, currentWork } = useMyWorkContext();
 
 	const [editorState, setEditorState] = useState(() =>
 		EditorState.createEmpty()
@@ -44,6 +39,7 @@ function MySubWorkEdit() {
 
 		setEditorState(subContentHtml);
 		setSubTitle(currentSubWork.subTitle);
+		// eslint-disable-next-line
 	}, []);
 
 	const editor = useRef(null);

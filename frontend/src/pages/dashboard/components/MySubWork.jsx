@@ -1,10 +1,5 @@
-import { useState } from 'react';
-
 import { useNavigate } from 'react-router-dom';
-
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
-
-import { Editor, convertFromRaw, EditorState } from 'draft-js';
 
 import {
 	MySubWorkStyles,
@@ -15,9 +10,6 @@ import Spinner from '../../../components/shared/Spinner';
 
 function MySubWork({ post: { _id, subTitle, subContentHtml } }) {
 	const { isLoading, dispatch } = useMyWorkContext();
-	const [editorState, setEditorState] = useState(() =>
-		EditorState.createEmpty()
-	);
 
 	const navigate = useNavigate();
 
@@ -42,7 +34,6 @@ function MySubWork({ post: { _id, subTitle, subContentHtml } }) {
 		<MySubWorkStyles>
 			{' '}
 			<TitleStyles onClick={handleViewerClick}>{subTitle} </TitleStyles>
-			<Editor editorState={editorState} readOnly={true}></Editor>
 			<ButtonStyles variant="edit" onClick={handleEditClick}>
 				수정하기
 			</ButtonStyles>

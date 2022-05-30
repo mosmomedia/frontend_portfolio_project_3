@@ -73,7 +73,7 @@ function Main() {
 								</h4>
 
 								<Link to="/dashboard/my-classroom/history">
-									<ButtonStyles variant="primary">보러가기</ButtonStyles>
+									<ButtonStyles variant="secondary">보러가기</ButtonStyles>
 								</Link>
 							</CardStyles>
 						) : (
