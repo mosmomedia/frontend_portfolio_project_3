@@ -162,6 +162,8 @@ function ClassAllList() {
 			newList = newList.filter((item) => item.weeks === weeks);
 		}
 
+		console.log(newList);
+
 		setFilteredList(newList);
 	}, [classDB, basicClass, advClass, pdClass, month, weeks]);
 

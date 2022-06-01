@@ -21,8 +21,9 @@ function MyClassCard({ item: myClass }) {
 		tutor,
 		isOnAir,
 		completedAt,
+		isCompleted,
 	} = myClass;
-
+	console.log(myClass);
 	return (
 		<CardStyles variant={type}>
 			{/* left item - title, tutor, hours, period  */}
@@ -43,7 +44,9 @@ function MyClassCard({ item: myClass }) {
 					{isOnAir ? completedAt + 2 : completedAt + 1} / {weeks}
 				</h2>
 				<Link to={URI + _id}>
-					<ButtonStyles>강의실 입장</ButtonStyles>
+					<ButtonStyles variant={isCompleted && 'history'}>
+						강의실 입장
+					</ButtonStyles>
 				</Link>
 			</RightItemStyles>
 		</CardStyles>
