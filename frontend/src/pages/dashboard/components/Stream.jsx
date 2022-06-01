@@ -1,7 +1,9 @@
 import { useState, useRef, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useMyClassContext } from '../../../contexts/myClassRoom/MyClassContext';
 
 import MyClassCard from './MyClassCard';
+import Spinner from '../../../components/shared/Spinner';
 
 import {
 	SectionStyles,
@@ -20,16 +22,34 @@ import {
 function Stream() {
 	const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(-1);
+	const [myCurrentList, setMyCurrentList] = useState([]);
 
-	const { myClassList } = useMyClassContext();
+	const { isLoading, dispatch, myClassList } = useMyClassContext();
 
-	const myCurrentList = [];
+	const navigate = useNavigate();
 
-	myClassList.forEach(({ myClass }) => {
-		if (!myClass.isCompleted) {
-			myCurrentList.push(myClass);
+	useEffect(() => {
+		dispatch({ type: 'LOADING' });
+		const filteredList = [];
+		if (myClassList.length > 0) {
+			myClassList.forEach(({ myClass }) => {
+				if (!myClass.isCompleted) {
+					if (myClass.isOnAir) {
+						filteredList.unshift(myClass);
+					} else {
+						filteredList.push(myClass);
+					}
+				}
+			});
 		}
-	});
+		dispatch({ type: 'OFF_LOADING' });
+		if (filteredList.length === 0) {
+			navigate('/dashboard/my-classroom');
+		} else {
+			setMyCurrentList(filteredList);
+		}
+		// eslint-disable-next-line
+	}, []);
 
 	useEffect(() => {
 		if (myCurrentList.length > 0) {
@@ -59,6 +79,8 @@ function Stream() {
 			setWidthInput(+initHeightRatio);
 		}
 	};
+
+	if (isLoading) return <Spinner />;
 
 	return (
 		<SectionStyles>

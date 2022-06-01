@@ -1,6 +1,8 @@
 import { useState, useRef, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
+import { motion, AnimatePresence } from 'framer-motion';
+
 import { getAllClasses } from '../../contexts/class/ClassActions';
 import { useClassContext } from '../../contexts/class/ClassContext';
 
@@ -142,39 +144,6 @@ function ClassAllList() {
 		fetchAllClasses();
 		return () => (isComponentMounted = false);
 	}, [dispatch, user, pathname, navigate]);
-
-	// useEffect(() => {
-	// 	const classState = {
-	// 		basicClass: true,
-	// 		advClass: true,
-	// 		pdClass: true,
-	// 	};
-
-	// 	const API_REG_URI = '/class-registration/all-classes';
-	// 	const API_MY_CLASS_URI = '/dashboard/my-classroom';
-
-	// 	if (pathname === `${API_MY_CLASS_URI}`) {
-	// 	} else if (pathname === `${API_REG_URI}/online/basic`) {
-	// 		classState.advClass = false;
-	// 		classState.pdClass = false;
-	// 	} else if (pathname === `${API_REG_URI}/online/adv`) {
-	// 		classState.basicClass = false;
-	// 		classState.pdClass = false;
-	// 	} else if (pathname === `${API_REG_URI}/online/pd`) {
-	// 		classState.basicClass = false;
-	// 		classState.advClass = false;
-	// 	} else if (
-	// 		pathname !== `${API_REG_URI}` &&
-	// 		pathname !== `${API_REG_URI}/online`
-	// 	) {
-	// 		return navigate('/notfound');
-	// 	}
-
-	// 	setStateClassList((prevState) => ({
-	// 		...prevState,
-	// 		...classState,
-	// 	}));
-	// }, [navigate, pathname]);
 
 	useEffect(() => {
 		let newList;
@@ -375,9 +344,18 @@ function ClassAllList() {
 							<div>강의 일정 또는 강의 종류를 선택하세요.</div>
 						) : (
 							<CardWrapperStyles>
-								{filteredList.map((item, id) => (
-									<ClassCard key={id} item={item}></ClassCard>
-								))}
+								<AnimatePresence>
+									{filteredList.map((item, id) => (
+										<motion.div
+											key={item._id}
+											initial={{ opacity: 0 }}
+											animate={{ opacity: 1 }}
+											exit={{ opacity: 0 }}
+										>
+											<ClassCard item={item}></ClassCard>
+										</motion.div>
+									))}
+								</AnimatePresence>
 							</CardWrapperStyles>
 						)}
 					</SectionWrapperStyles>

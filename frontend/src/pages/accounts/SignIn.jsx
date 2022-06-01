@@ -34,8 +34,8 @@ function SignIn() {
 	const [isDisabled, setIsDisabled] = useState(true);
 
 	const [formData, setFormData] = useState({
-		email: '',
-		password: '',
+		email: 'test@test.com',
+		password: 'test1234',
 	});
 
 	const { email, password } = formData;

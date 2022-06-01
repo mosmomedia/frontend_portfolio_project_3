@@ -12,7 +12,7 @@ export const PlatformStyles = styled.div`
 	${tw`flex justify-center `}
 
 	div {
-		${tw`flex-1 py-6 px-8 sm:px-12 lg:py-8`}
+		${tw`flex-1 py-6 px-6 sm:px-12 lg:py-8`}
 
 		h4 {
 			${tw`text-[0.9375rem] font-medium mb-6 lg:mb-8`}
@@ -39,7 +39,7 @@ export const PlatformStyles = styled.div`
 		${tw`grid grid-cols-2 lg:grid-cols-none lg:grid-flow-col lg:justify-between`}
 
 		li {
-			${tw`pb-2 md:text-sm lg:font-medium 2xl:text-base`}
+			${tw`pb-2  md:text-sm lg:font-medium 2xl:text-base`}
 		}
 	}
 `;

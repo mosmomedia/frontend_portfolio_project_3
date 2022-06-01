@@ -1,7 +1,4 @@
-import { useState, useEffect } from 'react';
-
 import { FaCheck, FaTimes, FaRss } from 'react-icons/fa';
-import IcoChecked from '../../../assets/icons/ico-checked.png';
 
 import {
 	WrapperStyles,
@@ -37,10 +34,7 @@ function CheckIn({ myClass: { currentClass, userObjectId } }) {
 			getClassInfo.push({ status: 'wating' });
 		}
 	});
-	// console.log(userObjectId);
-	// console.log(completedAt);
-	// console.log(classDetail);
-	// console.log(getClassInfo);
+
 	return (
 		<WrapperStyles>
 			<h3>출석 및 수업 현황</h3>
