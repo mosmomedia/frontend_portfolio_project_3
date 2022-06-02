@@ -23,7 +23,6 @@ function MyClassCard({ item: myClass }) {
 		completedAt,
 		isCompleted,
 	} = myClass;
-	console.log(myClass);
 	return (
 		<CardStyles variant={type}>
 			{/* left item - title, tutor, hours, period  */}

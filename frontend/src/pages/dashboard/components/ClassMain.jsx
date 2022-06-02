@@ -23,14 +23,23 @@ function Main() {
 
 	const myCurrentList = [];
 	const myHistoryList = [];
+	const onAirState = { isOnAir: false, num: 0 };
 
 	myClassList.forEach(({ myClass }) => {
+		console.log(myClass.isOnAir);
+		if (myClass.isOnAir) {
+			onAirState.isOnAir = true;
+			++onAirState.num;
+		}
+
 		if (myClass.status === 'completed') {
 			myHistoryList.push(myClass);
 		} else {
 			myCurrentList.push(myClass);
 		}
 	});
+
+	console.log(onAirState);
 
 	return (
 		<SectionStyles>
@@ -43,11 +52,21 @@ function Main() {
 						<h3>강의 정보</h3>
 						{myCurrentList.length > 0 ? (
 							<CardStyles>
-								<h4>
-									현재{' '}
-									<span className="stress_col">{myCurrentList.length}</span>
-									개의 강의를 수강하고 있습니다.
-								</h4>
+								<div>
+									{onAirState.isOnAir && (
+										<h4 className="onAirStateActivated">
+											현재 <span className="stress_col">{onAirState.num}</span>
+											개의{' '}
+											<span className="stress_col_onAir"> 실시간 강의</span>가
+											진행 중입니다.
+										</h4>
+									)}
+									<h4>
+										현재{' '}
+										<span className="stress_col">{myCurrentList.length}</span>
+										개의 강의를 수강하고 있습니다.
+									</h4>
+								</div>
 
 								<Link to="/dashboard/my-classroom/stream">
 									<ButtonStyles variant="primary">보러가기</ButtonStyles>

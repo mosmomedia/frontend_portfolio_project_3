@@ -40,7 +40,15 @@ export const CardStyles = styled.div`
 	}
 
 	.stress_col {
-		${tw`text-keyColor`}
+		${tw`text-keyColor px-0.5`}
+	}
+
+	.stress_col_onAir {
+		${tw`text-keyColor font-medium animate-pulse`}
+	}
+
+	.onAirStateActivated {
+		${tw`pb-1 `}
 	}
 
 	a {
