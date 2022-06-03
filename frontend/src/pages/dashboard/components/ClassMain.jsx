@@ -26,7 +26,6 @@ function Main() {
 	const onAirState = { isOnAir: false, num: 0 };
 
 	myClassList.forEach(({ myClass }) => {
-		console.log(myClass.isOnAir);
 		if (myClass.isOnAir) {
 			onAirState.isOnAir = true;
 			++onAirState.num;
@@ -38,8 +37,6 @@ function Main() {
 			myCurrentList.push(myClass);
 		}
 	});
-
-	console.log(onAirState);
 
 	return (
 		<SectionStyles>

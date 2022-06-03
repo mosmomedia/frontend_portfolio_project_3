@@ -44,7 +44,7 @@ export const CardStyles = styled.div`
 	}
 
 	.stress_col_onAir {
-		${tw`text-keyColor font-medium animate-pulse`}
+		${tw`text-keyColor animate-pulse`}
 	}
 
 	.onAirStateActivated {
