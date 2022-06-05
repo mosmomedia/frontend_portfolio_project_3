@@ -30,6 +30,9 @@ import MyClassRoom from './pages/dashboard/MyClassRoom';
 import MyBoard from './pages/dashboard/MyBoard';
 import MyPage from './pages/dashboard/MyPage';
 
+import MyAdminMain from './pages/admin/MyAdmin';
+import MyAdminClass from './pages/admin/MyAdminClass';
+
 import NotFound from './pages/etc/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 
@@ -77,6 +80,13 @@ function App() {
 									<Route path="my-classroom/*" element={<MyClassRoom />} />
 									<Route path="my-board/*" element={<MyBoard />} />
 									<Route path="my-page/*" element={<MyPage />} />
+								</Route>
+							</Route>
+
+							{/* admin */}
+							<Route path="/admin" element={<PrivateRoute />}>
+								<Route path="/admin" element={<MyAdminMain />}>
+									<Route path="class" element={<MyAdminClass />} />
 								</Route>
 							</Route>
 						</Routes>

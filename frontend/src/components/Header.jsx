@@ -38,6 +38,7 @@ function Header() {
 	//* tmp -  get token
 	if (user) {
 		// console.log(user.accessToken);
+		// console.log(user);
 	}
 
 	const splitURI = pathname.split('/');
@@ -66,7 +67,9 @@ function Header() {
 		pathname === `/dashboard/my-board/work/viewer/${id}` ||
 		pathname === '/dashboard/my-board/publish' ||
 		pathname === '/dashboard/my-page/change-myinfo' ||
-		pathname === '/dashboard/my-page'
+		pathname === '/dashboard/my-page' ||
+		pathname === '/admin/' ||
+		pathname === '/admin/class'
 	)
 		return null;
 
