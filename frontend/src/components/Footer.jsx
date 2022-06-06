@@ -21,7 +21,6 @@ import {
 
 function Footer() {
 	const { pathname } = useLocation();
-
 	const splitURI = pathname.trim().split('/');
 	const id = splitURI[splitURI.length - 1];
 	// exclude footer in specific components

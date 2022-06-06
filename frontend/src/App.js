@@ -31,10 +31,10 @@ import MyBoard from './pages/dashboard/MyBoard';
 import MyPage from './pages/dashboard/MyPage';
 
 import MyAdminMain from './pages/admin/MyAdmin';
-import MyAdminClass from './pages/admin/MyAdminClass';
 
 import NotFound from './pages/etc/NotFound';
 import PrivateRoute from './components/PrivateRoute';
+import AdminRoute from './components/AdminRoute';
 
 function App() {
 	return (
@@ -45,7 +45,7 @@ function App() {
 
 				<Router>
 					<ScrollToTop>
-						<Header></Header>
+						<Header />
 						<Routes>
 							<Route path="*" element={<NotFound />} />
 							<Route path="/notfound" element={<NotFound />} />
@@ -84,11 +84,9 @@ function App() {
 							</Route>
 
 							{/* admin */}
-							<Route path="/admin" element={<PrivateRoute />}>
-								<Route path="/admin" element={<MyAdminMain />}>
-									<Route path="class" element={<MyAdminClass />} />
-								</Route>
-							</Route>
+							{/* <Route path="/admin" element={<AdminRoute />}> */}
+							<Route path="/admin/*" element={<MyAdminMain />} />
+							{/* </Route> */}
 						</Routes>
 						<Footer />
 						<ToastContainer autoClose={2500} />

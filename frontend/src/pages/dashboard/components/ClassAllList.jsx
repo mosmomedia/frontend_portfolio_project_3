@@ -302,7 +302,7 @@ function ClassAllList() {
 						variant="card_col_2"
 					>
 						{classDB.length === 0 ? (
-							<div>No classes yet</div>
+							<div>현재 개설 된 강의가 없습니다.</div>
 						) : filteredList.length === 0 ? (
 							<div>강의 일정 또는 강의 종류를 선택하세요.</div>
 						) : (

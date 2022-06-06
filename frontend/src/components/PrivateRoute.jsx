@@ -6,7 +6,6 @@ import Spinner from '../components/shared/Spinner';
 
 const PrivateRoute = () => {
 	const [user, loading] = useAuthState(firebase.auth);
-
 	if (loading) return <Spinner />;
 	return user ? <Outlet /> : <Navigate to="/sign-in" />;
 };

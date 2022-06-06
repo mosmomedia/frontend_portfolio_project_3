@@ -1,4 +1,3 @@
-import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import Logo from '../../../assets/logos/logo_circle.svg';
@@ -9,15 +8,13 @@ import {
 	NavStyles,
 	NavChildStyles,
 	LogoStyles,
-	LogoutStyles,
 } from '../styles/AdminHeaderStyles';
 
 function AdminHeader() {
 	const { pathname } = useLocation();
 
-	const navigate = useNavigate();
-
 	const handleLogoutClick = (params) => {};
+
 	return (
 		<HeaderStyles>
 			<HeaderWrapperStyles>
@@ -28,9 +25,12 @@ function AdminHeader() {
 					</Link>
 				</LogoStyles>
 				<NavStyles>
-					<NavChildStyles is_selected={pathname === '/admin/class' ? 1 : 0}>
-						강의 만들기
-					</NavChildStyles>
+					<Link to="/admin/class">
+						<NavChildStyles is_selected={pathname === '/admin/class' ? 1 : 0}>
+							강의 만들기
+						</NavChildStyles>
+					</Link>
+
 					<NavChildStyles is_selected={pathname === '/' ? 1 : 0}>
 						강의 관리
 					</NavChildStyles>

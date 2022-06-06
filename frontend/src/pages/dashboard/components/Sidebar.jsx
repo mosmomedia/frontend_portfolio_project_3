@@ -59,8 +59,6 @@ function Sidebar() {
 		}
 	};
 
-	const handleChangeInfoClick = (params) => {};
-
 	const handleLogoutClick = () => {
 		firebase.auth.signOut();
 		toast.success('로그아웃 성공!');
@@ -185,7 +183,6 @@ function Sidebar() {
 							is_selected={
 								pathname === '/dashboard/my-page/change-myinfo' ? 1 : 0
 							}
-							onClick={handleChangeInfoClick}
 						>
 							정보변경
 						</MobileNavChildStyles>
