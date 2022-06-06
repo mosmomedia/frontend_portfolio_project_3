@@ -23,11 +23,13 @@ const AdminRoute = () => {
 
 		if (user) {
 			checkAdmin();
+		} else {
+			setIsLoading(false);
 		}
 	}, [user]);
 
 	if (isLoading) return <Spinner />;
-	return user && isAdmin ? <Outlet /> : <Navigate to="/sign-in" />;
+	return user && isAdmin ? <Outlet /> : <Navigate to="/admin/sign-in" />;
 };
 
 export default AdminRoute;

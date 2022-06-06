@@ -1,6 +1,10 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
+
+import { useAuthContext } from '../../../contexts/auth/AuthContext';
 
 import Logo from '../../../assets/logos/logo_circle.svg';
+import firebase from '../../../config/firebase';
 
 import {
 	HeaderStyles,
@@ -12,8 +16,15 @@ import {
 
 function AdminHeader() {
 	const { pathname } = useLocation();
+	const navigate = useNavigate();
 
-	const handleLogoutClick = (params) => {};
+	const { user } = useAuthContext();
+
+	const handleLogoutClick = () => {
+		firebase.auth.signOut();
+		toast.success('로그아웃 성공');
+		navigate('/');
+	};
 
 	return (
 		<HeaderStyles>
@@ -25,22 +36,34 @@ function AdminHeader() {
 					</Link>
 				</LogoStyles>
 				<NavStyles>
-					<Link to="/admin/class">
-						<NavChildStyles is_selected={pathname === '/admin/class' ? 1 : 0}>
+					<Link to="/admin">
+						<NavChildStyles is_selected={pathname === '/admin' ? 1 : 0}>
+							관리자 홈
+						</NavChildStyles>
+					</Link>
+
+					<Link to="/admin/registration">
+						<NavChildStyles
+							is_selected={pathname === '/admin/registration' ? 1 : 0}
+						>
 							강의 만들기
 						</NavChildStyles>
 					</Link>
 
-					<NavChildStyles is_selected={pathname === '/' ? 1 : 0}>
-						강의 관리
-					</NavChildStyles>
+					<Link to="/admin/classes">
+						<NavChildStyles is_selected={pathname === '/admin/classes' ? 1 : 0}>
+							강의 관리
+						</NavChildStyles>
+					</Link>
 
 					<NavChildStyles is_selected={pathname === '/' ? 1 : 0}>
 						학생 관리
 					</NavChildStyles>
-					<NavChildStyles>
-						<button onClick={handleLogoutClick}>로그아웃</button>
-					</NavChildStyles>
+					{user && (
+						<NavChildStyles>
+							<button onClick={handleLogoutClick}>로그아웃</button>
+						</NavChildStyles>
+					)}
 				</NavStyles>
 			</HeaderWrapperStyles>
 		</HeaderStyles>

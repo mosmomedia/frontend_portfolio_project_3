@@ -43,7 +43,8 @@ function Footer() {
 		pathname === '/dashboard/my-page/change-myinfo' ||
 		pathname === '/dashboard/my-page' ||
 		pathname === '/admin' ||
-		pathname === '/admin/class'
+		pathname === '/admin/registration' ||
+		pathname === '/admin/classes'
 	)
 		return null;
 

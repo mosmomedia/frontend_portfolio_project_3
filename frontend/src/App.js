@@ -34,7 +34,6 @@ import MyAdminMain from './pages/admin/MyAdmin';
 
 import NotFound from './pages/etc/NotFound';
 import PrivateRoute from './components/PrivateRoute';
-import AdminRoute from './components/AdminRoute';
 
 function App() {
 	return (
@@ -84,9 +83,7 @@ function App() {
 							</Route>
 
 							{/* admin */}
-							{/* <Route path="/admin" element={<AdminRoute />}> */}
 							<Route path="/admin/*" element={<MyAdminMain />} />
-							{/* </Route> */}
 						</Routes>
 						<Footer />
 						<ToastContainer autoClose={2500} />

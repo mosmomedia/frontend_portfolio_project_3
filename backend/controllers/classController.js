@@ -23,6 +23,7 @@ export const createClass = async (req, res) => {
 	}
 
 	const {
+		tutorId,
 		title,
 		type,
 		status,
@@ -48,9 +49,10 @@ export const createClass = async (req, res) => {
 		classDetail.push(tmpClass);
 	}
 
-	const verifyClass = month + weeks + type + period + hours + tutor;
+	const verifyClass = tutorId + month + weeks + type + period + hours + tutor;
 
 	const newClass = {
+		tutorId,
 		title,
 		type,
 		status,

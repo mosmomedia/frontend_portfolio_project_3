@@ -2,6 +2,9 @@ import mongoose from 'mongoose';
 
 const classInfoSchema = new mongoose.Schema(
 	{
+		tutorId: {
+			type: mongoose.Schema.Types.ObjectId,
+		},
 		title: { type: String, required: true },
 		type: { type: String, required: true },
 		status: { type: String, required: true },
