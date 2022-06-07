@@ -1,11 +1,11 @@
 import tw, { styled } from 'twin.macro';
 
 export const WrapperStyles = styled.div`
-	${tw`grid place-content-center tracking-wider h-screen md:text-sm`}
+	${tw`pt-[12vh] md:pt-[8vh] md:grid md:place-content-center tracking-wider md:h-screen md:text-sm`}
 `;
 
 export const FormStyles = styled.form`
-	${tw`space-y-5 max-w-sm mx-auto bg-white py-8 px-4  min-w-[360px]`}
+	${tw`space-y-5 max-w-sm mx-auto bg-white py-8 px-4  min-w-[360px] md:min-w-[480px] `}
 
 	h2 {
 		${tw`text-center mb-16`}
@@ -13,6 +13,9 @@ export const FormStyles = styled.form`
 `;
 export const InputGroupStyles = styled.div`
 	${tw`flex flex-col space-y-2 `}
+	h4 {
+		${tw`text-base`}
+	}
 `;
 
 export const InputStyles = styled.input`

@@ -10,7 +10,7 @@ function MyAdminHome() {
 
 	if (isLoading) return <Spinner />;
 
-	return <div>MyAdminHome</div>;
+	return <div>home</div>;
 }
 
 export default MyAdminHome;

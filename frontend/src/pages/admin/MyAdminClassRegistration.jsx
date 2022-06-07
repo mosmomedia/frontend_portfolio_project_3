@@ -1,8 +1,13 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Spinner from '../../components/shared/Spinner';
 
-import SelectOptions from './components/SelectOptions';
+import firebase from '../../config/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
+
+import SelectOptions from './components/AdminSelectOptions';
+import ClassPeriod from './components/AdminClassPeriod';
+import ClassHours from './components/AdminClassHours';
 
 import {
 	WrapperStyles,
@@ -14,8 +19,8 @@ import {
 } from './styles/MyAdminClassRegistrationStyles';
 
 function MyAdminOpenClass() {
-	const [loading, setLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(false);
+	const [user, loading] = useAuthState(firebase.auth);
 
 	const [formData, setFormData] = useState({
 		title: '',
@@ -23,15 +28,24 @@ function MyAdminOpenClass() {
 		status: 'pending',
 		month: 1,
 		weeks: 4,
-		period: '',
-		hours: '',
+		startDate: null,
+		endDate: null,
+		startHour: null,
+		endHour: null,
 		tutor: '',
 		price: 300000,
 		isOnAir: false,
 		completedAt: -1,
 	});
 
-	const { title } = formData;
+	const { title, tutor } = formData;
+
+	useEffect(() => {
+		if (user) {
+			const { displayName } = user;
+			setFormData({ ...formData, tutor: displayName });
+		}
+	}, []);
 
 	const handleSubmit = (e) => {
 		e.preventDefault();
@@ -42,14 +56,16 @@ function MyAdminOpenClass() {
 		setFormData({ ...formData, [id]: value });
 	};
 
-	const handleSelectionChange = ({ name, value }) => {
-		setFormData({ ...formData, [name]: value });
-	};
+	if (loading) return <Spinner />;
 
 	return (
 		<WrapperStyles>
 			<FormStyles onSubmit={handleSubmit}>
 				<h2>강의 개설하기</h2>
+				<InputGroupStyles>
+					<h4>강사 : {tutor}</h4>
+				</InputGroupStyles>
+
 				<InputGroupStyles>
 					<label htmlFor="title">강의 제목</label>
 					<InputStyles
@@ -100,6 +116,16 @@ function MyAdminOpenClass() {
 						formData={formData}
 						setFormData={setFormData}
 					/>
+				</InputGroupStyles>
+
+				{/* 강의 시작일 / 종료일 */}
+				<InputGroupStyles>
+					<ClassPeriod formData={formData} setFormData={setFormData} />
+				</InputGroupStyles>
+
+				{/* 강의 시작 시간 / 종료 시간 */}
+				<InputGroupStyles>
+					<ClassHours formData={formData} setFormData={setFormData} />
 				</InputGroupStyles>
 
 				<InputGroupStyles>
