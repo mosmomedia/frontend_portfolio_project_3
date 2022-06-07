@@ -15,7 +15,7 @@ export const getAllClasses = async (req, res) => {
 // @route Post /api/class
 // @access Private
 export const createClass = async (req, res) => {
-	const { isAdmin } = req.user;
+	const { isAdmin, userObjectId } = req.user;
 
 	if (!isAdmin) {
 		res.status(400);
@@ -23,14 +23,15 @@ export const createClass = async (req, res) => {
 	}
 
 	const {
-		tutorId,
 		title,
 		type,
 		status,
 		month,
 		weeks,
-		period,
-		hours,
+		startDate,
+		startHour,
+		endDate,
+		endHour,
 		tutor,
 		price,
 		homework,
@@ -49,35 +50,28 @@ export const createClass = async (req, res) => {
 		classDetail.push(tmpClass);
 	}
 
-	const verifyClass = tutorId + month + weeks + type + period + hours + tutor;
-
 	const newClass = {
-		tutorId,
+		tutorId: userObjectId,
 		title,
 		type,
 		status,
 		month,
 		weeks,
-		period,
-		hours,
 		tutor,
+		startDate,
+		startHour,
+		endDate,
+		endHour,
 		homework,
 		isOnAir,
 		completedAt,
 		price,
-		verifyClass,
 		classDetail,
 	};
 
-	// if (foundClass > -1) {
-	// 	res.status(400);
-	// 	throw new Error('db issue - this class already exists');
-	// }
-
-	// foundMonth.classList.push(newClass);
 	await Class.create(newClass);
 
-	res.status(201).json(newClass);
+	res.status(201).json({ message: 'success' });
 };
 
 // @desc enroll student to ordered class
