@@ -111,7 +111,7 @@ function MyAdminSignIn() {
 				</InputGroupStyles>
 
 				<SubmitStyles>
-					<ButtonStyles isDisabled={isDisabled}>
+					<ButtonStyles disabled={isDisabled} isDisabled={isDisabled}>
 						<span>
 							<img src={Logo} tw="w-5" alt="" />
 						</span>

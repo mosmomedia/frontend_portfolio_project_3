@@ -26,8 +26,6 @@ const createPayloadHeader = async () => {
 	}
 };
 
-export const name = async () => {};
-
 // @ create student
 // @ POST /api/student/
 // @ private

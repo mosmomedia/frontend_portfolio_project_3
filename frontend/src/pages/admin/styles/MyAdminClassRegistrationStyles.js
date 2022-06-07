@@ -1,18 +1,32 @@
 import tw, { styled } from 'twin.macro';
 
 export const WrapperStyles = styled.div`
-	${tw`pt-[12vh] md:pt-[8vh] md:grid md:place-content-center tracking-wider md:h-screen md:text-sm`}
+	${tw`py-[12vh] lg:grid lg:place-content-center tracking-wider lg:h-screen lg:text-sm`}
 `;
 
 export const FormStyles = styled.form`
-	${tw`space-y-5 max-w-sm mx-auto bg-white py-8 px-4  min-w-[360px] md:min-w-[480px] `}
+	${tw`space-y-4 max-w-sm mx-auto bg-white py-8 px-4  min-w-[380px] md:min-w-[480px] lg:min-w-[920px] lg:p-10 lg:space-y-10`}
 
 	h2 {
-		${tw`text-center mb-16`}
+		${tw`text-center mb-10`}
 	}
 `;
+
+export const WrapperItemStyles = styled.div`
+	${tw`lg:grid lg:grid-cols-2 gap-7`}
+`;
+
+export const LeftItemStyles = styled.div`
+	${tw`space-y-4 lg:space-y-6`}
+`;
+
+export const RightItemStyles = styled.div`
+	${tw`space-y-4 lg:space-y-6`}
+`;
+
 export const InputGroupStyles = styled.div`
 	${tw`flex flex-col space-y-2 `}
+
 	h4 {
 		${tw`text-base`}
 	}
@@ -24,11 +38,12 @@ export const InputStyles = styled.input`
 `;
 
 export const SubmitStyles = styled.div`
-	${tw`pt-5 space-y-7`}
+	${tw`pt-5 space-y-7 lg:max-w-md lg:mx-auto`}
 `;
 
 export const ButtonStyles = styled.button`
-	${tw`py-1.5 px-3 sm:py-2.5 sm:px-4 tracking-wider rounded-lg sm:hover:opacity-90`}
+	${tw`py-1.5 px-3 sm:py-2.5 sm:px-4 tracking-wider rounded-lg sm:hover:opacity-90  lg:py-3 lg:text-[17px] `}
+
 	${tw`bg-[#ea4b4e] text-white `}
 	${tw`text-center w-full text-base`}
 
