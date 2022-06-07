@@ -7,6 +7,7 @@ export const name = async (req, res) => {};
 // @access Public
 export const getAllClasses = async (req, res) => {
 	const allClasses = await Class.find();
+	console.log(allClasses);
 
 	res.status(200).json(allClasses);
 };

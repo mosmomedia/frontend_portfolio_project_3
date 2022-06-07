@@ -9,17 +9,6 @@ function ClassPeriod({ formData, setFormData }) {
 	const [startDate, setStartDate] = useState(new Date());
 	const [endDate, setEndDate] = useState(new Date());
 
-	const dateToString = (date) => {
-		const formattedDateKR = new Intl.DateTimeFormat('ko-KR').format(date);
-		const formattedWeekdayKR = new Intl.DateTimeFormat('ko-KR', {
-			weekday: 'short',
-		}).format(date);
-
-		const formattedDate = `${formattedDateKR} (${formattedWeekdayKR})`;
-
-		return formattedDate;
-	};
-
 	useEffect(() => {
 		setFormData({
 			...formData,

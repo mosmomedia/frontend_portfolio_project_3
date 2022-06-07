@@ -20,8 +20,43 @@ import {
 function ClassCard({ item }) {
 	const [isLoading, setIsLoading] = useState(false);
 
-	const { _id, title, type, weeks, hours, period, tutor, price, isPurchased } =
-		item;
+	const {
+		_id,
+		title,
+		type,
+		weeks,
+		startDate,
+		startHour,
+		endDate,
+		endHour,
+		tutor,
+		price,
+		isPurchased,
+	} = item;
+
+	const dateToString = (date) => {
+		const formattedDateKR = new Intl.DateTimeFormat('ko-KR').format(date);
+		const formattedWeekdayKR = new Intl.DateTimeFormat('ko-KR', {
+			weekday: 'short',
+		}).format(date);
+
+		const formattedDate = `${formattedDateKR} (${formattedWeekdayKR})`;
+
+		return formattedDate;
+	};
+
+	const hourToString = (hour) => {
+		const hrs = hour.getHours();
+		const min = hour.getMinutes();
+		return `${hrs < 10 ? hrs.toString().padStart(2, '0') : hrs}:${
+			min < 10 ? min.toString().padStart(2, '0') : min
+		}`;
+	};
+	const fmStartDate = dateToString(new Date(startDate));
+	const fmEndDate = dateToString(new Date(endDate));
+
+	const fmStartHour = hourToString(new Date(startHour));
+	const fmEndHour = hourToString(new Date(endHour));
 
 	const { user } = useAuthContext();
 	const navigate = useNavigate();
@@ -67,8 +102,12 @@ function ClassCard({ item }) {
 				<h2>{title}</h2>
 				<div>
 					<h3>강사 : {tutor}</h3>
-					<div>수강 시간 : {hours}</div>
-					<div>수강 기간 : {period}</div>
+					<div>
+						수강 시간 : {fmStartHour} - {fmEndHour}
+					</div>
+					<div>
+						수강 기간 : {fmStartDate} - {fmEndDate}
+					</div>
 				</div>
 			</LeftItemStyles>
 			{/* right item - weeks, price, checkout btn */}

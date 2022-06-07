@@ -22,8 +22,12 @@ export const CardStyles = styled.div`
 
 export const LeftItemStyles = styled.div`
 	${tw`space-y-6`}
+
+	h3 {
+		${tw`mb-2 md:text-[17px]`}
+	}
 	div {
-		${tw`space-y-[1px]`}
+		${tw`space-y-0.5 tracking-wider md:text-[15px] lg:text-sm`}
 	}
 `;
 export const RightItemStyles = styled.div`
@@ -39,7 +43,7 @@ export const RightItemStyles = styled.div`
 `;
 
 export const ButtonStyles = styled.button`
-	${tw`py-1.5 px-3 lg:py-2.5 lg:px-4 tracking-wider rounded-lg sm:hover:opacity-90 bg-primary text-primary`}
+	${tw`py-1.5 px-3 lg:py-2 lg:px-4 tracking-wider rounded-lg sm:hover:opacity-90 bg-primary text-primary`}
 
 	${({ isPurchased }) =>
 		isPurchased &&
