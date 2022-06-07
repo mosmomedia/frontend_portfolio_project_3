@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import Select from 'react-select';
 import Spinner from '../../components/shared/Spinner';
+
+import SelectOptions from './components/SelectOptions';
 
 import {
 	WrapperStyles,
@@ -11,43 +12,6 @@ import {
 	SubmitStyles,
 	ButtonStyles,
 } from './styles/MyAdminClassRegistrationStyles';
-
-const typeOptions = [
-	{ value: 'basicClass', label: 'Basic Class', name: 'type' },
-	{ value: 'advClass', label: 'Advanced Class', name: 'type' },
-	{ value: 'pdClass', label: 'PD Class', name: 'type' },
-];
-
-const statusOptions = [
-	{ value: 'open', label: 'Open', name: 'status' },
-	{ value: 'pending', label: 'Pending', name: 'status' },
-	{ value: 'closed', label: 'Closed', name: 'status' },
-];
-
-const weeksOptions = [
-	{ value: 4, label: '4주', name: 'weeks' },
-	{ value: 8, label: '8주', name: 'weeks' },
-];
-
-const priceOptions = [
-	{ value: 300000, label: 300000, name: 'price' },
-	{ value: 600000, label: 600000, name: 'price' },
-];
-
-const monthOptions = [
-	{ value: 1, label: '1월', name: 'month' },
-	{ value: 2, label: '2월', name: 'month' },
-	{ value: 3, label: '3월', name: 'month' },
-	{ value: 4, label: '4월', name: 'month' },
-	{ value: 5, label: '5월', name: 'month' },
-	{ value: 6, label: '6월', name: 'month' },
-	{ value: 7, label: '7월', name: 'month' },
-	{ value: 8, label: '8월', name: 'month' },
-	{ value: 9, label: '9월', name: 'month' },
-	{ value: 10, label: '10월', name: 'month' },
-	{ value: 11, label: '11월', name: 'month' },
-	{ value: 12, label: '12월', name: 'month' },
-];
 
 function MyAdminOpenClass() {
 	const [loading, setLoading] = useState(false);
@@ -99,46 +63,53 @@ function MyAdminOpenClass() {
 
 				<InputGroupStyles>
 					<label htmlFor="type">강의 타입</label>
-					<Select
-						defaultValue={typeOptions[0]}
-						options={typeOptions}
-						onChange={handleSelectionChange}
+					<SelectOptions
+						defaultValue={0}
+						name="typeOptions"
+						formData={formData}
+						setFormData={setFormData}
 					/>
 				</InputGroupStyles>
 
 				<InputGroupStyles>
 					<label htmlFor="status">강의 상태</label>
-					<Select
-						defaultValue={statusOptions[1]}
-						options={statusOptions}
-						onChange={handleSelectionChange}
+					<SelectOptions
+						name="statusOptions"
+						defaultValue={1}
+						formData={formData}
+						setFormData={setFormData}
 					/>
 				</InputGroupStyles>
 
 				<InputGroupStyles>
 					<label htmlFor="month">강의 시작(month)</label>
-					<Select
-						defaultValue={monthOptions[0]}
-						options={monthOptions}
-						onChange={handleSelectionChange}
+					<SelectOptions
+						name="monthOptions"
+						defaultValue={0}
+						formData={formData}
+						setFormData={setFormData}
 					/>
 				</InputGroupStyles>
 
 				<InputGroupStyles>
 					<label htmlFor="weeks">강의 기간(weeks)</label>
-					<Select
-						defaultValue={weeksOptions[0]}
-						options={weeksOptions}
-						onChange={handleSelectionChange}
+
+					<SelectOptions
+						name="weeksOptions"
+						defaultValue={0}
+						formData={formData}
+						setFormData={setFormData}
 					/>
 				</InputGroupStyles>
 
 				<InputGroupStyles>
 					<label htmlFor="price">강의 가격</label>
-					<Select
-						defaultValue={priceOptions[0]}
-						options={priceOptions}
-						onChange={handleSelectionChange}
+
+					<SelectOptions
+						name="priceOptions"
+						defaultValue={0}
+						formData={formData}
+						setFormData={setFormData}
 					/>
 				</InputGroupStyles>
 
