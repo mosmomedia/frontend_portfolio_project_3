@@ -7,7 +7,6 @@ export const name = async (req, res) => {};
 // @access Public
 export const getAllClasses = async (req, res) => {
 	const allClasses = await Class.find();
-	console.log(allClasses);
 
 	res.status(200).json(allClasses);
 };
@@ -70,9 +69,9 @@ export const createClass = async (req, res) => {
 		classDetail,
 	};
 
-	await Class.create(newClass);
+	const payload = await Class.create(newClass);
 
-	res.status(201).json({ message: 'success' });
+	res.status(201).json(payload);
 };
 
 // @desc enroll student to ordered class

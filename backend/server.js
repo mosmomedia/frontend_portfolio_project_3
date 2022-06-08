@@ -10,6 +10,10 @@ app.use(express.urlencoded({ extended: false }));
 
 // Routes
 
+//* Tutor
+import tutorRoutes from './Routes/tutorRoutes.js';
+app.use('/api/tutor', tutorRoutes);
+
 //* Student
 import studentRoutes from './Routes/studentRoutes.js';
 app.use('/api/student', studentRoutes);

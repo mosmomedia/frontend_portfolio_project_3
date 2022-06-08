@@ -1,7 +1,7 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useAuthContext } from '../../../contexts/auth/AuthContext';
+import { useAdminContext } from '../../../contexts/admin/AdminContext';
 
 import Logo from '../../../assets/logos/logo_circle.svg';
 import firebase from '../../../config/firebase';
@@ -17,9 +17,7 @@ import {
 function AdminHeader() {
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
-
-	const { user } = useAuthContext();
-
+	const { admin } = useAdminContext();
 	const handleLogoutClick = () => {
 		firebase.auth.signOut();
 		toast.success('로그아웃 성공');
@@ -59,7 +57,7 @@ function AdminHeader() {
 					<NavChildStyles is_selected={pathname === '/' ? 1 : 0}>
 						학생 관리
 					</NavChildStyles>
-					{user && (
+					{admin && (
 						<NavChildStyles>
 							<button onClick={handleLogoutClick}>로그아웃</button>
 						</NavChildStyles>

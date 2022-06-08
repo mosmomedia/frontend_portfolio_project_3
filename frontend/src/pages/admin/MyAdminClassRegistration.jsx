@@ -4,7 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import firebase from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
-import { createNewClass } from '../../contexts/admin/AdminActions';
+import { createNewClass } from '../../contexts/class/ClassActions';
+import { createTutor } from '../../contexts/admin/AdminActions';
 
 import SelectOptions from './components/AdminSelectOptions';
 import ClassPeriod from './components/AdminClassPeriod';
@@ -26,6 +27,7 @@ import {
 } from './styles/MyAdminClassRegistrationStyles';
 
 function MyAdminOpenClass() {
+	const [isLoading, setIsLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
 	const [user, loading] = useAuthState(firebase.auth);
 
@@ -102,9 +104,21 @@ function MyAdminOpenClass() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-
+		setIsLoading(true);
 		try {
-			const { message } = await createNewClass(formData);
+			const { tutorId, _id: classId } = await createNewClass(formData);
+
+			const { uid, email, displayName: name } = user;
+
+			// create a new tutor in mongodb
+			const { message } = await createTutor({
+				firebaseId: uid,
+				email,
+				name,
+				tutorId,
+				classId,
+			});
+
 			if (message === 'success') {
 				toast.success('새 강의를 개설했습니다.');
 				navigate('/admin');
@@ -114,13 +128,14 @@ function MyAdminOpenClass() {
 		} catch (error) {
 			console.log(error);
 		}
+		setIsLoading(false);
 	};
 
 	const handleChange = ({ target: { id, value } }) => {
 		setFormData({ ...formData, [id]: value });
 	};
 
-	if (loading) return <Spinner />;
+	if (loading || isLoading) return <Spinner />;
 
 	return (
 		<WrapperStyles>

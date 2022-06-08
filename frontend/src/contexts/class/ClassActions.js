@@ -26,7 +26,19 @@ const createPayloadHeader = async () => {
 	}
 };
 
-export const ClassActions = async () => {};
+// @ create class
+// @ POST /api/class/
+// @ private
+
+export const createNewClass = async (formData) => {
+	try {
+		const header = await createPayloadHeader();
+		const res = await axios.post(API_URI, formData, header);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
 
 // get all classes
 // @ get all classes

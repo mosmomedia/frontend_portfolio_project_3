@@ -1,7 +1,7 @@
 import axios from 'axios';
 import firebase from '../../config/firebase';
 
-const API_URI = '/api/class/';
+const API_URI = '/api/tutor/';
 
 const createPayloadHeader = async () => {
 	const user = firebase.auth.currentUser;
@@ -26,11 +26,11 @@ const createPayloadHeader = async () => {
 	}
 };
 
-// @ create class
-// @ POST /api/class/
+// @ create tutor
+// @ POST /api/tutor/
 // @ private
 
-export const createNewClass = async (formData) => {
+export const createTutor = async (formData) => {
 	try {
 		const header = await createPayloadHeader();
 		const res = await axios.post(API_URI, formData, header);
