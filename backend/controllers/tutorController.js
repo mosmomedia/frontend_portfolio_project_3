@@ -44,16 +44,15 @@ export const getMyClasses = async (req, res) => {
 		throw new Error('unauthorized issue');
 	}
 	const findTutorById = await Tutor.findOne({ userObjectId });
+	if (findTutorById) {
+		const { myClasses } = findTutorById;
 
-	if (!findTutorById) {
-		throw new Error('cannot find student db by user ID');
+		for (let i = 0; i < myClasses.length; i++) {
+			await findTutorById.populate(`myClasses.${i}.myClass`);
+		}
+
+		res.status(200).json({ myClasses, userObjectId });
+	} else {
+		res.status(200).json({ myClasses: null, userObjectId });
 	}
-
-	const { myClasses } = findTutorById;
-
-	for (let i = 0; i < myClasses.length; i++) {
-		await findTutorById.populate(`myClasses.${i}.myClass`);
-	}
-
-	res.status(200).json({ myClasses, userObjectId });
 };

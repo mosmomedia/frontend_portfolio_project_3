@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import firebase from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAdminContext } from '../../contexts/admin/AdminContext';
 
 import { createNewClass } from '../../contexts/class/ClassActions';
 import { createTutor } from '../../contexts/admin/AdminActions';
@@ -27,9 +28,10 @@ import {
 } from './styles/MyAdminClassRegistrationStyles';
 
 function MyAdminOpenClass() {
-	const [isLoading, setIsLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
 	const [user, loading] = useAuthState(firebase.auth);
+
+	const { isLoading, myClassList, dispatch } = useAdminContext();
 
 	const navigate = useNavigate();
 
@@ -104,9 +106,11 @@ function MyAdminOpenClass() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		setIsLoading(true);
+		dispatch({ type: 'LOADING' });
 		try {
-			const { tutorId, _id: classId } = await createNewClass(formData);
+			const newClass = await createNewClass(formData);
+
+			const { tutorId, _id: classId } = newClass;
 
 			const { uid, email, displayName: name } = user;
 
@@ -120,6 +124,8 @@ function MyAdminOpenClass() {
 			});
 
 			if (message === 'success') {
+				const payload = [...myClassList, newClass];
+				dispatch({ type: 'ADD_NEW_CLASS', payload });
 				toast.success('새 강의를 개설했습니다.');
 				navigate('/admin');
 			} else {
@@ -128,7 +134,7 @@ function MyAdminOpenClass() {
 		} catch (error) {
 			console.log(error);
 		}
-		setIsLoading(false);
+		dispatch({ type: 'OFF_LOADING' });
 	};
 
 	const handleChange = ({ target: { id, value } }) => {

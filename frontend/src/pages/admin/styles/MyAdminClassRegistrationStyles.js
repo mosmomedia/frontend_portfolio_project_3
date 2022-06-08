@@ -5,7 +5,7 @@ export const WrapperStyles = styled.div`
 `;
 
 export const FormStyles = styled.form`
-	${tw`space-y-4 max-w-sm mx-auto bg-white py-8 px-4  min-w-[380px] md:min-w-[480px] lg:min-w-[920px] lg:p-10 lg:space-y-10`}
+	${tw`space-y-4  mx-auto rounded bg-white py-8 px-4 w-[85%]  md:w-[80%]  lg:w-[90%] lg:p-10 lg:space-y-10`}
 
 	h2 {
 		${tw`text-center mb-10`}

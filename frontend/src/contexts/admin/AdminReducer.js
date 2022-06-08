@@ -8,6 +8,13 @@ function AdminReducer(state, action) {
 				isLoading: false,
 			};
 
+		case 'ADD_NEW_CLASS':
+			return {
+				...state,
+				myClassList: action.payload,
+				isLoading: false,
+			};
+
 		case 'GET_MY_CURRENT_CLASS':
 			return {
 				...state,
@@ -15,10 +22,11 @@ function AdminReducer(state, action) {
 			};
 
 		case 'LOADING':
-			return {
-				...state,
-				isLoading: true,
-			};
+			return { ...state, isLoading: true };
+
+		case 'OFF_LOADING':
+			return { ...state, isLoading: false };
+
 		default:
 			return new Error();
 	}

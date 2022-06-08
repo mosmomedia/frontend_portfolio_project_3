@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
 import AdminHeader from './components/AdminHeader';
@@ -15,23 +15,39 @@ import AdminRoute from '../../components/AdminRoute';
 import NotFound from '../etc/NotFound';
 
 import { ContainerStyles } from './styles';
+import Spinner from '../../components/shared/Spinner';
 
 function MyAdminMain() {
-	const { dispatch, isLoading, myClasssList, admin } = useAdminContext();
+	const { dispatch, isLoading } = useAdminContext();
 
 	useEffect(() => {
 		const fetchData = async () => {
 			dispatch({ type: 'LOADING' });
-			const { userObjectId, myClasses } = await getMyClasses();
-			const myClassArr = myClasses.map(({ myClass }) => myClass);
-			dispatch({
-				type: 'GET_MY_CLASSES',
-				payload: { userObjectId, myClassArr },
-			});
+
+			try {
+				const { userObjectId, myClasses } = await getMyClasses();
+
+				let myClassArr = [];
+
+				if (myClasses) {
+					myClassArr = myClasses.map(({ myClass }) => myClass);
+				}
+
+				dispatch({
+					type: 'GET_MY_CLASSES',
+					payload: { userObjectId, myClassArr },
+				});
+			} catch (error) {
+				console.log(error);
+			}
 		};
 
 		fetchData();
+
+		dispatch({ type: 'OFF_LOADING' });
 	}, [dispatch]);
+
+	if (isLoading) return <Spinner />;
 
 	return (
 		<ContainerStyles>

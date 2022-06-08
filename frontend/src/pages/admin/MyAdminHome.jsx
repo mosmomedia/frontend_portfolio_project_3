@@ -17,7 +17,6 @@ function MyAdminHome() {
 	const { classesNum, studentsNum, feedbackNum } = countInfo;
 
 	useEffect(() => {
-		// dispatch({ type: 'LOADING' });
 		if (!isLoading && myClassList) {
 			let classesNum = myClassList.length;
 			let studentsNum = 0;
