@@ -7,11 +7,11 @@ export const name = async (req, res) => {};
 // @access Private
 
 export const createTutor = async (req, res) => {
-	const { firebaseId, email, name, tutorId, classId } = req.body;
+	const { firebaseId, tutorId, classId } = req.body;
 	let foundTutor = await Tutor.findOne({ firebaseId });
 
 	if (!foundTutor) {
-		foundTutor = await Tutor.create({ ...req.body });
+		foundTutor = await Tutor.create({ ...req.body, userObjectId: tutorId });
 	}
 
 	const { myClasses } = foundTutor;
@@ -30,4 +30,30 @@ export const createTutor = async (req, res) => {
 	await foundTutor.save();
 
 	res.status(200).json({ message: 'success' });
+};
+
+// @ get my classes in tutor db
+// @ GET /api/tutor/myclass/:id
+// @ private
+
+export const getMyClasses = async (req, res) => {
+	const { userObjectId } = req.user;
+	const { id } = req.params;
+
+	if (userObjectId !== id) {
+		throw new Error('unauthorized issue');
+	}
+	const findTutorById = await Tutor.findOne({ userObjectId });
+
+	if (!findTutorById) {
+		throw new Error('cannot find student db by user ID');
+	}
+
+	const { myClasses } = findTutorById;
+
+	for (let i = 0; i < myClasses.length; i++) {
+		await findTutorById.populate(`myClasses.${i}.myClass`);
+	}
+
+	res.status(200).json({ myClasses, userObjectId });
 };

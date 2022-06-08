@@ -48,7 +48,7 @@ export const addClassToStudent = async (userId, myClass) => {
 	try {
 		const header = await createPayloadHeader();
 		const res = await axios.post(
-			API_URI + '/myclass/' + userId,
+			API_URI + 'myclass/' + userId,
 			{ myClass },
 			header
 		);
@@ -71,7 +71,7 @@ export const getMyClasses = async () => {
 		const getUserDb = await firebase.getDoc(docSnap);
 		const { userObjectId } = getUserDb.data();
 
-		const res = await axios.get(API_URI + '/myclass/' + userObjectId, header);
+		const res = await axios.get(API_URI + 'myclass/' + userObjectId, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);

@@ -1,6 +1,6 @@
 function AdminReducer(state, action) {
 	switch (action.type) {
-		case 'UPDATE_ADMIN_INFO':
+		case 'GET_MY_CLASSES':
 			return {
 				...state,
 				admin: action.payload.userObjectId,
@@ -8,7 +8,7 @@ function AdminReducer(state, action) {
 				isLoading: false,
 			};
 
-		case 'GET_MY_CLASSES':
+		case 'GET_MY_CURRENT_CLASS':
 			return {
 				...state,
 				isLoading: false,

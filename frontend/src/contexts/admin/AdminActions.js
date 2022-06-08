@@ -39,3 +39,22 @@ export const createTutor = async (formData) => {
 		console.log(error);
 	}
 };
+
+// @ get my classes in tutor db
+// @ GET /api/tutor/myclass/:id
+// @ private
+
+export const getMyClasses = async () => {
+	try {
+		const user = firebase.auth.currentUser;
+		const header = await createPayloadHeader();
+
+		const docSnap = firebase.doc(firebase.db, 'users', user.uid);
+		const getUserDb = await firebase.getDoc(docSnap);
+		const { userObjectId } = getUserDb.data();
+		const res = await axios.get(API_URI + 'myclass/' + userObjectId, header);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
