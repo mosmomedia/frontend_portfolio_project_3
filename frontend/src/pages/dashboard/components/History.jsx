@@ -26,7 +26,7 @@ function History() {
 	const myHistoryList = [];
 
 	myClassList.forEach(({ myClass }) => {
-		if (myClass.isCompleted) {
+		if (myClass.status === 'completed') {
 			myHistoryList.push(myClass);
 		}
 	});

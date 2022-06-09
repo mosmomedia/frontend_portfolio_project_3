@@ -74,6 +74,27 @@ export const createClass = async (req, res) => {
 	res.status(201).json(payload);
 };
 
+// @desc update class
+// @route PUT /api/class/:id
+// @access Private
+
+export const updateClass = async (req, res) => {
+	const { userObjectId } = req.user;
+	const { id } = req.params;
+
+	const getMyClassById = await Class.findById(id);
+
+	if (userObjectId !== getMyClassById.tutorId.toString()) {
+		throw new Error('unauthorized issue');
+	}
+
+	const updateItems = { ...req.body };
+
+	await getMyClassById.updateOne(updateItems);
+
+	res.status(200).json({ message: 'success' });
+};
+
 // @desc enroll student to ordered class
 // @route Post /api/class/:id
 // @access Private

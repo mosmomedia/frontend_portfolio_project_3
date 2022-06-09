@@ -7,6 +7,7 @@ function AdminProvider({ children }) {
 	const initialState = {
 		admin: null,
 		myClassList: [],
+		myCurrentClass: null,
 		isLoading: false,
 	};
 

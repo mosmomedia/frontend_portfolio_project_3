@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import Spinner from '../../../components/shared/Spinner';
+import { Link } from 'react-router-dom';
+
+import { FaRss, FaFlagCheckered } from 'react-icons/fa';
 
 import {
 	CardStyles,
@@ -9,9 +10,18 @@ import {
 } from '../styles/AdminClassCardStyles';
 
 function AdminClassCard({ item }) {
-	const [isLoading, setIsLoading] = useState(false);
-
-	const { title, type, weeks, startDate, startHour, endDate, endHour } = item;
+	const {
+		_id,
+		title,
+		type,
+		status,
+		weeks,
+		startDate,
+		startHour,
+		endDate,
+		endHour,
+		isOnAir,
+	} = item;
 
 	const dateToString = (date) => {
 		const formattedDateKR = new Intl.DateTimeFormat('ko-KR').format(date);
@@ -37,14 +47,17 @@ function AdminClassCard({ item }) {
 	const fmStartHour = hourToString(new Date(startHour));
 	const fmEndHour = hourToString(new Date(endHour));
 
-	const handleOnClick = (params) => {};
-
-	if (isLoading) return <Spinner />;
 	return (
 		<CardStyles variant={type}>
 			{/* left item - title, tutor, hours, period  */}
 			<LeftItemStyles>
-				<h2>{title}</h2>
+				<div className="headerTitle">
+					<h2>{title}</h2>
+					{status === 'completed' && (
+						<FaFlagCheckered size="18" className="completed" />
+					)}
+					{isOnAir && <FaRss size="18" />}
+				</div>
 				<div>
 					<div>
 						수강 시간 : {fmStartHour} - {fmEndHour}
@@ -57,7 +70,9 @@ function AdminClassCard({ item }) {
 			{/* right item - weeks, price, checkout btn */}
 			<RightItemStyles>
 				<h2>{weeks}주</h2>
-				<ButtonStyles onClick={handleOnClick}>강의실</ButtonStyles>
+				<Link to={`/admin/class/${_id}`}>
+					<ButtonStyles>강의실</ButtonStyles>
+				</Link>
 			</RightItemStyles>
 		</CardStyles>
 	);

@@ -40,7 +40,6 @@ export const createNewClass = async (formData) => {
 	}
 };
 
-// get all classes
 // @ get all classes
 // @ GET /api/class/
 // @ public
@@ -48,6 +47,20 @@ export const createNewClass = async (formData) => {
 export const getAllClasses = async () => {
 	try {
 		const res = await axios.get(API_URI);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// @desc update class
+// @route PUT /api/class/:id
+// @access Private
+export const updateClass = async (classId, formData) => {
+	const header = await createPayloadHeader();
+
+	try {
+		const res = await axios.put(API_URI + classId, formData, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);

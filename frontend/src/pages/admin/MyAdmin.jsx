@@ -3,9 +3,10 @@ import { Route, Routes } from 'react-router-dom';
 
 import AdminHeader from './components/AdminHeader';
 import MyAdminClassRegistration from './MyAdminClassRegistration';
-import MyAdminClass from './MyAdminClass';
+import MyAdminClasses from './MyAdminClasses';
 import MyAdminHome from './MyAdminHome';
 import MyAdminSignIn from './components/MyAdminSignIn';
+import MyAdminSingleClass from './components/MyAdminSingleClass';
 
 import { useAdminContext } from '../../contexts/admin/AdminContext';
 import { getMyClasses } from '../../contexts/admin/AdminActions';
@@ -58,7 +59,8 @@ function MyAdminMain() {
 				<Route path="/" element={<AdminRoute />}>
 					<Route path="/" element={<MyAdminHome />} />
 					<Route path="registration" element={<MyAdminClassRegistration />} />
-					<Route path="classes" element={<MyAdminClass />} />
+					<Route path="classes" element={<MyAdminClasses />} />
+					<Route path="class/:id" element={<MyAdminSingleClass />} />
 				</Route>
 			</Routes>
 		</ContainerStyles>

@@ -16,8 +16,13 @@ import {
 
 function AdminHeader() {
 	const { pathname } = useLocation();
-	const navigate = useNavigate();
 	const { admin } = useAdminContext();
+
+	const splitURI = pathname.split('/');
+	const id = splitURI[splitURI.length - 1];
+
+	const navigate = useNavigate();
+
 	const handleLogoutClick = () => {
 		firebase.auth.signOut();
 		toast.success('로그아웃 성공');
@@ -49,7 +54,14 @@ function AdminHeader() {
 					</Link>
 
 					<Link to="/admin/classes">
-						<NavChildStyles is_selected={pathname === '/admin/classes' ? 1 : 0}>
+						<NavChildStyles
+							is_selected={
+								pathname === '/admin/classes' ||
+								pathname === `/admin/class/${id}`
+									? 1
+									: 0
+							}
+						>
 							강의 관리
 						</NavChildStyles>
 					</Link>

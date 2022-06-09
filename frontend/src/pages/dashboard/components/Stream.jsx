@@ -33,7 +33,7 @@ function Stream() {
 		const filteredList = [];
 		if (myClassList.length > 0) {
 			myClassList.forEach(({ myClass }) => {
-				if (!myClass.isCompleted) {
+				if (myClass.status === 'open') {
 					if (myClass.isOnAir) {
 						filteredList.unshift(myClass);
 					} else {

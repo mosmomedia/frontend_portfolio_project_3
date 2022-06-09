@@ -2,7 +2,7 @@ import {
 	WrapperStyles,
 	BoxWrapperStyles,
 	BoxStyles,
-} from '../styles/HomeworkStyles';
+} from '../styles/MyAdminClassCheckInStyles';
 
 function Homework({ myClass: { completedAt, classDetail } }) {
 	// * homeworkAt
@@ -10,7 +10,7 @@ function Homework({ myClass: { completedAt, classDetail } }) {
 
 	return (
 		<WrapperStyles>
-			<h3>과제 제출 현황 (서비스 준비 중)</h3>
+			<h3>과제 체크 현황 (서비스 준비 중)</h3>
 			<BoxWrapperStyles>
 				{classDetail.map((item, id) => (
 					<BoxStyles key={id}>

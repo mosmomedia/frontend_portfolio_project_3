@@ -15,9 +15,18 @@ function AdminReducer(state, action) {
 				isLoading: false,
 			};
 
+		case 'UPDATE_CLASS':
+			return {
+				...state,
+				myClassList: action.payload.myClassList,
+				myCurrentClass: action.payload.myCurrentClass,
+				isLoading: false,
+			};
+
 		case 'GET_MY_CURRENT_CLASS':
 			return {
 				...state,
+				myCurrentClass: action.payload,
 				isLoading: false,
 			};
 

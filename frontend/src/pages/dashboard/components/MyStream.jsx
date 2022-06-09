@@ -40,6 +40,7 @@ function MyStream() {
 
 			dispatch({ type: 'OFF_LOADING' });
 		}
+		// eslint-disable-line-next
 	}, []);
 
 	if (isLoading || currentClass === null || userObjectId === null)

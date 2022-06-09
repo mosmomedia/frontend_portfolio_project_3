@@ -11,6 +11,7 @@ const groupOptions = {
 		{ value: 'open', label: 'Open', name: 'status' },
 		{ value: 'pending', label: 'Pending', name: 'status' },
 		{ value: 'closed', label: 'Closed', name: 'status' },
+		{ value: 'completed', label: 'Completed', name: 'status' },
 	],
 
 	weeksOptions: [
