@@ -162,6 +162,7 @@ function MyClassCard({
 				<h2>
 					{isOnAir ? completedAt + 2 : completedAt + 1} / {weeks}
 				</h2>
+
 				{status === 'completed' ? (
 					<MyButtonStyles isCompleted={true} disabled>
 						수업 완료
