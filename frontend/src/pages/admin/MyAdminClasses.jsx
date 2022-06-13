@@ -4,6 +4,8 @@ import { useAdminContext } from '../../contexts/admin/AdminContext';
 
 import AdminClassCard from './components/AdminClassCard';
 
+import {} from './styles';
+
 import 'twin.macro';
 import 'styled-components/macro';
 
