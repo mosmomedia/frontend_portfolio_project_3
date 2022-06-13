@@ -68,7 +68,7 @@ function Header() {
 		pathname === '/dashboard/my-board/publish' ||
 		pathname === '/dashboard/my-page/change-myinfo' ||
 		pathname === '/dashboard/my-page' ||
-		pathname === '/admin/' ||
+		pathname === '/admin' ||
 		pathname === '/admin/registration' ||
 		pathname === `/admin/class/${id}` ||
 		pathname === '/admin/classes'

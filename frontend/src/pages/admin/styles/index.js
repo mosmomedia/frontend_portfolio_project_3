@@ -9,7 +9,7 @@ export const WrapperStyles = styled.div`
 `;
 
 export const MainStyles = styled.div`
-	${tw`space-y-10 max-w-sm mx-auto bg-white py-8 px-4  min-w-[380px] md:min-w-[480px] lg:min-w-[920px] lg:p-10 lg:space-y-10`}
+	${tw`space-y-10 max-w-4xl mx-auto rounded bg-white py-8 px-4 w-[90%] md:w-[80%] lg:min-w-[640px] lg:p-5 lg:space-y-10`}
 
 	h3 {
 		${tw`text-lg`}
