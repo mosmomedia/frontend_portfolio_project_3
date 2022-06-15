@@ -43,7 +43,11 @@ export const LeftItemStyles = styled.div`
 	}
 `;
 export const RightItemStyles = styled.div`
-	${tw`flex flex-col justify-between items-center text-center`}
+	${tw`flex flex-col justify-between  text-center`}
+
+	/* .editBtn {
+		${tw`self-end pt-1`}
+	} */
 
 	h2 {
 		${tw`text-2xl tracking-wider`}
@@ -56,4 +60,8 @@ export const RightItemStyles = styled.div`
 
 export const ButtonStyles = styled.button`
 	${tw`py-1.5 px-3 lg:py-2 lg:px-4 tracking-wider rounded-lg sm:hover:opacity-90 bg-primary text-primary`}
+`;
+
+export const EditBtnStyles = styled.button`
+	${tw`self-end pt-1`}
 `;

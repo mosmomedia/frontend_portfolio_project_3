@@ -1,7 +1,4 @@
-import React from 'react';
-
 import { useAdminContext } from '../../contexts/admin/AdminContext';
-
 import AdminClassCard from './components/AdminClassCard';
 
 import {

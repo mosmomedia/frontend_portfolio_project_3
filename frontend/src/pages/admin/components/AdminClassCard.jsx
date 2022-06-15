@@ -1,21 +1,26 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-import { FaRss, FaFlagCheckered } from 'react-icons/fa';
+import { FaRss, FaFlagCheckered, FaEdit } from 'react-icons/fa';
+import { useAdminContext } from '../../../contexts/admin/AdminContext';
 
 import {
 	CardStyles,
 	LeftItemStyles,
 	RightItemStyles,
 	ButtonStyles,
+	EditBtnStyles,
 } from '../styles/AdminClassCardStyles';
 
 function AdminClassCard({ item }) {
+	const { dispatch } = useAdminContext();
+
+	const navigate = useNavigate();
+
 	const {
 		_id,
 		title,
 		type,
 		status,
-		weeks,
 		startDate,
 		startHour,
 		endDate,
@@ -47,12 +52,18 @@ function AdminClassCard({ item }) {
 	const fmStartHour = hourToString(new Date(startHour));
 	const fmEndHour = hourToString(new Date(endHour));
 
+	const handleOnClick = () => {
+		dispatch({ type: 'GET_MY_CURRENT_CLASS', payload: item });
+		navigate(`/admin/registration/edit/${_id}`);
+	};
+
 	return (
 		<CardStyles variant={type}>
 			{/* left item - title, tutor, hours, period  */}
 			<LeftItemStyles>
 				<div className="headerTitle">
 					<h2>{title}</h2>
+
 					{status === 'completed' && (
 						<FaFlagCheckered size="18" className="completed" />
 					)}
@@ -69,7 +80,9 @@ function AdminClassCard({ item }) {
 			</LeftItemStyles>
 			{/* right item - weeks, price, checkout btn */}
 			<RightItemStyles>
-				<h2>{weeks}주</h2>
+				<EditBtnStyles onClick={handleOnClick}>
+					<FaEdit size="18" />
+				</EditBtnStyles>
 				<Link to={`/admin/class/${_id}`}>
 					<ButtonStyles>강의실</ButtonStyles>
 				</Link>
