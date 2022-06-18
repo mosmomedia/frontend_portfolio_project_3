@@ -98,9 +98,37 @@ function MyAdminOpenClass() {
 	]);
 
 	useEffect(() => {
-		if (user) {
-			const { displayName } = user;
-			setFormData({ ...formData, tutor: displayName });
+		if (myCurrentClass) {
+			const {
+				title,
+				tutor,
+				status,
+				type,
+				month,
+				weeks,
+				startDate,
+				startHour,
+				endDate,
+				endHour,
+				price,
+			} = myCurrentClass;
+
+			console.log(status);
+
+			setFormData({
+				...formData,
+				title,
+				tutor,
+				status,
+				type,
+				month,
+				weeks,
+				startDate,
+				startHour,
+				endDate,
+				endHour,
+				price,
+			});
 		}
 		// eslint-disable-next-line
 	}, []);
@@ -187,7 +215,7 @@ function MyAdminOpenClass() {
 							<label htmlFor="status">강의 상태</label>
 							<SelectOptions
 								name="statusOptions"
-								defaultValue={1}
+								defaultValue={0}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -239,7 +267,7 @@ function MyAdminOpenClass() {
 				</WrapperItemStyles>
 				<SubmitStyles>
 					<ButtonStyles disabled={isDisabled} isDisabled={isDisabled}>
-						<span>개설하기</span>
+						<span>변경하기</span>
 					</ButtonStyles>
 				</SubmitStyles>
 			</FormStyles>
