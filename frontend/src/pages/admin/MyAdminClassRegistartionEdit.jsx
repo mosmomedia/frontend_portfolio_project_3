@@ -38,7 +38,7 @@ function MyAdminOpenClass() {
 
 	const [formData, setFormData] = useState({
 		title: '',
-		type: '',
+		type: -1,
 		status: '',
 		month: -1,
 		weeks: -1,
@@ -113,7 +113,7 @@ function MyAdminOpenClass() {
 				price,
 			} = myCurrentClass;
 
-			console.log(status);
+			console.log(status, type);
 
 			setFormData({
 				...formData,
@@ -204,7 +204,8 @@ function MyAdminOpenClass() {
 						<InputGroupStyles>
 							<label htmlFor="type">강의 타입</label>
 							<SelectOptions
-								defaultValue={0}
+								// defaultValue={0}
+								defaultValue={type}
 								name="typeOptions"
 								formData={formData}
 								setFormData={setFormData}
