@@ -45,6 +45,7 @@ function Footer() {
 		pathname === '/admin' ||
 		pathname === '/admin/registration' ||
 		pathname === `/admin/class/${id}` ||
+		pathname === `/admin/registration/edit/${id}` ||
 		pathname === '/admin/classes'
 	)
 		return null;

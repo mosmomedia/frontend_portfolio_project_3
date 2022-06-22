@@ -13,7 +13,7 @@ export const FormStyles = styled.form`
 `;
 
 export const WrapperItemStyles = styled.div`
-	${tw`lg:grid lg:grid-cols-2 gap-7`}
+	${tw`space-y-4 lg:grid lg:grid-cols-2 lg:gap-7 lg:space-y-0`}
 `;
 
 export const LeftItemStyles = styled.div`

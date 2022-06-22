@@ -5,13 +5,11 @@ import firebase from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAdminContext } from '../../contexts/admin/AdminContext';
 
-import { createNewClass } from '../../contexts/class/ClassActions';
-import { createTutor } from '../../contexts/admin/AdminActions';
+import { updateClass } from '../../contexts/class/ClassActions';
 
-import AdminSelectOptionData from './components/AdminSelectOptionData';
-import SelectOptions from './components/AdminSelectOptions';
-import ClassPeriod from './components/AdminClassPeriod';
-import ClassHours from './components/AdminClassHours';
+import SelectOptions from './components/AdminSelectOptionsEdit';
+import ClassPeriod from './components/AdminClassPeriodEdit';
+import ClassHours from './components/AdminClassHoursEdit';
 
 import { toast } from 'react-toastify';
 import Spinner from '../../components/shared/Spinner';
@@ -30,12 +28,12 @@ import {
 
 function MyAdminOpenClass() {
 	const [isDisabled, setIsDisabled] = useState(true);
-	const [user, loading] = useAuthState(firebase.auth);
 
 	const { isLoading, admin, myClassList, myCurrentClass, dispatch } =
 		useAdminContext();
 
 	const navigate = useNavigate();
+
 	const [formData, setFormData] = useState({
 		title: '',
 		type: null,
@@ -70,15 +68,15 @@ function MyAdminOpenClass() {
 	useEffect(() => {
 		if (
 			title &&
-			type &&
-			status &&
-			month &&
-			weeks &&
+			type !== null &&
+			status !== null &&
+			month !== null &&
+			weeks !== null &&
+			price !== null &&
 			startDate &&
 			startHour &&
 			endDate &&
-			endHour &&
-			price
+			endHour
 		) {
 			setIsDisabled(false);
 		} else {
@@ -113,66 +111,19 @@ function MyAdminOpenClass() {
 				price,
 			} = myCurrentClass;
 
-			const {
-				monthOptions,
-				statusOptions,
-				weeksOptions,
-				typeOptions,
-				priceOptions,
-			} = AdminSelectOptionData;
-
-			let typeNum, monthNum, statusNum, weeksNum, priceNum;
-
-			// find type order
-			for (let i = 0; i < typeOptions.length; i++) {
-				if (typeOptions[i].value === type) {
-					typeNum = i;
-				}
-			}
-
-			// find status order
-			for (let i = 0; i < statusOptions.length; i++) {
-				if (statusOptions[i].value === status) {
-					statusNum = i;
-				}
-			}
-
-			// find weeks order
-			for (let i = 0; i < weeksOptions.length; i++) {
-				if (weeksOptions[i].value === weeks) {
-					weeksNum = i;
-				}
-			}
-
-			// find month order
-			for (let i = 0; i < monthOptions.length; i++) {
-				if (monthOptions[i].value === month) {
-					monthNum = i;
-				}
-			}
-
-			// find price order
-			for (let i = 0; i < priceOptions.length; i++) {
-				if (priceOptions[i].value === price) {
-					priceNum = i;
-				}
-			}
-
-			console.log(startDate);
-
 			setFormData({
 				...formData,
 				title,
 				tutor,
-				status: statusNum,
-				type: typeNum,
-				month: monthNum,
-				weeks: weeksNum,
-				startDate,
-				startHour,
-				endDate,
-				endHour,
-				price: priceNum,
+				status,
+				type,
+				month,
+				weeks,
+				startDate: new Date(startDate),
+				startHour: new Date(startHour),
+				endDate: new Date(endDate),
+				endHour: new Date(endHour),
+				price,
 			});
 		}
 	}, []);
@@ -188,32 +139,28 @@ function MyAdminOpenClass() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch({ type: 'LOADING' });
+
 		try {
-			const newClass = await createNewClass(formData);
+			const { _id: classId } = myCurrentClass;
+			const updatedClass = await updateClass(classId, formData);
 
-			const { tutorId, _id: classId } = newClass;
-
-			const { uid, email, displayName: name } = user;
-
-			// create a new tutor in mongodb
-			const { message } = await createTutor({
-				firebaseId: uid,
-				email,
-				name,
-				tutorId,
-				classId,
+			const updatedMyClassList = myClassList.map((item) => {
+				if (item._id === classId) {
+					return updatedClass;
+				} else {
+					return item;
+				}
 			});
 
-			if (message === 'success') {
-				const payload = [...myClassList, newClass];
-				dispatch({ type: 'ADD_NEW_CLASS', payload });
-				toast.success('새 강의를 개설했습니다.');
-				navigate('/admin');
-			} else {
-				toast.error('강의 개설에 문제가 생겼습니다.');
-			}
+			dispatch({
+				type: 'UPDATE_CLASS',
+				payload: { updatedMyClassList, updatedClass },
+			});
+			toast.success('강의를 변경 했습니다.');
+			navigate('/admin');
 		} catch (error) {
 			console.log(error);
+			toast.error('강의 개설에 문제가 생겼습니다.');
 		}
 		dispatch({ type: 'OFF_LOADING' });
 	};
@@ -222,7 +169,7 @@ function MyAdminOpenClass() {
 		setFormData({ ...formData, [id]: value });
 	};
 
-	if (loading || isLoading) return <Spinner />;
+	if (isLoading || myCurrentClass === null) return <Spinner />;
 
 	return (
 		<WrapperStyles>
@@ -289,12 +236,22 @@ function MyAdminOpenClass() {
 
 						{/* 강의 시작일 / 종료일 */}
 						<InputGroupStyles>
-							<ClassPeriod formData={formData} setFormData={setFormData} />
+							<ClassPeriod
+								status="edit"
+								myCurrentClass={myCurrentClass}
+								formData={formData}
+								setFormData={setFormData}
+							/>
 						</InputGroupStyles>
 
 						{/* 강의 시작 시간 / 종료 시간 */}
 						<InputGroupStyles>
-							<ClassHours formData={formData} setFormData={setFormData} />
+							<ClassHours
+								status="edit"
+								myCurrentClass={myCurrentClass}
+								formData={formData}
+								setFormData={setFormData}
+							/>
 						</InputGroupStyles>
 
 						<InputGroupStyles>

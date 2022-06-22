@@ -49,7 +49,7 @@ function MyAdminOpenClass() {
 		homework: true,
 		price: -1,
 		isOnAir: false,
-		completedAt: null,
+		completedAt: -1,
 	});
 
 	const {
@@ -107,6 +107,7 @@ function MyAdminOpenClass() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch({ type: 'LOADING' });
+
 		try {
 			const newClass = await createNewClass(formData);
 

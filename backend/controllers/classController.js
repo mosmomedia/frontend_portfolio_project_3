@@ -81,7 +81,6 @@ export const createClass = async (req, res) => {
 export const updateClass = async (req, res) => {
 	const { userObjectId } = req.user;
 	const { id } = req.params;
-
 	const getMyClassById = await Class.findById(id);
 
 	if (userObjectId !== getMyClassById.tutorId.toString()) {
@@ -90,9 +89,11 @@ export const updateClass = async (req, res) => {
 
 	const updateItems = { ...req.body };
 
-	await getMyClassById.updateOne(updateItems);
+	let test = await Class.findByIdAndUpdate(id, updateItems, {
+		new: true,
+	});
 
-	res.status(200).json({ message: 'success' });
+	res.status(200).json(test);
 };
 
 // @desc enroll student to ordered class
