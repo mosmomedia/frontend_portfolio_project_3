@@ -47,9 +47,9 @@ function MyAdminOpenClass() {
 		endHour: null,
 		tutor: '',
 		homework: true,
-		price: 300000,
+		price: -1,
 		isOnAir: false,
-		completedAt: -1,
+		completedAt: null,
 	});
 
 	const {
@@ -69,15 +69,15 @@ function MyAdminOpenClass() {
 	useEffect(() => {
 		if (
 			title &&
-			type &&
-			status &&
-			month &&
-			weeks &&
+			type !== -1 &&
+			status !== -1 &&
+			month !== -1 &&
+			weeks !== -1 &&
+			price !== -1 &&
 			startDate &&
 			startHour &&
 			endDate &&
-			endHour &&
-			price
+			endHour
 		) {
 			setIsDisabled(false);
 		} else {
@@ -221,7 +221,7 @@ function MyAdminOpenClass() {
 
 							<SelectOptions
 								name="priceOptions"
-								defaultValue={0}
+								defaultValue={price}
 								formData={formData}
 								setFormData={setFormData}
 							/>

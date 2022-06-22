@@ -42,7 +42,7 @@ export const SubmitStyles = styled.div`
 `;
 
 export const ButtonStyles = styled.button`
-	${tw`py-1.5 px-3 sm:py-2.5 sm:px-4 tracking-wider rounded-lg sm:hover:opacity-90  lg:py-3 lg:text-[17px] `}
+	${tw`py-2.5 px-3 sm:py-2.5 sm:px-4 tracking-wider rounded-lg sm:hover:opacity-90  lg:py-3 lg:text-[17px] `}
 
 	${tw`bg-[#ea4b4e] text-white `}
 	${tw`text-center w-full text-base`}

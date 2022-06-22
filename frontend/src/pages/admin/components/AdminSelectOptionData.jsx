@@ -1,6 +1,3 @@
-import Select from 'react-select';
-import Spinner from '../../../components/shared/Spinner';
-
 const groupOptions = {
 	typeOptions: [
 		{ value: 'basicClass', label: 'Basic Class', name: 'type' },
@@ -41,21 +38,4 @@ const groupOptions = {
 	],
 };
 
-function SelectOptions({ name, defaultValue, formData, setFormData }) {
-	const handleSelectionChange = ({ name, value }) => {
-		setFormData({ ...formData, [name]: value });
-	};
-
-	if (defaultValue === null) return <Spinner />;
-
-	return (
-		<Select
-			placeholder="선택..."
-			defaultValue={groupOptions[name][defaultValue]}
-			options={groupOptions[name]}
-			onChange={handleSelectionChange}
-		/>
-	);
-}
-
-export default SelectOptions;
+export default groupOptions;

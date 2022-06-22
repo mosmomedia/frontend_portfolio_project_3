@@ -8,6 +8,7 @@ import { useAdminContext } from '../../contexts/admin/AdminContext';
 import { createNewClass } from '../../contexts/class/ClassActions';
 import { createTutor } from '../../contexts/admin/AdminActions';
 
+import AdminSelectOptionData from './components/AdminSelectOptionData';
 import SelectOptions from './components/AdminSelectOptions';
 import ClassPeriod from './components/AdminClassPeriod';
 import ClassHours from './components/AdminClassHours';
@@ -35,22 +36,21 @@ function MyAdminOpenClass() {
 		useAdminContext();
 
 	const navigate = useNavigate();
-
 	const [formData, setFormData] = useState({
 		title: '',
-		type: -1,
-		status: '',
-		month: -1,
-		weeks: -1,
+		type: null,
+		status: null,
+		month: null,
+		weeks: null,
 		startDate: null,
 		endDate: null,
 		startHour: null,
 		endHour: null,
 		tutor: '',
 		homework: true,
-		price: -1,
+		price: null,
 		isOnAir: false,
-		completedAt: -1,
+		completedAt: null,
 	});
 
 	const {
@@ -113,24 +113,68 @@ function MyAdminOpenClass() {
 				price,
 			} = myCurrentClass;
 
-			console.log(status, type);
+			const {
+				monthOptions,
+				statusOptions,
+				weeksOptions,
+				typeOptions,
+				priceOptions,
+			} = AdminSelectOptionData;
+
+			let typeNum, monthNum, statusNum, weeksNum, priceNum;
+
+			// find type order
+			for (let i = 0; i < typeOptions.length; i++) {
+				if (typeOptions[i].value === type) {
+					typeNum = i;
+				}
+			}
+
+			// find status order
+			for (let i = 0; i < statusOptions.length; i++) {
+				if (statusOptions[i].value === status) {
+					statusNum = i;
+				}
+			}
+
+			// find weeks order
+			for (let i = 0; i < weeksOptions.length; i++) {
+				if (weeksOptions[i].value === weeks) {
+					weeksNum = i;
+				}
+			}
+
+			// find month order
+			for (let i = 0; i < monthOptions.length; i++) {
+				if (monthOptions[i].value === month) {
+					monthNum = i;
+				}
+			}
+
+			// find price order
+			for (let i = 0; i < priceOptions.length; i++) {
+				if (priceOptions[i].value === price) {
+					priceNum = i;
+				}
+			}
+
+			console.log(startDate);
 
 			setFormData({
 				...formData,
 				title,
 				tutor,
-				status,
-				type,
-				month,
-				weeks,
+				status: statusNum,
+				type: typeNum,
+				month: monthNum,
+				weeks: weeksNum,
 				startDate,
 				startHour,
 				endDate,
 				endHour,
-				price,
+				price: priceNum,
 			});
 		}
-		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -204,7 +248,6 @@ function MyAdminOpenClass() {
 						<InputGroupStyles>
 							<label htmlFor="type">강의 타입</label>
 							<SelectOptions
-								// defaultValue={0}
 								defaultValue={type}
 								name="typeOptions"
 								formData={formData}
@@ -216,7 +259,7 @@ function MyAdminOpenClass() {
 							<label htmlFor="status">강의 상태</label>
 							<SelectOptions
 								name="statusOptions"
-								defaultValue={0}
+								defaultValue={status}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -227,7 +270,7 @@ function MyAdminOpenClass() {
 
 							<SelectOptions
 								name="weeksOptions"
-								defaultValue={0}
+								defaultValue={weeks}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -238,7 +281,7 @@ function MyAdminOpenClass() {
 							<label htmlFor="month">강의 시작(month)</label>
 							<SelectOptions
 								name="monthOptions"
-								defaultValue={0}
+								defaultValue={month}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -259,7 +302,7 @@ function MyAdminOpenClass() {
 
 							<SelectOptions
 								name="priceOptions"
-								defaultValue={0}
+								defaultValue={price}
 								formData={formData}
 								setFormData={setFormData}
 							/>
