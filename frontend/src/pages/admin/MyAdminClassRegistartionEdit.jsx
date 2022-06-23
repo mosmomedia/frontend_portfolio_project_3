@@ -1,11 +1,15 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { RiDeleteBin6Line } from 'react-icons/ri';
+
 import firebase from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAdminContext } from '../../contexts/admin/AdminContext';
 
-import { updateClass } from '../../contexts/class/ClassActions';
+import { updateClass, removeClass } from '../../contexts/class/ClassActions';
+
+import { removeClassInTutorDb } from '../../contexts/admin/AdminActions';
 
 import SelectOptions from './components/AdminSelectOptionsEdit';
 import ClassPeriod from './components/AdminClassPeriodEdit';
@@ -24,6 +28,7 @@ import {
 	InputStyles,
 	SubmitStyles,
 	ButtonStyles,
+	DeleteBtnStyles,
 } from './styles/MyAdminClassRegistrationStyles';
 
 function MyAdminOpenClass() {
@@ -157,7 +162,7 @@ function MyAdminOpenClass() {
 				payload: { updatedMyClassList, updatedClass },
 			});
 			toast.success('강의를 변경 했습니다.');
-			navigate('/admin');
+			navigate('/admin/classes');
 		} catch (error) {
 			console.log(error);
 			toast.error('강의 개설에 문제가 생겼습니다.');
@@ -169,11 +174,36 @@ function MyAdminOpenClass() {
 		setFormData({ ...formData, [id]: value });
 	};
 
+	const handleDeleteBtn = async () => {
+		try {
+			const { _id: classId, tutorId } = myCurrentClass;
+			const { message: deleteMyClass } = await removeClass(classId);
+			const { message: deleteMyClassInTutorDb } = await removeClassInTutorDb(
+				tutorId,
+				classId
+			);
+
+			if (deleteMyClass === 'success' && deleteMyClassInTutorDb === 'success') {
+				const payload = myClassList.filter((item) => item._id !== classId);
+
+				dispatch({ type: 'DELETE_MY_CURRENT_CLASS', payload });
+				toast.success('삭제가 완료 되었습니다.');
+				navigate('/admin/classes');
+			}
+		} catch (error) {
+			console.log(error);
+			toast.error('강의 삭제에 오류가 있습니다.');
+		}
+	};
+
 	if (isLoading || myCurrentClass === null) return <Spinner />;
 
 	return (
 		<WrapperStyles>
 			<FormStyles onSubmit={handleSubmit}>
+				<DeleteBtnStyles onClick={handleDeleteBtn}>
+					<RiDeleteBin6Line size={18} />
+				</DeleteBtnStyles>
 				<h2>강의 수정하기</h2>
 				<InputGroupStyles>
 					<h4>강사 : {tutor}</h4>

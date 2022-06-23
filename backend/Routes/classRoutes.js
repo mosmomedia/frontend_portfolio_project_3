@@ -7,6 +7,7 @@ import {
 	createClass,
 	enrollStudentToClass,
 	updateClass,
+	removeClass,
 } from '../controllers/classController.js';
 
 // auth middleware
@@ -18,6 +19,7 @@ router.route('/').get(getAllClasses).post(authMiddleware, createClass);
 router
 	.route('/:id')
 	.post(authMiddleware, enrollStudentToClass)
-	.put(authMiddleware, updateClass);
+	.put(authMiddleware, updateClass)
+	.delete(authMiddleware, removeClass);
 
 export default router;

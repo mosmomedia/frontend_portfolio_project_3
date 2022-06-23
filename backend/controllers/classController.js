@@ -79,8 +79,14 @@ export const createClass = async (req, res) => {
 // @access Private
 
 export const updateClass = async (req, res) => {
-	const { userObjectId } = req.user;
+	const { isAdmin, userObjectId } = req.user;
 	const { id } = req.params;
+
+	if (!isAdmin) {
+		res.status(400);
+		throw new Error('admin issue - Unauthorized');
+	}
+
 	const getMyClassById = await Class.findById(id);
 
 	if (userObjectId !== getMyClassById.tutorId.toString()) {
@@ -94,6 +100,28 @@ export const updateClass = async (req, res) => {
 	});
 
 	res.status(200).json(test);
+};
+
+// @desc remove class
+// @route DELETE /api/class/:id
+// @access Private
+export const removeClass = async (req, res) => {
+	const { isAdmin, userObjectId } = req.user;
+
+	if (!isAdmin) {
+		res.status(400);
+		throw new Error('admin issue - Unauthorized');
+	}
+
+	const { classId } = req.body;
+	const findClass = await Class.findById(classId);
+
+	if (!findClass || findClass.tutorId.toString() !== userObjectId) {
+		throw new Error('cannot find work');
+	}
+
+	await findClass.remove();
+	res.status(200).json({ message: 'success' });
 };
 
 // @desc enroll student to ordered class

@@ -30,6 +30,14 @@ function AdminReducer(state, action) {
 				isLoading: false,
 			};
 
+		case 'DELETE_MY_CURRENT_CLASS':
+			return {
+				...state,
+				myClassList: action.payload,
+				myCurrentClass: null,
+				isLoading: false,
+			};
+
 		case 'LOADING':
 			return { ...state, isLoading: true };
 

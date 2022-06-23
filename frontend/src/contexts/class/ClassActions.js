@@ -81,3 +81,20 @@ export const enrollStudentToClass = async (classId) => {
 		console.log(error);
 	}
 };
+
+// @ remove class
+// @ DELTE /api/class/:id
+// @ private
+
+export const removeClass = async (classId) => {
+	try {
+		const { headers } = await createPayloadHeader();
+		const res = await axios.delete(API_URI + classId, {
+			headers,
+			data: { classId },
+		});
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};

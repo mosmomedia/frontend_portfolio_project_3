@@ -51,3 +51,7 @@ export const ButtonStyles = styled.button`
 		isDisabled &&
 		tw`bg-st_bg1 text-gray-500 cursor-not-allowed sm:hover:opacity-100`}
 `;
+
+export const DeleteBtnStyles = styled.div`
+	${tw`cursor-pointer float-right text-keyColor`}
+`;
