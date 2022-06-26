@@ -117,7 +117,7 @@ export const removeClass = async (req, res) => {
 	const findClass = await Class.findById(classId);
 
 	if (!findClass || findClass.tutorId.toString() !== userObjectId) {
-		throw new Error('cannot find work');
+		throw new Error('cannot find class');
 	}
 
 	await findClass.remove();
