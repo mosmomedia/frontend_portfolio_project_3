@@ -6,8 +6,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { WrapperStyles, InputStyles } from '../styles/AdminClassPeriodStyles';
 
 function ClassHours({ formData, setFormData }) {
-	const [startHour, setStartHour] = useState(new Date());
-	const [endHour, setEndHour] = useState(new Date());
+	const [startHour, setStartHour] = useState(null);
+	const [endHour, setEndHour] = useState(null);
 
 	useEffect(() => {
 		setFormData({
@@ -23,6 +23,7 @@ function ClassHours({ formData, setFormData }) {
 			<InputStyles>
 				<label>강의 시작시간</label>
 				<DatePicker
+					placeholderText="선택..."
 					selected={startHour}
 					showTimeSelect
 					showTimeSelectOnly
@@ -35,6 +36,7 @@ function ClassHours({ formData, setFormData }) {
 			<InputStyles>
 				<label>강의 종료시간</label>
 				<DatePicker
+					placeholderText="선택..."
 					selected={endHour}
 					showTimeSelect
 					showTimeSelectOnly
