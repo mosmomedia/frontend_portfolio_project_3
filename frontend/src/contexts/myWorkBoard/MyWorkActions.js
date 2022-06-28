@@ -59,7 +59,7 @@ export const updateMyWork = async (formData, workId) => {
 };
 
 // @ remove myWork
-// @ POST /api/work/:id
+// @ DELTE /api/work/:id
 // @ private
 
 export const removeMyWork = async (workId) => {

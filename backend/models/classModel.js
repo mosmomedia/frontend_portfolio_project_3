@@ -18,7 +18,7 @@ const classInfoSchema = new mongoose.Schema(
 		price: { type: Number, required: true },
 		homework: { type: Boolean, required: true, default: true },
 		isOnAir: { type: Boolean, default: false },
-		completedAt: { type: Number, default: 0 },
+		completedAt: { type: Number, default: -1 },
 		students: [
 			{
 				type: mongoose.Schema.Types.ObjectId,

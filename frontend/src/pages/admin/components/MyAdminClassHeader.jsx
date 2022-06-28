@@ -1,7 +1,10 @@
 import { FaRss } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
-import { updateClass } from '../../../contexts/class/ClassActions';
+import {
+	updateClass,
+	handleOnairClass,
+} from '../../../contexts/class/ClassActions';
 
 import Spinner from '../../../components/shared/Spinner';
 
@@ -57,12 +60,13 @@ function MyClassCard({
 
 	const handleOpenClassClick = async () => {
 		dispatch({ type: 'LOADING' });
+
 		try {
 			const currentAt = completedAt + 1;
 
 			classDetail[currentAt].isOpen = true;
 
-			const { message } = await updateClass(_id, {
+			const { message } = await handleOnairClass(_id, {
 				isOnAir: true,
 				classDetail,
 			});
@@ -70,7 +74,7 @@ function MyClassCard({
 			if (message === 'success') {
 				const updatedClass = { ...currentClass, isOnAir: true, classDetail };
 
-				const updatedList = myClassList.map((item) => {
+				const updatedMyClassList = myClassList.map((item) => {
 					if (item._id === _id) {
 						return updatedClass;
 					} else {
@@ -80,7 +84,7 @@ function MyClassCard({
 
 				dispatch({
 					type: 'UPDATE_CLASS',
-					payload: { myClassList: updatedList, myCurrentClass: updatedClass },
+					payload: { updatedMyClassList, updatedClass },
 				});
 
 				toast.success('수업을 시작합니다.');
@@ -108,7 +112,7 @@ function MyClassCard({
 				status: currentAt + 1 === weeks ? 'completed' : status,
 			};
 
-			const { message } = await updateClass(_id, updatedformData);
+			const { message } = await handleOnairClass(_id, updatedformData);
 
 			if (message === 'success') {
 				const updatedClass = {
@@ -116,7 +120,7 @@ function MyClassCard({
 					...updatedformData,
 				};
 
-				const updatedList = myClassList.map((item) => {
+				const updatedMyClassList = myClassList.map((item) => {
 					if (item._id === _id) {
 						return updatedClass;
 					} else {
@@ -126,7 +130,7 @@ function MyClassCard({
 
 				dispatch({
 					type: 'UPDATE_CLASS',
-					payload: { myClassList: updatedList, myCurrentClass: updatedClass },
+					payload: { updatedMyClassList, updatedClass },
 				});
 
 				toast.success('수업을 종료합니다.');

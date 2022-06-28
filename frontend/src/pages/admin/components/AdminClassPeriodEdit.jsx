@@ -5,13 +5,28 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import { WrapperStyles, InputStyles } from '../styles/AdminClassPeriodStyles';
 
-function ClassPeriod({ formData, setFormData }) {
-	const [startDate, setStartDate] = useState(null);
-	const [endDate, setEndDate] = useState(null);
+function ClassPeriodEdit({ formData, setFormData, myCurrentClass }) {
+	const [startDate, setStartDate] = useState(
+		new Date(myCurrentClass.startDate)
+	);
+	const [endDate, setEndDate] = useState(new Date(myCurrentClass.endDate));
 
 	useEffect(() => {
 		setFormData({
 			...formData,
+			startDate,
+			endDate,
+		});
+
+		setFormData({
+			...formData,
+			type: myCurrentClass.type,
+			status: myCurrentClass.status,
+			weeks: myCurrentClass.weeks,
+			month: myCurrentClass.month,
+			price: myCurrentClass.price,
+			startHour: new Date(myCurrentClass.startHour),
+			endHour: new Date(myCurrentClass.endHour),
 			startDate,
 			endDate,
 		});
@@ -21,9 +36,7 @@ function ClassPeriod({ formData, setFormData }) {
 		<WrapperStyles>
 			<InputStyles>
 				<label>강의 시작일</label>
-
 				<DatePicker
-					placeholderText="선택..."
 					selected={startDate}
 					selectsStart
 					onChange={(date) => setStartDate(date)}
@@ -32,7 +45,6 @@ function ClassPeriod({ formData, setFormData }) {
 			<InputStyles>
 				<label>강의 종료일</label>
 				<DatePicker
-					placeholderText="선택..."
 					selected={endDate}
 					selectsEnd
 					minDate={startDate}
@@ -43,4 +55,4 @@ function ClassPeriod({ formData, setFormData }) {
 	);
 }
 
-export default ClassPeriod;
+export default ClassPeriodEdit;

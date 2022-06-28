@@ -1,16 +1,19 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { RiDeleteBin6Line } from 'react-icons/ri';
+
 import firebase from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAdminContext } from '../../contexts/admin/AdminContext';
 
-import { createNewClass } from '../../contexts/class/ClassActions';
-import { createTutor } from '../../contexts/admin/AdminActions';
+import { updateClass, removeClass } from '../../contexts/class/ClassActions';
 
-import SelectOptions from './components/AdminSelectOptions';
-import ClassPeriod from './components/AdminClassPeriod';
-import ClassHours from './components/AdminClassHours';
+import { removeClassInTutorDb } from '../../contexts/admin/AdminActions';
+
+import SelectOptions from './components/AdminSelectOptionsEdit';
+import ClassPeriod from './components/AdminClassPeriodEdit';
+import ClassHours from './components/AdminClassHoursEdit';
 
 import { toast } from 'react-toastify';
 import Spinner from '../../components/shared/Spinner';
@@ -25,11 +28,11 @@ import {
 	InputStyles,
 	SubmitStyles,
 	ButtonStyles,
+	DeleteBtnStyles,
 } from './styles/MyAdminClassRegistrationStyles';
 
 function MyAdminOpenClass() {
 	const [isDisabled, setIsDisabled] = useState(true);
-	const [user, loading] = useAuthState(firebase.auth);
 
 	const { isLoading, admin, myClassList, myCurrentClass, dispatch } =
 		useAdminContext();
@@ -38,19 +41,19 @@ function MyAdminOpenClass() {
 
 	const [formData, setFormData] = useState({
 		title: '',
-		type: '',
-		status: '',
-		month: -1,
-		weeks: -1,
+		type: null,
+		status: null,
+		month: null,
+		weeks: null,
 		startDate: null,
 		endDate: null,
 		startHour: null,
 		endHour: null,
 		tutor: '',
 		homework: true,
-		price: -1,
+		price: null,
 		isOnAir: false,
-		completedAt: -1,
+		completedAt: null,
 	});
 
 	const {
@@ -70,15 +73,15 @@ function MyAdminOpenClass() {
 	useEffect(() => {
 		if (
 			title &&
-			type &&
-			status &&
-			month &&
-			weeks &&
+			type !== null &&
+			status !== null &&
+			month !== null &&
+			weeks !== null &&
+			price !== null &&
 			startDate &&
 			startHour &&
 			endDate &&
-			endHour &&
-			price
+			endHour
 		) {
 			setIsDisabled(false);
 		} else {
@@ -98,11 +101,36 @@ function MyAdminOpenClass() {
 	]);
 
 	useEffect(() => {
-		if (user) {
-			const { displayName } = user;
-			setFormData({ ...formData, tutor: displayName });
+		if (myCurrentClass) {
+			const {
+				title,
+				tutor,
+				status,
+				type,
+				month,
+				weeks,
+				startDate,
+				startHour,
+				endDate,
+				endHour,
+				price,
+			} = myCurrentClass;
+
+			setFormData({
+				...formData,
+				title,
+				tutor,
+				status,
+				type,
+				month,
+				weeks,
+				startDate: new Date(startDate),
+				startHour: new Date(startHour),
+				endDate: new Date(endDate),
+				endHour: new Date(endHour),
+				price,
+			});
 		}
-		// eslint-disable-next-line
 	}, []);
 
 	useEffect(() => {
@@ -116,32 +144,28 @@ function MyAdminOpenClass() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch({ type: 'LOADING' });
+
 		try {
-			const newClass = await createNewClass(formData);
+			const { _id: classId } = myCurrentClass;
+			const updatedClass = await updateClass(classId, formData);
 
-			const { tutorId, _id: classId } = newClass;
-
-			const { uid, email, displayName: name } = user;
-
-			// create a new tutor in mongodb
-			const { message } = await createTutor({
-				firebaseId: uid,
-				email,
-				name,
-				tutorId,
-				classId,
+			const updatedMyClassList = myClassList.map((item) => {
+				if (item._id === classId) {
+					return updatedClass;
+				} else {
+					return item;
+				}
 			});
 
-			if (message === 'success') {
-				const payload = [...myClassList, newClass];
-				dispatch({ type: 'ADD_NEW_CLASS', payload });
-				toast.success('새 강의를 개설했습니다.');
-				navigate('/admin');
-			} else {
-				toast.error('강의 개설에 문제가 생겼습니다.');
-			}
+			dispatch({
+				type: 'UPDATE_CLASS',
+				payload: { updatedMyClassList, updatedClass },
+			});
+			toast.success('강의를 변경 했습니다.');
+			navigate('/admin/classes');
 		} catch (error) {
 			console.log(error);
+			toast.error('강의 개설에 문제가 생겼습니다.');
 		}
 		dispatch({ type: 'OFF_LOADING' });
 	};
@@ -150,11 +174,36 @@ function MyAdminOpenClass() {
 		setFormData({ ...formData, [id]: value });
 	};
 
-	if (loading || isLoading) return <Spinner />;
+	const handleDeleteBtn = async () => {
+		try {
+			const { _id: classId, tutorId } = myCurrentClass;
+			const { message: deleteMyClass } = await removeClass(classId);
+			const { message: deleteMyClassInTutorDb } = await removeClassInTutorDb(
+				tutorId,
+				classId
+			);
+
+			if (deleteMyClass === 'success' && deleteMyClassInTutorDb === 'success') {
+				const payload = myClassList.filter((item) => item._id !== classId);
+
+				dispatch({ type: 'DELETE_MY_CURRENT_CLASS', payload });
+				toast.success('삭제가 완료 되었습니다.');
+				navigate('/admin/classes');
+			}
+		} catch (error) {
+			console.log(error);
+			toast.error('강의 삭제에 오류가 있습니다.');
+		}
+	};
+
+	if (isLoading || myCurrentClass === null) return <Spinner />;
 
 	return (
 		<WrapperStyles>
 			<FormStyles onSubmit={handleSubmit}>
+				<DeleteBtnStyles onClick={handleDeleteBtn}>
+					<RiDeleteBin6Line size={18} />
+				</DeleteBtnStyles>
 				<h2>강의 수정하기</h2>
 				<InputGroupStyles>
 					<h4>강사 : {tutor}</h4>
@@ -176,7 +225,7 @@ function MyAdminOpenClass() {
 						<InputGroupStyles>
 							<label htmlFor="type">강의 타입</label>
 							<SelectOptions
-								defaultValue={0}
+								defaultValue={type}
 								name="typeOptions"
 								formData={formData}
 								setFormData={setFormData}
@@ -187,7 +236,7 @@ function MyAdminOpenClass() {
 							<label htmlFor="status">강의 상태</label>
 							<SelectOptions
 								name="statusOptions"
-								defaultValue={1}
+								defaultValue={status}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -198,7 +247,7 @@ function MyAdminOpenClass() {
 
 							<SelectOptions
 								name="weeksOptions"
-								defaultValue={0}
+								defaultValue={weeks}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -209,7 +258,7 @@ function MyAdminOpenClass() {
 							<label htmlFor="month">강의 시작(month)</label>
 							<SelectOptions
 								name="monthOptions"
-								defaultValue={0}
+								defaultValue={month}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -217,12 +266,22 @@ function MyAdminOpenClass() {
 
 						{/* 강의 시작일 / 종료일 */}
 						<InputGroupStyles>
-							<ClassPeriod formData={formData} setFormData={setFormData} />
+							<ClassPeriod
+								status="edit"
+								myCurrentClass={myCurrentClass}
+								formData={formData}
+								setFormData={setFormData}
+							/>
 						</InputGroupStyles>
 
 						{/* 강의 시작 시간 / 종료 시간 */}
 						<InputGroupStyles>
-							<ClassHours formData={formData} setFormData={setFormData} />
+							<ClassHours
+								status="edit"
+								myCurrentClass={myCurrentClass}
+								formData={formData}
+								setFormData={setFormData}
+							/>
 						</InputGroupStyles>
 
 						<InputGroupStyles>
@@ -230,7 +289,7 @@ function MyAdminOpenClass() {
 
 							<SelectOptions
 								name="priceOptions"
-								defaultValue={0}
+								defaultValue={price}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -239,7 +298,7 @@ function MyAdminOpenClass() {
 				</WrapperItemStyles>
 				<SubmitStyles>
 					<ButtonStyles disabled={isDisabled} isDisabled={isDisabled}>
-						<span>개설하기</span>
+						<span>변경하기</span>
 					</ButtonStyles>
 				</SubmitStyles>
 			</FormStyles>

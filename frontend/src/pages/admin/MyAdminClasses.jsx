@@ -19,9 +19,13 @@ function MyAdminClass() {
 					<h3>강의 리스트</h3>
 				</div>
 				<CardWrapperStyles>
-					{myClassList.map((item) => (
-						<AdminClassCard key={item._id} item={item} />
-					))}
+					{myClassList.length > 0 ? (
+						myClassList.map((item) => (
+							<AdminClassCard key={item._id} item={item} />
+						))
+					) : (
+						<div>개설 된 강의가 없습니다.</div>
+					)}
 				</CardWrapperStyles>
 			</MainStyles>
 		</WrapperStyles>

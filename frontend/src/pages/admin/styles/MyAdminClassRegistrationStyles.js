@@ -13,7 +13,7 @@ export const FormStyles = styled.form`
 `;
 
 export const WrapperItemStyles = styled.div`
-	${tw`lg:grid lg:grid-cols-2 gap-7`}
+	${tw`space-y-4 lg:grid lg:grid-cols-2 lg:gap-7 lg:space-y-0`}
 `;
 
 export const LeftItemStyles = styled.div`
@@ -42,7 +42,7 @@ export const SubmitStyles = styled.div`
 `;
 
 export const ButtonStyles = styled.button`
-	${tw`py-1.5 px-3 sm:py-2.5 sm:px-4 tracking-wider rounded-lg sm:hover:opacity-90  lg:py-3 lg:text-[17px] `}
+	${tw`py-2.5 px-3 sm:py-2.5 sm:px-4 tracking-wider rounded-lg sm:hover:opacity-90  lg:py-3 lg:text-[17px] `}
 
 	${tw`bg-[#ea4b4e] text-white `}
 	${tw`text-center w-full text-base`}
@@ -50,4 +50,8 @@ export const ButtonStyles = styled.button`
 	${({ isDisabled }) =>
 		isDisabled &&
 		tw`bg-st_bg1 text-gray-500 cursor-not-allowed sm:hover:opacity-100`}
+`;
+
+export const DeleteBtnStyles = styled.div`
+	${tw`cursor-pointer float-right text-keyColor`}
 `;

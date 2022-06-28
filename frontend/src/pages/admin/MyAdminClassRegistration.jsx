@@ -37,17 +37,17 @@ function MyAdminOpenClass() {
 
 	const [formData, setFormData] = useState({
 		title: '',
-		type: 'basicClass',
-		status: 'pending',
-		month: 1,
-		weeks: 4,
+		type: -1,
+		status: -1,
+		month: -1,
+		weeks: -1,
 		startDate: null,
 		endDate: null,
 		startHour: null,
 		endHour: null,
 		tutor: '',
 		homework: true,
-		price: 300000,
+		price: -1,
 		isOnAir: false,
 		completedAt: -1,
 	});
@@ -69,15 +69,15 @@ function MyAdminOpenClass() {
 	useEffect(() => {
 		if (
 			title &&
-			type &&
-			status &&
-			month &&
-			weeks &&
+			type !== -1 &&
+			status !== -1 &&
+			month !== -1 &&
+			weeks !== -1 &&
+			price !== -1 &&
 			startDate &&
 			startHour &&
 			endDate &&
-			endHour &&
-			price
+			endHour
 		) {
 			setIsDisabled(false);
 		} else {
@@ -107,6 +107,7 @@ function MyAdminOpenClass() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		dispatch({ type: 'LOADING' });
+
 		try {
 			const newClass = await createNewClass(formData);
 
@@ -167,7 +168,7 @@ function MyAdminOpenClass() {
 						<InputGroupStyles>
 							<label htmlFor="type">강의 타입</label>
 							<SelectOptions
-								defaultValue={0}
+								defaultValue={type}
 								name="typeOptions"
 								formData={formData}
 								setFormData={setFormData}
@@ -178,7 +179,7 @@ function MyAdminOpenClass() {
 							<label htmlFor="status">강의 상태</label>
 							<SelectOptions
 								name="statusOptions"
-								defaultValue={1}
+								defaultValue={status}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -189,7 +190,7 @@ function MyAdminOpenClass() {
 
 							<SelectOptions
 								name="weeksOptions"
-								defaultValue={0}
+								defaultValue={weeks}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -200,7 +201,7 @@ function MyAdminOpenClass() {
 							<label htmlFor="month">강의 시작(month)</label>
 							<SelectOptions
 								name="monthOptions"
-								defaultValue={0}
+								defaultValue={month}
 								formData={formData}
 								setFormData={setFormData}
 							/>
@@ -221,7 +222,7 @@ function MyAdminOpenClass() {
 
 							<SelectOptions
 								name="priceOptions"
-								defaultValue={0}
+								defaultValue={price}
 								formData={formData}
 								setFormData={setFormData}
 							/>

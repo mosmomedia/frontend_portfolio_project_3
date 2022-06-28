@@ -81,3 +81,34 @@ export const enrollStudentToClass = async (classId) => {
 		console.log(error);
 	}
 };
+
+// @ remove class
+// @ DELTE /api/class/:id
+// @ private
+
+export const removeClass = async (classId) => {
+	try {
+		const { headers } = await createPayloadHeader();
+		const res = await axios.delete(API_URI + classId, {
+			headers,
+			data: { classId },
+		});
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// @desc handle online class
+// @route PUT /api/class/onair/:id
+// @access Private
+export const handleOnairClass = async (classId, formData) => {
+	const header = await createPayloadHeader();
+
+	try {
+		const res = await axios.put(API_URI + 'onair/' + classId, formData, header);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};

@@ -2,7 +2,11 @@ import express from 'express';
 
 const router = express.Router();
 
-import { createTutor, getMyClasses } from '../controllers/tutorController.js';
+import {
+	createTutor,
+	getMyClasses,
+	removeClassInTutorDb,
+} from '../controllers/tutorController.js';
 
 // controller
 
@@ -13,6 +17,9 @@ import authMiddleware from '../middleware/authMiddleware.js';
 router.route('/').post(authMiddleware, createTutor);
 
 // tutor class
-router.route('/myclass/:id').get(authMiddleware, getMyClasses);
+router
+	.route('/myclass/:id')
+	.get(authMiddleware, getMyClasses)
+	.put(authMiddleware, removeClassInTutorDb);
 
 export default router;

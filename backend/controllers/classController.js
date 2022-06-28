@@ -79,9 +79,13 @@ export const createClass = async (req, res) => {
 // @access Private
 
 export const updateClass = async (req, res) => {
-	const { userObjectId } = req.user;
+	const { isAdmin, userObjectId } = req.user;
 	const { id } = req.params;
 
+	if (!isAdmin) {
+		res.status(400);
+		throw new Error('admin issue - Unauthorized');
+	}
 	const getMyClassById = await Class.findById(id);
 
 	if (userObjectId !== getMyClassById.tutorId.toString()) {
@@ -90,8 +94,32 @@ export const updateClass = async (req, res) => {
 
 	const updateItems = { ...req.body };
 
-	await getMyClassById.updateOne(updateItems);
+	let updatedClass = await Class.findByIdAndUpdate(id, updateItems, {
+		new: true,
+	});
 
+	res.status(200).json(updatedClass);
+};
+
+// @desc remove class
+// @route DELETE /api/class/:id
+// @access Private
+export const removeClass = async (req, res) => {
+	const { isAdmin, userObjectId } = req.user;
+
+	if (!isAdmin) {
+		res.status(400);
+		throw new Error('admin issue - Unauthorized');
+	}
+
+	const { classId } = req.body;
+	const findClass = await Class.findById(classId);
+
+	if (!findClass || findClass.tutorId.toString() !== userObjectId) {
+		throw new Error('cannot find class');
+	}
+
+	await findClass.remove();
 	res.status(200).json({ message: 'success' });
 };
 
@@ -120,4 +148,31 @@ export const enrollStudentToClass = async (req, res) => {
 	await findOrderedClass.save();
 
 	res.status(200).json(true);
+};
+
+// @desc open class
+// @route PUT /api/class/onair/:id
+// @access Private
+
+export const handleOnairClass = async (req, res) => {
+	const { isAdmin, userObjectId } = req.user;
+	const { id } = req.params;
+
+	if (!isAdmin) {
+		res.status(400);
+		throw new Error('admin issue - Unauthorized');
+	}
+	const getMyClassById = await Class.findById(id);
+
+	if (userObjectId !== getMyClassById.tutorId.toString()) {
+		throw new Error('unauthorized issue');
+	}
+
+	const updateItems = { ...req.body };
+
+	await Class.findByIdAndUpdate(id, updateItems, {
+		new: true,
+	});
+
+	res.status(200).json({ message: 'success' });
 };

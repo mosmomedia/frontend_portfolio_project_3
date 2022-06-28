@@ -58,3 +58,23 @@ export const getMyClasses = async () => {
 		console.log(error);
 	}
 };
+
+// @ remove a class in tutor db
+// @ PUT /api/tutor/myclass/:id
+// @ private
+
+export const removeClassInTutorDb = async (userId, classId) => {
+	try {
+		const header = await createPayloadHeader();
+
+		const res = await axios.put(
+			API_URI + 'myclass/' + userId,
+			{ classId },
+			header
+		);
+
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
