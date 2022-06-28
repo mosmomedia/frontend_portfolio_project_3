@@ -6,8 +6,8 @@ import Button from '../../components/shared/Button';
 
 function NotFound() {
 	return (
-		<div tw="bg-adv  h-full grid place-content-center ">
-			<div tw="container mx-auto flex flex-col space-y-20 text-center">
+		<div tw="bg-adv  h-screen grid place-content-center ">
+			<div tw=" mx-auto flex flex-col space-y-20 text-center">
 				<div tw="space-y-5 lg:space-y-10">
 					<h1 tw="text-6xl px-0.5 lg:text-7xl">x 404 x</h1>
 					<h2 tw="text-lg px-1 lg:text-xl">
