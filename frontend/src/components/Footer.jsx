@@ -44,6 +44,7 @@ function Footer() {
 		pathname === '/dashboard/my-page' ||
 		pathname === '/admin' ||
 		pathname === '/admin/registration' ||
+		pathname === `/admin/registration/edit/${id}` ||
 		pathname === `/admin/class/${id}` ||
 		pathname === '/admin/classes'
 	)

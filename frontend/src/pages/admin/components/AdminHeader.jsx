@@ -57,7 +57,8 @@ function AdminHeader() {
 						<NavChildStyles
 							is_selected={
 								pathname === '/admin/classes' ||
-								pathname === `/admin/class/${id}`
+								pathname === `/admin/class/${id}` ||
+								pathname === `/admin/registration/edit/${id}`
 									? 1
 									: 0
 							}
