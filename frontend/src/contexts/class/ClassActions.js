@@ -98,3 +98,17 @@ export const removeClass = async (classId) => {
 		console.log(error);
 	}
 };
+
+// @desc handle online class
+// @route PUT /api/class/onair/:id
+// @access Private
+export const handleOnairClass = async (classId, formData) => {
+	const header = await createPayloadHeader();
+
+	try {
+		const res = await axios.put(API_URI + 'onair/' + classId, formData, header);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};

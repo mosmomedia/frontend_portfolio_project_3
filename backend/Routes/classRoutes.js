@@ -8,6 +8,7 @@ import {
 	enrollStudentToClass,
 	updateClass,
 	removeClass,
+	handleOnairClass,
 } from '../controllers/classController.js';
 
 // auth middleware
@@ -21,5 +22,7 @@ router
 	.post(authMiddleware, enrollStudentToClass)
 	.put(authMiddleware, updateClass)
 	.delete(authMiddleware, removeClass);
+
+router.route('/onair/:id').put(authMiddleware, handleOnairClass);
 
 export default router;
