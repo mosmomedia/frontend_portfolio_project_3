@@ -29,6 +29,10 @@ function AdminHeader() {
 		navigate('/');
 	};
 
+	const handleNoServiceClick = () => {
+		toast.error('서비스 준비 중입니다.');
+	};
+
 	return (
 		<HeaderStyles>
 			<HeaderWrapperStyles>
@@ -67,7 +71,7 @@ function AdminHeader() {
 						</NavChildStyles>
 					</Link>
 
-					<NavChildStyles is_selected={pathname === '/' ? 1 : 0}>
+					<NavChildStyles onClick={handleNoServiceClick}>
 						학생 관리
 					</NavChildStyles>
 					{admin && (
