@@ -3,10 +3,8 @@ import { AuthProvider } from './contexts/auth/AuthContext';
 import { AdminProvider } from './contexts/admin/AdminContext';
 import { ClassProvider } from './contexts/class/ClassContext';
 
-import { GlobalStyles } from 'twin.macro';
 import ScrollToTop from './components/ScrollToTop';
 
-import BaseStyles from './styles/BaseStyles';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
@@ -41,9 +39,6 @@ function App() {
 		<AuthProvider>
 			<AdminProvider>
 				<ClassProvider>
-					<GlobalStyles />
-					<BaseStyles />
-
 					<Router>
 						<ScrollToTop>
 							<Header />

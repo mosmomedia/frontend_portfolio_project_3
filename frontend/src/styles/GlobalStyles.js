@@ -1,9 +1,10 @@
-import tw from 'twin.macro';
+import React from 'react';
+import tw, { GlobalStyles as BaseStyles } from 'twin.macro';
 import { createGlobalStyle } from 'styled-components';
 import paybooc_M from './fonts/paybooc_medium.otf';
 import paybooc_B from './fonts/paybooc_bold.otf';
 
-const BaseStyles = createGlobalStyle`
+const CustomStyles = createGlobalStyle`
 
 /* paybook Medium */
 @font-face {
@@ -45,7 +46,13 @@ h4{
 
 p{
 	${tw`text-base`}
-}
-`;
+}`;
 
-export default BaseStyles;
+const GlobalStyles = () => (
+	<>
+		<BaseStyles />
+		<CustomStyles />
+	</>
+);
+
+export default GlobalStyles;
