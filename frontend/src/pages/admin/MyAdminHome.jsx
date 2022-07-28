@@ -6,6 +6,7 @@ import { WrapperStyles, MainStyles, InfoWrapperStyles } from './styles';
 
 function MyAdminHome() {
 	const { isLoading, myClassList } = useAdminContext();
+	const [loading, setLoading] = useState(true);
 
 	const [countInfo, setCountInfo] = useState({
 		classesNum: 0,
@@ -16,7 +17,7 @@ function MyAdminHome() {
 	const { classesNum, studentsNum, feedbackNum } = countInfo;
 
 	useEffect(() => {
-		if (!isLoading && myClassList) {
+		if (myClassList.length > 0) {
 			let classesNum = myClassList.length;
 			let studentsNum = 0;
 
@@ -30,11 +31,14 @@ function MyAdminHome() {
 			});
 
 			setCountInfo({ ...countInfo, classesNum, studentsNum, feedbackNum });
+			setLoading(false);
 		}
-		// eslint-disable-next-line
-	}, [isLoading, myClassList]);
+		setLoading(false);
 
-	if (isLoading) return <Spinner />;
+		// eslint-disable-next-line
+	}, [myClassList]);
+
+	if (isLoading || loading) return <Spinner />;
 
 	return (
 		<WrapperStyles>

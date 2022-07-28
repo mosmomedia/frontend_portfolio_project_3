@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { useAuthContext } from '../contexts/auth/AuthContext';
+
+import { useAuthState } from 'react-firebase-hooks/auth';
+import firebase from '../config/firebase';
 
 import tw from 'twin.macro';
 import 'twin.macro';
@@ -11,6 +13,7 @@ import Logo_white from '../assets/logos/logo_on.svg';
 import Button from './shared/Button';
 
 import { FaChalkboardTeacher } from 'react-icons/fa';
+import Spinner from './shared/Spinner';
 
 import {
 	HeaderStyles,
@@ -33,7 +36,10 @@ function Header() {
 	const [currentPath, setCurrentPath] = useState('');
 
 	const { pathname } = useLocation();
-	const { user } = useAuthContext();
+
+	const [user, loading] = useAuthState(firebase.auth);
+	// const { user } = useAuthContext();
+	// console.log(user, loading);
 
 	//* tmp -  get token
 	if (user) {
@@ -80,6 +86,8 @@ function Header() {
 		setHoverOn(false);
 		setHamburgerOn(false);
 	};
+
+	if (loading) <Spinner />;
 
 	return (
 		<HeaderStyles is_hover_on={hoverOn}>

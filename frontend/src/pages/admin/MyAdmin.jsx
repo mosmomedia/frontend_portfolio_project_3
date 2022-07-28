@@ -29,7 +29,6 @@ function MyAdminMain() {
 
 			try {
 				const { userObjectId, myClasses } = await getMyClasses();
-
 				let myClassArr = [];
 
 				if (myClasses) {
