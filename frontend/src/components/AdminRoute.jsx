@@ -6,29 +6,35 @@ import firebase from '../config/firebase';
 import Spinner from './shared/Spinner';
 
 const AdminRoute = () => {
-	const [user] = useAuthState(firebase.auth);
+	const [user, loading] = useAuthState(firebase.auth);
 
 	const [isAdmin, setIsAdmin] = useState(false);
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const checkAdmin = async () => {
-			const docRef = firebase.doc(firebase.db, 'users', user.uid);
-			const docSnap = await firebase.getDoc(docRef);
-			if (docSnap.data().isAdmin) {
-				setIsAdmin(true);
+			if (user) {
+				const docRef = firebase.doc(firebase.db, 'users', user.uid);
+				const docSnap = await firebase.getDoc(docRef);
+				if (docSnap.data().isAdmin) {
+					setIsAdmin(true);
+				} else {
+					setIsAdmin(false);
+				}
+			} else {
+				setIsAdmin(false);
 			}
+
 			setIsLoading(false);
 		};
 
-		if (user) {
+		if (!loading) {
 			checkAdmin();
-		} else {
-			setIsLoading(false);
 		}
-	}, [user]);
+	}, [loading]);
 
-	if (isLoading) return <Spinner />;
+	if (isLoading || loading) return <Spinner />;
+
 	return user && isAdmin ? <Outlet /> : <Navigate to="/admin/sign-in" />;
 };
 

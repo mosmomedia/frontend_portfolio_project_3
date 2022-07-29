@@ -38,8 +38,6 @@ function Header() {
 	const { pathname } = useLocation();
 
 	const [user, loading] = useAuthState(firebase.auth);
-	// const { user } = useAuthContext();
-	// console.log(user, loading);
 
 	//* tmp -  get token
 	if (user) {

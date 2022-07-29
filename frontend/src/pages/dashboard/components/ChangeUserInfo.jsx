@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import PhoneInput from 'react-phone-number-input/input';
 
-import { useAuthContext } from '../../../contexts/auth/AuthContext';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import firebase from '../../../config/firebase';
 
@@ -23,8 +23,9 @@ import {
 import { toast } from 'react-toastify';
 
 function ChangeUserInfo() {
-	const { isLoading, user } = useAuthContext();
-	const [loading, setLoading] = useState(false);
+	const [user, loading] = useAuthState(firebase.auth);
+
+	const [isLoading, setLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
 	const [phoneNumber, setPhoneNumber] = useState();
 

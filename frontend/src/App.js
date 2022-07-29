@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { AuthProvider } from './contexts/auth/AuthContext';
 import { AdminProvider } from './contexts/admin/AdminContext';
 import { ClassProvider } from './contexts/class/ClassContext';
 
@@ -36,62 +35,57 @@ import PrivateRoute from './components/PrivateRoute';
 
 function App() {
 	return (
-		<AuthProvider>
-			<AdminProvider>
-				<ClassProvider>
-					<Router>
-						<ScrollToTop>
-							<Header />
-							<Routes>
-								<Route path="*" element={<NotFound />} />
-								<Route path="/notfound" element={<NotFound />} />
+		<AdminProvider>
+			<ClassProvider>
+				<Router>
+					<ScrollToTop>
+						<Header />
+						<Routes>
+							<Route path="*" element={<NotFound />} />
+							<Route path="/notfound" element={<NotFound />} />
 
-								{/* landing */}
-								<Route path="/" element={<Landing />} />
+							{/* landing */}
+							<Route path="/" element={<Landing />} />
 
-								{/* accounts */}
-								<Route path="/sign-in" element={<SignIn />} />
-								<Route path="/sign-up" element={<SignUp />} />
-								<Route path="/forgot-password" element={<ForgotPassword />} />
+							{/* accounts */}
+							<Route path="/sign-in" element={<SignIn />} />
+							<Route path="/sign-up" element={<SignUp />} />
+							<Route path="/forgot-password" element={<ForgotPassword />} />
 
-								{/* class registration */}
-								<Route
-									path="/class-registration/*"
-									element={<ClassRegistration />}
-								/>
+							{/* class registration */}
+							<Route
+								path="/class-registration/*"
+								element={<ClassRegistration />}
+							/>
 
-								{/* debut - history & scholarship */}
-								<Route
-									path="/student/debut-history"
-									element={<DebutHistory />}
-								/>
-								<Route path="/student/scholarship" element={<Scholarship />} />
+							{/* debut - history & scholarship */}
+							<Route path="/student/debut-history" element={<DebutHistory />} />
+							<Route path="/student/scholarship" element={<Scholarship />} />
 
-								{/* company */}
-								<Route path="/company/*" element={<Company />} />
+							{/* company */}
+							<Route path="/company/*" element={<Company />} />
 
-								{/*customer  */}
-								<Route path="/customer/faq" element={<Faq />} />
+							{/*customer  */}
+							<Route path="/customer/faq" element={<Faq />} />
 
-								{/* Dashboard */}
-								<Route path="/dashboard" element={<PrivateRoute />}>
-									<Route path="/dashboard" element={<Dashboard />}>
-										<Route path="my-classroom/*" element={<MyClassRoom />} />
-										<Route path="my-board/*" element={<MyBoard />} />
-										<Route path="my-page/*" element={<MyPage />} />
-									</Route>
+							{/* Dashboard */}
+							<Route path="/dashboard" element={<PrivateRoute />}>
+								<Route path="/dashboard" element={<Dashboard />}>
+									<Route path="my-classroom/*" element={<MyClassRoom />} />
+									<Route path="my-board/*" element={<MyBoard />} />
+									<Route path="my-page/*" element={<MyPage />} />
 								</Route>
+							</Route>
 
-								{/* admin */}
-								<Route path="/admin/*" element={<MyAdminMain />} />
-							</Routes>
-							<Footer />
-							<ToastContainer autoClose={2500} />
-						</ScrollToTop>
-					</Router>
-				</ClassProvider>
-			</AdminProvider>
-		</AuthProvider>
+							{/* admin */}
+							<Route path="/admin/*" element={<MyAdminMain />} />
+						</Routes>
+						<Footer />
+						<ToastContainer autoClose={2500} />
+					</ScrollToTop>
+				</Router>
+			</ClassProvider>
+		</AdminProvider>
 	);
 }
 

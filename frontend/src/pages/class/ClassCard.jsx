@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuthContext } from '../../contexts/auth/AuthContext';
+
+import { useAuthState } from 'react-firebase-hooks/auth';
+import firebase from '../../config/firebase';
 import { placeOrder } from '../../contexts/order/OrderActions';
 import { enrollStudentToClass } from '../../contexts/class/ClassActions';
 import { addClassToStudent } from '../../contexts/myClassRoom/MyClassActions';
-
-import firebase from '../../config/firebase';
 
 import Spinner from '../../components/shared/Spinner';
 import { toast } from 'react-toastify';
@@ -58,7 +58,8 @@ function ClassCard({ item }) {
 	const fmStartHour = hourToString(new Date(startHour));
 	const fmEndHour = hourToString(new Date(endHour));
 
-	const { user } = useAuthContext();
+	const [user, loading] = useAuthState(firebase.auth);
+
 	const navigate = useNavigate();
 	const handleOnClick = async () => {
 		if (!user) {
@@ -94,7 +95,7 @@ function ClassCard({ item }) {
 			}
 		}
 	};
-	if (isLoading) return <Spinner />;
+	if (isLoading || loading) return <Spinner />;
 	return (
 		<CardStyles variant={type}>
 			{/* left item - title, tutor, hours, period  */}

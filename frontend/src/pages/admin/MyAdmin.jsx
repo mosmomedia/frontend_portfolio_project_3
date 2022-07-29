@@ -13,6 +13,9 @@ import MyAdminSingleClass from './components/MyAdminSingleClass';
 import { useAdminContext } from '../../contexts/admin/AdminContext';
 import { getMyClasses } from '../../contexts/admin/AdminActions';
 
+import { useAuthState } from 'react-firebase-hooks/auth';
+import firebase from '../../config/firebase';
+
 import AdminRoute from '../../components/AdminRoute';
 
 import NotFound from '../etc/NotFound';
@@ -22,6 +25,7 @@ import Spinner from '../../components/shared/Spinner';
 
 function MyAdminMain() {
 	const { dispatch, isLoading } = useAdminContext();
+	const [user, loading] = useAuthState(firebase.auth);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -44,10 +48,12 @@ function MyAdminMain() {
 			}
 		};
 
-		fetchData();
+		if (user) {
+			fetchData();
+		}
 
 		dispatch({ type: 'OFF_LOADING' });
-	}, [dispatch]);
+	}, [user, dispatch]);
 
 	if (isLoading) return <Spinner />;
 

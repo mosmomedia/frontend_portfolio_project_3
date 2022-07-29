@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Navigate } from 'react-router-dom';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from '../../../config/firebase';
@@ -21,12 +21,13 @@ import {
 } from '../styles/MyAdminSignInStyles';
 
 function MyAdminSignIn() {
-	const [loading, setLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
+	const [isAdmin, setIsAdmin] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 
-	const { dispatch, isLoading } = useAdminContext();
+	const { dispatch } = useAdminContext();
 
-	const [user] = useAuthState(firebase.auth);
+	const [user, loading] = useAuthState(firebase.auth);
 
 	const [formData, setFormData] = useState({
 		email: 'test@test.com',
@@ -42,22 +43,27 @@ function MyAdminSignIn() {
 	};
 
 	useEffect(() => {
-		setLoading(true);
 		const checkAdmin = async () => {
-			const docRef = firebase.doc(firebase.db, 'users', user.uid);
-			const docSnap = await firebase.getDoc(docRef);
-			if (docSnap.data().isAdmin) {
-				setLoading(false);
-				navigate('/admin');
+			if (user) {
+				const docRef = firebase.doc(firebase.db, 'users', user.uid);
+				const docSnap = await firebase.getDoc(docRef);
+				if (docSnap.data().isAdmin) {
+					setIsAdmin(true);
+				} else {
+					firebase.auth.signOut();
+					setIsAdmin(false);
+				}
+			} else {
+				setIsAdmin(false);
 			}
+
+			setIsLoading(false);
 		};
 
-		if (user) {
+		if (!loading) {
 			checkAdmin();
-		} else {
-			setLoading(false);
 		}
-	}, [user]);
+	}, [loading]);
 
 	useEffect(() => {
 		if (email && password) {
@@ -69,6 +75,8 @@ function MyAdminSignIn() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		dispatch({ type: 'LOADING' });
+
 		if (email && password) {
 			try {
 				const userCredential = await firebase.signInWithEmailAndPassword(
@@ -83,8 +91,6 @@ function MyAdminSignIn() {
 				const docSnap = await firebase.getDoc(docRef);
 
 				if (docSnap.data().isAdmin) {
-					dispatch({ type: 'LOADING' });
-
 					const { userObjectId, myClasses } = await getMyClasses();
 					let myClassArr = [];
 					if (myClasses) {
@@ -119,7 +125,7 @@ function MyAdminSignIn() {
 
 	if (loading || isLoading) return <Spinner />;
 
-	return (
+	return !isAdmin ? (
 		<WrapperStyles>
 			<FormStyles onSubmit={handleSubmit}>
 				<h2>관리자 로그인</h2>
@@ -156,6 +162,8 @@ function MyAdminSignIn() {
 				</SubmitStyles>
 			</FormStyles>
 		</WrapperStyles>
+	) : (
+		<Navigate to="/admin" />
 	);
 }
 

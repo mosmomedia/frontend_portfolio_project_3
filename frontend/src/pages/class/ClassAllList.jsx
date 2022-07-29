@@ -6,7 +6,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { getAllClasses } from '../../contexts/class/ClassActions';
 import { useClassContext } from '../../contexts/class/ClassContext';
 
-import { useAuthContext } from '../../contexts/auth/AuthContext';
+import firebase from '../../config/firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 import { getMyClasses } from '../../contexts/myClassRoom/MyClassActions';
 
 import ClassCard from './ClassCard';
@@ -35,7 +36,7 @@ function ClassAllList() {
 	const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(-1);
 
-	const { user } = useAuthContext();
+	const [user, loading] = useAuthState(firebase.auth);
 
 	const { classDB, isLoading, dispatch } = useClassContext();
 
@@ -272,8 +273,7 @@ function ClassAllList() {
 			pdClass: true,
 		}));
 	};
-
-	if (isLoading) return <Spinner />;
+	if (isLoading || loading) return <Spinner />;
 
 	return (
 		<WrapperStyles>
