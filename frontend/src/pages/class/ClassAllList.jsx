@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import { motion, AnimatePresence } from 'framer-motion';
@@ -51,8 +51,9 @@ function ClassAllList() {
 	const [stateClassList, setStateClassList] = useState(initialState);
 	const { month, weeks, basicClass, advClass, pdClass } = stateClassList;
 	const [monthList, setMonthList] = useState(null);
-
 	const [filteredList, setFilteredList] = useState([]);
+
+	const [isChanged, setIsChanged] = useState(false);
 
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
@@ -144,33 +145,45 @@ function ClassAllList() {
 
 		fetchAllClasses();
 		return () => (isComponentMounted = false);
-	}, [dispatch, user, pathname, navigate]);
+	}, []);
 
 	useEffect(() => {
-		let newList;
-		newList = classDB.filter(
-			(item) =>
-				(basicClass && item.type === 'basicClass') ||
-				(advClass && item.type === 'advClass') ||
-				(pdClass && item.type === 'pdClass')
-		);
-
-		if (month > 0) {
-			newList = newList.filter((item) => item.month === month);
+		if (initHeight.current) {
+			console.log(initHeight.current.scrollHeight);
 		}
+		return () => {};
+	});
 
-		if (weeks > 0) {
-			newList = newList.filter((item) => item.weeks === weeks);
+	useEffect(() => {
+		if (isChanged) {
+			let newList;
+			newList = classDB.filter(
+				(item) =>
+					(basicClass && item.type === 'basicClass') ||
+					(advClass && item.type === 'advClass') ||
+					(pdClass && item.type === 'pdClass')
+			);
+
+			if (month > 0) {
+				newList = newList.filter((item) => item.month === month);
+			}
+
+			if (weeks > 0) {
+				newList = newList.filter((item) => item.weeks === weeks);
+			}
+
+			setFilteredList(newList);
+			setIsChanged(false);
 		}
-
-		setFilteredList(newList);
-	}, [classDB, basicClass, advClass, pdClass, month, weeks]);
+	}, [isChanged]);
 
 	// scrollbar
+
 	useEffect(() => {
-		if (!isLoading && filteredList.length > 0) {
+		if (!isLoading && filteredList.length > 0 && initHeight.current) {
 			// set initial scrollbar height
 			const { clientHeight, scrollHeight } = initHeight.current;
+
 			if (clientHeight === scrollHeight) {
 				setWidthInput(0);
 			} else {
@@ -180,14 +193,13 @@ function ClassAllList() {
 				setWidthInput(+initHeightRatio);
 			}
 		}
-	}, [isLoading, filteredList]);
+	}, []);
 
 	// changed initial scrollbar height
 	const handleScroll = ({
 		target: { clientHeight, scrollTop, scrollHeight },
 	}) => {
 		const changedHeight = clientHeight + scrollTop;
-
 		if (clientHeight === scrollHeight) {
 			setWidthInput(0);
 		} else {
@@ -260,6 +272,7 @@ function ClassAllList() {
 	// click filter btns
 	const handleFilterBtnClick = ({ target: { id } }) => {
 		setStateClassList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
+		setIsChanged(true);
 	};
 
 	// get all list
@@ -344,18 +357,18 @@ function ClassAllList() {
 							<div>강의 일정 또는 강의 종류를 선택하세요.</div>
 						) : (
 							<CardWrapperStyles>
-								<AnimatePresence>
-									{filteredList.map((item, id) => (
-										<motion.div
-											key={item._id}
-											initial={{ opacity: 0 }}
-											animate={{ opacity: 1 }}
-											exit={{ opacity: 0 }}
-										>
-											<ClassCard item={item}></ClassCard>
-										</motion.div>
-									))}
-								</AnimatePresence>
+								{/* <AnimatePresence> */}
+								{filteredList.map((item, id) => (
+									// <motion.div
+									// 	key={item._id}
+									// 	initial={{ opacity: 0 }}
+									// 	animate={{ opacity: 1 }}
+									// 	exit={{ opacity: 0 }}
+									// >
+									<ClassCard item={item}></ClassCard>
+									// </motion.div>
+								))}
+								{/* </AnimatePresence> */}
 							</CardWrapperStyles>
 						)}
 					</SectionWrapperStyles>

@@ -35,15 +35,8 @@ function Header() {
 
 	const [currentPath, setCurrentPath] = useState('');
 
-	const { pathname } = useLocation();
-
 	const [user, loading] = useAuthState(firebase.auth);
-
-	//* tmp -  get token
-	if (user) {
-		// console.log(user.accessToken);
-		// console.log(user);
-	}
+	const { pathname } = useLocation();
 
 	const splitURI = pathname.split('/');
 	const id = splitURI[splitURI.length - 1];
@@ -73,6 +66,7 @@ function Header() {
 		pathname === '/dashboard/my-page/change-myinfo' ||
 		pathname === '/dashboard/my-page' ||
 		pathname === '/admin' ||
+		pathname === '/admin/sign-in' ||
 		pathname === '/admin/registration' ||
 		pathname === `/admin/registration/edit/${id}` ||
 		pathname === `/admin/class/${id}` ||
@@ -85,7 +79,7 @@ function Header() {
 		setHamburgerOn(false);
 	};
 
-	if (loading) <Spinner />;
+	if (loading) return <Spinner />;
 
 	return (
 		<HeaderStyles is_hover_on={hoverOn}>
