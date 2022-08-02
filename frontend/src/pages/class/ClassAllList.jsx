@@ -4,11 +4,11 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { getAllClasses } from '../../contexts/class/ClassActions';
+import { getMyClasses } from '../../contexts/myClassRoom/MyClassActions';
 import { useClassContext } from '../../contexts/class/ClassContext';
 
 import firebase from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { getMyClasses } from '../../contexts/myClassRoom/MyClassActions';
 
 import ClassCard from './ClassCard';
 
@@ -33,7 +33,7 @@ import {
 } from '../../styles/ClassAllListStyles';
 
 function ClassAllList() {
-	const initHeight = useRef();
+	// const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(-1);
 
 	const [user, loading] = useAuthState(firebase.auth);
@@ -49,11 +49,14 @@ function ClassAllList() {
 	};
 
 	const [stateClassList, setStateClassList] = useState(initialState);
+	const [initStateClassList, setInitStateClassList] = useState({
+		...initialState,
+		month: 0,
+		weeks: 0,
+	});
 	const { month, weeks, basicClass, advClass, pdClass } = stateClassList;
 	const [monthList, setMonthList] = useState(null);
 	const [filteredList, setFilteredList] = useState([]);
-
-	const [isChanged, setIsChanged] = useState(false);
 
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
@@ -67,11 +70,18 @@ function ClassAllList() {
 			const classDB = await getAllClasses();
 			const months = new Set();
 
-			const filteredClassDB = [];
+			let filteredClassDB = [];
+
+			const classState = {
+				basicClass: false,
+				advClass: false,
+				pdClass: false,
+			};
 
 			classDB.forEach((item) => {
 				if (item.status === 'open') {
 					months.add(item.month);
+					// add property
 					item.isPurchased = false;
 
 					filteredClassDB.push(item);
@@ -81,14 +91,18 @@ function ClassAllList() {
 			// find months
 			const monthsArr = Array.from(months).sort((x, y) => x - y);
 
-			if (filteredClassDB.length > 1) {
-				filteredClassDB.sort((a, b) => a.weeks - b.weeks);
-			}
-
 			if (user && filteredClassDB.length > 0) {
-				dispatch({ type: 'LOADING' });
+				const docRef = firebase.doc(firebase.db, 'users', user.uid);
+				const docSnap = await firebase.getDoc(docRef);
+				const { userObjectId, isAdmin } = docSnap.data();
+				if (isAdmin) {
+					filteredClassDB = filteredClassDB.filter(
+						(item) => item.tutorId !== userObjectId
+					);
+				}
 
 				const { myClasses: payload } = await getMyClasses();
+
 				if (payload) {
 					filteredClassDB.forEach((item) => {
 						const findMyclassId = payload.findIndex(
@@ -102,14 +116,21 @@ function ClassAllList() {
 						return item;
 					});
 				}
-				dispatch({ type: 'OFF_LOADING' });
 			}
 
-			const classState = {
-				basicClass: true,
-				advClass: true,
-				pdClass: true,
-			};
+			if (filteredClassDB.length > 1) {
+				filteredClassDB.sort((a, b) => a.weeks - b.weeks);
+			}
+
+			filteredClassDB.forEach((item) => {
+				if (item.type === 'basicClass') {
+					classState.basicClass = true;
+				} else if (item.type === 'advClass') {
+					classState.advClass = true;
+				} else if (item.type === 'pdClass') {
+					classState.pdClass = true;
+				}
+			});
 
 			const API_REG_URI = '/class-registration/all-classes';
 			const API_MY_CLASS_URI = '/dashboard/my-classroom';
@@ -130,11 +151,11 @@ function ClassAllList() {
 			) {
 				return navigate('/notfound');
 			}
-
 			if (isComponentMounted) {
 				setMonthList(monthsArr);
-				setStateClassList(classState);
+				setStateClassList((prevState) => ({ ...prevState, ...classState }));
 				setFilteredList(filteredClassDB);
+				setInitStateClassList({ ...initStateClassList, ...classState });
 			}
 
 			dispatch({
@@ -143,46 +164,46 @@ function ClassAllList() {
 			});
 		};
 
-		fetchAllClasses();
+		if (!loading) {
+			fetchAllClasses();
+		}
+
 		return () => (isComponentMounted = false);
+	}, [loading, dispatch]);
+
+	useEffect(() => {
+		let newList;
+		newList = classDB.filter(
+			(item) =>
+				(basicClass && item.type === 'basicClass') ||
+				(advClass && item.type === 'advClass') ||
+				(pdClass && item.type === 'pdClass')
+		);
+
+		if (month > 0) {
+			newList = newList.filter((item) => item.month === month);
+		}
+
+		if (weeks > 0) {
+			newList = newList.filter((item) => item.weeks === weeks);
+		}
+
+		setFilteredList(newList);
+	}, [basicClass, advClass, pdClass, month, weeks, classDB]);
+
+	// scrollbar
+	const [node, setNode] = useState();
+
+	const initHeight = useCallback((node) => {
+		if (node !== null) {
+			setNode(node);
+		}
 	}, []);
 
 	useEffect(() => {
-		if (initHeight.current) {
-			console.log(initHeight.current.scrollHeight);
-		}
-		return () => {};
-	});
-
-	useEffect(() => {
-		if (isChanged) {
-			let newList;
-			newList = classDB.filter(
-				(item) =>
-					(basicClass && item.type === 'basicClass') ||
-					(advClass && item.type === 'advClass') ||
-					(pdClass && item.type === 'pdClass')
-			);
-
-			if (month > 0) {
-				newList = newList.filter((item) => item.month === month);
-			}
-
-			if (weeks > 0) {
-				newList = newList.filter((item) => item.weeks === weeks);
-			}
-
-			setFilteredList(newList);
-			setIsChanged(false);
-		}
-	}, [isChanged]);
-
-	// scrollbar
-
-	useEffect(() => {
-		if (!isLoading && filteredList.length > 0 && initHeight.current) {
+		if (!isLoading && filteredList.length > 0 && node) {
 			// set initial scrollbar height
-			const { clientHeight, scrollHeight } = initHeight.current;
+			const { clientHeight, scrollHeight } = node;
 
 			if (clientHeight === scrollHeight) {
 				setWidthInput(0);
@@ -193,7 +214,7 @@ function ClassAllList() {
 				setWidthInput(+initHeightRatio);
 			}
 		}
-	}, []);
+	}, [isLoading, filteredList, node]);
 
 	// changed initial scrollbar height
 	const handleScroll = ({
@@ -219,7 +240,6 @@ function ClassAllList() {
 		if (+value > 0) {
 			for (let i = 0; i < classDB.length; i++) {
 				const item = classDB[i];
-
 				if (name === 'month' && weeks > 0 && item.weeks !== weeks) {
 					continue;
 				}
@@ -272,20 +292,13 @@ function ClassAllList() {
 	// click filter btns
 	const handleFilterBtnClick = ({ target: { id } }) => {
 		setStateClassList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
-		setIsChanged(true);
 	};
 
 	// get all list
 	const handleHeaderClick = () => {
-		setStateClassList((prevState) => ({
-			...prevState,
-			month: 0,
-			weeks: 0,
-			basicClass: true,
-			advClass: true,
-			pdClass: true,
-		}));
+		setStateClassList(initStateClassList);
 	};
+
 	if (isLoading || loading) return <Spinner />;
 
 	return (
@@ -365,7 +378,7 @@ function ClassAllList() {
 									// 	animate={{ opacity: 1 }}
 									// 	exit={{ opacity: 0 }}
 									// >
-									<ClassCard item={item}></ClassCard>
+									<ClassCard item={item} key={item._id}></ClassCard>
 									// </motion.div>
 								))}
 								{/* </AnimatePresence> */}
