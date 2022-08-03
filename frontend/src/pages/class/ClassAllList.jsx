@@ -1,5 +1,13 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import {
+	useState,
+	useLayoutEffect,
+	useRef,
+	useEffect,
+	useCallback,
+} from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+
+import useResizeObserver from '@react-hook/resize-observer';
 
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -33,12 +41,12 @@ import {
 } from '../../styles/ClassAllListStyles';
 
 function ClassAllList() {
-	// const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(-1);
 
 	const [user, loading] = useAuthState(firebase.auth);
+	const [isLoading, setIsLoading] = useState(false);
 
-	const { classDB, isLoading, dispatch } = useClassContext();
+	const [classDB, setClassDB] = useState([]);
 
 	const initialState = {
 		month: -1,
@@ -54,20 +62,41 @@ function ClassAllList() {
 		month: 0,
 		weeks: 0,
 	});
+
 	const { month, weeks, basicClass, advClass, pdClass } = stateClassList;
 	const [monthList, setMonthList] = useState(null);
 	const [filteredList, setFilteredList] = useState([]);
+	const [isChanged, setIsChanged] = useState(false);
+	const [height, setHeight] = useState({ clientHeight: 0, scrollHeight: 0 });
 
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
+
+	const [node, setNode] = useState();
+
+	const target = useCallback((node) => {
+		if (node) {
+			setNode(node);
+		}
+	}, []);
+
+	useResizeObserver(
+		node,
+		(entry) => {
+			const { clientHeight, scrollHeight } = entry.target;
+			setHeight({ clientHeight, scrollHeight });
+		},
+		[]
+	);
 
 	useEffect(() => {
 		let isComponentMounted = true;
 
 		const fetchAllClasses = async () => {
-			dispatch({ type: 'LOADING' });
-
+			setIsLoading(true);
 			const classDB = await getAllClasses();
+			// setClassDB(classDB);
+
 			const months = new Set();
 
 			let filteredClassDB = [];
@@ -77,7 +106,6 @@ function ClassAllList() {
 				advClass: false,
 				pdClass: false,
 			};
-
 			classDB.forEach((item) => {
 				if (item.status === 'open') {
 					months.add(item.month);
@@ -151,60 +179,55 @@ function ClassAllList() {
 			) {
 				return navigate('/notfound');
 			}
+
 			if (isComponentMounted) {
 				setMonthList(monthsArr);
+				setInitStateClassList({ ...initStateClassList, ...classState });
 				setStateClassList((prevState) => ({ ...prevState, ...classState }));
 				setFilteredList(filteredClassDB);
-				setInitStateClassList({ ...initStateClassList, ...classState });
 			}
-
-			dispatch({
-				type: 'GET_ALL_CLASSES',
-				payload: filteredClassDB,
-			});
+			setIsLoading(false);
 		};
 
 		if (!loading) {
 			fetchAllClasses();
 		}
-
 		return () => (isComponentMounted = false);
-	}, [loading, dispatch]);
+	}, [loading]);
 
 	useEffect(() => {
-		let newList;
-		newList = classDB.filter(
-			(item) =>
-				(basicClass && item.type === 'basicClass') ||
-				(advClass && item.type === 'advClass') ||
-				(pdClass && item.type === 'pdClass')
-		);
+		if (isChanged) {
+			let newList;
+			newList = classDB.filter(
+				(item) =>
+					(basicClass && item.type === 'basicClass') ||
+					(advClass && item.type === 'advClass') ||
+					(pdClass && item.type === 'pdClass')
+			);
 
-		if (month > 0) {
-			newList = newList.filter((item) => item.month === month);
+			if (month > 0) {
+				newList = newList.filter((item) => item.month === month);
+			}
+
+			if (weeks > 0) {
+				newList = newList.filter((item) => item.weeks === weeks);
+			}
+
+			if (newList.length > 1) {
+				newList.sort((a, b) => a.weeks - b.weeks);
+			}
+
+			setFilteredList(newList);
+			setIsChanged(false);
 		}
-
-		if (weeks > 0) {
-			newList = newList.filter((item) => item.weeks === weeks);
-		}
-
-		setFilteredList(newList);
-	}, [basicClass, advClass, pdClass, month, weeks, classDB]);
+	}, [isChanged]);
 
 	// scrollbar
-	const [node, setNode] = useState();
-
-	const initHeight = useCallback((node) => {
-		if (node !== null) {
-			setNode(node);
-		}
-	}, []);
-
 	useEffect(() => {
-		if (!isLoading && filteredList.length > 0 && node) {
+		if (!loading && filteredList.length > 0 && node) {
 			// set initial scrollbar height
-			const { clientHeight, scrollHeight } = node;
-
+			const { clientHeight, scrollHeight } = height;
+			console.log(height);
 			if (clientHeight === scrollHeight) {
 				setWidthInput(0);
 			} else {
@@ -214,7 +237,7 @@ function ClassAllList() {
 				setWidthInput(+initHeightRatio);
 			}
 		}
-	}, [isLoading, filteredList, node]);
+	}, [loading, height, filteredList, node]);
 
 	// changed initial scrollbar height
 	const handleScroll = ({
@@ -292,6 +315,7 @@ function ClassAllList() {
 	// click filter btns
 	const handleFilterBtnClick = ({ target: { id } }) => {
 		setStateClassList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
+		setIsChanged(true);
 	};
 
 	// get all list
@@ -299,7 +323,7 @@ function ClassAllList() {
 		setStateClassList(initStateClassList);
 	};
 
-	if (isLoading || loading) return <Spinner />;
+	if (loading || isLoading) return <Spinner />;
 
 	return (
 		<WrapperStyles>
@@ -359,32 +383,33 @@ function ClassAllList() {
 				<>
 					<SectionWrapperStyles
 						className="SectionWrapperStyles"
-						ref={initHeight}
+						ref={target}
 						onScroll={handleScroll}
 						add_styles={tw`border-[1rem] rounded-t-lg  border-white`}
 						variant="card_col_2"
 					>
-						{classDB.length === 0 ? (
+						{/* {classDB.length === 0 ? (
 							<div>현재 개설 된 강의가 없습니다.</div>
 						) : filteredList.length === 0 ? (
 							<div>강의 일정 또는 강의 종류를 선택하세요.</div>
-						) : (
-							<CardWrapperStyles>
-								{/* <AnimatePresence> */}
-								{filteredList.map((item, id) => (
-									// <motion.div
-									// 	key={item._id}
-									// 	initial={{ opacity: 0 }}
-									// 	animate={{ opacity: 1 }}
-									// 	exit={{ opacity: 0 }}
-									// >
-									<ClassCard item={item} key={item._id}></ClassCard>
-									// </motion.div>
-								))}
-								{/* </AnimatePresence> */}
-							</CardWrapperStyles>
-						)}
+						) : ( */}
+						<CardWrapperStyles>
+							{/* <AnimatePresence> */}
+							{filteredList.map((item) => (
+								// <motion.div
+								// 	key={item._id}
+								// 	initial={{ opacity: 0 }}
+								// 	animate={{ opacity: 1 }}
+								// 	exit={{ opacity: 0 }}
+								// >
+								<ClassCard item={item} key={item._id}></ClassCard>
+								// </motion.div>
+							))}
+							{/* </AnimatePresence> */}
+						</CardWrapperStyles>
+						{/* )} */}
 					</SectionWrapperStyles>
+
 					<BarIndicatorStyles>
 						<BarContainerStyles>
 							<BarStyles widthInput={widthInput} />
