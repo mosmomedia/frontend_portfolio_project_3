@@ -1,8 +1,6 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
-import useResizeObserver from '@react-hook/resize-observer';
-
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { getAllClasses } from '../../contexts/class/ClassActions';
@@ -10,6 +8,7 @@ import { getMyClasses } from '../../contexts/myClassRoom/MyClassActions';
 
 import firebase from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { useClassContext } from '../../contexts/class/ClassContext';
 
 import ClassCard from './ClassCard';
 
@@ -37,35 +36,24 @@ function ClassAllList() {
 	const [widthInput, setWidthInput] = useState(-1);
 
 	const [user, loading] = useAuthState(firebase.auth);
-	const [isLoading, setIsLoading] = useState(false);
 
-	const [classDB, setClassDB] = useState([]);
 	const [adminInfo, setAdminInfo] = useState(null);
 
-	const initialState = {
-		month: -1,
-		weeks: -1,
-		basicClass: false,
-		advClass: false,
-		pdClass: false,
-	};
+	const {
+		filteredList,
+		classDB,
+		monthList,
+		stateClassList,
+		initStateClassList,
+		isLoading,
+		dispatch,
+	} = useClassContext();
 
-	const [initStateClassList, setInitStateClassList] = useState({
-		...initialState,
-		month: 0,
-		weeks: 0,
-	});
-
-	const [stateClassList, setStateClassList] = useState(initialState);
 	const { month, weeks, basicClass, advClass, pdClass } = stateClassList;
 
-	const [monthList, setMonthList] = useState(null);
-	const [filteredList, setFilteredList] = useState([]);
 	const [isChanged, setIsChanged] = useState(false);
 
 	const [node, setNode] = useState();
-	const [clientHeight, setClientHeight] = useState(0);
-	const [scrollHeight, setScrollHeight] = useState(0);
 	const [height, SetHeight] = useState({ clientHeight: 0, scrollHeight: 0 });
 
 	const { pathname } = useLocation();
@@ -74,7 +62,6 @@ function ClassAllList() {
 	const targetClient = useCallback((node) => {
 		if (node) {
 			const { clientHeight } = node;
-			// setClientHeight(clientHeight);
 			SetHeight({ ...height, clientHeight });
 		}
 	}, []);
@@ -84,12 +71,6 @@ function ClassAllList() {
 			setNode(node);
 		}
 	}, []);
-
-	useResizeObserver(node, (entry) => {
-		const { clientHeight } = entry.target;
-		// setScrollHeight(clientHeight);
-		// SetHeight({ ...height, scrollHeight });
-	});
 
 	const myObserver = new ResizeObserver((entries) => {
 		for (let entry of entries) {
@@ -111,11 +92,10 @@ function ClassAllList() {
 		let isComponentMounted = true;
 
 		const fetchAllClasses = async () => {
-			setIsLoading(true);
-			const classDB = await getAllClasses();
-			setClassDB(classDB);
+			// setIsLoading(true);
+			dispatch({ type: 'LOADING' });
 
-			const months = new Set();
+			const classDB = await getAllClasses();
 
 			let filteredClassDB = [];
 
@@ -127,16 +107,12 @@ function ClassAllList() {
 
 			classDB.forEach((item) => {
 				if (item.status === 'open') {
-					months.add(item.month);
 					// add property
 					item.isPurchased = false;
 
 					filteredClassDB.push(item);
 				}
 			});
-
-			// find months
-			const monthsArr = Array.from(months).sort((x, y) => x - y);
 
 			if (user && filteredClassDB.length > 0) {
 				const docRef = firebase.doc(firebase.db, 'users', user.uid);
@@ -171,6 +147,8 @@ function ClassAllList() {
 				filteredClassDB.sort((a, b) => a.weeks - b.weeks);
 			}
 
+			const months = new Set();
+
 			filteredClassDB.forEach((item) => {
 				if (item.type === 'basicClass') {
 					classState.basicClass = true;
@@ -179,7 +157,11 @@ function ClassAllList() {
 				} else if (item.type === 'pdClass') {
 					classState.pdClass = true;
 				}
+
+				months.add(item.month);
 			});
+
+			const monthsArr = Array.from(months).sort((x, y) => x - y);
 
 			const API_REG_URI = '/class-registration/all-classes';
 			const API_MY_CLASS_URI = '/dashboard/my-classroom';
@@ -202,12 +184,21 @@ function ClassAllList() {
 			}
 
 			if (isComponentMounted) {
-				setMonthList(monthsArr);
-				setInitStateClassList({ ...initStateClassList, ...classState });
-				setStateClassList((prevState) => ({ ...prevState, ...classState }));
-				setFilteredList(filteredClassDB);
+				dispatch({
+					type: 'FETCH_INIT_ALLCLASSES_USER',
+					payload: {
+						classDB,
+						monthsArr,
+						classState,
+						filteredClassDB,
+					},
+				});
+				// setMonthList(monthsArr);
+				// setInitStateClassList({ ...initStateClassList, ...classState });
+				// setStateClassList((prevState) => ({ ...prevState, ...classState }));
+				// setFilteredList(filteredClassDB);
 			}
-			setIsLoading(false);
+			// setIsLoading(false);
 		};
 
 		if (!loading) {
@@ -245,18 +236,15 @@ function ClassAllList() {
 				newList.sort((a, b) => a.weeks - b.weeks);
 			}
 
-			setFilteredList(newList);
+			dispatch({ type: 'SET_FILTERED_LIST', payload: newList });
 			setIsChanged(false);
 		}
 	}, [isChanged]);
-
 	// scrollbar
 	useEffect(() => {
 		if (!loading && filteredList.length > 0 && node) {
 			// set initial scrollbar height
-
 			const { clientHeight, scrollHeight } = height;
-
 			if (clientHeight >= scrollHeight) {
 				setWidthInput(0);
 			} else {
@@ -266,7 +254,7 @@ function ClassAllList() {
 				setWidthInput(+initHeightRatio);
 			}
 		}
-	}, [loading, filteredList.length, height]);
+	}, [loading, filteredList, height]);
 
 	// changed initial scrollbar height
 	const handleScroll = ({
@@ -305,11 +293,15 @@ function ClassAllList() {
 				}
 			}
 
-			setStateClassList((prevState) => ({
-				...prevState,
-				[name]: +value,
-				...getClassState,
-			}));
+			dispatch({
+				type: 'SET_STATEDATELIST',
+				payload: { name, value, getClassState },
+			});
+			// setStateClassList((prevState) => ({
+			// 	...prevState,
+			// 	[name]: +value,
+			// 	...getClassState,
+			// }));
 		} else if (+value === 0 && (month <= 0 || weeks <= 0)) {
 			handleHeaderClick();
 		} else if (+value === 0 && (month > 0 || weeks > 0)) {
@@ -328,33 +320,42 @@ function ClassAllList() {
 				}
 			}
 
-			setStateClassList((prevState) => ({
-				...prevState,
-				[name]: +value,
-				...getClassState,
-			}));
+			dispatch({
+				type: 'SET_STATEDATELIST',
+				payload: { name, value, getClassState },
+			});
+			// setStateClassList((prevState) => ({
+			// 	...prevState,
+			// 	[name]: +value,
+			// 	...getClassState,
+			// }));
 		} else {
-			setStateClassList((prevState) => ({
-				...prevState,
-				[name]: +value,
-			}));
+			dispatch({
+				type: 'SET_STATEDATELIST',
+				payload: { name, value, getClassState },
+			});
+			// setStateClassList((prevState) => ({
+			// 	...prevState,
+			// 	[name]: +value,
+			// }));
 		}
 
-		setFilteredList([]);
+		// setFilteredList([]);
 		setIsChanged(true);
 	};
 
 	// click filter btns
 	const handleFilterBtnClick = ({ target: { id } }) => {
-		setStateClassList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
-		setFilteredList([]);
+		// setStateClassList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
+		dispatch({ type: 'SET_STATECLASSLIST', payload: id });
+		// setFilteredList([]);
 		setIsChanged(true);
 	};
-
 	// get all list
 	const handleHeaderClick = () => {
-		setStateClassList(initStateClassList);
-		setFilteredList([]);
+		dispatch({ type: 'GET_INIT_FILTERED_LIST' });
+		// setStateClassList(initStateClassList);
+		// setFilteredList([]);
 		setIsChanged(true);
 	};
 
@@ -423,26 +424,27 @@ function ClassAllList() {
 						add_styles={tw`border-[1rem] rounded-t-lg  border-white`}
 						variant="card_col_2"
 					>
-						{classDB.length === 0 ? (
+						{/* {classDB.length === 0 ? (
 							<div>현재 개설 된 강의가 없습니다.</div>
 						) : filteredList.length === 0 ? (
 							<div>강의 일정 또는 강의 종류를 선택하세요.</div>
-						) : (
-							<CardWrapperStyles ref={targetScroll}>
-								<AnimatePresence>
-									{filteredList.map((item) => (
-										<motion.div
-											key={item._id}
-											initial={{ opacity: 0 }}
-											animate={{ opacity: 1 }}
-											exit={{ opacity: 0 }}
-										>
-											<ClassCard item={item} key={item._id}></ClassCard>
-										</motion.div>
-									))}
-								</AnimatePresence>
-							</CardWrapperStyles>
-						)}
+						) :
+						( */}
+						<CardWrapperStyles ref={targetScroll}>
+							<AnimatePresence>
+								{filteredList.map((item) => (
+									<motion.div
+										key={item._id}
+										initial={{ opacity: 0 }}
+										animate={{ opacity: 1 }}
+										exit={{ opacity: 0 }}
+									>
+										<ClassCard item={item} key={item._id}></ClassCard>
+									</motion.div>
+								))}
+							</AnimatePresence>
+						</CardWrapperStyles>
+						{/* )} */}
 					</SectionWrapperStyles>
 
 					<BarIndicatorStyles>

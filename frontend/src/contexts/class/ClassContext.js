@@ -7,7 +7,16 @@ function ClassProvider({ children }) {
 	const initialState = {
 		classDB: [],
 		filteredList: [],
-		user: null,
+		monthList: [],
+		stateClassList: {
+			month: -1,
+			weeks: -1,
+			basicClass: false,
+			advClass: false,
+			pdClass: false,
+		},
+		initStateClassList: {},
+		adminInfo: { useObjectId: null, isAdmin: null },
 		isLoading: false,
 	};
 
