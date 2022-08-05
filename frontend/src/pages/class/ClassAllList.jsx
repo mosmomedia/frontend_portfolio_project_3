@@ -1,10 +1,4 @@
-import {
-	useState,
-	useLayoutEffect,
-	useRef,
-	useEffect,
-	useCallback,
-} from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 
 import useResizeObserver from '@react-hook/resize-observer';
@@ -13,7 +7,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 import { getAllClasses } from '../../contexts/class/ClassActions';
 import { getMyClasses } from '../../contexts/myClassRoom/MyClassActions';
-import { useClassContext } from '../../contexts/class/ClassContext';
 
 import firebase from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
@@ -57,14 +50,15 @@ function ClassAllList() {
 		pdClass: false,
 	};
 
-	const [stateClassList, setStateClassList] = useState(initialState);
 	const [initStateClassList, setInitStateClassList] = useState({
 		...initialState,
 		month: 0,
 		weeks: 0,
 	});
 
+	const [stateClassList, setStateClassList] = useState(initialState);
 	const { month, weeks, basicClass, advClass, pdClass } = stateClassList;
+
 	const [monthList, setMonthList] = useState(null);
 	const [filteredList, setFilteredList] = useState([]);
 	const [isChanged, setIsChanged] = useState(false);
@@ -72,13 +66,16 @@ function ClassAllList() {
 	const [node, setNode] = useState();
 	const [clientHeight, setClientHeight] = useState(0);
 	const [scrollHeight, setScrollHeight] = useState(0);
+	const [height, SetHeight] = useState({ clientHeight: 0, scrollHeight: 0 });
 
 	const { pathname } = useLocation();
 	const navigate = useNavigate();
 
 	const targetClient = useCallback((node) => {
 		if (node) {
-			setClientHeight(node.clientHeight);
+			const { clientHeight } = node;
+			// setClientHeight(clientHeight);
+			SetHeight({ ...height, clientHeight });
 		}
 	}, []);
 
@@ -90,8 +87,25 @@ function ClassAllList() {
 
 	useResizeObserver(node, (entry) => {
 		const { clientHeight } = entry.target;
-		setScrollHeight(clientHeight);
+		// setScrollHeight(clientHeight);
+		// SetHeight({ ...height, scrollHeight });
 	});
+
+	const myObserver = new ResizeObserver((entries) => {
+		for (let entry of entries) {
+			SetHeight({ ...height, scrollHeight: entry.contentRect.height });
+		}
+	});
+
+	useEffect(() => {
+		if (node) {
+			myObserver.observe(node);
+
+			return () => {
+				myObserver.unobserve(node);
+			};
+		}
+	}, [node]);
 
 	useEffect(() => {
 		let isComponentMounted = true;
@@ -110,6 +124,7 @@ function ClassAllList() {
 				advClass: false,
 				pdClass: false,
 			};
+
 			classDB.forEach((item) => {
 				if (item.status === 'open') {
 					months.add(item.month);
@@ -127,6 +142,7 @@ function ClassAllList() {
 				const docRef = firebase.doc(firebase.db, 'users', user.uid);
 				const docSnap = await firebase.getDoc(docRef);
 				const { userObjectId, isAdmin } = docSnap.data();
+
 				if (isAdmin) {
 					filteredClassDB = filteredClassDB.filter(
 						(item) => item.tutorId !== userObjectId
@@ -236,8 +252,10 @@ function ClassAllList() {
 
 	// scrollbar
 	useEffect(() => {
-		if (!loading && filteredList.length > 0) {
+		if (!loading && filteredList.length > 0 && node) {
 			// set initial scrollbar height
+
+			const { clientHeight, scrollHeight } = height;
 
 			if (clientHeight >= scrollHeight) {
 				setWidthInput(0);
@@ -248,7 +266,7 @@ function ClassAllList() {
 				setWidthInput(+initHeightRatio);
 			}
 		}
-	}, [loading, filteredList.length, clientHeight, scrollHeight]);
+	}, [loading, filteredList.length, height]);
 
 	// changed initial scrollbar height
 	const handleScroll = ({
@@ -321,6 +339,9 @@ function ClassAllList() {
 				[name]: +value,
 			}));
 		}
+
+		setFilteredList([]);
+		setIsChanged(true);
 	};
 
 	// click filter btns
@@ -333,6 +354,8 @@ function ClassAllList() {
 	// get all list
 	const handleHeaderClick = () => {
 		setStateClassList(initStateClassList);
+		setFilteredList([]);
+		setIsChanged(true);
 	};
 
 	if (loading || isLoading) return <Spinner />;
