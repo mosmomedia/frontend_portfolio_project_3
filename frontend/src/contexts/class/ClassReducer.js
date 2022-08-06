@@ -13,6 +13,10 @@ function ClassReducer(state, action) {
 					...state.stateClassList,
 					...action.payload.classState,
 				},
+				adminInfo:
+					action.payload.adminInfo && action.payload.adminInfo.isAdmin
+						? action.payload.adminInfo
+						: state.adminInfo,
 				monthList: action.payload.monthsArr,
 
 				isLoading: false,
@@ -39,7 +43,7 @@ function ClassReducer(state, action) {
 				stateClassList: {
 					...state.stateClassList,
 					[action.payload.name]: +action.payload.value,
-					// ...action.payload.getClassState,
+					...action.payload.getClassState,
 				},
 			};
 
