@@ -286,6 +286,7 @@ function ClassAllList() {
 				if (name === 'weeks' && month > 0 && item.month !== month) {
 					continue;
 				}
+
 				const { userObjectId, isAdmin } = adminInfo;
 				if (item[name] === +value) {
 					if (isAdmin && item.tutorId === userObjectId) {
