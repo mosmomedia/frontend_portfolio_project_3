@@ -48,7 +48,6 @@ function ClassAllList() {
 	} = useClassContext();
 
 	const { month, weeks, basicClass, advClass, pdClass } = stateClassList;
-
 	const [isChanged, setIsChanged] = useState(false);
 
 	const [node, setNode] = useState();
@@ -423,7 +422,7 @@ function ClassAllList() {
 											animate={{ opacity: 1 }}
 											exit={{ opacity: 0 }}
 										>
-											<ClassCard item={item} key={item._id}></ClassCard>
+											<ClassCard item={item}></ClassCard>
 										</motion.div>
 									))}
 								</AnimatePresence>

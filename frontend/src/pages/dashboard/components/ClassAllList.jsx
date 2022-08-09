@@ -1,12 +1,11 @@
-import { useState, useRef, useEffect } from 'react';
-
+import { useState, useCallback, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { getAllClasses } from '../../../contexts/class/ClassActions';
-import { useClassContext } from '../../../contexts/class/ClassContext';
-
-import { useAuthState } from 'react-firebase-hooks/auth';
-import firebase from '../../../config/firebase';
-
 import { getMyClasses } from '../../../contexts/myClassRoom/MyClassActions';
+
+import firebase from '../../../config/firebase';
+import { useClassContext } from '../../../contexts/class/ClassContext';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 import ClassCard from '../../class/ClassCard';
 
@@ -31,26 +30,56 @@ import {
 } from '../styles/ClassAllListStyles';
 
 function ClassAllList() {
-	const initHeight = useRef();
 	const [widthInput, setWidthInput] = useState(-1);
-
 	const [user, loading] = useAuthState(firebase.auth);
 
-	const { classDB, isLoading, dispatch } = useClassContext();
+	const {
+		filteredList,
+		classDB,
+		monthList,
+		stateClassList,
+		adminInfo,
+		dispatch,
+		isLoading,
+	} = useClassContext();
 
-	const initialState = {
-		month: -1,
-		weeks: -1,
-		basicClass: true,
-		advClass: true,
-		pdClass: true,
-	};
-
-	const [stateClassList, setStateClassList] = useState(initialState);
 	const { month, weeks, basicClass, advClass, pdClass } = stateClassList;
-	const [monthList, setMonthList] = useState(null);
+	const [isChanged, setIsChanged] = useState(false);
 
-	const [filteredList, setFilteredList] = useState([]);
+	const [node, setNode] = useState();
+	const [height, SetHeight] = useState({ clientHeight: 0, scrollHeight: 0 });
+
+	const targetClient = useCallback((node) => {
+		if (node) {
+			const { clientHeight } = node;
+			SetHeight((prevState) => ({ ...prevState, clientHeight }));
+		}
+	}, []);
+
+	const targetScroll = useCallback((node) => {
+		if (node) {
+			setNode(node);
+		}
+	}, []);
+
+	const myObserver = new ResizeObserver((entries) => {
+		for (let entry of entries) {
+			SetHeight((prevState) => ({
+				...prevState,
+				scrollHeight: entry.contentRect.height,
+			}));
+		}
+	});
+
+	useEffect(() => {
+		if (node) {
+			myObserver.observe(node);
+
+			return () => {
+				myObserver.unobserve(node);
+			};
+		}
+	}, [node]);
 
 	useEffect(() => {
 		let isComponentMounted = true;
@@ -60,82 +89,134 @@ function ClassAllList() {
 
 			const classDB = await getAllClasses();
 
-			const months = new Set();
-
 			let filteredClassDB = [];
+
+			const classState = {
+				basicClass: false,
+				advClass: false,
+				pdClass: false,
+			};
 
 			classDB.forEach((item) => {
 				if (item.status === 'open') {
-					months.add(item.month);
+					// add property
 					item.isPurchased = false;
+
 					filteredClassDB.push(item);
 				}
 			});
 
-			// find months
-			const monthsArr = Array.from(months);
+			let adminInfo;
 
 			if (user && filteredClassDB.length > 0) {
-				dispatch({ type: 'LOADING' });
+				const docRef = firebase.doc(firebase.db, 'users', user.uid);
+				const docSnap = await firebase.getDoc(docRef);
+				const { userObjectId, isAdmin } = docSnap.data();
+
+				if (isAdmin) {
+					filteredClassDB = filteredClassDB.filter(
+						(item) => item.tutorId !== userObjectId
+					);
+					adminInfo = { userObjectId, isAdmin };
+				}
 
 				const { myClasses: payload } = await getMyClasses();
+
 				if (payload) {
-					filteredClassDB = filteredClassDB.filter((item) => {
+					filteredClassDB.forEach((item) => {
 						const findMyclassId = payload.findIndex(
 							(e) => e.myClass._id === item._id
 						);
+
 						if (findMyclassId !== -1) {
 							item.isPurchased = true;
-							return false;
 						}
 
-						return true;
+						return item;
 					});
 				}
-
-				dispatch({ type: 'OFF_LOADING' });
 			}
+
+			if (filteredClassDB.length > 1) {
+				filteredClassDB.sort((a, b) => a.weeks - b.weeks);
+			}
+
+			const months = new Set();
+
+			filteredClassDB.forEach((item) => {
+				if (item.type === 'basicClass') {
+					classState.basicClass = true;
+				} else if (item.type === 'advClass') {
+					classState.advClass = true;
+				} else if (item.type === 'pdClass') {
+					classState.pdClass = true;
+				}
+
+				months.add(item.month);
+			});
+
+			const monthsArr = Array.from(months).sort((x, y) => x - y);
 
 			if (isComponentMounted) {
-				setMonthList(monthsArr);
-				setFilteredList(filteredClassDB);
+				dispatch({
+					type: 'FETCH_INIT_ALLCLASSES_USER',
+					payload: {
+						classDB,
+						monthsArr,
+						classState,
+						filteredClassDB,
+						adminInfo,
+					},
+				});
 			}
-
-			dispatch({
-				type: 'GET_ALL_CLASSES',
-				payload: filteredClassDB,
-			});
 		};
 
-		fetchAllClasses();
+		if (!loading) {
+			fetchAllClasses();
+		}
 		return () => (isComponentMounted = false);
-	}, [dispatch, user]);
+	}, [loading]);
 
 	useEffect(() => {
-		let newList;
-		newList = classDB.filter(
-			(item) =>
-				(basicClass && item.type === 'basicClass') ||
-				(advClass && item.type === 'advClass') ||
-				(pdClass && item.type === 'pdClass')
-		);
+		if (isChanged) {
+			let newList;
+			newList = classDB.filter(
+				(item) =>
+					(basicClass && item.type === 'basicClass') ||
+					(advClass && item.type === 'advClass') ||
+					(pdClass && item.type === 'pdClass')
+			);
 
-		if (month > 0) {
-			newList = newList.filter((item) => item.month === month);
+			if (month > 0) {
+				newList = newList.filter((item) => item.month === month);
+			}
+
+			if (weeks > 0) {
+				newList = newList.filter((item) => item.weeks === weeks);
+			}
+
+			if (user) {
+				const { userObjectId, isAdmin } = adminInfo;
+				if (isAdmin) {
+					newList = newList.filter((item) => item.tutorId !== userObjectId);
+				}
+			}
+
+			if (newList.length > 1) {
+				newList.sort((a, b) => a.weeks - b.weeks);
+			}
+
+			dispatch({ type: 'SET_FILTERED_LIST', payload: newList });
+			setIsChanged(false);
 		}
+	}, [isChanged]);
 
-		if (weeks > 0) {
-			newList = newList.filter((item) => item.weeks === weeks);
-		}
-
-		setFilteredList(newList);
-	}, [classDB, basicClass, advClass, pdClass, month, weeks]);
-
+	// scrollbar
 	useEffect(() => {
-		if (!isLoading && filteredList.length > 0) {
+		if (!loading && filteredList.length > 0 && node) {
 			// set initial scrollbar height
-			const { clientHeight, scrollHeight } = initHeight.current;
-			if (clientHeight === scrollHeight) {
+			const { clientHeight, scrollHeight } = height;
+			if (clientHeight >= scrollHeight) {
 				setWidthInput(0);
 			} else {
 				const initHeightRatio = ((clientHeight / scrollHeight) * 100).toFixed(
@@ -144,14 +225,13 @@ function ClassAllList() {
 				setWidthInput(+initHeightRatio);
 			}
 		}
-	}, [isLoading, filteredList]);
+	}, [loading, filteredList, height]);
 
 	// changed initial scrollbar height
 	const handleScroll = ({
 		target: { clientHeight, scrollTop, scrollHeight },
 	}) => {
 		const changedHeight = clientHeight + scrollTop;
-
 		if (clientHeight === scrollHeight) {
 			setWidthInput(0);
 		} else {
@@ -171,7 +251,6 @@ function ClassAllList() {
 		if (+value > 0) {
 			for (let i = 0; i < classDB.length; i++) {
 				const item = classDB[i];
-
 				if (name === 'month' && weeks > 0 && item.weeks !== weeks) {
 					continue;
 				}
@@ -180,16 +259,19 @@ function ClassAllList() {
 					continue;
 				}
 
+				const { userObjectId, isAdmin } = adminInfo;
 				if (item[name] === +value) {
+					if (isAdmin && item.tutorId === userObjectId) {
+						continue;
+					}
 					getClassState[item.type] = true;
 				}
 			}
 
-			setStateClassList((prevState) => ({
-				...prevState,
-				[name]: +value,
-				...getClassState,
-			}));
+			dispatch({
+				type: 'SET_STATEDATELIST',
+				payload: { name, value, getClassState },
+			});
 		} else if (+value === 0 && (month <= 0 || weeks <= 0)) {
 			handleHeaderClick();
 		} else if (+value === 0 && (month > 0 || weeks > 0)) {
@@ -208,34 +290,30 @@ function ClassAllList() {
 				}
 			}
 
-			setStateClassList((prevState) => ({
-				...prevState,
-				[name]: +value,
-				...getClassState,
-			}));
+			dispatch({
+				type: 'SET_STATEDATELIST',
+				payload: { name, value, getClassState },
+			});
 		} else {
-			setStateClassList((prevState) => ({
-				...prevState,
-				[name]: +value,
-			}));
+			dispatch({
+				type: 'SET_STATEDATELIST',
+				payload: { name, value, getClassState },
+			});
 		}
+
+		setIsChanged(true);
 	};
 
 	// click filter btns
 	const handleFilterBtnClick = ({ target: { id } }) => {
-		setStateClassList((prevState) => ({ ...prevState, [id]: !prevState[id] }));
+		dispatch({ type: 'SET_STATECLASSLIST', payload: id });
+		setIsChanged(true);
 	};
 
 	// get all list
 	const handleHeaderClick = () => {
-		setStateClassList((prevState) => ({
-			...prevState,
-			month: 0,
-			weeks: 0,
-			basicClass: true,
-			advClass: true,
-			pdClass: true,
-		}));
+		dispatch({ type: 'GET_INIT_FILTERED_LIST' });
+		setIsChanged(true);
 	};
 
 	if (isLoading || loading) return <Spinner />;
@@ -298,7 +376,7 @@ function ClassAllList() {
 				<>
 					<SectionWrapperStyles
 						className="SectionWrapperStyles"
-						ref={initHeight}
+						ref={targetClient}
 						onScroll={handleScroll}
 						add_styles={tw`border-[1rem] rounded-t-lg  border-white`}
 						variant="card_col_2"
@@ -308,10 +386,19 @@ function ClassAllList() {
 						) : filteredList.length === 0 ? (
 							<div>강의 일정 또는 강의 종류를 선택하세요.</div>
 						) : (
-							<CardWrapperStyles>
-								{filteredList.map((item, id) => (
-									<ClassCard key={id} item={item}></ClassCard>
-								))}
+							<CardWrapperStyles ref={targetScroll}>
+								<AnimatePresence>
+									{filteredList.map((item, id) => (
+										<motion.div
+											key={item._id}
+											initial={{ opacity: 0 }}
+											animate={{ opacity: 1 }}
+											exit={{ opacity: 0 }}
+										>
+											<ClassCard item={item}></ClassCard>
+										</motion.div>
+									))}
+								</AnimatePresence>
 							</CardWrapperStyles>
 						)}
 					</SectionWrapperStyles>
