@@ -123,16 +123,16 @@ function ClassAllList() {
 				const { myClasses: payload } = await getMyClasses();
 
 				if (payload) {
-					filteredClassDB.forEach((item) => {
+					filteredClassDB.filter((item) => {
 						const findMyclassId = payload.findIndex(
 							(e) => e.myClass._id === item._id
 						);
 
 						if (findMyclassId !== -1) {
-							item.isPurchased = true;
+							return false;
+						} else {
+							return item;
 						}
-
-						return item;
 					});
 				}
 			}

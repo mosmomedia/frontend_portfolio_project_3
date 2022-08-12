@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const CardWrapperStyles = styled.div`
-	${tw`space-y-4 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-4 `}
+	${tw`space-y-4 xl:space-y-0 xl:grid xl:grid-cols-2 xl:gap-4 `}
 `;
 
 export const FilterWrapperStyles = styled.div`

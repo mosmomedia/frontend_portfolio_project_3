@@ -169,14 +169,26 @@ function ClassAllList() {
 
 			if (pathname === `${API_MY_CLASS_URI}`) {
 			} else if (pathname === `${API_REG_URI}/online/basic`) {
+				classState.basicClass = true;
 				classState.advClass = false;
 				classState.pdClass = false;
+				filteredClassDB = filteredClassDB.filter(
+					(item) => item.type === 'basicClass'
+				);
 			} else if (pathname === `${API_REG_URI}/online/adv`) {
 				classState.basicClass = false;
+				classState.advClass = true;
 				classState.pdClass = false;
+				filteredClassDB = filteredClassDB.filter(
+					(item) => item.type === 'advClass'
+				);
 			} else if (pathname === `${API_REG_URI}/online/pd`) {
 				classState.basicClass = false;
 				classState.advClass = false;
+				classState.pdClass = true;
+				filteredClassDB = filteredClassDB.filter(
+					(item) => item.type === 'pdClass'
+				);
 			} else if (
 				pathname !== `${API_REG_URI}` &&
 				pathname !== `${API_REG_URI}/online`
