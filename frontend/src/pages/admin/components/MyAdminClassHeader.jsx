@@ -32,7 +32,6 @@ function MyClassCard({
 		completedAt,
 		classDetail,
 	} = currentClass;
-
 	const dateToString = (date) => {
 		const formattedDateKR = new Intl.DateTimeFormat('ko-KR').format(date);
 		const formattedWeekdayKR = new Intl.DateTimeFormat('ko-KR', {

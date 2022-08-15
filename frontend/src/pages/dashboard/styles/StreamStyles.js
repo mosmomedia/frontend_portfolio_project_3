@@ -35,5 +35,5 @@ export const SectionWrapperStyles = styled.div`
 
 export const CardWrapperStyles = styled.div`
 	${tw`space-y-4`}
-	${tw`lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-4`}
+	${tw`xl:space-y-0 xl:grid xl:grid-cols-2 xl:gap-4`}
 `;

@@ -8,7 +8,6 @@ import {
 
 function CheckIn({ myClass: { currentClass, userObjectId } }) {
 	const { completedAt, classDetail, isOnAir } = currentClass;
-
 	const getClassInfo = [];
 
 	classDetail.forEach((item) => {

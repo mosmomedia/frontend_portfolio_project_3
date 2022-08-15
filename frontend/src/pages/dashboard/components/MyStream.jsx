@@ -18,27 +18,28 @@ import Spinner from '../../../components/shared/Spinner';
 
 function MyStream() {
 	const { id } = useParams();
-	const { isLoading, userObjectId, myClassList, dispatch } =
+	const { isLoading, userObjectId, myClassList, currentClass, dispatch } =
 		useMyClassContext();
+	// const [currentClass, setCurrentClass] = useState(null);
 
-	const [currentClass, setCurrentClass] = useState(null);
 	useEffect(() => {
 		dispatch({ type: 'LOADING' });
 		if (myClassList.length > 0) {
-			let getCurrentClass;
+			let payload;
 
 			for (let i = 0; i < myClassList.length; i++) {
 				const { myClass } = myClassList[i];
 				if (myClass._id !== id) {
 					continue;
 				} else {
-					getCurrentClass = myClass;
+					payload = myClass;
 					break;
 				}
 			}
-			setCurrentClass(getCurrentClass);
 
-			dispatch({ type: 'OFF_LOADING' });
+			// setCurrentClass(getCurrentClass);
+
+			dispatch({ type: 'GET_MY_CURRENT_CLASS', payload });
 		}
 		// eslint-disable-line-next
 	}, []);
