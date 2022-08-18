@@ -49,18 +49,13 @@ function MyStream() {
 
 	return (
 		<SectionStyles>
-			{' '}
-			{/* header */}
 			<HeaderStyles>
 				<h2>나의 강의 관리</h2>
 			</HeaderStyles>
-			{/*main */}
 			<MainStyles>
 				<MyStreamCard myClass={currentClass} />
 				<InfoWrapperStyles>
-					{/* checkin */}
 					<CheckIn myClass={{ currentClass, userObjectId }} />
-					{/* homework */}
 					<Homework myClass={currentClass} />
 				</InfoWrapperStyles>
 			</MainStyles>

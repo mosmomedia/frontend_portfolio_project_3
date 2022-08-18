@@ -9,8 +9,6 @@ function MyClassProvider({ children }) {
 		myClassList: [],
 		currentClass: null,
 		isLoading: false,
-		isAdmin: false,
-		isTutor: false,
 	};
 
 	const [state, dispatch] = useReducer(MyClassReducer, initialState);
