@@ -1,5 +1,10 @@
+import { useEffect } from 'react';
+
 import tw from 'twin.macro';
 import { BsArrowRightShort } from 'react-icons/bs';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 // conponents
 import HeroSection from './HeroSection';
@@ -25,6 +30,10 @@ import img_about from '../assets/st_img_about.png';
 import img_tutors from '../assets/st_img_tutors.png';
 
 function Landing() {
+	useEffect(() => {
+		AOS.init();
+	}, []);
+
 	const addClassBtnStyles = tw`flex justify-start items-center hover:text-keyColor hover:opacity-80`;
 
 	const addCompanyBtnStyles = tw`flex justify-start items-center hover:text-st_alt1 hover:opacity-80`;
@@ -80,7 +89,13 @@ function Landing() {
 						{/* card list */}
 						<CardListStyles>
 							{/* card */}
-							<CardStyles variant="basic">
+							<CardStyles
+								variant="basic"
+								data-aos="fade-up"
+								data-aos-delay="50"
+								data-aos-duration="550"
+								data-aos-once="true"
+							>
 								<div>
 									<h3>입문 클래스</h3>
 									<h4>온라인 실시간 스트리밍 강의입니다.</h4>
@@ -97,7 +112,13 @@ function Landing() {
 								{/* point color */}
 								<span></span>
 							</CardStyles>
-							<CardStyles variant="adv">
+							<CardStyles
+								variant="adv"
+								data-aos="fade-up"
+								data-aos-delay="150"
+								data-aos-duration="550"
+								data-aos-once="true"
+							>
 								<div>
 									<h3>심화 클래스</h3>
 									<h4>온라인 실시간 스트리밍 강의입니다.</h4>
@@ -118,7 +139,13 @@ function Landing() {
 								{/* point color */}
 								<span></span>
 							</CardStyles>
-							<CardStyles variant="pd">
+							<CardStyles
+								variant="pd"
+								data-aos="fade-up"
+								data-aos-delay="250"
+								data-aos-duration="550"
+								data-aos-once="true"
+							>
 								<div>
 									<h3>PD 클래스</h3>
 									<h4>온라인 실시간 스트리밍 강의입니다.</h4>
@@ -137,7 +164,13 @@ function Landing() {
 								{/* point color */}
 								<span></span>
 							</CardStyles>
-							<CardStyles variant="debut">
+							<CardStyles
+								variant="debut"
+								data-aos="fade-up"
+								data-aos-delay="350"
+								data-aos-duration="550"
+								data-aos-once="true"
+							>
 								<div>
 									<h3>데뷔 클래스</h3>
 									<h4>오프라인 강의입니다.</h4>
@@ -166,7 +199,13 @@ function Landing() {
 					{/* content */}
 					<ContentStyles>
 						{/* leftitem - text*/}
-						<LeftItemStyles>
+						<LeftItemStyles
+							data-aos="fade-up"
+							data-aos-delay="150"
+							data-aos-duration="600"
+							data-aos-easing="ease-out"
+							data-aos-once="true"
+						>
 							<h2>스토리튠즈 - 웹소설 작가의 꿈이 현실이 되는 곳!</h2>
 							<p>
 								스토리튠즈 아카데미는 나만의 이야기를 상상하고 풀어내길 바라는
@@ -198,7 +237,14 @@ function Landing() {
 					{/* content */}
 					<ContentStyles>
 						{/* leftitem - text*/}
-						<LeftItemStyles variant="reverse_section">
+						<LeftItemStyles
+							variant="reverse_section"
+							data-aos="fade-up"
+							data-aos-delay="100"
+							data-aos-duration="600"
+							data-aos-easing="ease-out"
+							data-aos-once="true"
+						>
 							<h2>스토리튠즈의 대표 강사진</h2>
 
 							<p>

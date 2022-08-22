@@ -23,7 +23,7 @@ function MyClassRoom() {
 		};
 
 		fetchData();
-	}, [dispatch]);
+	}, []);
 
 	if (isLoading) return <Spinner />;
 

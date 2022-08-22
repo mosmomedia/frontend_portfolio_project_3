@@ -1,3 +1,8 @@
+import { useEffect } from 'react';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import tw from 'twin.macro';
 import { MainStyles, SectionStyles, ContainerStyles } from '../../styles';
 import {
@@ -11,6 +16,9 @@ import img_tutors from '../../assets/st_img_tutors.png';
 import img_tutors2 from '../../assets/st_img_tutors2.png';
 
 function About() {
+	useEffect(() => {
+		AOS.init();
+	}, []);
 	return (
 		<MainStyles>
 			<SectionStyles
@@ -19,7 +27,13 @@ function About() {
 			>
 				<ContainerStyles>
 					<ContentStyles>
-						<LeftItemStyles>
+						<LeftItemStyles
+							data-aos="fade-up"
+							data-aos-delay="150"
+							data-aos-duration="600"
+							data-aos-easing="ease-out"
+							data-aos-once="true"
+						>
 							<h1>About</h1>
 							<h2>스토리튠즈 - 웹소설 작가의 꿈이 현실이 되는 곳!</h2>
 							<p>우리는 수많은 매체에서, 수많은 이야기를 접하며 살아갑니다.</p>
@@ -54,7 +68,14 @@ function About() {
 			>
 				<ContainerStyles>
 					<ContentStyles>
-						<LeftItemStyles variant="reverse_section">
+						<LeftItemStyles
+							variant="reverse_section"
+							data-aos="fade-up"
+							data-aos-delay="150"
+							data-aos-duration="600"
+							data-aos-easing="ease-out"
+							data-aos-once="true"
+						>
 							<h2>창작의 사막 속 타오르는 갈증을 해결할 오아시스!</h2>
 							<h3>"이 이야기를 풀어내 보고 싶다."</h3>
 							<p>
@@ -82,7 +103,13 @@ function About() {
 			<SectionStyles add_styles={tw`px-10 space-y-8 md:px-6 xl:pl-4 xl:pr-2 `}>
 				<ContainerStyles>
 					<ContentStyles>
-						<LeftItemStyles>
+						<LeftItemStyles
+							data-aos="fade-up"
+							data-aos-delay="150"
+							data-aos-duration="600"
+							data-aos-easing="ease-out"
+							data-aos-once="true"
+						>
 							<h2>최고의 강사진과 함께 만들어 갈 나만의 매혹적인 세상!</h2>
 							<p>
 								스토리튠즈 아카데미는 그런 여러분을 돕고 싶다는 마음에서

@@ -1,5 +1,4 @@
 import tw from 'twin.macro';
-
 import Button from '../components/shared/Button';
 
 // assets (imgs)
@@ -96,7 +95,15 @@ function HeroSection() {
 				{/* img */}
 				<HeroStyles src={img_hero} alt="landing hero" />
 				{/* img effect */}
-				<EffectStyles src={img_effect} alt="landing effect" />
+				<EffectStyles
+					src={img_effect}
+					alt="landing effect"
+					data-aos="zoom-in-up"
+					data-aos-easing="ease-in-out"
+					data-aos-delay="3"
+					data-aos-duration="2200"
+					data-aos-offset="0"
+				/>
 			</RightItemStyles>
 		</SectionStyles>
 	);

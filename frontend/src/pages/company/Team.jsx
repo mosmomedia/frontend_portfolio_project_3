@@ -1,3 +1,8 @@
+import { useEffect } from 'react';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+
 import { MainStyles, SectionStyles, ContainerStyles } from '../../styles';
 import tw from 'twin.macro';
 import {
@@ -14,6 +19,10 @@ import img_t5 from '../../assets/img_tutors/t_5.png';
 import img_t6 from '../../assets/img_tutors/t_6.png';
 
 function Team() {
+	useEffect(() => {
+		AOS.init();
+	}, []);
+
 	return (
 		<MainStyles>
 			<SectionStyles variant="first" add_styles={tw`px-6 xl:px-20`}>

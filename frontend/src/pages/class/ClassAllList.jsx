@@ -36,7 +36,6 @@ function ClassAllList() {
 	const [widthInput, setWidthInput] = useState(-1);
 
 	const [user, loading] = useAuthState(firebase.auth);
-
 	const {
 		filteredList,
 		classDB,

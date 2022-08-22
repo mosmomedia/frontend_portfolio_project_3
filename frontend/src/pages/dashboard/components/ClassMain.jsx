@@ -25,18 +25,20 @@ function Main() {
 	const myHistoryList = [];
 	const onAirState = { isOnAir: false, num: 0 };
 
-	myClassList.forEach(({ myClass }) => {
-		if (myClass.isOnAir) {
-			onAirState.isOnAir = true;
-			++onAirState.num;
-		}
+	if (myClassList.length > 0) {
+		myClassList.forEach(({ myClass }) => {
+			if (myClass.isOnAir) {
+				onAirState.isOnAir = true;
+				++onAirState.num;
+			}
 
-		if (myClass.status === 'completed') {
-			myHistoryList.push(myClass);
-		} else {
-			myCurrentList.push(myClass);
-		}
-	});
+			if (myClass.status === 'completed') {
+				myHistoryList.push(myClass);
+			} else {
+				myCurrentList.push(myClass);
+			}
+		});
+	}
 
 	return (
 		<SectionStyles>

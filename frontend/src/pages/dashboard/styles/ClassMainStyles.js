@@ -13,7 +13,7 @@ export const HeaderStyles = styled.div`
 `;
 
 export const MainStyles = styled.div`
-	${tw`lg:grid lg:grid-cols-2 lg:gap-6 xl:gap-12`}
+	${tw`xl:grid xl:grid-cols-2 xl:gap-12`}
 `;
 
 export const LeftItemStyles = styled.div`
@@ -21,7 +21,7 @@ export const LeftItemStyles = styled.div`
 `;
 
 export const RightItemStyles = styled.div`
-	${tw`hidden lg:block `}
+	${tw`hidden xl:block `}
 `;
 
 export const NoticeStyles = styled.div`

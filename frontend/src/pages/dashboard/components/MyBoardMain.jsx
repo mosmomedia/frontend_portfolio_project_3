@@ -16,8 +16,6 @@ import {
 } from '../styles/MyBoardMainStyles';
 
 function MyBoardMain() {
-	// const { userObjectId, myWorkList } = useMyWorkContext();
-
 	const { isLoading, userObjectId, myWorkList, dispatch } = useMyWorkContext();
 
 	useEffect(() => {

@@ -1,6 +1,3 @@
-import 'twin.macro';
-import 'styled-components/macro';
-
 import { Link, useLocation } from 'react-router-dom';
 
 import link_fb from '../assets/icons/ico_link_fb.png';
