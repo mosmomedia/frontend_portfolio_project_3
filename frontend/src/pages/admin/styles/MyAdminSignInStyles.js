@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const WrapperStyles = styled.div`
-	${tw`grid place-content-center tracking-wider h-screen md:text-sm`}
+	${tw`grid place-content-center tracking-wider bg-st_alt1 h-screen md:text-sm`}
 `;
 
 export const FormStyles = styled.form`

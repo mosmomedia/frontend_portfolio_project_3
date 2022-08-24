@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom';
 
 import { MyClassProvider } from '../../contexts/myClassRoom/MyClassContext';
 import { MyWorkProvider } from '../../contexts/myWorkBoard/MyWorkContext';
+import { ClassProvider } from '../../contexts/class/ClassContext';
 
 import Sidebar from './components/Sidebar';
 
@@ -11,10 +12,12 @@ function Dashboard() {
 	return (
 		<MyClassProvider>
 			<MyWorkProvider>
-				<MainStyles>
-					<Sidebar />
-					<Outlet />
-				</MainStyles>
+				<ClassProvider>
+					<MainStyles>
+						<Sidebar />
+						<Outlet />
+					</MainStyles>
+				</ClassProvider>
 			</MyWorkProvider>
 		</MyClassProvider>
 	);

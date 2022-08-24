@@ -23,9 +23,8 @@ import {
 function MyAdminSignIn() {
 	const [isDisabled, setIsDisabled] = useState(true);
 	const [isAdmin, setIsAdmin] = useState(false);
-	const [isLoading, setIsLoading] = useState(true);
 
-	const { dispatch } = useAdminContext();
+	const { dispatch, isLoading } = useAdminContext();
 
 	const [user, loading] = useAuthState(firebase.auth);
 
@@ -38,12 +37,10 @@ function MyAdminSignIn() {
 
 	const navigate = useNavigate();
 
-	const handleChange = ({ target: { id, value } }) => {
-		setFormData({ ...formData, [id]: value });
-	};
-
 	useEffect(() => {
 		const checkAdmin = async () => {
+			dispatch({ type: 'LOADING' });
+
 			if (user) {
 				const docRef = firebase.doc(firebase.db, 'users', user.uid);
 				const docSnap = await firebase.getDoc(docRef);
@@ -56,8 +53,7 @@ function MyAdminSignIn() {
 			} else {
 				setIsAdmin(false);
 			}
-
-			setIsLoading(false);
+			dispatch({ type: 'OFF_LOADING' });
 		};
 
 		if (!loading) {
@@ -72,6 +68,10 @@ function MyAdminSignIn() {
 			setIsDisabled(true);
 		}
 	}, [email, password]);
+
+	const handleChange = ({ target: { id, value } }) => {
+		setFormData({ ...formData, [id]: value });
+	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();

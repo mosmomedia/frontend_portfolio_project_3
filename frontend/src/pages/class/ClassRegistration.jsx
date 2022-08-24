@@ -5,20 +5,23 @@ import { ContainerStyles } from '../../styles';
 
 import NotFound from '../etc/NotFound';
 
+import { ClassProvider } from '../../contexts/class/ClassContext';
 import Roadmap from './ClassRoadmap';
 import ClassAllList from './ClassAllList';
 
 function ClassRegistration() {
 	return (
-		<SectionStyles>
-			<ContainerStyles>
-				<Routes>
-					<Route path="*" element={<NotFound />} />
-					<Route path="/roadmap" element={<Roadmap />} />
-					<Route path="/all-classes/*" element={<ClassAllList />} />
-				</Routes>
-			</ContainerStyles>
-		</SectionStyles>
+		<ClassProvider>
+			<SectionStyles>
+				<ContainerStyles>
+					<Routes>
+						<Route path="*" element={<NotFound />} />
+						<Route path="/roadmap" element={<Roadmap />} />
+						<Route path="/all-classes/*" element={<ClassAllList />} />
+					</Routes>
+				</ContainerStyles>
+			</SectionStyles>
+		</ClassProvider>
 	);
 }
 

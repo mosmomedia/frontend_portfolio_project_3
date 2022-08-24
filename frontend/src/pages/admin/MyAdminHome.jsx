@@ -43,7 +43,7 @@ function MyAdminHome() {
 	return (
 		<WrapperStyles>
 			<MainStyles>
-				<h3>관리자 정보 게시판 (서비스 준비 중)</h3>
+				<h3>관리자 정보 게시판</h3>
 				<InfoWrapperStyles>
 					<div>
 						현재 <span>{classesNum}</span>개의 강의를 진행 중입니다.
@@ -53,6 +53,7 @@ function MyAdminHome() {
 					</div>
 					<div>
 						현재 <span>{feedbackNum}</span>개의 과제 피드백이 대기 중입니다.
+						(서비스 준비 중)
 					</div>
 				</InfoWrapperStyles>
 			</MainStyles>
