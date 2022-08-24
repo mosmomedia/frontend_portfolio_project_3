@@ -38,8 +38,13 @@ export const LeftItemStyles = styled.div`
 	h3 {
 		${tw`mb-2 md:text-[17px]`}
 	}
+
 	div {
 		${tw`space-y-0.5 tracking-wider md:text-[15px] lg:text-sm`}
+	}
+
+	#fm_date {
+		${tw`sm:flex sm:items-center`}
 	}
 `;
 export const RightItemStyles = styled.div`

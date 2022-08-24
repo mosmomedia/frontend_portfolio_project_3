@@ -38,6 +38,10 @@ export const LeftItemStyles = styled.div`
 	img {
 		${tw`w-7 ml-3.5 pt-0.5 opacity-90 animate-pulse`}
 	}
+
+	#fm_date {
+		${tw`sm:flex sm:items-center`}
+	}
 `;
 
 export const RightItemStyles = styled.div`

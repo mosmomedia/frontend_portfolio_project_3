@@ -20,7 +20,6 @@ function MyStream() {
 	const { id } = useParams();
 	const { isLoading, userObjectId, myClassList, currentClass, dispatch } =
 		useMyClassContext();
-	// const [currentClass, setCurrentClass] = useState(null);
 
 	useEffect(() => {
 		dispatch({ type: 'LOADING' });
@@ -36,8 +35,6 @@ function MyStream() {
 					break;
 				}
 			}
-
-			// setCurrentClass(getCurrentClass);
 
 			dispatch({ type: 'GET_MY_CURRENT_CLASS', payload });
 		}
