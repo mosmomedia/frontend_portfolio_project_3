@@ -359,8 +359,10 @@ function ClassAllList() {
 	return (
 		<WrapperStyles>
 			{/* header */}
-			<HeaderStyles>
-				<h2 onClick={handleHeaderClick}>강의 스케쥴</h2>
+			<HeaderStyles variant={'class_schedule'}>
+				<h2 id="class_title" onClick={handleHeaderClick}>
+					강의 스케쥴
+				</h2>
 				{/* btns */}
 				<FilterWrapperStyles>
 					<select name="month" onChange={handleChange} value={month}>

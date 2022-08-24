@@ -122,7 +122,7 @@ function Roadmap() {
 		<WrapperStyles>
 			{/* header */}
 			<HeaderStyles>
-				<h2 id="class_info" onClick={handleNavClick}>
+				<h2 id="class_title" onClick={handleNavClick}>
 					강의 로드맵
 				</h2>
 				{/* btns */}

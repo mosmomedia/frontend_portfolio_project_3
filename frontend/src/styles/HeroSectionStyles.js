@@ -1,7 +1,7 @@
 import tw, { styled } from 'twin.macro';
 
 export const SectionStyles = styled.div`
-	${tw`pt-0 md:pt-0 md:flex md:justify-between md:items-center md:py-28 lg:py-10  xl:py-0  xl:h-screen`}/* ${tw`pt-0 md:pt-0 md:flex md:items-center md:py-40 xl:py-0  xl:h-screen`} */
+	${tw`pt-[4.25rem] sm:pt-0 md:flex md:justify-between md:items-center md:py-28 lg:py-10  xl:py-0  xl:h-screen`}
 `;
 
 export const LeftItemStyles = styled.div`
@@ -42,6 +42,7 @@ export const TextWrapper = styled.div`
 	${tw`absolute bottom-16 space-y-10 w-full`}
 	${tw`sm:bottom-32 md:relative md:bottom-[unset]`}
 `;
+
 export const TextStyles = styled.div`
 	${tw`text-center space-y-12 tracking-wider`}
 	${tw`md:text-st_alt1 md:text-left`}
@@ -57,7 +58,7 @@ export const TextStyles = styled.div`
 	}
 
 	h2 {
-		${tw`text-xl sm:text-[1.75rem ] mb-1 sm:mb-4 md:text-xl xl:text-2xl`}
+		${tw`text-lg xs:text-2xl sm:text-[1.75rem ] mb-1 xs:mb-4 md:text-xl xl:text-2xl`}
 	}
 
 	h2 span {
@@ -73,7 +74,7 @@ export const TextStyles = styled.div`
 	}
 
 	h1 {
-		${tw`text-3xl sm:text-[2.375rem] md:text-[1.5rem] lg:text-[1.75rem] xl:text-4xl`}
+		${tw`text-2xl xs:text-3xl sm:text-[2.375rem] md:text-[1.5rem] lg:text-[1.75rem] xl:text-4xl`}
 
 		span {
 			${tw`md:text-keyColor`}
@@ -81,13 +82,13 @@ export const TextStyles = styled.div`
 	}
 
 	h4 {
-		${tw`text-base sm:text-xl my-3 md:text-sm md:font-light md:leading-6 lg:text-[0.9375rem] lg:leading-7 xl:text-base xl:leading-7`}
+		${tw`text-[15px] xs:text-base sm:text-xl my-3 md:text-sm md:font-light md:leading-6 lg:text-[0.9375rem] lg:leading-7 xl:text-base xl:leading-7`}
 	}
 `;
 
 export const LinkBtnStyles = styled.div`
-	${tw`w-2/3 mx-auto space-y-3 text-base sm:text-xl `}
-	${tw`md:text-sm md:w-4/5 md:mx-0 xl:text-base xl:w-2/3`}
+	${tw`w-[80%] mx-auto space-y-3 text-sm`}
+	${tw`xs:text-base sm:text-xl sm:w-2/3 md:text-sm md:w-4/5 md:mx-0 xl:text-base xl:w-2/3`}
 `;
 
 export const LinkUpperStyles = styled.div`

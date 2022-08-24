@@ -3,7 +3,7 @@ import tw, { styled } from 'twin.macro';
 export const CardStyles = styled.div`
 	${tw`rounded-md p-4 bg-gray-100  space-y-5`}
 	${tw`border-st_alt1 border-[1px] border-opacity-10 shadow-md`}
-${tw`w-96 md:w-80 lg:w-96 xl:w-[444px]`}
+${tw`w-72 xs:w-96 md:w-80 lg:w-96 xl:w-[444px]`}
 
 	h2 {
 		${tw`text-st_bg1 text-xl `}

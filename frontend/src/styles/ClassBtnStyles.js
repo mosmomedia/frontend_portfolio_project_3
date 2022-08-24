@@ -29,6 +29,10 @@ export const LeftItemStyles = styled.div`
 	div {
 		${tw`space-y-0.5 tracking-wider md:text-[15px] lg:text-sm`}
 	}
+
+	#fm_date {
+		${tw`sm:flex sm:items-center`}
+	}
 `;
 export const RightItemStyles = styled.div`
 	${tw`flex flex-col justify-between items-center text-center`}

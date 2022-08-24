@@ -47,6 +47,9 @@ function ClassReducer(state, action) {
 				},
 			};
 
+		case 'SET_ADMIN':
+			return { ...state, adminInfo: action.payload };
+
 		case 'LOADING':
 			return { ...state, isLoading: true };
 

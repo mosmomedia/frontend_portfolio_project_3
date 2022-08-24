@@ -19,6 +19,7 @@ function About() {
 	useEffect(() => {
 		AOS.init();
 	}, []);
+
 	return (
 		<MainStyles>
 			<SectionStyles

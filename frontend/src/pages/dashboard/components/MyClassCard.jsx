@@ -64,8 +64,10 @@ function MyClassCard({ item: myClass }) {
 					<div>
 						수강 시간 : {fmStartHour} - {fmEndHour}
 					</div>
-					<div>
-						수강 기간 : {fmStartDate} - {fmEndDate}
+					<div id="fm_date">
+						<div>수강 기간 : </div>
+						<div>{fmStartDate} - </div>
+						<div>{fmEndDate}</div>
 					</div>
 				</div>
 			</LeftItemStyles>

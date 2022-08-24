@@ -3,7 +3,6 @@ import { toast } from 'react-toastify';
 
 import { useAdminContext } from '../../../contexts/admin/AdminContext';
 
-import Logo from '../../../assets/logos/logo_circle.svg';
 import firebase from '../../../config/firebase';
 
 import {
@@ -11,7 +10,6 @@ import {
 	HeaderWrapperStyles,
 	NavStyles,
 	NavChildStyles,
-	LogoStyles,
 } from '../styles/AdminHeaderStyles';
 
 function AdminHeader() {
@@ -36,12 +34,6 @@ function AdminHeader() {
 	return (
 		<HeaderStyles>
 			<HeaderWrapperStyles>
-				<LogoStyles>
-					{/* logo */}
-					<Link to="/">
-						<img src={Logo} alt="" />
-					</Link>
-				</LogoStyles>
 				<NavStyles>
 					<Link to="/admin">
 						<NavChildStyles is_selected={pathname === '/admin' ? 1 : 0}>

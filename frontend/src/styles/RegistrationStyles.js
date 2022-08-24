@@ -11,15 +11,21 @@ export const WrapperStyles = styled.div`
 export const HeaderStyles = styled.div`
 	${tw`flex justify-between items-center`}
 
-	h2 {
-		${tw`cursor-pointer`}
-	}
-
 	ul {
-		${tw`flex space-x-1`}
+		${tw`flex space-x-1 justify-around w-full xs:justify-around xs:w-[unset]`}
 	}
 
 	${tw`h-[10vh]`}
+
+	#class_title {
+		${tw`cursor-pointer text-base hidden xs:block sm:text-lg`}
+	}
+
+	@media (max-width: 500px) {
+		#class_title {
+			${({ variant }) => variant === 'class_schedule' && tw`hidden`}
+		}
+	}
 `;
 
 export const MainStyles = styled.div`

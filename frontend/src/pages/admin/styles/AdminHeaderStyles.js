@@ -5,18 +5,12 @@ export const HeaderStyles = styled.div`
 `;
 
 export const HeaderWrapperStyles = styled.header`
-	${tw`container mx-auto `}
-	${tw`px-6  py-5 flex items-center justify-between`}
-`;
-
-export const LogoStyles = styled.div`
-	img {
-		${tw`h-7`}
-	}
+	${tw`container mx-auto px-6  py-5 flex  items-center `}
 `;
 
 export const NavStyles = styled.ul`
-	${tw`text-gray-500 space-x-8 flex items-center `}
+	${tw`text-gray-500  flex justify-between items-center w-full xs:space-x-2  
+	sm:justify-around xl:justify-center xl:space-x-36`}
 
 	/* ${({ is_active }) => is_active === 1 && tw`flex items-center`} */
 

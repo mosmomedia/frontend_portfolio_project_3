@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import firebase from '../../config/firebase';
 import OAuth from '../../components/OAuth';
 
+import { useClassContext } from '../../contexts/class/ClassContext';
+
 import BackToHomeBar from '../../components/BackToHomeBar';
 import Logo from '../../assets/logos/logo_circle.svg';
 import Img from '../../assets/st_img_sign_in.png';
@@ -32,6 +34,8 @@ import {
 function SignIn() {
 	const [loading, setLoading] = useState(false);
 	const [isDisabled, setIsDisabled] = useState(true);
+
+	const { dispatch, isAdmin } = useClassContext();
 
 	const [formData, setFormData] = useState({
 		email: 'test@test.com',
@@ -64,7 +68,16 @@ function SignIn() {
 					email,
 					password
 				);
-				const { displayName } = userCredential.user;
+
+				const { displayName, uid } = userCredential.user;
+
+				const docRef = firebase.doc(firebase.db, 'users', uid);
+				const docSnap = await firebase.getDoc(docRef);
+				const { userObjectId, isAdmin } = docSnap.data();
+
+				if (isAdmin) {
+					dispatch({ type: 'SET_ADMIN', payload: { userObjectId, isAdmin } });
+				}
 
 				if (displayName) {
 					toast(`Welcome, ${displayName}!`);

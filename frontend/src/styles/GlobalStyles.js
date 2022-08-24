@@ -28,7 +28,7 @@ const CustomStyles = createGlobalStyle`
 }
 
 body {
-	${tw`bg-body text-main_text  h-full text-sm md:text-base`}
+	${tw`bg-body text-main_text  h-full  text-sm md:text-base`}
 }
 
 h1{
