@@ -93,12 +93,14 @@ function SignUp() {
 				const { uid } = userCredential.user;
 
 				// create a student in mongodb
-
-				const newStudent = await createStudent({
-					firebaseId: uid,
-					email,
-					name,
-				});
+				const newStudent = await createStudent(
+					{
+						firebaseId: uid,
+						email,
+						name,
+					},
+					userCredential.user
+				);
 
 				const { _id } = newStudent;
 
@@ -116,6 +118,11 @@ function SignUp() {
 				await firebase.setDoc(
 					firebase.doc(firebase.db, 'users', uid),
 					userProfile
+				);
+
+				localStorage.setItem(
+					'st_user',
+					JSON.stringify({ userId: _id, isAdmin })
 				);
 
 				toast(`Welcome, ${name}!`);

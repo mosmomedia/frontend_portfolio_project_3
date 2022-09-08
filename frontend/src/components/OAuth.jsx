@@ -33,11 +33,14 @@ function OAuth({ setLoading }) {
 			const docSnap = await firebase.getDoc(docRef);
 
 			if (!docSnap.exists()) {
-				const newStudent = await createStudent({
-					firebaseId: uid,
-					email,
-					name: displayName,
-				});
+				const newStudent = await createStudent(
+					{
+						firebaseId: uid,
+						email,
+						name: displayName,
+					},
+					userCredential.user
+				);
 
 				const { _id } = newStudent;
 
@@ -52,6 +55,11 @@ function OAuth({ setLoading }) {
 					createdAt: firebase.serverTimestamp(),
 				};
 				await firebase.setDoc(docRef, userProfile);
+
+				localStorage.setItem(
+					'st_user',
+					JSON.stringify({ userId: _id, isAdmin: false })
+				);
 			}
 
 			toast(`Welcome, ${displayName}!`);

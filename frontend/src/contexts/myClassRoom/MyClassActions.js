@@ -1,10 +1,8 @@
 import axios from 'axios';
-import firebase from '../../config/firebase';
 
 const API_URI = '/api/student/';
 
-const createPayloadHeader = async () => {
-	const user = firebase.auth.currentUser;
+const createPayloadHeader = async (user) => {
 	try {
 		if (user) {
 			const token = await user.getIdToken();
@@ -30,9 +28,9 @@ const createPayloadHeader = async () => {
 // @ POST /api/student/
 // @ private
 
-export const createStudent = async (formData) => {
+export const createStudent = async (formData, user) => {
 	try {
-		const header = await createPayloadHeader();
+		const header = await createPayloadHeader(user);
 		const res = await axios.post(API_URI, formData, header);
 		return res.data;
 	} catch (error) {
@@ -44,9 +42,9 @@ export const createStudent = async (formData) => {
 // @ POST /api/student/myclass/:id
 // @ private
 
-export const addClassToStudent = async (userId, myClass) => {
+export const addClassToStudent = async (userId, myClass, user) => {
 	try {
-		const header = await createPayloadHeader();
+		const header = await createPayloadHeader(user);
 		const res = await axios.post(
 			API_URI + 'myclass/' + userId,
 			{ myClass },
@@ -62,15 +60,10 @@ export const addClassToStudent = async (userId, myClass) => {
 // @ GET /api/student/myclass/:id
 // @ private
 
-export const getMyClasses = async () => {
+export const getMyClasses = async (user, userId) => {
 	try {
-		const user = firebase.auth.currentUser;
-		const header = await createPayloadHeader();
-
-		const docSnap = firebase.doc(firebase.db, 'users', user.uid);
-		const getUserDb = await firebase.getDoc(docSnap);
-		const { userObjectId } = getUserDb.data();
-		const res = await axios.get(API_URI + 'myclass/' + userObjectId, header);
+		const header = await createPayloadHeader(user);
+		const res = await axios.get(API_URI + 'myclass/' + userId, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);

@@ -36,6 +36,7 @@ function ClassAllList() {
 	const [widthInput, setWidthInput] = useState(-1);
 
 	const [user, loading] = useAuthState(firebase.auth);
+
 	const {
 		filteredList,
 		classDB,
@@ -93,6 +94,8 @@ function ClassAllList() {
 		const fetchAllClasses = async () => {
 			dispatch({ type: 'LOADING' });
 
+			const currentUserInfo = JSON.parse(localStorage.getItem('st_user'));
+
 			const classDB = await getAllClasses();
 
 			let filteredClassDB = [];
@@ -111,22 +114,19 @@ function ClassAllList() {
 					filteredClassDB.push(item);
 				}
 			});
-
-			let adminInfo;
-
-			if (user && filteredClassDB.length > 0) {
-				const docRef = firebase.doc(firebase.db, 'users', user.uid);
-				const docSnap = await firebase.getDoc(docRef);
-				const { userObjectId, isAdmin } = docSnap.data();
-
+			if (
+				currentUserInfo &&
+				currentUserInfo.userId &&
+				filteredClassDB.length > 0
+			) {
+				const { userId, isAdmin } = currentUserInfo;
 				if (isAdmin) {
 					filteredClassDB = filteredClassDB.filter(
-						(item) => item.tutorId !== userObjectId
+						(item) => item.tutorId !== userId
 					);
-					adminInfo = { userObjectId, isAdmin };
 				}
 
-				const { myClasses: payload } = await getMyClasses();
+				const { myClasses: payload } = await getMyClasses(user, userId);
 
 				if (payload) {
 					filteredClassDB.forEach((item) => {
@@ -233,7 +233,9 @@ function ClassAllList() {
 				newList = newList.filter((item) => item.weeks === weeks);
 			}
 
-			if (user) {
+			const currentUserInfo = JSON.parse(localStorage.getItem('st_user'));
+
+			if (currentUserInfo && currentUserInfo.userId) {
 				const { userObjectId, isAdmin } = adminInfo;
 				if (isAdmin) {
 					newList = newList.filter((item) => item.tutorId !== userObjectId);
@@ -435,7 +437,7 @@ function ClassAllList() {
 											animate={{ opacity: 1 }}
 											exit={{ opacity: 0 }}
 										>
-											<ClassCard item={item}></ClassCard>
+											<ClassCard item={item} user={user}></ClassCard>
 										</motion.div>
 									))}
 								</AnimatePresence>

@@ -1,4 +1,6 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+
+import { AuthProvider } from './contexts/auth/AuthContext';
 import { AdminProvider } from './contexts/admin/AdminContext';
 
 import ScrollToTop from './components/ScrollToTop';
@@ -41,70 +43,80 @@ import MyAdminClasses from './pages/admin/MyAdminClasses';
 import NotFound from './pages/etc/NotFound';
 import PrivateRoute from './components/PrivateRoute';
 
+// import { QueryClient, QueryClientProvider } from 'react-query';
+// const queryClient = new QueryClient();
+
 function App() {
 	return (
 		<Router>
-			<ScrollToTop>
-				<Header />
-				<Routes>
-					<Route path="/notfound" element={<NotFound />} />
-
-					{/* landing */}
-					<Route path="/" element={<Landing />} />
-
-					{/* accounts */}
-					<Route path="/sign-in" element={<SignIn />} />
-					<Route path="/sign-up" element={<SignUp />} />
-					<Route path="/forgot-password" element={<ForgotPassword />} />
-
-					{/* class registration */}
-					<Route path="/class-registration/*" element={<ClassRegistration />} />
-
-					{/* debut - history & scholarship */}
-					<Route path="/student/debut-history" element={<DebutHistory />} />
-					<Route path="/student/scholarship" element={<Scholarship />} />
-
-					{/* company */}
-					<Route path="/company/*" element={<Company />} />
-
-					{/*customer  */}
-					<Route path="/customer/faq" element={<Faq />} />
-
-					{/* dashboard */}
-					<Route path="/dashboard/*" element={<PrivateRoute />}>
-						<Route path="/dashboard/*" element={<Dashboard />}>
-							<Route path="my-classroom/*" element={<MyClassRoom />} />
-							<Route path="my-board/*" element={<MyBoard />} />
-							<Route path="my-page/*" element={<MyPage />} />
-						</Route>
-					</Route>
-				</Routes>
-
-				{/* admin */}
-				<AdminProvider>
+			{/* <QueryClientProvider client={queryClient}> */}
+			<AuthProvider>
+				<ScrollToTop>
+					<Header />
 					<Routes>
-						<Route path="/admin/sign-in" element={<MyAdminSignIn />} />
-						<Route path="/admin" element={<AdminRoute />}>
-							<Route path="/admin" element={<MyAdminMain />}>
-								<Route path="" element={<MyAdminHome />} />
-								<Route
-									path="registration"
-									element={<MyAdminClassRegistration />}
-								/>
-								<Route
-									path="registration/edit/:id"
-									element={<MyAdminClassRegistartionEdit />}
-								/>
-								<Route path="classes" element={<MyAdminClasses />} />
-								<Route path="class/:id" element={<MyAdminSingleClass />} />
+						<Route path="/notfound" element={<NotFound />} />
+
+						{/* landing */}
+						<Route path="/" element={<Landing />} />
+
+						{/* accounts */}
+						<Route path="/sign-in" element={<SignIn />} />
+						<Route path="/sign-up" element={<SignUp />} />
+						<Route path="/forgot-password" element={<ForgotPassword />} />
+
+						{/* class registration */}
+						<Route
+							path="/class-registration/*"
+							element={<ClassRegistration />}
+						/>
+
+						{/* debut - history & scholarship */}
+						<Route path="/student/debut-history" element={<DebutHistory />} />
+						<Route path="/student/scholarship" element={<Scholarship />} />
+
+						{/* company */}
+						<Route path="/company/*" element={<Company />} />
+
+						{/*customer  */}
+						<Route path="/customer/faq" element={<Faq />} />
+
+						{/* dashboard */}
+						<Route path="/dashboard/*" element={<PrivateRoute />}>
+							<Route path="/dashboard/*" element={<Dashboard />}>
+								<Route path="my-classroom/*" element={<MyClassRoom />} />
+								<Route path="my-board/*" element={<MyBoard />} />
+								<Route path="my-page/*" element={<MyPage />} />
 							</Route>
 						</Route>
 					</Routes>
-				</AdminProvider>
-				<Footer />
 
-				<ToastContainer autoClose={2500} />
-			</ScrollToTop>
+					{/* admin */}
+					<AdminProvider>
+						<Routes>
+							<Route path="/admin/sign-in" element={<MyAdminSignIn />} />
+							<Route path="/admin" element={<AdminRoute />}>
+								<Route path="/admin" element={<MyAdminMain />}>
+									<Route path="" element={<MyAdminHome />} />
+									<Route
+										path="registration"
+										element={<MyAdminClassRegistration />}
+									/>
+									<Route
+										path="registration/edit/:id"
+										element={<MyAdminClassRegistartionEdit />}
+									/>
+									<Route path="classes" element={<MyAdminClasses />} />
+									<Route path="class/:id" element={<MyAdminSingleClass />} />
+								</Route>
+							</Route>
+						</Routes>
+					</AdminProvider>
+					<Footer />
+
+					<ToastContainer autoClose={2500} />
+				</ScrollToTop>
+			</AuthProvider>
+			{/* </QueryClientProvider> */}
 		</Router>
 	);
 }

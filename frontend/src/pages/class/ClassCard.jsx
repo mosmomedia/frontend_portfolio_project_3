@@ -17,7 +17,7 @@ import {
 	ButtonStyles,
 } from '../../styles/ClassBtnStyles';
 
-function ClassCard({ item }) {
+function ClassCard({ item, user }) {
 	const [isLoading, setIsLoading] = useState(false);
 
 	const {
@@ -58,7 +58,7 @@ function ClassCard({ item }) {
 	const fmStartHour = hourToString(new Date(startHour));
 	const fmEndHour = hourToString(new Date(endHour));
 
-	const [user, loading] = useAuthState(firebase.auth);
+	// const [user, loading] = useAuthState(firebase.auth);
 
 	const navigate = useNavigate();
 	const handleOnClick = async () => {
@@ -80,7 +80,7 @@ function ClassCard({ item }) {
 				const [isEnrolled, isPlaced, isAdded] = await Promise.all([
 					enrollStudentToClass(_id),
 					placeOrder(formData),
-					addClassToStudent(userObjectId, _id),
+					addClassToStudent(userObjectId, _id, user),
 				]);
 
 				if (isEnrolled && isPlaced && isAdded) {
@@ -95,7 +95,7 @@ function ClassCard({ item }) {
 			}
 		}
 	};
-	if (isLoading || loading) return <Spinner />;
+	if (isLoading) return <Spinner />;
 	return (
 		<CardStyles variant={type}>
 			{/* left item - title, tutor, hours, period  */}

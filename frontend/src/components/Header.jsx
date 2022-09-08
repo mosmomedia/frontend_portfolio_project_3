@@ -35,7 +35,9 @@ function Header() {
 
 	const [currentPath, setCurrentPath] = useState('');
 
-	const [user, loading] = useAuthState(firebase.auth);
+	const user = JSON.parse(localStorage.getItem('st_user'));
+
+	// const [user, loading] = useAuthState(firebase.auth);
 	const { pathname } = useLocation();
 
 	const splitURI = pathname.split('/');
@@ -79,7 +81,7 @@ function Header() {
 		setHamburgerOn(false);
 	};
 
-	if (loading) return <Spinner />;
+	// if (loading) return <Spinner />;
 
 	return (
 		<HeaderStyles is_hover_on={hoverOn}>

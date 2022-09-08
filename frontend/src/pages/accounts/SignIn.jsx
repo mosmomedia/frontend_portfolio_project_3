@@ -59,6 +59,11 @@ function SignIn() {
 		setLoading(true);
 		if (email && password) {
 			try {
+				firebase.setPersistence(
+					firebase.auth,
+					firebase.browserSessionPersistence
+				);
+
 				const userCredential = await firebase.signInWithEmailAndPassword(
 					firebase.auth,
 					email,
@@ -71,9 +76,12 @@ function SignIn() {
 				const docSnap = await firebase.getDoc(docRef);
 				const { userObjectId, isAdmin } = docSnap.data();
 
-				// if (isAdmin) {
-				// 	dispatch({ type: 'SET_ADMIN', payload: { userObjectId, isAdmin } });
-				// }
+				localStorage.setItem(
+					'st_user',
+					JSON.stringify({ userId: userObjectId, isAdmin })
+				);
+
+				setLoading(false);
 
 				if (displayName) {
 					toast(`Welcome, ${displayName}!`);

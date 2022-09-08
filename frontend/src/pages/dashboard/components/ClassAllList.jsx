@@ -3,8 +3,8 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { getAllClasses } from '../../../contexts/class/ClassActions';
 import { getMyClasses } from '../../../contexts/myClassRoom/MyClassActions';
 
-import firebase from '../../../config/firebase';
 import { useClassContext } from '../../../contexts/class/ClassContext';
+import firebase from '../../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
 
 import ClassCard from '../../class/ClassCard';
@@ -87,6 +87,8 @@ function ClassAllList() {
 		const fetchAllClasses = async () => {
 			dispatch({ type: 'LOADING' });
 
+			const currentUserInfo = JSON.parse(localStorage.getItem('st_user'));
+
 			const classDB = await getAllClasses();
 
 			let filteredClassDB = [];
@@ -108,31 +110,31 @@ function ClassAllList() {
 
 			let adminInfo;
 
-			if (user && filteredClassDB.length > 0) {
-				const docRef = firebase.doc(firebase.db, 'users', user.uid);
-				const docSnap = await firebase.getDoc(docRef);
-				const { userObjectId, isAdmin } = docSnap.data();
-
+			if (
+				currentUserInfo &&
+				currentUserInfo.userId &&
+				filteredClassDB.length > 0
+			) {
+				const { userId, isAdmin } = currentUserInfo;
 				if (isAdmin) {
 					filteredClassDB = filteredClassDB.filter(
-						(item) => item.tutorId !== userObjectId
+						(item) => item.tutorId !== userId
 					);
-					adminInfo = { userObjectId, isAdmin };
 				}
 
-				const { myClasses: payload } = await getMyClasses();
+				const { myClasses: payload } = await getMyClasses(user, userId);
 
 				if (payload) {
-					filteredClassDB.filter((item) => {
+					filteredClassDB.forEach((item) => {
 						const findMyclassId = payload.findIndex(
 							(e) => e.myClass._id === item._id
 						);
 
 						if (findMyclassId !== -1) {
-							return false;
-						} else {
-							return item;
+							item.isPurchased = true;
 						}
+
+						return item;
 					});
 				}
 			}
