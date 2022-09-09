@@ -1,5 +1,4 @@
 import axios from 'axios';
-
 const API_URI = '/api/student/';
 
 const createPayloadHeader = async (user) => {
@@ -57,13 +56,13 @@ export const addClassToStudent = async (userId, myClass, user) => {
 };
 
 // @ get my classes in student db
-// @ GET /api/student/myclass/:id
+// @ GET /api/student/myclass/
 // @ private
 
-export const getMyClasses = async (user, userId) => {
+export const getMyClasses = async (user) => {
 	try {
 		const header = await createPayloadHeader(user);
-		const res = await axios.get(API_URI + 'myclass/' + userId, header);
+		const res = await axios.get(API_URI + 'myclass/', header);
 		return res.data;
 	} catch (error) {
 		console.log(error);

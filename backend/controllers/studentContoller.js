@@ -47,7 +47,7 @@ export const addClassToStudent = async (req, res) => {
 // @ private
 
 export const getMyClasses = async (req, res) => {
-	const { userObjectId } = req.user;
+	const { userObjectId, isAdmin } = req.user;
 	const findStudentById = await Student.findById(userObjectId);
 	if (!findStudentById) {
 		throw new Error('cannot find student db by user ID');
@@ -59,7 +59,7 @@ export const getMyClasses = async (req, res) => {
 		await findStudentById.populate(`myClasses.${i}.myClass`);
 	}
 
-	res.status(200).json({ myClasses, userObjectId });
+	res.status(200).json({ myClasses, userObjectId, isAdmin });
 };
 
 // @desc add work to student db

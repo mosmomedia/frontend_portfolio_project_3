@@ -94,8 +94,6 @@ function ClassAllList() {
 		const fetchAllClasses = async () => {
 			dispatch({ type: 'LOADING' });
 
-			const currentUserInfo = JSON.parse(localStorage.getItem('st_user'));
-
 			const classDB = await getAllClasses();
 
 			let filteredClassDB = [];
@@ -114,19 +112,23 @@ function ClassAllList() {
 					filteredClassDB.push(item);
 				}
 			});
-			if (
-				currentUserInfo &&
-				currentUserInfo.userId &&
-				filteredClassDB.length > 0
-			) {
-				const { userId, isAdmin } = currentUserInfo;
+
+			let adminInfo;
+
+			if (user && filteredClassDB.length > 0) {
+				const {
+					myClasses: payload,
+					isAdmin,
+					userObjectId,
+				} = await getMyClasses(user);
+
 				if (isAdmin) {
 					filteredClassDB = filteredClassDB.filter(
-						(item) => item.tutorId !== userId
+						(item) => item.tutorId !== userObjectId
 					);
-				}
 
-				const { myClasses: payload } = await getMyClasses(user, userId);
+					adminInfo = { userObjectId, isAdmin };
+				}
 
 				if (payload) {
 					filteredClassDB.forEach((item) => {
@@ -233,9 +235,7 @@ function ClassAllList() {
 				newList = newList.filter((item) => item.weeks === weeks);
 			}
 
-			const currentUserInfo = JSON.parse(localStorage.getItem('st_user'));
-
-			if (currentUserInfo && currentUserInfo.userId) {
+			if (user) {
 				const { userObjectId, isAdmin } = adminInfo;
 				if (isAdmin) {
 					newList = newList.filter((item) => item.tutorId !== userObjectId);

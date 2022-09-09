@@ -16,10 +16,9 @@ const ImageStyle = styled.img`
 	${tw`h-8`}
 `;
 
-function OAuth({ setLoading }) {
+function OAuth() {
 	const navigate = useNavigate();
 	const onGoogleClick = async () => {
-		setLoading(true);
 		try {
 			const provider = new firebase.GoogleAuthProvider();
 			const userCredential = await firebase.signInWithPopup(
@@ -68,7 +67,6 @@ function OAuth({ setLoading }) {
 		} catch (error) {
 			console.log(error);
 			toast.error('Could not authorize with Google');
-			setLoading(false);
 		}
 	};
 

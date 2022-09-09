@@ -28,6 +28,7 @@ import {
 	LinkStyles,
 	ButtonStyles,
 } from '../../styles/AuthStyles';
+import { getMyClasses } from '../../contexts/myClassRoom/MyClassActions';
 
 function SignIn() {
 	const [loading, setLoading] = useState(false);
@@ -59,27 +60,13 @@ function SignIn() {
 		setLoading(true);
 		if (email && password) {
 			try {
-				firebase.setPersistence(
-					firebase.auth,
-					firebase.browserSessionPersistence
-				);
-
 				const userCredential = await firebase.signInWithEmailAndPassword(
 					firebase.auth,
 					email,
 					password
 				);
 
-				const { displayName, uid } = userCredential.user;
-
-				const docRef = firebase.doc(firebase.db, 'users', uid);
-				const docSnap = await firebase.getDoc(docRef);
-				const { userObjectId, isAdmin } = docSnap.data();
-
-				localStorage.setItem(
-					'st_user',
-					JSON.stringify({ userId: userObjectId, isAdmin })
-				);
+				const { displayName } = userCredential.user;
 
 				setLoading(false);
 

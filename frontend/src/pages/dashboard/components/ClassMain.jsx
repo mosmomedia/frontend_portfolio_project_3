@@ -18,7 +18,7 @@ import {
 } from '../styles/ClassMainStyles';
 
 function Main() {
-	const { myClassList } = useMyClassContext();
+	const { myClassList, isAdmin, userObjectId } = useMyClassContext();
 	const { width } = useWidthState();
 
 	const myCurrentList = [];
@@ -109,7 +109,9 @@ function Main() {
 				{/* registration */}
 				<RightItemStyles>
 					{/*  */}
-					{width >= 1024 ? <ClassAllList /> : null}
+					{width >= 1280 ? (
+						<ClassAllList userState={{ myClassList, isAdmin, userObjectId }} />
+					) : null}
 					{/*  */}
 				</RightItemStyles>
 			</MainStyles>

@@ -19,7 +19,7 @@ router.route('/').post(authMiddleware, createStudent);
 
 // student - class
 router
-	.route('/myclass/:id')
+	.route('/myclass/')
 	.get(authMiddleware, getMyClasses)
 	.post(authMiddleware, addClassToStudent);
 

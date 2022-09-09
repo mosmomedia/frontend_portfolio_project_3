@@ -29,10 +29,9 @@ import {
 	FilterStyles,
 } from '../styles/ClassAllListStyles';
 
-function ClassAllList() {
+function ClassAllList({ userState: { myClassList, isAdmin, userObjectId } }) {
 	const [widthInput, setWidthInput] = useState(-1);
 	const [user, loading] = useAuthState(firebase.auth);
-
 	const {
 		filteredList,
 		classDB,
@@ -87,8 +86,6 @@ function ClassAllList() {
 		const fetchAllClasses = async () => {
 			dispatch({ type: 'LOADING' });
 
-			const currentUserInfo = JSON.parse(localStorage.getItem('st_user'));
-
 			const classDB = await getAllClasses();
 
 			let filteredClassDB = [];
@@ -110,31 +107,27 @@ function ClassAllList() {
 
 			let adminInfo;
 
-			if (
-				currentUserInfo &&
-				currentUserInfo.userId &&
-				filteredClassDB.length > 0
-			) {
-				const { userId, isAdmin } = currentUserInfo;
+			if (filteredClassDB.length > 0) {
 				if (isAdmin) {
 					filteredClassDB = filteredClassDB.filter(
-						(item) => item.tutorId !== userId
+						(item) => item.tutorId !== userObjectId
 					);
+
+					adminInfo = { userObjectId, isAdmin };
 				}
 
-				const { myClasses: payload } = await getMyClasses(user, userId);
-
-				if (payload) {
-					filteredClassDB.forEach((item) => {
-						const findMyclassId = payload.findIndex(
+				if (myClassList.length > 0) {
+					filteredClassDB = filteredClassDB.filter((item) => {
+						const findMyclassId = myClassList.findIndex(
 							(e) => e.myClass._id === item._id
 						);
 
 						if (findMyclassId !== -1) {
 							item.isPurchased = true;
+							return false;
+						} else {
+							return item;
 						}
-
-						return item;
 					});
 				}
 			}
@@ -197,11 +190,23 @@ function ClassAllList() {
 				newList = newList.filter((item) => item.weeks === weeks);
 			}
 
-			if (user) {
-				const { userObjectId, isAdmin } = adminInfo;
-				if (isAdmin) {
-					newList = newList.filter((item) => item.tutorId !== userObjectId);
-				}
+			if (isAdmin) {
+				newList = newList.filter((item) => item.tutorId !== userObjectId);
+			}
+
+			if (myClassList.length > 0) {
+				newList = newList.filter((item) => {
+					const findMyclassId = myClassList.findIndex(
+						(e) => e.myClass._id === item._id
+					);
+
+					if (findMyclassId !== -1) {
+						item.isPurchased = true;
+						return false;
+					} else {
+						return item;
+					}
+				});
 			}
 
 			if (newList.length > 1) {

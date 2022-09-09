@@ -5,6 +5,7 @@ function MyClassReducer(state, action) {
 				...state,
 				userObjectId: action.payload.userObjectId,
 				myClassList: action.payload.myClasses,
+				isAdmin: action.payload.isAdmin,
 				isLoading: false,
 			};
 

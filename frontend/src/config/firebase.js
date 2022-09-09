@@ -21,8 +21,6 @@ import {
 	createUserWithEmailAndPassword,
 	reauthenticateWithCredential,
 	EmailAuthProvider,
-	setPersistence,
-	browserSessionPersistence,
 } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -69,8 +67,6 @@ const firebase = {
 	updateDoc,
 	collection,
 	serverTimestamp,
-	setPersistence,
-	browserSessionPersistence,
 };
 
 export default firebase;

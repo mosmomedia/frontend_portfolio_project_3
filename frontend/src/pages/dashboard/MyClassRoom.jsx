@@ -1,10 +1,11 @@
-import { Route, Routes } from 'react-router-dom';
 import { useEffect } from 'react';
+import { Route, Routes } from 'react-router-dom';
+
 import { useMyClassContext } from '../../contexts/myClassRoom/MyClassContext';
 import { getMyClasses } from '../../contexts/myClassRoom/MyClassActions';
 
-import firebase from '../../config/firebase';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import firebase from '../../config/firebase';
 
 import Home from './components/ClassMain';
 import Stream from './components/Stream';
@@ -22,14 +23,12 @@ function MyClassRoom() {
 		const fetchData = async () => {
 			dispatch({ type: 'LOADING' });
 
-			const currentUserInfo = JSON.parse(localStorage.getItem('st_user'));
-			const payload = await getMyClasses(user, currentUserInfo.userId);
-
+			const payload = await getMyClasses(user);
 			dispatch({ type: 'GET_MY_CLASSES', payload });
 		};
 
 		fetchData();
-	}, []);
+	}, [user]);
 
 	if (isLoading || loading) return <Spinner />;
 

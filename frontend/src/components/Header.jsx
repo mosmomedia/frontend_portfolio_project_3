@@ -1,9 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 
-import { useAuthState } from 'react-firebase-hooks/auth';
-import firebase from '../config/firebase';
-
 import tw from 'twin.macro';
 import 'twin.macro';
 import 'styled-components/macro';
@@ -13,7 +10,6 @@ import Logo_white from '../assets/logos/logo_on.svg';
 import Button from './shared/Button';
 
 import { FaChalkboardTeacher } from 'react-icons/fa';
-import Spinner from './shared/Spinner';
 
 import {
 	HeaderStyles,
@@ -29,20 +25,15 @@ import {
 	ButtonStyles,
 } from '../styles/HeaderStyles';
 
-function Header() {
+function Header({ userState }) {
 	const [hamburgerOn, setHamburgerOn] = useState(false);
 	const [hoverOn, setHoverOn] = useState(false);
 
 	const [currentPath, setCurrentPath] = useState('');
-
-	const user = JSON.parse(localStorage.getItem('st_user'));
-
-	// const [user, loading] = useAuthState(firebase.auth);
 	const { pathname } = useLocation();
 
 	const splitURI = pathname.split('/');
 	const id = splitURI[splitURI.length - 1];
-
 	useEffect(() => {
 		setCurrentPath(splitURI[1]);
 	}, [splitURI]);
@@ -257,7 +248,7 @@ function Header() {
 				{/*logout  */}
 				{/* my dashboard */}
 				<ButtonStyles>
-					{user ? (
+					{userState ? (
 						<>
 							<div className="web">
 								<Button
