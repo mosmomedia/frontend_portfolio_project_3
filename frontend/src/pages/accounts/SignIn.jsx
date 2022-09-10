@@ -28,7 +28,6 @@ import {
 	LinkStyles,
 	ButtonStyles,
 } from '../../styles/AuthStyles';
-import { getMyClasses } from '../../contexts/myClassRoom/MyClassActions';
 
 function SignIn() {
 	const [loading, setLoading] = useState(false);
@@ -67,11 +66,10 @@ function SignIn() {
 				);
 
 				const { displayName } = userCredential.user;
-
 				setLoading(false);
 
 				if (displayName) {
-					toast(`Welcome, ${displayName}!`);
+					toast(`반갑습니다, ${displayName}님!`);
 					navigate('/');
 				}
 			} catch (error) {

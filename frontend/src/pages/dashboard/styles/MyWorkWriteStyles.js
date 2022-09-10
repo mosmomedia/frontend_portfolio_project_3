@@ -31,12 +31,6 @@ export const InfoStyles = styled.div`
 	}
 `;
 
-export const ButtonStyles = styled.button`
-	${tw`py-1.5 px-3 lg:py-2.5 lg:px-4 tracking-wider rounded-md sm:hover:opacity-90`}
-
-	${tw`bg-primary text-primary  shadow-md   sm:hover:shadow-inner`}
-`;
-
 export const InputGroupStyles = styled.div`
 	${tw`space-y-3`}
 
@@ -60,4 +54,20 @@ export const EditorOutlineStyles = styled.div`
 	${tw`text-st_bg1 text-sm py-1 px-1 tracking-wide  rounded-sm border-[#4d4d4d] border-solid border-[1px] border-opacity-30 `}
 
 	${tw`relative overflow-auto h-full`}
+`;
+
+export const SubmitStyles = styled.div`
+	${tw`flex space-x-2`}
+`;
+
+export const ButtonStyles = styled.button`
+	${tw` py-1.5 px-3 lg:py-2.5 lg:px-4 tracking-wider rounded-md cursor-pointer  sm:hover:opacity-90`}
+
+	${tw`bg-pd text-primary  shadow-md   sm:hover:shadow-inner`}
+`;
+
+export const RemoveButtonStyles = styled.div`
+	${tw` py-1.5 px-3 lg:py-2.5 lg:px-4 tracking-wider rounded-md cursor-pointer  sm:hover:opacity-90`}
+
+	${tw`bg-keyColor text-white text-center`}
 `;

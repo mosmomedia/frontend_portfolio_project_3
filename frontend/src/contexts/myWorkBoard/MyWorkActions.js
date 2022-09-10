@@ -41,34 +41,13 @@ export const createNewWork = async (formData) => {
 };
 
 // @ update myWork
-// @ POST /api/work/:id
+// @ POST /api/work/
 // @ private
 
 export const updateMyWork = async (formData, workId) => {
 	try {
 		const header = await createPayloadHeader();
-		const res = await axios.put(
-			'/api/work/' + workId,
-			{ formData, workId },
-			header
-		);
-		return res.data;
-	} catch (error) {
-		console.log(error);
-	}
-};
-
-// @ remove myWork
-// @ DELTE /api/work/:id
-// @ private
-
-export const removeMyWork = async (workId) => {
-	try {
-		const { headers } = await createPayloadHeader();
-		const res = await axios.delete('/api/work/' + workId, {
-			headers,
-			data: { workId },
-		});
+		const res = await axios.put('/api/work/', { formData, workId }, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);
@@ -79,10 +58,10 @@ export const removeMyWork = async (workId) => {
 // @ POST /api/student/mywork/:id
 // @ private
 
-export const addWorkToStudent = async (userId, myWork) => {
+export const addWorkToStudent = async (myWork) => {
 	try {
 		const header = await createPayloadHeader();
-		const res = await axios.post(API_URI + userId, { myWork }, header);
+		const res = await axios.post(API_URI, { myWork }, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);
@@ -95,14 +74,32 @@ export const addWorkToStudent = async (userId, myWork) => {
 
 export const getMyWorks = async () => {
 	try {
-		const user = firebase.auth.currentUser;
+		// const user = firebase.auth.currentUser;
 		const header = await createPayloadHeader();
 
-		const docSnap = firebase.doc(firebase.db, 'users', user.uid);
-		const getUserDb = await firebase.getDoc(docSnap);
-		const { userObjectId } = getUserDb.data();
+		// const docSnap = firebase.doc(firebase.db, 'users', user.uid);
+		// const getUserDb = await firebase.getDoc(docSnap);
+		// const { userObjectId } = getUserDb.data();
 
-		const res = await axios.get(API_URI + userObjectId, header);
+		const res = await axios.get(API_URI, header);
+		// const res = await axios.get(API_URI + userObjectId, header);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// @ remove myWork
+// @ DELTE /api/work
+// @ private
+
+export const removeMyWork = async (workId) => {
+	try {
+		const { headers } = await createPayloadHeader();
+		const res = await axios.delete('/api/work/', {
+			headers,
+			data: { workId },
+		});
 		return res.data;
 	} catch (error) {
 		console.log(error);
@@ -110,13 +107,13 @@ export const getMyWorks = async () => {
 };
 
 // @ remove a work in student db
-// @ PUT /api/student/mywork/:id
+// @ PUT /api/student/mywork
 // @ private
 
-export const removeWorkInStudentDb = async (userId, workId) => {
+export const removeWorkInStudentDb = async (workId) => {
 	try {
 		const header = await createPayloadHeader();
-		const res = await axios.put(API_URI + userId, { workId }, header);
+		const res = await axios.put(API_URI, { workId }, header);
 
 		return res.data;
 	} catch (error) {
@@ -150,6 +147,25 @@ export const updateSubWork = async (formData, workId, subWorkId) => {
 			{ formData, subWorkId },
 			header
 		);
+		return res.data;
+	} catch (error) {
+		console.log(error);
+	}
+};
+
+// @ remove a work in student db
+// @ PUT  /api/work/sub/:id
+// @ private
+
+export const removeSubWork = async (workId, subWorkId) => {
+	try {
+		const { headers } = await createPayloadHeader();
+
+		const res = await axios.delete(`/api/work/sub/${workId}`, {
+			headers,
+			data: { workId, subWorkId },
+		});
+
 		return res.data;
 	} catch (error) {
 		console.log(error);

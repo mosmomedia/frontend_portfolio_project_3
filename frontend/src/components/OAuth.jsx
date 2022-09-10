@@ -16,9 +16,10 @@ const ImageStyle = styled.img`
 	${tw`h-8`}
 `;
 
-function OAuth() {
+function OAuth({ setLoading }) {
 	const navigate = useNavigate();
 	const onGoogleClick = async () => {
+		setLoading(true);
 		try {
 			const provider = new firebase.GoogleAuthProvider();
 			const userCredential = await firebase.signInWithPopup(
@@ -32,14 +33,11 @@ function OAuth() {
 			const docSnap = await firebase.getDoc(docRef);
 
 			if (!docSnap.exists()) {
-				const newStudent = await createStudent(
-					{
-						firebaseId: uid,
-						email,
-						name: displayName,
-					},
-					userCredential.user
-				);
+				const newStudent = await createStudent({
+					firebaseId: uid,
+					email,
+					name: displayName,
+				});
 
 				const { _id } = newStudent;
 
@@ -54,11 +52,6 @@ function OAuth() {
 					createdAt: firebase.serverTimestamp(),
 				};
 				await firebase.setDoc(docRef, userProfile);
-
-				localStorage.setItem(
-					'st_user',
-					JSON.stringify({ userId: _id, isAdmin: false })
-				);
 			}
 
 			toast(`Welcome, ${displayName}!`);
@@ -67,6 +60,7 @@ function OAuth() {
 		} catch (error) {
 			console.log(error);
 			toast.error('Could not authorize with Google');
+			setLoading(false);
 		}
 	};
 

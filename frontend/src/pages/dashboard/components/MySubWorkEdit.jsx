@@ -2,7 +2,10 @@ import { useState, useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
-import { updateSubWork } from '../../../contexts/myWorkBoard/MyWorkActions';
+import {
+	updateSubWork,
+	removeSubWork,
+} from '../../../contexts/myWorkBoard/MyWorkActions';
 
 import { Editor, EditorState, convertFromRaw, convertToRaw } from 'draft-js';
 
@@ -17,7 +20,9 @@ import {
 	UpperGroupStyles,
 	EditorStyles,
 	EditorOutlineStyles,
+	SubmitStyles,
 	ButtonStyles,
+	RemoveButtonStyles,
 } from '../styles/MyWorkWriteStyles';
 import { toast } from 'react-toastify';
 
@@ -96,6 +101,46 @@ function MySubWorkEdit() {
 		}
 	};
 
+	const handleRemoveClick = async () => {
+		if (window.confirm('정말 삭제 하시겠습니까?')) {
+			try {
+				dispatch({ type: 'LOADING' });
+				const { _id: workId } = currentWork;
+				const { _id: subWorkId } = currentSubWork;
+
+				const { message: deleteMySubWork } = await removeSubWork(
+					workId,
+					subWorkId
+				);
+
+				if (deleteMySubWork === 'success') {
+					const { contentList } = currentWork;
+					const filteredContentList = contentList.filter(
+						(item) => item._id !== subWorkId
+					);
+
+					const payload = myWorkList.map((item) => {
+						if (item._id === workId) {
+							item.contentList = filteredContentList;
+							return item;
+						} else {
+							return item;
+						}
+					});
+
+					dispatch({ type: 'DELETE_MY_CURRENT_SUB_WORK', payload });
+					toast.success('삭제가 완료 되었습니다.');
+					navigate(`/dashboard/my-board/work/list/${workId}`);
+				}
+			} catch (error) {
+				dispatch({ type: 'OFF_LOADING' });
+
+				toast.error('문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
+				console.log(error);
+			}
+		}
+	};
+
 	if (isLoading || !currentWork) return <Spinner />;
 
 	return (
@@ -110,7 +155,15 @@ function MySubWorkEdit() {
 								<h4>{currentWork.genre}</h4>
 							</InfoStyles>
 						</Link>
-						<ButtonStyles>변경하기</ButtonStyles>
+						<SubmitStyles>
+							<RemoveButtonStyles
+								id="remove-button"
+								onClick={handleRemoveClick}
+							>
+								삭제하기
+							</RemoveButtonStyles>
+							<ButtonStyles>변경하기</ButtonStyles>
+						</SubmitStyles>
 					</UpperGroupStyles>
 					<InputGroupStyles>
 						<label htmlFor="subTitle">

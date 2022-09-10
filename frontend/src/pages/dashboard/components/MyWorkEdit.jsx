@@ -26,11 +26,10 @@ import {
 	RemoveButtonStyles,
 } from '../styles/PublishWorkStyles';
 
-function CreateWork() {
-	const [loading, setLoading] = useState(false);
+function EditWork() {
 	const [isDisabled, setIsDisabled] = useState(true);
 
-	const { userObjectId, currentWork, dispatch, myWorkList } =
+	const { userObjectId, currentWork, dispatch, myWorkList, isLoading } =
 		useMyWorkContext();
 
 	const genreArr = [
@@ -77,7 +76,7 @@ function CreateWork() {
 		const { _id: workId, user } = currentWork;
 
 		try {
-			setLoading(true);
+			dispatch({ type: 'LOADING' });
 
 			const { findWork, message } = await updateMyWork(formData, workId);
 
@@ -98,7 +97,8 @@ function CreateWork() {
 			}
 		} catch (error) {
 			console.log(error);
-			setLoading(false);
+			dispatch({ type: 'OFF_LOADING' });
+
 			toast.error('문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
 		}
 	};
@@ -110,11 +110,12 @@ function CreateWork() {
 	const handleRemoveClick = async () => {
 		if (window.confirm('정말 삭제 하시겠습니까?')) {
 			try {
+				dispatch({ type: 'LOADING' });
 				const { _id: workId } = currentWork;
 
 				const { message: deleteMyWork } = await removeMyWork(workId);
 				const { message: deleteMyWorkInStudentDb } =
-					await removeWorkInStudentDb(userObjectId, workId);
+					await removeWorkInStudentDb(workId);
 
 				if (
 					deleteMyWork === 'success' &&
@@ -127,12 +128,15 @@ function CreateWork() {
 					navigate('/dashboard/my-board');
 				}
 			} catch (error) {
+				dispatch({ type: 'OFF_LOADING' });
+
+				toast.error('문제가 발생했습니다. 잠시 후 다시 시도해주세요.');
 				console.log(error);
 			}
 		}
 	};
 
-	if (loading) return <Spinner />;
+	if (isLoading) return <Spinner />;
 
 	return (
 		<MainStyles>
@@ -208,4 +212,4 @@ function CreateWork() {
 	);
 }
 
-export default CreateWork;
+export default EditWork;

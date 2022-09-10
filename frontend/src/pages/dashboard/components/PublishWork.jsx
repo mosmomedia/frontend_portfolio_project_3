@@ -69,7 +69,7 @@ function CreateWork() {
 
 			const { user: userObjectId, _id: myWorkId } = createdWork;
 
-			const { message } = await addWorkToStudent(userObjectId, myWorkId);
+			const { message } = await addWorkToStudent(myWorkId);
 
 			if (message === 'success') {
 				const payload = [...myWorkList, createdWork];

@@ -138,9 +138,9 @@ export const removeMyWorkInStudentDb = async (req, res) => {
 		);
 	}
 
-	await Student.findByIdAndUpdate(userObjectId, {
-		myWorks: filteredMyWorks,
-	});
+	findStudentById.myWorks = filteredMyWorks;
+
+	await findStudentById.save();
 
 	res.status(200).json({ message: 'success' });
 };

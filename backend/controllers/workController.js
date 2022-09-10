@@ -37,7 +37,7 @@ export const updateWork = async (req, res) => {
 };
 
 // @desc remove my work
-// @route PUT /api/work/:id
+// @route DELETE /api/work/:id
 // @access Private
 export const removeWork = async (req, res) => {
 	const { userObjectId } = req.user;
@@ -99,4 +99,40 @@ export const updateSubWork = async (req, res) => {
 	await findWork.save();
 
 	res.status(200).json(findWork);
+};
+
+// @desc remove my sub work
+// @route DELETE /api/work/sub/:id
+// @access Private
+
+export const removeSubWork = async (req, res) => {
+	const { userObjectId } = req.user;
+
+	const { id } = req.params;
+	const { workId, subWorkId } = req.body;
+
+	if (id !== workId) {
+		throw new Error('doesnt match id and workId');
+	}
+	const findWork = await Work.findById(id);
+
+	if (!findWork || findWork.user.toString() !== userObjectId) {
+		throw new Error('cannot find work');
+	}
+	let { contentList } = findWork;
+
+	let filteredMySubWorks;
+	if (contentList.length === 0) {
+		throw new Error('cannot find the sub work in this db');
+	} else {
+		filteredMySubWorks = contentList.filter(
+			({ _id }) => _id.toString() !== subWorkId
+		);
+	}
+
+	findWork.contentList = filteredMySubWorks;
+
+	await findWork.save();
+
+	res.status(200).json({ message: 'success' });
 };

@@ -120,12 +120,7 @@ function SignUp() {
 					userProfile
 				);
 
-				localStorage.setItem(
-					'st_user',
-					JSON.stringify({ userId: _id, isAdmin })
-				);
-
-				toast(`Welcome, ${name}!`);
+				toast(`반갑습니다, ${name}님!`);
 				navigate('/');
 			} catch (error) {
 				if (error.code === 'auth/weak-password') {

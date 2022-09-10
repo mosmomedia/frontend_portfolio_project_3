@@ -26,7 +26,7 @@ router
 // student - work
 
 router
-	.route('/mywork/:id')
+	.route('/mywork/')
 	.get(authMiddleware, getMyWorks)
 	.post(authMiddleware, addWorkToStudent)
 	.put(authMiddleware, removeMyWorkInStudentDb);

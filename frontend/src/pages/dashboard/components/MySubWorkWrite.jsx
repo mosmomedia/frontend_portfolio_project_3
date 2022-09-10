@@ -18,9 +18,10 @@ import {
 	ButtonStyles,
 } from '../styles/MyWorkWriteStyles';
 import { toast } from 'react-toastify';
+import Spinner from '../../../components/shared/Spinner';
 
 function MyWorkWrite() {
-	const { currentWork, myWorkList, dispatch } = useMyWorkContext();
+	const { currentWork, myWorkList, dispatch, isLoading } = useMyWorkContext();
 
 	const [currentWorkState, setCurrentWorkState] = useState({
 		workId: null,
@@ -91,6 +92,8 @@ function MyWorkWrite() {
 			toast.error('본문 내용을 입력하세요.');
 		}
 	};
+
+	if (isLoading) return <Spinner />;
 
 	return (
 		<SectionStyles>

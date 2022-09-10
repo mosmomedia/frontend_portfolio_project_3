@@ -57,6 +57,14 @@ function MyWorkReducer(state, action) {
 				isLoading: false,
 			};
 
+		case 'DELETE_MY_CURRENT_SUB_WORK':
+			return {
+				...state,
+				myWorkList: action.payload,
+				currentSubWork: null,
+				isLoading: false,
+			};
+
 		case 'LOADING':
 			return { ...state, isLoading: true };
 
