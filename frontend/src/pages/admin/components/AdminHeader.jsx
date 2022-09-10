@@ -1,8 +1,6 @@
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
-import { useAdminContext } from '../../../contexts/admin/AdminContext';
-
 import firebase from '../../../config/firebase';
 
 import {
@@ -14,7 +12,6 @@ import {
 
 function AdminHeader() {
 	const { pathname } = useLocation();
-	const { admin } = useAdminContext();
 
 	const splitURI = pathname.split('/');
 	const id = splitURI[splitURI.length - 1];
@@ -66,11 +63,9 @@ function AdminHeader() {
 					<NavChildStyles onClick={handleNoServiceClick}>
 						학생 관리
 					</NavChildStyles>
-					{admin && (
-						<NavChildStyles>
-							<button onClick={handleLogoutClick}>로그아웃</button>
-						</NavChildStyles>
-					)}
+					<NavChildStyles>
+						<button onClick={handleLogoutClick}>로그아웃</button>
+					</NavChildStyles>
 				</NavStyles>
 			</HeaderWrapperStyles>
 		</HeaderStyles>

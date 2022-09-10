@@ -1,12 +1,15 @@
 import { useState, useEffect } from 'react';
+
+import { useOutletContext } from 'react-router-dom';
+
 import Spinner from '../../components/shared/Spinner';
 import { useAdminContext } from '../../contexts/admin/AdminContext';
 
 import { WrapperStyles, MainStyles, InfoWrapperStyles } from './styles';
 
 function MyAdminHome() {
-	const { isLoading, myClassList } = useAdminContext();
-	const [loading, setLoading] = useState(true);
+	const [loading, setLoading] = useState(false);
+	const myClassList = useOutletContext();
 
 	const [countInfo, setCountInfo] = useState({
 		classesNum: 0,
@@ -17,7 +20,9 @@ function MyAdminHome() {
 	const { classesNum, studentsNum, feedbackNum } = countInfo;
 
 	useEffect(() => {
-		if (myClassList.length > 0) {
+		if (myClassList && myClassList.length > 0) {
+			setLoading(true);
+
 			let classesNum = myClassList.length;
 			let studentsNum = 0;
 
@@ -34,11 +39,9 @@ function MyAdminHome() {
 			setLoading(false);
 		}
 		setLoading(false);
-
-		// eslint-disable-next-line
 	}, [myClassList]);
 
-	if (isLoading || loading) return <Spinner />;
+	if (loading) return <Spinner />;
 
 	return (
 		<WrapperStyles>

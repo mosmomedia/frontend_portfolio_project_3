@@ -9,12 +9,11 @@ import AdminHeader from './components/AdminHeader';
 import Spinner from '../../components/shared/Spinner';
 import { useAdminContext } from '../../contexts/admin/AdminContext';
 import { getMyClasses } from '../../contexts/admin/AdminActions';
-import { useAuthState } from 'react-firebase-hooks/auth';
-import firebase from '../../config/firebase';
+import { useState } from 'react';
 
-function Dashboard() {
+function MyAdminMain() {
 	const { dispatch, isLoading } = useAdminContext();
-	const [user, loading] = useAuthState(firebase.auth);
+	const [classesList, setClassesList] = useState();
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -27,6 +26,7 @@ function Dashboard() {
 				if (myClasses) {
 					myClassArr = myClasses.map(({ myClass }) => myClass);
 				}
+				setClassesList(myClassArr);
 
 				dispatch({
 					type: 'GET_MY_CLASSES',
@@ -37,20 +37,18 @@ function Dashboard() {
 			}
 		};
 
-		if (user) {
-			fetchData();
-		}
+		fetchData();
 
 		dispatch({ type: 'OFF_LOADING' });
-	}, [user, dispatch]);
+	}, []);
 	if (isLoading) return <Spinner />;
 
 	return (
 		<ContainerStyles>
 			<AdminHeader />
-			<Outlet />
+			<Outlet context={classesList} />
 		</ContainerStyles>
 	);
 }
 
-export default Dashboard;
+export default MyAdminMain;
