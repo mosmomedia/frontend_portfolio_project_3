@@ -1,10 +1,7 @@
 import { FaRss } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
-import {
-	updateClass,
-	handleOnairClass,
-} from '../../../contexts/class/ClassActions';
+import { handleOnairClass } from '../../../contexts/class/ClassActions';
 
 import Spinner from '../../../components/shared/Spinner';
 

@@ -3,20 +3,14 @@ import { Route, Routes } from 'react-router-dom';
 
 import AdminHeader from './components/AdminHeader';
 import MyAdminClassRegistration from './MyAdminClassRegistration';
-import MyAdminClassRegistartionEdit from './MyAdminClassRegistartionEdit';
 
-import MyAdminClasses from './MyAdminClasses';
 import MyAdminHome from './MyAdminHome';
-import MyAdminSignIn from './components/MyAdminSignIn';
-import MyAdminSingleClass from './components/MyAdminSingleClass';
 
 import { useAdminContext } from '../../contexts/admin/AdminContext';
 import { getMyClasses } from '../../contexts/admin/AdminActions';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from '../../config/firebase';
-
-import AdminRoute from '../../components/AdminRoute';
 
 import NotFound from '../etc/NotFound';
 
@@ -61,17 +55,8 @@ function MyAdminMain() {
 			<AdminHeader />
 			<Routes>
 				<Route path="*" element={<NotFound />} />
-				{/* <Route path="sign-in" element={<MyAdminSignIn />} /> */}
-				{/* <Route path="/" element={<AdminRoute />}> */}
 				<Route path="/" element={<MyAdminHome />} />
 				<Route path="/registration" element={<MyAdminClassRegistration />} />
-				{/* <Route
-					path="registration/edit/:id"
-					element={<MyAdminClassRegistartionEdit />}
-				/> */}
-				{/* <Route path="classes" element={<MyAdminClasses />} /> */}
-				{/* <Route path="class/:id" element={<MyAdminSingleClass />} /> */}
-				{/* </Route> */}
 			</Routes>
 		</ContainerStyles>
 	);

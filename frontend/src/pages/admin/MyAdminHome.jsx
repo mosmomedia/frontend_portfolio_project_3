@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 import { useOutletContext } from 'react-router-dom';
 
 import Spinner from '../../components/shared/Spinner';
-import { useAdminContext } from '../../contexts/admin/AdminContext';
 
 import { WrapperStyles, MainStyles, InfoWrapperStyles } from './styles';
 

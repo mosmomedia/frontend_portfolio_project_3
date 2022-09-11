@@ -29,8 +29,7 @@ import {
 function EditWork() {
 	const [isDisabled, setIsDisabled] = useState(true);
 
-	const { userObjectId, currentWork, dispatch, myWorkList, isLoading } =
-		useMyWorkContext();
+	const { currentWork, dispatch, myWorkList, isLoading } = useMyWorkContext();
 
 	const genreArr = [
 		'판타지',

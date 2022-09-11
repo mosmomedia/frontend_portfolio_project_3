@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { useAuthState } from 'react-firebase-hooks/auth';
 import firebase from '../../config/firebase';
 import { placeOrder } from '../../contexts/order/OrderActions';
 import { enrollStudentToClass } from '../../contexts/class/ClassActions';

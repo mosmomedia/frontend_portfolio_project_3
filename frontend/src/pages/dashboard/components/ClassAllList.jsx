@@ -1,7 +1,6 @@
 import { useState, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { getAllClasses } from '../../../contexts/class/ClassActions';
-import { getMyClasses } from '../../../contexts/myClassRoom/MyClassActions';
 
 import { useClassContext } from '../../../contexts/class/ClassContext';
 import firebase from '../../../config/firebase';

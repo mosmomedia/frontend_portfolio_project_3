@@ -3,8 +3,6 @@ import { useNavigate } from 'react-router-dom';
 
 import { RiDeleteBin6Line } from 'react-icons/ri';
 
-import firebase from '../../config/firebase';
-import { useAuthState } from 'react-firebase-hooks/auth';
 import { useAdminContext } from '../../contexts/admin/AdminContext';
 
 import { updateClass, removeClass } from '../../contexts/class/ClassActions';
