@@ -66,28 +66,32 @@ function MyWorkWrite() {
 		const content = editorState.getCurrentContent();
 
 		if (content.hasText()) {
-			dispatch({ type: 'LOADING' });
+			try {
+				dispatch({ type: 'LOADING' });
 
-			const subContentHtml = JSON.stringify(
-				convertToRaw(editorState.getCurrentContent())
-			);
+				const subContentHtml = JSON.stringify(
+					convertToRaw(editorState.getCurrentContent())
+				);
 
-			const formData = { subTitle, subContentHtml };
-			const updatedMyWork = await addSubWork(formData, workId);
-			const { _id: updatedWorkId } = updatedMyWork;
+				const formData = { subTitle, subContentHtml };
+				const updatedMyWork = await addSubWork(formData, workId);
+				const { _id: updatedWorkId } = updatedMyWork;
 
-			const payload = myWorkList.map((item) => {
-				if (item._id === updatedWorkId) {
-					return updatedMyWork;
-				} else {
-					return item;
-				}
-			});
+				const payload = myWorkList.map((item) => {
+					if (item._id === updatedWorkId) {
+						return updatedMyWork;
+					} else {
+						return item;
+					}
+				});
 
-			dispatch({ type: 'GET_MY_CURRENT_WORK', payload: updatedMyWork });
-			dispatch({ type: 'ADD_SUB_WORK', payload });
-			toast('새 글이 성공적으로 등록 되었습니다.');
-			navigate(`/dashboard/my-board/work/list/${workId}`);
+				dispatch({ type: 'GET_MY_CURRENT_WORK', payload: updatedMyWork });
+				dispatch({ type: 'ADD_SUB_WORK', payload });
+				toast('새 글이 성공적으로 등록 되었습니다.');
+				navigate(`/dashboard/my-board/work/list/${workId}`);
+			} catch (error) {
+				console.log(error);
+			}
 		} else {
 			toast.error('본문 내용을 입력하세요.');
 		}

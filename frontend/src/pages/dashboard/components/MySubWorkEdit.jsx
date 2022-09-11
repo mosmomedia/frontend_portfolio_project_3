@@ -68,34 +68,38 @@ function MySubWorkEdit() {
 		const content = editorState.getCurrentContent();
 
 		if (content.hasText()) {
-			dispatch({ type: 'LOADING' });
+			try {
+				dispatch({ type: 'LOADING' });
 
-			const subContentHtml = JSON.stringify(
-				convertToRaw(editorState.getCurrentContent())
-			);
+				const subContentHtml = JSON.stringify(
+					convertToRaw(editorState.getCurrentContent())
+				);
 
-			const formData = { subTitle, subContentHtml };
+				const formData = { subTitle, subContentHtml };
 
-			const updatedMyWork = await updateSubWork(
-				formData,
-				currentWork._id,
-				currentSubWork._id
-			);
+				const updatedMyWork = await updateSubWork(
+					formData,
+					currentWork._id,
+					currentSubWork._id
+				);
 
-			const { _id: updatedWorkId } = updatedMyWork;
+				const { _id: updatedWorkId } = updatedMyWork;
 
-			const payload = myWorkList.map((item) => {
-				if (item._id === updatedWorkId) {
-					return updatedMyWork;
-				} else {
-					return item;
-				}
-			});
+				const payload = myWorkList.map((item) => {
+					if (item._id === updatedWorkId) {
+						return updatedMyWork;
+					} else {
+						return item;
+					}
+				});
 
-			dispatch({ type: 'GET_MY_CURRENT_WORK', payload: updatedMyWork });
-			dispatch({ type: 'UPDATE_SUB_WORK', payload });
-			toast('성공적으로 수정 되었습니다.');
-			navigate(`/dashboard/my-board/work/list/${currentWork._id}`);
+				dispatch({ type: 'GET_MY_CURRENT_WORK', payload: updatedMyWork });
+				dispatch({ type: 'UPDATE_SUB_WORK', payload });
+				toast('성공적으로 수정 되었습니다.');
+				navigate(`/dashboard/my-board/work/list/${currentWork._id}`);
+			} catch (error) {
+				console.log(error);
+			}
 		} else {
 			toast.error('본문 내용을 입력하세요.');
 		}

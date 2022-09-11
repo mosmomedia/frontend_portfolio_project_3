@@ -74,15 +74,8 @@ export const addWorkToStudent = async (myWork) => {
 
 export const getMyWorks = async () => {
 	try {
-		// const user = firebase.auth.currentUser;
 		const header = await createPayloadHeader();
-
-		// const docSnap = firebase.doc(firebase.db, 'users', user.uid);
-		// const getUserDb = await firebase.getDoc(docSnap);
-		// const { userObjectId } = getUserDb.data();
-
 		const res = await axios.get(API_URI, header);
-		// const res = await axios.get(API_URI + userObjectId, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);

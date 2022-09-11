@@ -67,35 +67,41 @@ function ClassCard({ item, user }) {
 			toast.error('수강신청 시 로그인이 필요합니다.');
 		} else {
 			if (window.confirm('[테스트] 신청..?')) {
-				setIsLoading(true);
-				const formData = {
-					...item,
-					paymentMethod: 'Credit',
-				};
+				try {
+					setIsLoading(true);
+					const formData = {
+						...item,
+						paymentMethod: 'Credit',
+					};
 
-				const docRef = firebase.doc(firebase.db, 'users', user.uid);
-				const docSnap = await firebase.getDoc(docRef);
-				const { userObjectId } = docSnap.data();
+					const docRef = firebase.doc(firebase.db, 'users', user.uid);
+					const docSnap = await firebase.getDoc(docRef);
+					const { userObjectId } = docSnap.data();
 
-				const [isEnrolled, isPlaced, isAdded] = await Promise.all([
-					enrollStudentToClass(_id),
-					placeOrder(formData),
-					addClassToStudent(userObjectId, _id, user),
-				]);
+					const [isEnrolled, isPlaced, isAdded] = await Promise.all([
+						enrollStudentToClass(_id),
+						placeOrder(formData),
+						addClassToStudent(userObjectId, _id, user),
+					]);
 
-				if (isEnrolled && isPlaced && isAdded) {
-					window.location.reload(false);
-					toast('강의 신청 성공! 감사합니다.');
-				} else {
-					toast('강의 신청에 실패 했습니다.');
-					console.log('Error: cannot order the class');
+					if (isEnrolled && isPlaced && isAdded) {
+						window.location.reload(false);
+						toast('강의 신청 성공! 감사합니다.');
+					} else {
+						toast('강의 신청에 실패 했습니다.');
+						console.log('Error: cannot order the class');
+					}
+
+					setIsLoading(false);
+				} catch (error) {
+					console.log(error);
 				}
-
-				setIsLoading(false);
 			}
 		}
 	};
+
 	if (isLoading) return <Spinner />;
+
 	return (
 		<CardStyles variant={type}>
 			{/* left item - title, tutor, hours, period  */}

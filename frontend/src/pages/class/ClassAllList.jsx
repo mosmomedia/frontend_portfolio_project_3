@@ -92,122 +92,126 @@ function ClassAllList() {
 		let isComponentMounted = true;
 
 		const fetchAllClasses = async () => {
-			dispatch({ type: 'LOADING' });
+			try {
+				dispatch({ type: 'LOADING' });
 
-			const classDB = await getAllClasses();
+				const classDB = await getAllClasses();
 
-			let filteredClassDB = [];
+				let filteredClassDB = [];
 
-			const classState = {
-				basicClass: false,
-				advClass: false,
-				pdClass: false,
-			};
+				const classState = {
+					basicClass: false,
+					advClass: false,
+					pdClass: false,
+				};
 
-			classDB.forEach((item) => {
-				if (item.status === 'open') {
-					// add property
-					item.isPurchased = false;
+				classDB.forEach((item) => {
+					if (item.status === 'open') {
+						// add property
+						item.isPurchased = false;
 
-					filteredClassDB.push(item);
-				}
-			});
+						filteredClassDB.push(item);
+					}
+				});
 
-			let adminInfo;
+				let adminInfo;
 
-			if (user && filteredClassDB.length > 0) {
-				const {
-					myClasses: payload,
-					isAdmin,
-					userObjectId,
-				} = await getMyClasses(user);
+				if (user && filteredClassDB.length > 0) {
+					const {
+						myClasses: payload,
+						isAdmin,
+						userObjectId,
+					} = await getMyClasses(user);
 
-				if (isAdmin) {
-					filteredClassDB = filteredClassDB.filter(
-						(item) => item.tutorId !== userObjectId
-					);
-
-					adminInfo = { userObjectId, isAdmin };
-				}
-
-				if (payload) {
-					filteredClassDB.forEach((item) => {
-						const findMyclassId = payload.findIndex(
-							(e) => e.myClass._id === item._id
+					if (isAdmin) {
+						filteredClassDB = filteredClassDB.filter(
+							(item) => item.tutorId !== userObjectId
 						);
 
-						if (findMyclassId !== -1) {
-							item.isPurchased = true;
-						}
+						adminInfo = { userObjectId, isAdmin };
+					}
 
-						return item;
+					if (payload) {
+						filteredClassDB.forEach((item) => {
+							const findMyclassId = payload.findIndex(
+								(e) => e.myClass._id === item._id
+							);
+
+							if (findMyclassId !== -1) {
+								item.isPurchased = true;
+							}
+
+							return item;
+						});
+					}
+				}
+
+				if (filteredClassDB.length > 1) {
+					filteredClassDB.sort((a, b) => a.weeks - b.weeks);
+				}
+
+				const months = new Set();
+
+				filteredClassDB.forEach((item) => {
+					if (item.type === 'basicClass') {
+						classState.basicClass = true;
+					} else if (item.type === 'advClass') {
+						classState.advClass = true;
+					} else if (item.type === 'pdClass') {
+						classState.pdClass = true;
+					}
+
+					months.add(item.month);
+				});
+
+				const monthsArr = Array.from(months).sort((x, y) => x - y);
+
+				const API_REG_URI = '/class-registration/all-classes';
+				const API_MY_CLASS_URI = '/dashboard/my-classroom';
+
+				if (pathname === `${API_MY_CLASS_URI}`) {
+				} else if (pathname === `${API_REG_URI}/online/basic`) {
+					classState.basicClass = true;
+					classState.advClass = false;
+					classState.pdClass = false;
+					filteredClassDB = filteredClassDB.filter(
+						(item) => item.type === 'basicClass'
+					);
+				} else if (pathname === `${API_REG_URI}/online/adv`) {
+					classState.basicClass = false;
+					classState.advClass = true;
+					classState.pdClass = false;
+					filteredClassDB = filteredClassDB.filter(
+						(item) => item.type === 'advClass'
+					);
+				} else if (pathname === `${API_REG_URI}/online/pd`) {
+					classState.basicClass = false;
+					classState.advClass = false;
+					classState.pdClass = true;
+					filteredClassDB = filteredClassDB.filter(
+						(item) => item.type === 'pdClass'
+					);
+				} else if (
+					pathname !== `${API_REG_URI}` &&
+					pathname !== `${API_REG_URI}/online`
+				) {
+					return navigate('/notfound');
+				}
+
+				if (isComponentMounted) {
+					dispatch({
+						type: 'FETCH_INIT_ALLCLASSES_USER',
+						payload: {
+							classDB,
+							monthsArr,
+							classState,
+							filteredClassDB,
+							adminInfo,
+						},
 					});
 				}
-			}
-
-			if (filteredClassDB.length > 1) {
-				filteredClassDB.sort((a, b) => a.weeks - b.weeks);
-			}
-
-			const months = new Set();
-
-			filteredClassDB.forEach((item) => {
-				if (item.type === 'basicClass') {
-					classState.basicClass = true;
-				} else if (item.type === 'advClass') {
-					classState.advClass = true;
-				} else if (item.type === 'pdClass') {
-					classState.pdClass = true;
-				}
-
-				months.add(item.month);
-			});
-
-			const monthsArr = Array.from(months).sort((x, y) => x - y);
-
-			const API_REG_URI = '/class-registration/all-classes';
-			const API_MY_CLASS_URI = '/dashboard/my-classroom';
-
-			if (pathname === `${API_MY_CLASS_URI}`) {
-			} else if (pathname === `${API_REG_URI}/online/basic`) {
-				classState.basicClass = true;
-				classState.advClass = false;
-				classState.pdClass = false;
-				filteredClassDB = filteredClassDB.filter(
-					(item) => item.type === 'basicClass'
-				);
-			} else if (pathname === `${API_REG_URI}/online/adv`) {
-				classState.basicClass = false;
-				classState.advClass = true;
-				classState.pdClass = false;
-				filteredClassDB = filteredClassDB.filter(
-					(item) => item.type === 'advClass'
-				);
-			} else if (pathname === `${API_REG_URI}/online/pd`) {
-				classState.basicClass = false;
-				classState.advClass = false;
-				classState.pdClass = true;
-				filteredClassDB = filteredClassDB.filter(
-					(item) => item.type === 'pdClass'
-				);
-			} else if (
-				pathname !== `${API_REG_URI}` &&
-				pathname !== `${API_REG_URI}/online`
-			) {
-				return navigate('/notfound');
-			}
-
-			if (isComponentMounted) {
-				dispatch({
-					type: 'FETCH_INIT_ALLCLASSES_USER',
-					payload: {
-						classDB,
-						monthsArr,
-						classState,
-						filteredClassDB,
-						adminInfo,
-					},
-				});
+			} catch (error) {
+				console.log(error);
 			}
 		};
 

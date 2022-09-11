@@ -20,12 +20,20 @@ function MyBoardMain() {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			dispatch({ type: 'LOADING' });
-			const { userObjectId, myWorks } = await getMyWorks();
-			const myWorksArr = myWorks.map(({ myWork }) => myWork);
+			try {
+				dispatch({ type: 'LOADING' });
+				const { userObjectId, myWorks } = await getMyWorks();
+				const myWorksArr = myWorks.map(({ myWork }) => myWork);
 
-			dispatch({ type: 'GET_MY_WORKS', payload: { userObjectId, myWorksArr } });
+				dispatch({
+					type: 'GET_MY_WORKS',
+					payload: { userObjectId, myWorksArr },
+				});
+			} catch (error) {
+				console.log(error);
+			}
 		};
+
 		fetchData();
 	}, [dispatch]);
 

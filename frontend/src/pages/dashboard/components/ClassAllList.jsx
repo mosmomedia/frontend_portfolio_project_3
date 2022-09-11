@@ -84,85 +84,89 @@ function ClassAllList({ userState: { myClassList, isAdmin, userObjectId } }) {
 		let isComponentMounted = true;
 
 		const fetchAllClasses = async () => {
-			dispatch({ type: 'LOADING' });
+			try {
+				dispatch({ type: 'LOADING' });
 
-			const classDB = await getAllClasses();
+				const classDB = await getAllClasses();
 
-			let filteredClassDB = [];
+				let filteredClassDB = [];
 
-			const classState = {
-				basicClass: false,
-				advClass: false,
-				pdClass: false,
-			};
+				const classState = {
+					basicClass: false,
+					advClass: false,
+					pdClass: false,
+				};
 
-			classDB.forEach((item) => {
-				if (item.status === 'open') {
-					// add property
-					item.isPurchased = false;
+				classDB.forEach((item) => {
+					if (item.status === 'open') {
+						// add property
+						item.isPurchased = false;
 
-					filteredClassDB.push(item);
-				}
-			});
+						filteredClassDB.push(item);
+					}
+				});
 
-			let adminInfo;
+				let adminInfo;
 
-			if (filteredClassDB.length > 0) {
-				if (isAdmin) {
-					filteredClassDB = filteredClassDB.filter(
-						(item) => item.tutorId !== userObjectId
-					);
-
-					adminInfo = { userObjectId, isAdmin };
-				}
-
-				if (myClassList.length > 0) {
-					filteredClassDB = filteredClassDB.filter((item) => {
-						const findMyclassId = myClassList.findIndex(
-							(e) => e.myClass._id === item._id
+				if (filteredClassDB.length > 0) {
+					if (isAdmin) {
+						filteredClassDB = filteredClassDB.filter(
+							(item) => item.tutorId !== userObjectId
 						);
 
-						if (findMyclassId !== -1) {
-							item.isPurchased = true;
-							return false;
-						} else {
-							return item;
-						}
+						adminInfo = { userObjectId, isAdmin };
+					}
+
+					if (myClassList.length > 0) {
+						filteredClassDB = filteredClassDB.filter((item) => {
+							const findMyclassId = myClassList.findIndex(
+								(e) => e.myClass._id === item._id
+							);
+
+							if (findMyclassId !== -1) {
+								item.isPurchased = true;
+								return false;
+							} else {
+								return item;
+							}
+						});
+					}
+				}
+
+				if (filteredClassDB.length > 1) {
+					filteredClassDB.sort((a, b) => a.weeks - b.weeks);
+				}
+
+				const months = new Set();
+
+				filteredClassDB.forEach((item) => {
+					if (item.type === 'basicClass') {
+						classState.basicClass = true;
+					} else if (item.type === 'advClass') {
+						classState.advClass = true;
+					} else if (item.type === 'pdClass') {
+						classState.pdClass = true;
+					}
+
+					months.add(item.month);
+				});
+
+				const monthsArr = Array.from(months).sort((x, y) => x - y);
+
+				if (isComponentMounted) {
+					dispatch({
+						type: 'FETCH_INIT_ALLCLASSES_USER',
+						payload: {
+							classDB,
+							monthsArr,
+							classState,
+							filteredClassDB,
+							adminInfo,
+						},
 					});
 				}
-			}
-
-			if (filteredClassDB.length > 1) {
-				filteredClassDB.sort((a, b) => a.weeks - b.weeks);
-			}
-
-			const months = new Set();
-
-			filteredClassDB.forEach((item) => {
-				if (item.type === 'basicClass') {
-					classState.basicClass = true;
-				} else if (item.type === 'advClass') {
-					classState.advClass = true;
-				} else if (item.type === 'pdClass') {
-					classState.pdClass = true;
-				}
-
-				months.add(item.month);
-			});
-
-			const monthsArr = Array.from(months).sort((x, y) => x - y);
-
-			if (isComponentMounted) {
-				dispatch({
-					type: 'FETCH_INIT_ALLCLASSES_USER',
-					payload: {
-						classDB,
-						monthsArr,
-						classState,
-						filteredClassDB,
-						adminInfo,
-					},
-				});
+			} catch (error) {
+				console.log(error);
 			}
 		};
 

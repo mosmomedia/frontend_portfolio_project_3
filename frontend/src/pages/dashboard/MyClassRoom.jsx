@@ -21,10 +21,14 @@ function MyClassRoom() {
 
 	useEffect(() => {
 		const fetchData = async () => {
-			dispatch({ type: 'LOADING' });
+			try {
+				dispatch({ type: 'LOADING' });
 
-			const payload = await getMyClasses(user);
-			dispatch({ type: 'GET_MY_CLASSES', payload });
+				const payload = await getMyClasses(user);
+				dispatch({ type: 'GET_MY_CLASSES', payload });
+			} catch (error) {
+				console.log(error);
+			}
 		};
 
 		fetchData();

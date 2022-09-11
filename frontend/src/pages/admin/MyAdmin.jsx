@@ -54,7 +54,7 @@ function MyAdminMain() {
 
 		dispatch({ type: 'OFF_LOADING' });
 	}, [user, dispatch]);
-	if (isLoading) return <Spinner />;
+	if (isLoading || loading) return <Spinner />;
 
 	return (
 		<ContainerStyles>

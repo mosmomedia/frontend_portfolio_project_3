@@ -72,9 +72,8 @@ export const updateClass = async (classId, formData) => {
 // @ private
 
 export const enrollStudentToClass = async (classId) => {
-	const header = await createPayloadHeader();
-
 	try {
+		const header = await createPayloadHeader();
 		const res = await axios.post(API_URI + classId, { classId }, header);
 		return res.data;
 	} catch (error) {
@@ -103,9 +102,8 @@ export const removeClass = async (classId) => {
 // @route PUT /api/class/onair/:id
 // @access Private
 export const handleOnairClass = async (classId, formData) => {
-	const header = await createPayloadHeader();
-
 	try {
+		const header = await createPayloadHeader();
 		const res = await axios.put(API_URI + 'onair/' + classId, formData, header);
 		return res.data;
 	} catch (error) {

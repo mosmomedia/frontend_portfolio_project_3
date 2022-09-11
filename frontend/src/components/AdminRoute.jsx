@@ -14,12 +14,16 @@ const AdminRoute = () => {
 	useEffect(() => {
 		const checkAdmin = async () => {
 			if (user) {
-				const docRef = firebase.doc(firebase.db, 'users', user.uid);
-				const docSnap = await firebase.getDoc(docRef);
-				if (docSnap.data().isAdmin) {
-					setIsAdmin(true);
-				} else {
-					setIsAdmin(false);
+				try {
+					const docRef = firebase.doc(firebase.db, 'users', user.uid);
+					const docSnap = await firebase.getDoc(docRef);
+					if (docSnap.data().isAdmin) {
+						setIsAdmin(true);
+					} else {
+						setIsAdmin(false);
+					}
+				} catch (error) {
+					console.log(error);
 				}
 			} else {
 				setIsAdmin(false);
