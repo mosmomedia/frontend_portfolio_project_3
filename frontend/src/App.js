@@ -14,7 +14,7 @@ import SignIn from './pages/accounts/SignIn';
 import SignUp from './pages/accounts/SignUp';
 import ForgotPassword from './pages/accounts/ForgotPassword';
 
-// import ClassRegistration from './pages/class/ClassRegistration';
+import ClassRegistration from './pages/class/ClassRegistration';
 import DebutHistory from './pages/student/DebutHistory';
 import Scholarship from './pages/student/Scholarship';
 
@@ -67,7 +67,7 @@ function App() {
 					<Route path="/forgot-password" element={<ForgotPassword />} />
 
 					{/* class registration */}
-					{/* <Route path="/class-registration/*" element={<ClassRegistration />} /> */}
+					<Route path="/class-registration/*" element={<ClassRegistration />} />
 
 					{/* debut - history & scholarship */}
 					<Route path="/student/debut-history" element={<DebutHistory />} />

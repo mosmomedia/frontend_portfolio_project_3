@@ -4,7 +4,7 @@ import useWidthState from '../../../hooks/useWindowDimensions';
 
 import { Link } from 'react-router-dom';
 
-// import ClassAllList from './ClassAllList';
+import ClassAllList from './ClassAllList';
 
 import {
 	SectionStyles,
@@ -108,11 +108,9 @@ function Main() {
 				</LeftItemStyles>
 				{/* registration */}
 				<RightItemStyles>
-					{/*  */}
-					{/* {width >= 1280 ? (
+					{width >= 1280 ? (
 						<ClassAllList userState={{ myClassList, isAdmin, userObjectId }} />
-					) : null} */}
-					{/*  */}
+					) : null}
 				</RightItemStyles>
 			</MainStyles>
 		</SectionStyles>
