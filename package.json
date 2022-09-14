@@ -1,6 +1,9 @@
 {
 	"name": "3_storytunes",
 	"version": "0.1.0",
+	"engines": {
+		"node": "16.x"
+	},
 	"type": "module",
 	"description": "",
 	"main": "index.js",
