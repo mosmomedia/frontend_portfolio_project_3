@@ -1,7 +1,13 @@
 import path from 'path';
+import { fileURLToPath } from 'url';
+
 import express from 'express';
 import connetDB from './config/db.js';
+
 connetDB();
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const app = express();
 
