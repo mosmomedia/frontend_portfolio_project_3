@@ -77,6 +77,7 @@ function ClassAllList({ userState: { myClassList, isAdmin, userObjectId } }) {
 				myObserver.unobserve(node);
 			};
 		}
+		// eslint-disable-next-line
 	}, [node]);
 
 	useEffect(() => {
@@ -173,6 +174,7 @@ function ClassAllList({ userState: { myClassList, isAdmin, userObjectId } }) {
 			fetchAllClasses();
 		}
 		return () => (isComponentMounted = false);
+		// eslint-disable-next-line
 	}, [loading]);
 
 	useEffect(() => {
@@ -219,6 +221,7 @@ function ClassAllList({ userState: { myClassList, isAdmin, userObjectId } }) {
 			dispatch({ type: 'SET_FILTERED_LIST', payload: newList });
 			setIsChanged(false);
 		}
+		// eslint-disable-next-line
 	}, [isChanged]);
 
 	// scrollbar
@@ -235,6 +238,7 @@ function ClassAllList({ userState: { myClassList, isAdmin, userObjectId } }) {
 				setWidthInput(+initHeightRatio);
 			}
 		}
+		// eslint-disable-next-line
 	}, [loading, filteredList, height]);
 
 	// changed initial scrollbar height

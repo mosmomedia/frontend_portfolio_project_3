@@ -32,6 +32,7 @@ function MyClassRoom() {
 		};
 
 		fetchData();
+		// eslint-disable-next-line
 	}, [user]);
 
 	if (isLoading || loading) return <Spinner />;
