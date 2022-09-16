@@ -1,19 +1,21 @@
 import tw, { styled } from 'twin.macro';
 
 export const Wrapper = styled.div`
-	${tw`grid place-content-center bg-black text-[#7c7c7c]   tracking-wider h-screen md:text-sm xl:block`}
+	${tw`xs:grid xs:place-content-center bg-black text-[#7c7c7c] tracking-wider h-full xs:h-screen md:text-sm xl:block`}
 `;
 
 export const MainStyles = styled.div`
 	${tw`xl:flex xl:items-center xl:h-full `}
+
+	${tw`pt-28 xs:pt-0`}
 `;
 
 export const LeftSectionStyles = styled.div`
-	${tw`xl:w-3/5  `}
+	${tw`xl:w-3/5`}
 `;
 
 export const FormStyles = styled.form`
-	${tw`space-y-5 max-w-sm mx-auto`}
+	${tw`space-y-5 w-[85%] xs:w-full  xs:max-w-sm mx-auto`}
 
 	h2 {
 		${tw`text-center text-white mb-10`}
@@ -24,7 +26,7 @@ export const InputGroupStyles = styled.div`
 `;
 
 export const InputStyles = styled.input`
-	${tw`text-st_bg1 text-base py-0.5 px-1 min-w-[360px] rounded-sm`}
+	${tw`text-st_bg1 text-base py-0.5 px-1 xs:min-w-[360px] rounded-sm`}
 `;
 
 export const SubmitStyles = styled.div`
@@ -49,7 +51,7 @@ export const LineStyles = styled.div`
 `;
 
 export const InfoStyles = styled.div`
-	${tw`flex items-center space-x-1.5`}
+	${tw`text-[13px] xs:text-base flex items-center space-x-1.5`}
 
 	label {
 		${tw`pb-[1px]`}

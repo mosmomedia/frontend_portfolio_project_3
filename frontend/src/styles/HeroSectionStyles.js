@@ -16,7 +16,7 @@ export const LeftItemStyles = styled.div`
 	}
 
 	@media (max-width: 767px) {
-		${tw`before:content before:absolute before:inset-0  before:w-full before:h-full  before:bg-black/[50%]`}
+		${tw`before:content before:absolute before:inset-0  before:w-full before:h-full  before:bg-black/[60%]`}
 	}
 `;
 
@@ -39,7 +39,7 @@ export const EffectStyles = styled.img`
 `;
 
 export const TextWrapper = styled.div`
-	${tw`absolute bottom-16 space-y-10 w-full`}
+	${tw`absolute bottom-6  xs:bottom-16 space-y-10 w-full`}
 	${tw`sm:bottom-32 md:relative md:bottom-[unset]`}
 `;
 
@@ -82,7 +82,7 @@ export const TextStyles = styled.div`
 	}
 
 	h4 {
-		${tw`text-[15px] xs:text-base sm:text-xl my-3 md:text-sm md:font-light md:leading-6 lg:text-[0.9375rem] lg:leading-7 xl:text-base xl:leading-7`}
+		${tw`text-[13px] xs:text-base sm:text-xl my-3 md:text-sm md:font-light md:leading-6 lg:text-[0.9375rem] lg:leading-7 xl:text-base xl:leading-7`}
 	}
 `;
 
