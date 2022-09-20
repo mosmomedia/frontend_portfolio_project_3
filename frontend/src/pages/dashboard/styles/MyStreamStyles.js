@@ -5,7 +5,7 @@ export const SectionStyles = styled.div`
 `;
 
 export const HeaderStyles = styled.div`
-	${tw`pt-10 pb-5 lg:py-10`}
+	${tw`pt-5 xs:pt-10 pb-5 lg:py-10`}
 
 	h2 {
 		${tw`text-[17px] md:text-lg xl:text-[19px] `}

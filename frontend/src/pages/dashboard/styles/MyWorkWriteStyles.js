@@ -5,7 +5,7 @@ export const SectionStyles = styled.div`
 `;
 
 export const FormStyles = styled.form`
-	${tw`bg-white rounded-lg h-[70vh] w-[90vw] max-w-6xl`}
+	${tw`bg-white rounded-lg xs:h-[70vh]  w-[90vw] max-w-6xl`}
 	${tw`grid grid-rows-4`}
 `;
 
@@ -32,7 +32,7 @@ export const InfoStyles = styled.div`
 `;
 
 export const InputGroupStyles = styled.div`
-	${tw`space-y-3`}
+	${tw`space-y-5`}
 
 	input {
 		${tw`w-full p-1`}

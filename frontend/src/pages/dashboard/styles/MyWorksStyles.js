@@ -5,7 +5,7 @@ export const SectionStyles = styled.div`
 `;
 
 export const MainStyles = styled.div`
-	${tw`bg-white rounded-t-lg h-[65vh] `}
+	${tw`bg-white rounded-t-lg h-[70vh]  xs:h-[65vh] `}
 
 	box-shadow: 0px 0px 4px rgb(50 50 71 / 8%), 0px 12px 32px rgb(50 50 71 / 2%);
 `;

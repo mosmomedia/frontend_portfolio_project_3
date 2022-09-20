@@ -5,10 +5,10 @@ export const MainStyles = styled.div`
 `;
 
 export const FormStyles = styled.form`
-	${tw`space-y-8 max-w-sm sm:max-w-md mx-auto p-5 py-7 bg-white rounded-lg shadow-sm`}
+	${tw`space-y-4 xs:space-y-8 max-w-xs xs:max-w-md mx-auto p-5 xs:py-7 bg-white rounded-lg shadow-sm`}
 
 	h4 {
-		${tw`text-[17px] font-normal`}
+		${tw`text-[15px] xs:text-[17px] font-normal`}
 	}
 `;
 export const InputGroupStyles = styled.div`
@@ -16,7 +16,7 @@ export const InputGroupStyles = styled.div`
 `;
 
 export const InputStyles = styled.input`
-	${tw`text-st_bg1 text-sm py-1 px-1 tracking-wide min-w-[324px] rounded-sm border-[#4d4d4d] border-solid border-[1px] border-opacity-30 md:min-w-[400px]`}
+	${tw`text-st_bg1 text-sm py-1 px-1 tracking-wide xs:min-w-[324px] rounded-sm border-[#4d4d4d] border-solid border-[1px] border-opacity-30 md:min-w-[400px]`}
 `;
 
 export const GenreWrapperStyles = styled.div`
@@ -29,7 +29,7 @@ export const GenreGroupStyles = styled.div`
 
 
 	.label-title {
-		${tw`relative z-10 cursor-pointer`}
+		${tw`text-sm xs:text-base relative z-10 cursor-pointer`}
 	}
 
 	.label-checked {
@@ -51,7 +51,7 @@ export const GenreInputStyles = styled.input`
 `;
 
 export const DescriptionStyles = styled.textarea`
-	${tw`text-st_bg1 text-sm py-1 px-1 tracking-wide min-w-[324px] rounded-sm border-[#4d4d4d] border-solid border-[1px] border-opacity-30`}
+	${tw`text-st_bg1 text-sm py-1 px-1 tracking-wide xs:min-w-[324px] rounded-sm border-[#4d4d4d] border-solid border-[1px] border-opacity-30`}
 `;
 
 export const SubmitStyles = styled.div`

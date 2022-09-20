@@ -41,14 +41,10 @@ export const createStudent = async (formData, user) => {
 // @ POST /api/student/myclass/:id
 // @ private
 
-export const addClassToStudent = async (userId, myClass, user) => {
+export const addClassToStudent = async (myClass, user) => {
 	try {
 		const header = await createPayloadHeader(user);
-		const res = await axios.post(
-			API_URI + 'myclass/' + userId,
-			{ myClass },
-			header
-		);
+		const res = await axios.post(API_URI + 'myclass/', { myClass }, header);
 		return res.data;
 	} catch (error) {
 		console.log(error);

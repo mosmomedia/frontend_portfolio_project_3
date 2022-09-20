@@ -73,14 +73,10 @@ function ClassCard({ item, user }) {
 						paymentMethod: 'Credit',
 					};
 
-					const docRef = firebase.doc(firebase.db, 'users', user.uid);
-					const docSnap = await firebase.getDoc(docRef);
-					const { userObjectId } = docSnap.data();
-
 					const [isEnrolled, isPlaced, isAdded] = await Promise.all([
 						enrollStudentToClass(_id),
 						placeOrder(formData),
-						addClassToStudent(userObjectId, _id, user),
+						addClassToStudent(_id, user),
 					]);
 
 					if (isEnrolled && isPlaced && isAdded) {

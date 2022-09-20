@@ -5,7 +5,7 @@ export const LayoutStyles = styled.div`
 `;
 
 export const SectionStyles = styled.form`
-	${tw`bg-white rounded-lg h-[70vh] w-[90vw] max-w-6xl`}
+	${tw`bg-white rounded-lg h-[80vh] xs:h-[70vh] w-[90vw] max-w-6xl`}
 	${tw`grid grid-rows-3`}
 `;
 

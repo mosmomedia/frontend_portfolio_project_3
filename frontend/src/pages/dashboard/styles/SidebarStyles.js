@@ -15,7 +15,7 @@ export const HeaderStyles = styled.header`
 
 export const LogoStyles = styled.div`
 	img {
-		${tw`h-7`}
+		${tw`h-5  xs:h-7`}
 	}
 `;
 
@@ -47,10 +47,10 @@ export const MenuStyles = styled.footer`
 `;
 
 export const MainMenuStyles = styled.ul`
-	${tw`container mx-auto flex justify-between items-center px-6`}
+	${tw`container mx-auto flex justify-between items-center px-6 `}
 
 	h3 {
-		${tw`text-sm tracking-wide font-normal`}
+		${tw`text-xs  xs:text-sm tracking-wide font-normal`}
 	}
 
 	ol {
