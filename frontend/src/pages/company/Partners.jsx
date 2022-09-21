@@ -7,7 +7,7 @@ import {
 	PlatformStyles,
 } from '../../styles/PartnersStyles';
 
-import img_t1 from '../../assets/st_img_partners.png';
+import img_t1 from '../../assets/st_img_partners.webp';
 
 function Team() {
 	return (

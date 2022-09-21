@@ -7,7 +7,7 @@ import { createStudent } from '../../contexts/myClassRoom/MyClassActions';
 
 import BackToHomeBar from '../../components/BackToHomeBar';
 import Logo from '../../assets/logos/logo_circle.svg';
-import Img from '../../assets/st_img_sign_up.png';
+import Img from '../../assets/st_img_sign_up.webp';
 import { toast } from 'react-toastify';
 import Spinner from '../../components/shared/Spinner';
 

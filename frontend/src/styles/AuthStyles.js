@@ -34,12 +34,13 @@ export const SubmitStyles = styled.div`
 `;
 
 export const RightSectionStyles = styled.div`
-	${tw`hidden xl:block xl:w-2/5 xl:self-end xl:max-h-[95%]`}
+	${tw`hidden xl:block xl:w-2/5 xl:self-end xl:max-h-[95%] `}
+
 	${tw`overflow-hidden`}
 `;
 
 export const ImageStyles = styled.img`
-	${tw`max-w-[unset] `}
+	${tw`max-w-[unset] xl:w-[650px]  2xl:w-[unset]`}
 `;
 
 export const LineStyles = styled.div`

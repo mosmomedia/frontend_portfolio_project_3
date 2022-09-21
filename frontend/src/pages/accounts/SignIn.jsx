@@ -6,7 +6,7 @@ import OAuth from '../../components/OAuth';
 
 import BackToHomeBar from '../../components/BackToHomeBar';
 import Logo from '../../assets/logos/logo_circle.svg';
-import Img from '../../assets/st_img_sign_in.png';
+import Img from '../../assets/st_img_sign_in.webp';
 import { toast } from 'react-toastify';
 import Spinner from '../../components/shared/Spinner';
 

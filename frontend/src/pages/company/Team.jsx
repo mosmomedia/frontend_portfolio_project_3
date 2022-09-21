@@ -11,12 +11,12 @@ import {
 	RightItemStyles,
 } from '../../styles/TeamStyles';
 
-import img_t1 from '../../assets/img_tutors/t_1.png';
-import img_t2 from '../../assets/img_tutors/t_2.png';
-import img_t3 from '../../assets/img_tutors/t_3.png';
-import img_t4 from '../../assets/img_tutors/t_4.png';
-import img_t5 from '../../assets/img_tutors/t_5.png';
-import img_t6 from '../../assets/img_tutors/t_6.png';
+import img_t1 from '../../assets/img_tutors/t_1.webp';
+import img_t2 from '../../assets/img_tutors/t_2.webp';
+import img_t3 from '../../assets/img_tutors/t_3.webp';
+import img_t4 from '../../assets/img_tutors/t_4.webp';
+import img_t5 from '../../assets/img_tutors/t_5.webp';
+import img_t6 from '../../assets/img_tutors/t_6.webp';
 
 function Team() {
 	useEffect(() => {

@@ -50,7 +50,7 @@ export const TextStyles = styled.div`
 	h1,
 	h2 ,
 	h2 span,
-	h4,
+	p,
 	h1 span {
 		font-family: 'Paybooc_M';
 		font-weight: 600;
@@ -81,7 +81,7 @@ export const TextStyles = styled.div`
 		}
 	}
 
-	h4 {
+	p {
 		${tw`text-[13px] xs:text-base sm:text-xl my-3 md:text-sm md:font-light md:leading-6 lg:text-[0.9375rem] lg:leading-7 xl:text-base xl:leading-7`}
 	}
 `;

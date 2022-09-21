@@ -11,9 +11,9 @@ import {
 	RightItemStyles,
 } from '../../styles/AboutStyles';
 
-import img_about from '../../assets/st_img_about.png';
-import img_tutors from '../../assets/st_img_tutors.png';
-import img_tutors2 from '../../assets/st_img_tutors2.png';
+import img_about from '../../assets/st_img_about.webp';
+import img_tutors from '../../assets/st_img_tutors.webp';
+import img_tutors2 from '../../assets/st_img_tutors2.webp';
 
 function About() {
 	useEffect(() => {

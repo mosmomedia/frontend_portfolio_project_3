@@ -26,8 +26,8 @@ import {
 import ico_kkp from '../assets/icons/ico_partner_kkp.png';
 import ico_naver from '../assets/icons/ico_partner_n.png';
 import ico_ridi from '../assets/icons/ico_partner_ridi.png';
-import img_about from '../assets/st_img_about.png';
-import img_tutors from '../assets/st_img_tutors.png';
+import img_about from '../assets/st_img_about.webp';
+import img_tutors from '../assets/st_img_tutors.webp';
 
 function Landing() {
 	useEffect(() => {
