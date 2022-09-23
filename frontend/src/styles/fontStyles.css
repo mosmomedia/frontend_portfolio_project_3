@@ -1,0 +1,37 @@
+@font-face {
+	font-family: 'Noto Sans KR';
+	font-display: swap;
+	font-style: normal;
+	font-weight: 400;
+	src: url('./fonts/noto-sans-kr/noto-sans-kr-v27-korean-regular.eot'); /* IE9 Compat Modes */
+	src: local(''),
+		url('./fonts/noto-sans-kr/noto-sans-kr-v27-korean-regular.eot?#iefix')
+			format('embedded-opentype'),
+		/* IE6-IE8 */
+			url('./fonts/noto-sans-kr/noto-sans-kr-v27-korean-regular.woff2')
+			format('woff2'),
+		/* Super Modern Browsers */
+			url('./fonts/noto-sans-kr/noto-sans-kr-v27-korean-regular.woff')
+			format('woff'),
+		/* Modern Browsers */ /* Safari, Android, iOS */
+			url('./fonts/noto-sans-kr/noto-sans-kr-v27-korean-regular.svg#NotoSansKR')
+			format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+	font-family: 'Paybooc';
+	font-display: swap;
+	font-style: normal;
+	font-weight: 700;
+	src: url('./fonts/paybooc_bold.woff2') format('woff2'),
+		url('./fonts/paybooc_bold.woff') format('woff');
+}
+
+@font-face {
+	font-family: 'Paybooc';
+	font-display: swap;
+	font-style: normal;
+	font-weight: 400;
+	src: url('./fonts/paybooc_medium.woff2') format('woff2'),
+		url('./fonts/paybooc_medium.woff') format('woff');
+}

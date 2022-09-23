@@ -52,9 +52,8 @@ export const TextStyles = styled.div`
 	h2 span,
 	p,
 	h1 span {
-		font-family: 'Paybooc_M';
-		font-weight: 600;
-		${tw`text-white md:text-main_text`}
+		font-family: 'Paybooc';
+		${tw`text-white md:text-main_text font-bold`}
 	}
 
 	h2 {

@@ -44,7 +44,7 @@ export const PlatformStyles = styled.div`
 
 	h2 {
 		${tw`text-xl 2xl:text-2xl`}
-		font-family: 'Paybooc_B';
+		font-family: 'Paybooc';
 	}
 
 	div {

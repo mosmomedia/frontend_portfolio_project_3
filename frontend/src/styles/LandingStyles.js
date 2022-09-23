@@ -51,7 +51,7 @@ export const ClassInfoStyles = styled.div`
 
 	h2 {
 		${tw`font-bold text-[1.25rem] text-center mb-14  lg:mb-24`}
-		font-family: 'Paybooc_B';
+		font-family: 'Paybooc';
 	}
 `;
 
@@ -85,7 +85,7 @@ export const CardStyles = styled.div`
 	}
 
 	button {
-		font-family: 'Paybooc_M';
+		font-family: 'Paybooc';
 		${tw`font-bold text-sm text-st_bg1 pt-8 px-0`}
 
 		svg {
@@ -106,7 +106,7 @@ export const LeftItemStyles = styled.div`
 
 	h2 {
 		${tw`font-bold xl:text-2xl`}
-		font-family: 'Paybooc_B';
+		font-family: 'Paybooc';
 	}
 
 	p {

@@ -15,7 +15,7 @@ export const LeftItemStyles = styled.div`
 	h2,
 	h3 {
 		${tw`text-lg font-bold lg:text-xl xl:text-2xl`}
-		font-family: 'Paybooc_B';
+		font-family: 'Paybooc';
 	}
 	h3 {
 		${tw`xl:text-xl`}

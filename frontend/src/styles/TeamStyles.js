@@ -20,7 +20,7 @@ export const LeftItemStyles = styled.div`
 	h3,
 	h4 {
 		${tw`text-lg font-bold lg:text-xl`}
-		font-family: 'Paybooc_B';
+		font-family: 'Paybooc';
 	}
 
 	h2 {

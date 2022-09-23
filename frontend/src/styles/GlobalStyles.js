@@ -1,22 +1,8 @@
 import React from 'react';
 import tw, { GlobalStyles as BaseStyles } from 'twin.macro';
 import { createGlobalStyle } from 'styled-components';
-import paybooc_M from './fonts/paybooc_medium.otf';
-import paybooc_B from './fonts/paybooc_bold.otf';
 
 const CustomStyles = createGlobalStyle`
-
-/* paybook Medium */
-@font-face {
-  font-family: 'Paybooc_M';
-	src: url(${paybooc_M}) format('opentype')
-}
-
-@font-face {
-  font-family: 'Paybooc_B';
-	font-weight: bold;
-	src: url(${paybooc_B}) format('opentype')
-}
 
 :root {
 	font-family: 'Noto Sans KR', sans-serif;
