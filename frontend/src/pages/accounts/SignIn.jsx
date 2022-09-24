@@ -6,7 +6,6 @@ import OAuth from '../../components/OAuth';
 
 import BackToHomeBar from '../../components/BackToHomeBar';
 import Logo from '../../assets/logos/logo_circle.svg';
-import Img from '../../assets/st_img_sign_in.webp';
 import { toast } from 'react-toastify';
 import Spinner from '../../components/shared/Spinner';
 
@@ -19,7 +18,7 @@ import {
 	LeftSectionStyles,
 	FormStyles,
 	RightSectionStyles,
-	ImageStyles,
+	SignInImageStyles,
 	InputGroupStyles,
 	InputStyles,
 	LineStyles,
@@ -147,7 +146,7 @@ function SignIn() {
 						</FormStyles>
 					</LeftSectionStyles>
 					<RightSectionStyles>
-						<ImageStyles src={Img} alt="Ads images" />
+						<SignInImageStyles />
 						<AdsInfoStyles>
 							<h3>회귀한 엑스트라가 천재가 됨</h3>
 							<h4>스튠 x 텍골 작가</h4>

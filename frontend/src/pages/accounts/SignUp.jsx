@@ -7,7 +7,6 @@ import { createStudent } from '../../contexts/myClassRoom/MyClassActions';
 
 import BackToHomeBar from '../../components/BackToHomeBar';
 import Logo from '../../assets/logos/logo_circle.svg';
-import Img from '../../assets/st_img_sign_up.webp';
 import { toast } from 'react-toastify';
 import Spinner from '../../components/shared/Spinner';
 
@@ -20,7 +19,7 @@ import {
 	LeftSectionStyles,
 	FormStyles,
 	RightSectionStyles,
-	ImageStyles,
+	SignUpImageStyles,
 	InputGroupStyles,
 	InputStyles,
 	LineStyles,
@@ -259,7 +258,7 @@ function SignUp() {
 						</FormStyles>
 					</LeftSectionStyles>
 					<RightSectionStyles>
-						<ImageStyles src={Img} alt="" />
+						<SignUpImageStyles />
 						<AdsInfoStyles>
 							<h3>절대자도 아빠는 처음이라</h3>
 							<h4>스튠 x 제이 작가</h4>

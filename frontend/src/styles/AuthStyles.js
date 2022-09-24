@@ -34,13 +34,22 @@ export const SubmitStyles = styled.div`
 `;
 
 export const RightSectionStyles = styled.div`
-	${tw`hidden xl:block xl:w-2/5 xl:self-end xl:max-h-[95%] `}
-
-	${tw`overflow-hidden`}
+	/* ${tw`hidden xl:block xl:w-2/5 xl:self-end xl:max-h-[95%] `} */
+	${tw`hidden xl:block`}/* ${tw`overflow-hidden`} */
 `;
 
-export const ImageStyles = styled.img`
-	${tw`max-w-[unset] xl:w-[650px]  2xl:w-[unset]`}
+export const SignInImageStyles = styled.div`
+	${tw`fixed top-[5%] left-[60%] right-0 bottom-0`}
+	background-image: url(/images/st_img_sign_in.webp);
+	background-repeat: no-repeat;
+	background-size: cover;
+`;
+
+export const SignUpImageStyles = styled.div`
+	${tw`fixed top-[5%] left-[60%] right-0 bottom-0`}
+	background-image: url(/images/st_img_sign_up.webp);
+	background-repeat: no-repeat;
+	background-size: cover;
 `;
 
 export const LineStyles = styled.div`

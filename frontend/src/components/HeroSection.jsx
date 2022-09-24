@@ -103,11 +103,18 @@ function HeroSection() {
 
 				<RightItemStyles>
 					{/* img */}
-					<HeroStyles src={img_hero_webp} alt="landing hero" />
+					<HeroStyles
+						src={img_hero_webp}
+						width={640}
+						height={950}
+						alt="landing hero"
+					/>
 					{/* img effect */}
 					<EffectStyles
 						src={img_effect_webp}
 						alt="landing effect"
+						width={614}
+						height={937}
 						data-aos="zoom-in-up"
 						data-aos-easing="ease-in-out"
 						data-aos-delay="3"

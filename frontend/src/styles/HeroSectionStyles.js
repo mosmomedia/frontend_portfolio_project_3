@@ -5,7 +5,7 @@ export const SectionStyles = styled.div`
 `;
 
 export const LeftItemStyles = styled.div`
-	${tw`relative bg-[#ffe0e0] md:w-1/2 md:bg-body md:p-5 lg:pr-16  xl:pr-[6rem]`}
+	${tw`relative bg-[#ffe0e0] md:w-1/2 md:bg-body md:p-5 lg:pr-16  xl:pr-[6rem] 2xl:pr-[3.75rem]`}
 
 	.mobile {
 		${tw`md:hidden`}
@@ -30,16 +30,16 @@ export const RightItemStyles = styled.div`
 `;
 
 export const HeroStyles = styled.img`
-	${tw`rounded-2xl`}
+	${tw`rounded-2xl lg:pt-10 lg:w-[400px] xl:pt-0 xl:w-[480px] 2xl:w-[640px] m-auto `}
 `;
 
 export const EffectStyles = styled.img`
-	${tw`absolute inset-0 h-full w-full`}
+	${tw`absolute inset-0 h-full w-full  lg:w-[400px] xl:w-[480px] 2xl:w-[640px]  m-auto`}
 	${tw`md:p-5 lg:pr-1 xl:p-16 xl:pr-10 2xl:p-12 2xl:pr-0`}
 `;
 
 export const TextWrapper = styled.div`
-	${tw`absolute bottom-6  xs:bottom-16 space-y-10 w-full`}
+	${tw`absolute bottom-6  xs:bottom-16 space-y-10 w-full 2xl:space-y-16`}
 	${tw`sm:bottom-32 md:relative md:bottom-[unset]`}
 `;
 
@@ -57,7 +57,7 @@ export const TextStyles = styled.div`
 	}
 
 	h2 {
-		${tw`text-lg xs:text-2xl sm:text-[1.75rem ] mb-1 xs:mb-4 md:text-xl xl:text-2xl`}
+		${tw`text-lg xs:text-2xl sm:text-[1.75rem ] mb-1 xs:mb-4 md:text-xl xl:text-2xl 2xl:text-[28px]`}
 	}
 
 	h2 span {
@@ -73,7 +73,7 @@ export const TextStyles = styled.div`
 	}
 
 	h1 {
-		${tw`text-2xl xs:text-3xl sm:text-[2.375rem] md:text-[1.5rem] lg:text-[1.75rem] xl:text-4xl`}
+		${tw`text-2xl xs:text-3xl sm:text-[2.375rem] md:text-[1.5rem] lg:text-[1.75rem] xl:text-4xl 2xl:text-[40px]`}
 
 		span {
 			${tw`md:text-keyColor`}
