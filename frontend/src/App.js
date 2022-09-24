@@ -52,46 +52,48 @@ function App() {
 
 	return (
 		<Router>
-			<ScrollToTop>
-				<Header userState={user} />
-				<Routes>
-					{/* <Route path="/*" element={<NotFound />} /> */}
-					<Route path="/notfound" element={<NotFound />} />
-
-					{/* landing */}
-					<Route path="/" element={<Landing />} />
-
-					{/* accounts */}
-					<Route path="/sign-in" element={<SignIn />} />
-					<Route path="/sign-up" element={<SignUp />} />
-					<Route path="/forgot-password" element={<ForgotPassword />} />
-
-					{/* class registration */}
-					<Route path="/class-registration/*" element={<ClassRegistration />} />
-
-					{/* debut - history & scholarship */}
-					<Route path="/student/debut-history" element={<DebutHistory />} />
-					<Route path="/student/scholarship" element={<Scholarship />} />
-
-					{/* company */}
-					<Route path="/company/*" element={<Company />} />
-
-					{/*customer  */}
-					<Route path="/customer/faq" element={<Faq />} />
-
-					{/* dashboard */}
-					<Route path="/dashboard/*" element={<PrivateRoute />}>
-						<Route path="/dashboard/*" element={<Dashboard />}>
-							<Route path="my-classroom/*" element={<MyClassRoom />} />
-							<Route path="my-board/*" element={<MyBoard />} />
-							<Route path="my-page/*" element={<MyPage />} />
-						</Route>
-					</Route>
-				</Routes>
-
-				{/* admin */}
-				<AdminProvider>
+			<AdminProvider>
+				<ScrollToTop>
+					<Header userState={user} />
 					<Routes>
+						<Route path="/*" element={<NotFound />} />
+						<Route path="/notfound" element={<NotFound />} />
+
+						{/* landing */}
+						<Route path="/" element={<Landing />} />
+
+						{/* accounts */}
+						<Route path="/sign-in" element={<SignIn />} />
+						<Route path="/sign-up" element={<SignUp />} />
+						<Route path="/forgot-password" element={<ForgotPassword />} />
+
+						{/* class registration */}
+						<Route
+							path="/class-registration/*"
+							element={<ClassRegistration />}
+						/>
+
+						{/* debut - history & scholarship */}
+						<Route path="/student/debut-history" element={<DebutHistory />} />
+						<Route path="/student/scholarship" element={<Scholarship />} />
+
+						{/* company */}
+						<Route path="/company/*" element={<Company />} />
+
+						{/*customer  */}
+						<Route path="/customer/faq" element={<Faq />} />
+
+						{/* dashboard */}
+						<Route path="/dashboard/*" element={<PrivateRoute />}>
+							<Route path="/dashboard/*" element={<Dashboard />}>
+								<Route path="my-classroom/*" element={<MyClassRoom />} />
+								<Route path="my-board/*" element={<MyBoard />} />
+								<Route path="my-page/*" element={<MyPage />} />
+							</Route>
+						</Route>
+
+						{/* admin */}
+						{/* <Routes> */}
 						<Route path="/admin/sign-in" element={<MyAdminSignIn />} />
 						<Route path="/admin" element={<AdminRoute />}>
 							<Route path="/admin" element={<MyAdminMain />}>
@@ -109,11 +111,10 @@ function App() {
 							</Route>
 						</Route>
 					</Routes>
-				</AdminProvider>
-				<Footer />
-
-				<ToastContainer autoClose={2500} />
-			</ScrollToTop>
+					<Footer />
+					<ToastContainer autoClose={2500} />
+				</ScrollToTop>
+			</AdminProvider>
 		</Router>
 	);
 }
