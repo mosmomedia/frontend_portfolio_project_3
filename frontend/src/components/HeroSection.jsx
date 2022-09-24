@@ -5,7 +5,7 @@ import Button from '../components/shared/Button';
 
 // assets (imgs)
 import logo_kkp from '../assets/logos/logo_kkp.png';
-import img_hero_webp from '../assets/st_img_hero.webp';
+import img_hero_webp from '../assets/st_img_hero_1.webp';
 import img_effect_webp from '../assets/st_img_hero_effect.webp';
 
 import {
