@@ -39,7 +39,7 @@ export const RightSectionStyles = styled.div`
 `;
 
 export const SignInImageStyles = styled.div`
-	${tw`fixed top-[5%] left-[60%] right-0 bottom-0`}
+	${tw`fixed top-[5%] left-[55%] right-0 bottom-0`}
 	background-image: url(/images/st_img_sign_in.webp);
 	background-repeat: no-repeat;
 	background-size: cover;

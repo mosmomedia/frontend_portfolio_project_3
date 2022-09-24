@@ -5,7 +5,7 @@ import Button from '../components/shared/Button';
 
 // assets (imgs)
 import logo_kkp from '../assets/logos/logo_kkp.png';
-import img_hero_webp from '../assets/st_img_hero_1.webp';
+import img_hero_webp from '../assets/st_img_hero.webp';
 import img_effect_webp from '../assets/st_img_hero_effect.webp';
 
 import {
@@ -106,15 +106,15 @@ function HeroSection() {
 					<HeroStyles
 						src={img_hero_webp}
 						width={640}
-						height={950}
+						height={975}
 						alt="landing hero"
 					/>
 					{/* img effect */}
 					<EffectStyles
 						src={img_effect_webp}
 						alt="landing effect"
-						width={614}
-						height={937}
+						width={640}
+						height={975}
 						data-aos="zoom-in-up"
 						data-aos-easing="ease-in-out"
 						data-aos-delay="3"
