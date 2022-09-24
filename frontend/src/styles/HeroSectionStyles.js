@@ -53,11 +53,11 @@ export const TextStyles = styled.div`
 	p,
 	h1 span {
 		font-family: 'Paybooc';
-		${tw`text-white md:text-main_text font-bold`}
+		${tw`text-white md:text-main_text md:font-bold`}
 	}
 
 	h2 {
-		${tw`text-lg xs:text-2xl sm:text-[1.75rem ] mb-1 xs:mb-4 md:text-xl xl:text-2xl 2xl:text-[28px] text-st_alt1`}
+		${tw`text-lg xs:text-2xl sm:text-[1.75rem ] mb-1 xs:mb-4 md:text-xl xl:text-2xl 2xl:text-[28px] md:text-st_alt1`}
 	}
 
 	h2 span {
@@ -73,7 +73,7 @@ export const TextStyles = styled.div`
 	}
 
 	h1 {
-		${tw`text-2xl xs:text-3xl sm:text-[2.375rem] md:text-[1.5rem] lg:text-[1.75rem] xl:text-4xl 2xl:text-[40px] text-st_alt1`}
+		${tw`text-2xl xs:text-3xl sm:text-[2.375rem] md:text-[1.5rem] lg:text-[1.75rem] xl:text-4xl 2xl:text-[40px] md:text-st_alt1`}
 
 		span {
 			${tw`md:text-keyColor`}
