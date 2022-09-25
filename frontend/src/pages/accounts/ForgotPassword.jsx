@@ -18,7 +18,6 @@ import {
 	MainStyles,
 	LeftSectionStyles,
 	FormStyles,
-	RightSectionStyles,
 	SignInImageStyles,
 	InputGroupStyles,
 	InputStyles,
@@ -100,13 +99,11 @@ function ForgotPassword() {
 							</SubmitStyles>
 						</FormStyles>
 					</LeftSectionStyles>
-					<RightSectionStyles>
-						<SignInImageStyles />
-						<AdsInfoStyles>
-							<h3>회귀한 엑스트라가 천재가 됨</h3>
-							<h4>스튠 x 텍골 작가</h4>
-						</AdsInfoStyles>
-					</RightSectionStyles>
+					<SignInImageStyles />
+					<AdsInfoStyles>
+						<h3>회귀한 엑스트라가 천재가 됨</h3>
+						<h4>스튠 x 텍골 작가</h4>
+					</AdsInfoStyles>
 				</MainStyles>
 			</Wrapper>
 		</>

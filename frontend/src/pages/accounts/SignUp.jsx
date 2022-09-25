@@ -18,7 +18,6 @@ import {
 	MainStyles,
 	LeftSectionStyles,
 	FormStyles,
-	RightSectionStyles,
 	SignUpImageStyles,
 	InputGroupStyles,
 	InputStyles,
@@ -257,13 +256,13 @@ function SignUp() {
 							</SubmitStyles>
 						</FormStyles>
 					</LeftSectionStyles>
-					<RightSectionStyles>
-						<SignUpImageStyles />
-						<AdsInfoStyles>
-							<h3>절대자도 아빠는 처음이라</h3>
-							<h4>스튠 x 제이 작가</h4>
-						</AdsInfoStyles>
-					</RightSectionStyles>
+					{/* <RightSectionStyles> */}
+					<SignUpImageStyles />
+					<AdsInfoStyles>
+						<h3>절대자도 아빠는 처음이라</h3>
+						<h4>스튠 x 제이 작가</h4>
+					</AdsInfoStyles>
+					{/* </RightSectionStyles> */}
 				</MainStyles>
 			</Wrapper>
 		</>

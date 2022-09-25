@@ -12,11 +12,12 @@ export const MainStyles = styled.div`
 
 export const LeftSectionStyles = styled.div`
 	${tw`xl:w-3/5`}
+	${tw`z-10`}
 `;
 
 export const FormStyles = styled.form`
 	${tw`space-y-5 w-[85%] xs:w-full  xs:max-w-sm mx-auto`}
-
+	/* ${tw`z-20`} */
 	h2 {
 		${tw`text-center text-white mb-10`}
 	}
@@ -33,23 +34,20 @@ export const SubmitStyles = styled.div`
 	${tw`pt-5 space-y-7`}
 `;
 
-export const RightSectionStyles = styled.div`
-	/* ${tw`hidden xl:block xl:w-2/5 xl:self-end xl:max-h-[95%] `} */
-	${tw`hidden xl:block`}/* ${tw`overflow-hidden`} */
-`;
-
 export const SignInImageStyles = styled.div`
-	${tw`fixed top-[5%] left-[55%] right-0 bottom-0`}
+	${tw`hidden xl:block fixed top-[5%] left-0 right-0 bottom-0`}
 	background-image: url(/images/st_img_sign_in.webp);
+	background-position: right;
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: contain;
 `;
 
 export const SignUpImageStyles = styled.div`
-	${tw`fixed top-[5%] left-[60%] right-0 bottom-0`}
+	${tw`hidden xl:block fixed top-[5%] left-0 right-0 bottom-0`}
 	background-image: url(/images/st_img_sign_up.webp);
+	background-position: right;
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: contain;
 `;
 
 export const LineStyles = styled.div`
@@ -73,7 +71,7 @@ export const InfoStyles = styled.div`
 `;
 
 export const AdsInfoStyles = styled.div`
-	${tw`absolute bottom-4 right-4 text-[#9e9e9e] bg-[#111111] py-4 px-6 space-y-1.5 text-base rounded-md`}
+	${tw`hidden xl:block fixed z-50  bottom-4 right-4 text-[#9e9e9e] bg-[#111111] py-4 px-6 space-y-1.5 text-base rounded-md`}
 
 	h4 {
 		${tw`text-[#5c5c5c]`}
