@@ -4,7 +4,7 @@ import Logo_white from '../assets/logos/logo_on.svg';
 import tw, { styled } from 'twin.macro';
 
 const LogoStyles = styled.header`
-	${tw`fixed  p-2 md:p-5`}
+	${tw`fixed z-50 p-2 md:p-5`}
 `;
 
 const ImgStyles = styled.img`
