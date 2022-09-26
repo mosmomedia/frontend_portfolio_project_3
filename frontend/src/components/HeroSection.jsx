@@ -5,8 +5,14 @@ import Button from '../components/shared/Button';
 
 // assets (imgs)
 import logo_kkp from '../assets/logos/logo_kkp.png';
-import img_hero_webp from '../assets/st_img_hero.webp';
-import img_effect_webp from '../assets/st_img_hero_effect.webp';
+import st_img_hero_384 from '../assets/img_hero/st_img_hero_384.png';
+import st_img_hero_682 from '../assets/img_hero/st_img_hero_682.png';
+import st_img_hero_901 from '../assets/img_hero/st_img_hero_901.png';
+import st_img_hero_1089 from '../assets/img_hero/st_img_hero_1089.png';
+import st_img_hero_1259 from '../assets/img_hero/st_img_hero_1259.png';
+import st_img_hero_1534 from '../assets/img_hero/st_img_hero_1534.png';
+
+import img_effect_webp from '../assets/img_hero/st_img_hero_effect.webp';
 
 import {
 	SectionStyles,
@@ -36,7 +42,19 @@ function HeroSection() {
 				{/*LeftItem /  submit wrapper */}
 				<LeftItemStyles>
 					<MobileImgStyles>
-						<img src={img_hero_webp} alt="" onLoad={handleLoad} />
+						<img
+							sizes="(max-width: 767px) 100vw, 1534w"
+							srcSet={`
+					${st_img_hero_384} 384w,
+					${st_img_hero_682} 682w,
+					${st_img_hero_901} 901w,
+					${st_img_hero_1089} 1089w,
+					${st_img_hero_1259} 1259w,
+					${st_img_hero_1534} 1534w`}
+							src={st_img_hero_901}
+							alt=""
+							onLoad={handleLoad}
+						/>
 					</MobileImgStyles>
 					<TextWrapper>
 						{/* st_text */}
@@ -104,9 +122,15 @@ function HeroSection() {
 				<RightItemStyles>
 					{/* img */}
 					<HeroStyles
-						src={img_hero_webp}
-						width={640}
-						height={975}
+						sizes="(min-width: 768px) 901px"
+						srcSet={`
+					${st_img_hero_384} 384w,
+					${st_img_hero_682} 682w,
+					${st_img_hero_901} 901w,
+					${st_img_hero_1089} 1089w,
+					${st_img_hero_1259} 1259w,
+					${st_img_hero_1534} 1534w`}
+						src={st_img_hero_901}
 						alt="landing hero"
 					/>
 					{/* img effect */}
