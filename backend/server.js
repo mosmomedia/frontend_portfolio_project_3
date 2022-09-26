@@ -1,6 +1,8 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
 
+import compression from 'compression';
+
 import express from 'express';
 import connetDB from './config/db.js';
 
@@ -14,6 +16,9 @@ const app = express();
 // body parser
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// gzip comression
+app.use(compression());
 
 // Routes
 
