@@ -63,30 +63,34 @@ function Footer() {
 					</LogoStyles>
 					<LinkListStyles>
 						<a
-							href="http://storytunes.co.kr"
+							href="https://storytunes.co.kr"
 							target="_blank"
 							rel="noopener noreferrer"
+							aria-label="Link to social media app"
 						>
 							<img src={link_fb} alt="" />
 						</a>
 						<a
-							href="http://storytunes.co.kr"
+							href="https://storytunes.co.kr"
 							target="_blank"
 							rel="noopener noreferrer"
+							aria-label="Link to social media app"
 						>
 							<img src={link_insta} alt="" />
 						</a>
 						<a
-							href="http://storytunes.co.kr"
+							href="https://storytunes.co.kr"
 							target="_blank"
 							rel="noopener noreferrer"
+							aria-label="Link to social media app"
 						>
 							<img src={link_naver} alt="" />
 						</a>
 						<a
-							href="http://storytunes.co.kr"
+							href="https://storytunes.co.kr"
 							target="_blank"
 							rel="noopener noreferrer"
+							aria-label="Link to social media app"
 						>
 							<img src={link_kakao} alt="" />
 						</a>
