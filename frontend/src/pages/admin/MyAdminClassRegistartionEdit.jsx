@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import { RiDeleteBin6Line } from 'react-icons/ri';
+import { RiDeleteBin6Line } from '@react-icons/all-files/ri/RiDeleteBin6Line';
 
 import { useAdminContext } from '../../contexts/admin/AdminContext';
 

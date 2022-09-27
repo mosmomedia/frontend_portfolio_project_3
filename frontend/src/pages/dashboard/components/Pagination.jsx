@@ -1,5 +1,6 @@
 import tw, { styled } from 'twin.macro';
-import { MdNavigateBefore, MdNavigateNext } from 'react-icons/md';
+import { MdNavigateNext } from '@react-icons/all-files/md/MdNavigateNext';
+import { MdNavigateBefore } from '@react-icons/all-files/md/MdNavigateBefore';
 
 export const NavStyles = styled.nav`
 	${tw`p-4 w-full  bg-st_bg1 rounded-b-lg text-white`}

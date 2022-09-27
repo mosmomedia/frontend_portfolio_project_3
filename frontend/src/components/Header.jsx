@@ -9,7 +9,7 @@ import Logo_black from '../assets/logos/logo.svg';
 import Logo_white from '../assets/logos/logo_on.svg';
 import Button from './shared/Button';
 
-import { FaChalkboardTeacher } from 'react-icons/fa';
+import { FaChalkboardTeacher } from '@react-icons/all-files/fa/FaChalkboardTeacher';
 
 import {
 	HeaderStyles,

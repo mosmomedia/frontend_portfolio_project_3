@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useMyClassContext } from '../../../contexts/myClassRoom/MyClassContext';
@@ -38,6 +38,7 @@ function MyStream() {
 
 			dispatch({ type: 'GET_MY_CURRENT_CLASS', payload });
 		}
+
 		// eslint-disable-line-next
 	}, []);
 

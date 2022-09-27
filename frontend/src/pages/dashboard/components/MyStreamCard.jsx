@@ -1,4 +1,4 @@
-import { FaRss } from 'react-icons/fa';
+import { FaRss } from '@react-icons/all-files/fa/FaRss';
 import { toast } from 'react-toastify';
 
 import tw from 'twin.macro';

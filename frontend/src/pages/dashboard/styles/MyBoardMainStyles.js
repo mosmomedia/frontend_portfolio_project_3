@@ -2,6 +2,10 @@ import tw, { styled } from 'twin.macro';
 
 export const SectionStyles = styled.div`
 	${tw`container mx-auto px-6 pt-[68px] `}
+
+	@media (min-width: 2200px) {
+		${tw`pt-40`}
+	}
 `;
 
 export const MainStyles = styled.div`

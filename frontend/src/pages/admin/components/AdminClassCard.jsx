@@ -1,6 +1,8 @@
 import { Link, useNavigate } from 'react-router-dom';
 
-import { FaRss, FaFlagCheckered, FaEdit } from 'react-icons/fa';
+import { FaEdit } from '@react-icons/all-files/fa/FaEdit';
+import { FaFlagCheckered } from '@react-icons/all-files/fa/FaFlagCheckered';
+import { FaRss } from '@react-icons/all-files/fa/FaRss';
 import { useAdminContext } from '../../../contexts/admin/AdminContext';
 
 import {

@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaExternalLinkAlt, FaUser } from 'react-icons/fa';
+import { FaUser } from '@react-icons/all-files/fa/FaUser';
+import { FaExternalLinkAlt } from '@react-icons/all-files/fa/FaExternalLinkAlt';
 
 import tw, { styled } from 'twin.macro';
 

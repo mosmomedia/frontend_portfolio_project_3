@@ -1,4 +1,6 @@
-import { FaCheck, FaTimes, FaRss } from 'react-icons/fa';
+import { FaTimes } from '@react-icons/all-files/fa/FaTimes';
+import { FaRss } from '@react-icons/all-files/fa/FaRss';
+import { FaCheck } from '@react-icons/all-files/fa/FaCheck';
 
 import {
 	WrapperStyles,

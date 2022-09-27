@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import tw from 'twin.macro';
-import { BsArrowRightShort } from 'react-icons/bs';
+import { BsArrowRightShort } from '@react-icons/all-files/bs/BsArrowRightShort';
 
 import AOS from 'aos';
 import 'aos/dist/aos.css';

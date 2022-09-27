@@ -62,18 +62,18 @@ function Footer() {
 						</div>
 					</LogoStyles>
 					<LinkListStyles>
-						<Link to="/">
+						<a href="http://" target="_blank" rel="noopener noreferrer">
 							<img src={link_fb} alt="" />
-						</Link>
-						<Link to="/">
+						</a>
+						<a href="http://" target="_blank" rel="noopener noreferrer">
 							<img src={link_insta} alt="" />
-						</Link>
-						<Link to="/">
+						</a>
+						<a href="http://" target="_blank" rel="noopener noreferrer">
 							<img src={link_naver} alt="" />
-						</Link>
-						<Link to="/">
+						</a>
+						<a href="http://" target="_blank" rel="noopener noreferrer">
 							<img src={link_kakao} alt="" />
-						</Link>
+						</a>
 					</LinkListStyles>
 				</LeftItemStyles>
 				{/* center - info A*/}

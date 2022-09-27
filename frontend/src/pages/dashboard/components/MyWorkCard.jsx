@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { useMyWorkContext } from '../../../contexts/myWorkBoard/MyWorkContext';
 
-import { FaEdit } from 'react-icons/fa';
+import { FaEdit } from '@react-icons/all-files/fa/FaEdit';
 
 import {
 	CardStyles,
