@@ -7,7 +7,7 @@ import {
 	updateDoc,
 	collection,
 	serverTimestamp,
-} from 'firebase/firestore';
+} from 'firebase/firestore/lite';
 
 import {
 	getAuth,
