@@ -50,10 +50,10 @@ function HeroSection() {
 					${st_img_hero_1259} 1259w,
 					${st_img_hero_1534} 1534w`}
 						src={st_img_hero_384}
-						alt=""
+						alt="Hero image"
 						onLoad={handleLoad}
 					/>
-					<EffectStyles src={img_effect_webp} />
+					<EffectStyles src={img_effect_webp} alt="hero effect image" />
 				</ImgWrapeprStyles>
 				<TextWrapper>
 					{/* st_text */}

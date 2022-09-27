@@ -50,7 +50,7 @@ function Landing() {
 					{/* platform */}
 					<PlatformStyles>
 						<div>
-							<h4>Platform</h4>
+							<h3>Platform</h3>
 							<ul>
 								<li>
 									<img src={ico_kkp} alt="" />

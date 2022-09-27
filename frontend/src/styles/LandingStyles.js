@@ -14,7 +14,7 @@ export const PlatformStyles = styled.div`
 	div {
 		${tw`flex-1 py-6 px-6 sm:px-12 lg:py-8`}
 
-		h4 {
+		h3 {
 			${tw`text-[0.9375rem] font-medium mb-6 lg:mb-8`}
 		}
 	}

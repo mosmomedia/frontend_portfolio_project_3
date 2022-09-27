@@ -62,16 +62,32 @@ function Footer() {
 						</div>
 					</LogoStyles>
 					<LinkListStyles>
-						<a href="http://" target="_blank" rel="noopener noreferrer">
+						<a
+							href="http://storytunes.co.kr"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<img src={link_fb} alt="" />
 						</a>
-						<a href="http://" target="_blank" rel="noopener noreferrer">
+						<a
+							href="http://storytunes.co.kr"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<img src={link_insta} alt="" />
 						</a>
-						<a href="http://" target="_blank" rel="noopener noreferrer">
+						<a
+							href="http://storytunes.co.kr"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<img src={link_naver} alt="" />
 						</a>
-						<a href="http://" target="_blank" rel="noopener noreferrer">
+						<a
+							href="http://storytunes.co.kr"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
 							<img src={link_kakao} alt="" />
 						</a>
 					</LinkListStyles>
