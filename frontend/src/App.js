@@ -93,7 +93,6 @@ function App() {
 						</Route>
 
 						{/* admin */}
-						{/* <Routes> */}
 						<Route path="/admin/sign-in" element={<MyAdminSignIn />} />
 						<Route path="/admin" element={<AdminRoute />}>
 							<Route path="/admin" element={<MyAdminMain />}>
