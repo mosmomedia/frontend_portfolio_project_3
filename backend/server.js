@@ -1,5 +1,7 @@
 import path from 'path';
 import { fileURLToPath } from 'url';
+import http from 'http';
+import cron from 'node-cron';
 
 import compression from 'compression';
 
@@ -60,6 +62,12 @@ if (process.env.NODE_ENV === 'production') {
 		res.status(200).json({ message: 'Welcome to Storytunes' });
 	});
 }
+
+// second minute hour day-of-month month day-of-week
+cron.schedule('*/20 23,0-14 * * *', function () {
+	console.log('node-cron');
+	http.get('https://storytunes.herokuapp.com/');
+});
 
 const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Server started on port ${PORT}`));

@@ -1,7 +1,5 @@
 import Class from '../models/classModel.js';
 
-export const name = async (req, res) => {};
-
 // @desc get all classes
 // @route GET /api/class
 // @access Public
